@@ -16,11 +16,24 @@ public class RelayManager : MonoBehaviour
 
     private async void Awake()
     {
-        await UnityServices.InitializeAsync();
-        await SignInAnonymouslyAsync();
+        await InitializeUnityServices();
         joinCodeDisplayText.text = "";
         createJoinCodeButton.onClick.AddListener(CreateJoinCode);
     }
+
+    private async Task InitializeUnityServices()
+    {
+        if (!UnityServices.State.Equals(ServicesInitializationState.Initialized))
+        {
+            await UnityServices.InitializeAsync();
+        }
+
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await SignInAnonymouslyAsync();
+        }
+    }
+
 
     async Task SignInAnonymouslyAsync()
     {
