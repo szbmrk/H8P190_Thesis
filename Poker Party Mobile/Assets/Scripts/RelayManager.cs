@@ -25,7 +25,7 @@ public class RelayManager : MonoBehaviour
         await InitializeUnityServices();
         networkDriver = NetworkDriver.Create();
         joinBtn.onClick.AddListener(JoinRelay);
-        signedInPlayerDisplay.text = AccountManager.LoggedInAccount.Username;
+        signedInPlayerDisplay.text = UserManager.LoggedInUser.Username;
     }
 
     private void Update()

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public static class AccountManager
+public static class UserManager
 {
-    public static Account LoggedInAccount { get; set; }
+    public static User LoggedInUser { get; set; }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +13,7 @@ public class Login : MonoBehaviour
 
     [SerializeField] private GameObject registerPanel;
 
+    [SerializeField] private AuthManager authManager;
     private void Awake()
     {
         dontHaveAnAccountBtn.onClick.AddListener(ShowRegisterPanel);
@@ -27,7 +26,7 @@ public class Login : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void loginToAccount()
+    private async void loginToAccount()
     {
         string username = usernameInputField.text;
         string password = passwordInputField.text;
@@ -40,7 +39,7 @@ public class Login : MonoBehaviour
 
         Debug.Log($"Username: {username}, Password: {password}");
 
-        AccountManager.LoggedInAccount = new Account(username);
+        await authManager.Login(username, password);
         SceneManager.LoadScene("Game");
     }
 }
