@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using Unity.Collections;
+using UnityEditor.MemoryProfiler;
 
 public class RelayManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class RelayManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI joinCodeDisplayText;
 
     public NetworkDriver networkDriver;
-    public NativeList<NetworkConnection> connections;
+    public List<NetworkConnection> connections;
 
     private async void Awake()
     {
@@ -44,7 +45,7 @@ public class RelayManager : MonoBehaviour
         networkDriver.ScheduleUpdate().Complete();
 
         // Clean up stale connections.
-        for (int i = 0; i < connections.Length; i++)
+        for (int i = 0; i < connections.Count; i++)
         {
             if (!connections[i].IsCreated)
             {
@@ -101,7 +102,7 @@ public class RelayManager : MonoBehaviour
             var allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-            connections = new NativeList<NetworkConnection>(maxConnections, Allocator.Persistent);
+            connections = new List<NetworkConnection>();
 
             RelayServerData relayServerData = new RelayServerData(allocation, "udp");
 
@@ -138,5 +139,10 @@ public class RelayManager : MonoBehaviour
     private void ShowJoinCodeError(string errorMessage)
     {
         Debug.LogError(errorMessage);
+    }
+
+    private void OnDestroy()
+    {
+        networkDriver.Dispose();
     }
 }

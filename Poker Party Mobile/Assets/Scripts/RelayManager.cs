@@ -1,22 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
-using System.Threading.Tasks;
 using Unity.Networking.Transport.Relay;
 using Unity.Networking.Transport;
 using Unity.Services.Relay.Models;
 using Unity.Collections;
+using System.Threading.Tasks;
 
 public class RelayManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private TextMeshProUGUI signedInPlayerDisplay;
-    [SerializeField] private Button signInBtn;
     [SerializeField] private Button joinBtn;
 
     public NetworkDriver networkDriver;
@@ -28,8 +25,7 @@ public class RelayManager : MonoBehaviour
         await InitializeUnityServices();
         networkDriver = NetworkDriver.Create();
         joinBtn.onClick.AddListener(JoinRelay);
-        signInBtn.onClick.AddListener(SignInAnonymouslyAsync);
-        signedInPlayerDisplay.text = "";
+        signedInPlayerDisplay.text = AccountManager.LoggedInAccount.Username;
     }
 
     private void Update()
@@ -54,18 +50,15 @@ public class RelayManager : MonoBehaviour
         {
             switch (eventType)
             {
-                // Handle Relay events.
                 case NetworkEvent.Type.Data:
                     FixedString32Bytes msg = stream.ReadFixedString32();
                     Debug.Log($"Player received msg: {msg}");
                     break;
 
-                // Handle Connect events.
                 case NetworkEvent.Type.Connect:
                     Debug.Log("Player connected to the Host");
                     break;
 
-                // Handle Disconnect events.
                 case NetworkEvent.Type.Disconnect:
                     Debug.Log("Player got disconnected from the Host");
                     break;
@@ -79,16 +72,20 @@ public class RelayManager : MonoBehaviour
         {
             await UnityServices.InitializeAsync();
         }
+
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await SignInAnonymouslyAsync();
+        }
     }
 
-    async void SignInAnonymouslyAsync()
+    async Task SignInAnonymouslyAsync()
     {
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             Debug.Log("Sign in anonymously succeeded!");
             Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
-            signedInPlayerDisplay.text = AuthenticationService.Instance.PlayerId;
 
         }
         catch (AuthenticationException ex)
@@ -136,5 +133,15 @@ public class RelayManager : MonoBehaviour
     private void ShowJoinCodeError(string errorMessage)
     {
         Debug.LogError(errorMessage);
+    }
+
+    private void OnDestroy()
+    {
+        if (connection != null)
+        {
+            networkDriver.Dispose();
+            connection.Disconnect(networkDriver);
+            connection = default;
+        }
     }
 }
