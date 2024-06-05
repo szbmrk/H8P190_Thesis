@@ -1,9 +1,10 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Login : MonoBehaviour
+public class LoginGUI : MonoBehaviour
 {
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
@@ -12,8 +13,6 @@ public class Login : MonoBehaviour
     [SerializeField] private Button loginBtn;
 
     [SerializeField] private GameObject registerPanel;
-
-    [SerializeField] private AuthManager authManager;
     private void Awake()
     {
         dontHaveAnAccountBtn.onClick.AddListener(ShowRegisterPanel);
@@ -37,9 +36,18 @@ public class Login : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Username: {username}, Password: {password}");
+        try
+        {
+            await AuthManager.Instance.Login(username, password);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+            usernameInputField.text = "";
+            passwordInputField.text = "";
+            return;
+        }
 
-        await authManager.Login(username, password);
         SceneManager.LoadScene("Game");
     }
 }

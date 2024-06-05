@@ -1398,7 +1398,6 @@ MonoBehaviour:
   alreadyHaveAnAccountBtn: {fileID: 1164557122}
   signInBtn: {fileID: 630095429}
   loginPanel: {fileID: 1530889307}
-  authManager: {fileID: 952270953}
 --- !u!1 &559506655
 GameObject:
   m_ObjectHideFlags: 0
@@ -2434,7 +2433,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 952270954}
-  - component: {fileID: 952270953}
+  - component: {fileID: 952270955}
   m_Layer: 0
   m_Name: AuthManager
   m_TagString: Untagged
@@ -2442,18 +2441,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &952270953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 952270952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4158edbd220bde49a6d47b7b98ef3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &952270954
 Transform:
   m_ObjectHideFlags: 0
@@ -2469,6 +2456,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &952270955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952270952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1274861d5bf9724eb4d707f562fc634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047006377
 GameObject:
   m_ObjectHideFlags: 0
@@ -3964,7 +3963,6 @@ MonoBehaviour:
   dontHaveAnAccountBtn: {fileID: 906656548}
   loginBtn: {fileID: 92274474}
   registerPanel: {fileID: 430514567}
-  authManager: {fileID: 952270953}
 --- !u!1 &1647896188
 GameObject:
   m_ObjectHideFlags: 0

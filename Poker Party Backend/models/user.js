@@ -9,8 +9,8 @@ const UserSchema = new mongoose.Schema({
     gamesWon: { type: Number, default: 0 },
     XP: { type: Number, default: 0 },
     level: { type: Number, default: 1 },
-    created_at: { type: Date, default: Date.now }
-});
+    created_at: { type: Date, default: Date.now },
+}, { versionKey: false });
 
 UserSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
