@@ -49,7 +49,6 @@ public class AuthManager : MonoBehaviour
         };
 
         UnityWebRequest response = await RequestManager.SendPostRequest("/login", JsonUtility.ToJson(loginData));
-        Debug.Log(response.downloadHandler.text);
         LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(response.downloadHandler.text);
 
         if (response.responseCode != 200L)
