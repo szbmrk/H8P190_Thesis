@@ -14,7 +14,7 @@ app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }))
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/api', router)
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/hello', (req, res) => res.send('Hello World!'))
 
 mongoose.connect(process.env.MONGODB_URI).then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
