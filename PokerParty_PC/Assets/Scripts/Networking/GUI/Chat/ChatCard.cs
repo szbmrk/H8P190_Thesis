@@ -10,6 +10,7 @@ public class ChatCard : MonoBehaviour
     
     public void SetData(ChatMessage chatMessage)
     {
+        playerNameText.color = PlayerColorManager.GetColor(chatMessage.player.username);
         playerNameText.text = chatMessage.player.username;
         chatMessageText.text = chatMessage.message;
     }
