@@ -36,18 +36,21 @@ public class LobbyGUI : MonoBehaviour
 
     public void DisplayNewPlayer(Player player)
     {
+        Transform playerCard = null;
+
         if (numOfPlayers >= parentForPlayerCards.childCount)
         {
-            Instantiate(playerCardPrefab, parentForPlayerCards);
+            playerCard = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
         }
-
-        Transform playerCard = null;
-        for (int i = 0; i < parentForPlayerCards.childCount; i++)
+        else
         {
-            PlayerCard playerCardComponent = parentForPlayerCards.GetChild(i).GetComponent<PlayerCard>();
-            if (playerCardComponent.isPlayerAssigned == false) 
+            for (int i = 0; i < parentForPlayerCards.childCount; i++)
             {
-                playerCard = parentForPlayerCards.GetChild(i);
+                PlayerCard playerCardComponent = parentForPlayerCards.GetChild(i).GetComponent<PlayerCard>();
+                if (playerCardComponent.isPlayerAssigned == false) 
+                {
+                    playerCard = parentForPlayerCards.GetChild(i);
+                }
             }
         }
 

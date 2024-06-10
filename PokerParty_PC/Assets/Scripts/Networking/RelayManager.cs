@@ -242,6 +242,8 @@ public class RelayManager : MonoBehaviour
     {
         Debug.Log("Lobby deleted");
         DisconnectAllPlayers();
+        LobbyGUI.Instance.ClearDisplay();
+        ChatGUI.Instance.ClearChat();
 
         if (networkDriver.IsCreated)
         {

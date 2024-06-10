@@ -1856,6 +1856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentForChatBoxes: {fileID: 2039530761}
   chatBoxPrefab: {fileID: 4622086771011074772, guid: fa6806c4616f6d04087bc90a9ea47c4a, type: 3}
+  chatScrollbar: {fileID: 1880921044}
 --- !u!4 &1302923440
 Transform:
   m_ObjectHideFlags: 0
@@ -2267,7 +2268,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880921042}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
