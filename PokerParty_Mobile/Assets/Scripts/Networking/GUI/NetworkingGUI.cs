@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ public class NetworkingGUI : MonoBehaviour
 
     [SerializeField] private PlayerCard playerCard;
     
-    [SerializeField] private Button joinBtn;
+    public Button joinBtn;
     [SerializeField] private Button sendTestMsgBtn;
     [SerializeField] private Button disconnectBtn;
 
@@ -27,13 +28,24 @@ public class NetworkingGUI : MonoBehaviour
 
         playerCard.DisplayData(PlayerManager.LoggedInPlayer);
 
-        joinBtn.onClick.AddListener(() => RelayManager.Instance.JoinRelay(joinCodeInputField.text));
-        disconnectBtn.onClick.AddListener(() => RelayManager.Instance.DisconnectFromHost());
+        joinBtn.onClick.AddListener(JoinRelay);
+        disconnectBtn.onClick.AddListener(DisconnectFromHost);
         sendTestMsgBtn.onClick.AddListener(SendChatMessageToHost);
     }
 
     public void ShowJoinedPanel(bool value)
     {
+        if (value)
+        {
+            joinBtn.interactable = false;
+            disconnectBtn.interactable = true;
+        }
+        else
+        {
+            joinBtn.interactable = true;
+            disconnectBtn.interactable = false;
+        }
+
         joinedPanel.SetActive(value);
         notJoinedPanel.SetActive(!value);
     }
@@ -54,13 +66,26 @@ public class NetworkingGUI : MonoBehaviour
         }
 
         RelayManager.Instance.SendChatMessageToHost(messageInput.text);
-        messageInput.text = "";
+        messageInput.text = string.Empty;
     }
 
-    private IEnumerator DisplayErrorText(string error)
+    private void JoinRelay()
+    {
+        joinBtn.interactable = false;
+        RelayManager.Instance.JoinRelay(joinCodeInputField.text);
+    }
+
+    private void DisconnectFromHost()
+    {
+        joinBtn.interactable = true;
+        disconnectBtn.interactable = false;
+        RelayManager.Instance.DisconnectFromHost();
+    }
+
+    public IEnumerator DisplayErrorText(string error)
     {
         errorText.text = error;
         yield return new WaitForSeconds(5f);
-        errorText.text = "";
+        errorText.text = string.Empty;
     }
 }

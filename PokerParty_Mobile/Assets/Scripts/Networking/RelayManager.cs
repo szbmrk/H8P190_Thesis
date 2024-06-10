@@ -10,6 +10,7 @@ using Unity.Services.Relay.Models;
 using Unity.Collections;
 using System.Threading.Tasks;
 using PokerParty_SharedDLL;
+using System;
 
 public class RelayManager : MonoBehaviour
 {
@@ -131,7 +132,8 @@ public class RelayManager : MonoBehaviour
         }
         catch (RelayServiceException e)
         {
-            Debug.LogError($"Error joining game: {e.Message}");
+            NetworkingGUI.Instance.joinBtn.interactable = true;
+            StartCoroutine(NetworkingGUI.Instance.DisplayErrorText(e.Message));
         }
     }
 
@@ -139,7 +141,8 @@ public class RelayManager : MonoBehaviour
     {
         if (networkDriver.Bind(NetworkEndPoint.AnyIpv4) != 0)
         {
-            Debug.LogError("Player client failed to bind");
+            NetworkingGUI.Instance.joinBtn.interactable = true;
+            StartCoroutine(NetworkingGUI.Instance.DisplayErrorText("Failed to bind to any IP"));
         }
         else
         {

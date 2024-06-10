@@ -171,6 +171,8 @@ public class RelayManager : MonoBehaviour
     {
         try
         {
+            createJoinCodeButton.interactable = false;
+
             var allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
@@ -244,6 +246,8 @@ public class RelayManager : MonoBehaviour
         DisconnectAllPlayers();
         LobbyGUI.Instance.ClearDisplay();
         ChatGUI.Instance.ClearChat();
+
+        createJoinCodeButton.interactable = true;
 
         if (networkDriver.IsCreated)
         {
