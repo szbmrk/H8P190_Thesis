@@ -12,7 +12,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using Unity.Collections;
-using UnityEditor.MemoryProfiler;
 using UnityEngine.Assertions;
 using System;
 using PokerParty_SharedDLL;
@@ -239,5 +238,6 @@ public class RelayManager : MonoBehaviour
     {
         Debug.Log("Server app stopped");
         DeleteLobby();
+        networkDriver.Dispose();
     }
 }

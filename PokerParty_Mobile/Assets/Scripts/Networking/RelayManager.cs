@@ -213,5 +213,6 @@ public class RelayManager : MonoBehaviour
     {
         Debug.Log("Client app stopped");
         DisconnectFromHost();
+        networkDriver.Dispose();
     }
 }
