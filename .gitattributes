@@ -1,0 +1,16 @@
+* text=auto
+
+*.cs text
+*.meta text
+*.unity text
+*.prefab text
+*.asset text
+
+*.bat eol=crlf
+*.cmd eol=crlf
+
+*.sh eol=lf
+*.yml eol=lf
+*.yaml eol=lf
+
+*.dll binary

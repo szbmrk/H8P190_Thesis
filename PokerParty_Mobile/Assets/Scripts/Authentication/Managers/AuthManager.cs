@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.Networking;
+using PokerParty_SharedDLL;
 
 public class AuthManager : MonoBehaviour
 {
@@ -56,6 +57,6 @@ public class AuthManager : MonoBehaviour
             throw new InvalidLoginException(loginResponse.msg);
         }
 
-        UserManager.LoggedInUser = loginResponse.user;
+        PlayerManager.LoggedInPlayer = loginResponse.user;
     }
 }
