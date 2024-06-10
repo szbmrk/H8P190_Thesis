@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentForChatBoxes: {fileID: 2039530761}
   chatBoxPrefab: {fileID: 4622086771011074772, guid: fa6806c4616f6d04087bc90a9ea47c4a, type: 3}
-  chatScrollbar: {fileID: 1880921044}
+  chatScrollRect: {fileID: 520923166}
 --- !u!4 &1302923440
 Transform:
   m_ObjectHideFlags: 0
