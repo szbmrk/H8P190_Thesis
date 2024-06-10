@@ -1,10 +1,4 @@
-﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public static class PlayerColorManager
@@ -20,18 +14,16 @@ public static class PlayerColorManager
         }
     }
 
-    public static System.Random rnd = new System.Random();
-
     private static List<ColorForPlayer> ColorForPlayers = new List<ColorForPlayer>
     {
-        new ColorForPlayer(new Color(186, 255, 245)),
-        new ColorForPlayer(new Color(255, 248, 186)),
-        new ColorForPlayer(new Color(191, 186, 255)),
-        new ColorForPlayer(new Color(255, 93, 121)),
-        new ColorForPlayer(new Color(105, 118, 255)),
-        new ColorForPlayer(new Color(191, 255, 105)),
-        new ColorForPlayer(new Color(251, 129, 255)),
-        new ColorForPlayer(new Color(207, 141, 97))
+        new ColorForPlayer(new Color(0.729f, 1.0f, 0.961f)),
+        new ColorForPlayer(new Color(1.0f, 0.973f, 0.729f)),
+        new ColorForPlayer(new Color(0.749f, 0.729f, 1.0f)),
+        new ColorForPlayer(new Color(1.0f, 0.365f, 0.475f)),
+        new ColorForPlayer(new Color(0.412f, 0.463f, 1.0f)),
+        new ColorForPlayer(new Color(0.749f, 1.0f, 0.412f)),
+        new ColorForPlayer(new Color(0.984f, 0.506f, 1.0f)),
+        new ColorForPlayer(new Color(0.812f, 0.553f, 0.38f))
     };
 
     public static Color GetColor(string username)
@@ -43,6 +35,7 @@ public static class PlayerColorManager
 
         while (true)
         {
+            System.Random rnd = new System.Random();
             int randomIndex = rnd.Next(1, 8);
 
             if (ColorForPlayers[randomIndex].username == "")
@@ -50,6 +43,14 @@ public static class PlayerColorManager
                 ColorForPlayers[randomIndex].username = username;
                 return ColorForPlayers[randomIndex].color;
             }
+        }
+    }
+
+    public static void RemoveColorFromPlayer(string username)
+    {
+        foreach (ColorForPlayer colorForPlayer in ColorForPlayers)
+        {
+            if (colorForPlayer.username == username) colorForPlayer.username = "";
         }
     }
 }

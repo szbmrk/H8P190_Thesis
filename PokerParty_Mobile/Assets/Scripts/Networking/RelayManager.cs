@@ -15,17 +15,24 @@ public class RelayManager : MonoBehaviour
 {
     public static RelayManager Instance;
 
-    public NetworkDriver networkDriver;
-    public NetworkConnection connection;
-    string joinCode;
+    private NetworkDriver networkDriver;
+    private NetworkConnection connection;
+
+    private string joinCode;
 
     private async void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            networkDriver = NetworkDriver.Create();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         await InitializeUnityServices();
-        networkDriver = NetworkDriver.Create();
     }
 
     private void Update()
@@ -113,6 +120,11 @@ public class RelayManager : MonoBehaviour
             var settings = new NetworkSettings();
             settings.WithRelayParameters(ref relayServerData);
 
+            if (networkDriver.IsCreated)
+            {
+                networkDriver.Dispose();
+            }
+
             networkDriver = NetworkDriver.Create(settings);
 
             BindToHostAndSendPlayerData(networkDriver);
@@ -185,7 +197,7 @@ public class RelayManager : MonoBehaviour
 
     public void DisconnectFromHost()
     {
-        if(connection.IsCreated)
+        if (connection.IsCreated)
         {
             SendDisconnectMessageToHost();
         }
@@ -203,16 +215,13 @@ public class RelayManager : MonoBehaviour
 
         SendMessageToHost(NetworkMessageType.DisconnectMessage, disconnectMessageInString);
     }
-
-    private void OnDestroy()
-    {
-        DisconnectFromHost();
-    }
-
     private void OnApplicationQuit()
     {
         Debug.Log("Client app stopped");
         DisconnectFromHost();
-        networkDriver.Dispose();
+        if (networkDriver.IsCreated)
+        {
+            networkDriver.Dispose();
+        }
     }
 }

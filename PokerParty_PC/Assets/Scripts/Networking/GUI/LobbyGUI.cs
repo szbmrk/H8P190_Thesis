@@ -77,6 +77,7 @@ public class LobbyGUI : MonoBehaviour
                 playerCard.assignedPlayer = null;
                 playerCard.isPlayerAssigned = false;
                 playerCard.gameObject.SetActive(false);
+                PlayerColorManager.RemoveColorFromPlayer(player.username);
             }
         }
 

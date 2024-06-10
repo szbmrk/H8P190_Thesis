@@ -15,6 +15,7 @@ using Unity.Collections;
 using UnityEngine.Assertions;
 using System;
 using PokerParty_SharedDLL;
+using Unity.Services.Relay.Models;
 
 public class RelayManager : MonoBehaviour
 {
@@ -28,7 +29,13 @@ public class RelayManager : MonoBehaviour
     private async void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         await InitializeUnityServices();
         createJoinCodeButton.onClick.AddListener(() => CreateRelayAndJoinCode());
@@ -49,17 +56,6 @@ public class RelayManager : MonoBehaviour
         }
 
         networkDriver.ScheduleUpdate().Complete();
-
-        // Clean up stale connections.
-        for (int i = 0; i < Connections.Length; i++)
-        {
-            if (!Connections[i].IsCreated)
-            {
-                Debug.Log("Stale connection removed");
-                Connections.RemoveAt(i);
-                --i;
-            }
-        }
 
         NetworkConnection incomingConnection;
         while ((incomingConnection = networkDriver.Accept()) != default(NetworkConnection))
@@ -112,6 +108,9 @@ public class RelayManager : MonoBehaviour
                             break;
                         }
 
+                        break;
+                    case NetworkEvent.Type.Disconnect:
+                        Debug.Log("AAAAAAAA");
                         break;
                 }
             }
@@ -181,6 +180,9 @@ public class RelayManager : MonoBehaviour
             var settings = new NetworkSettings();
             settings.WithRelayParameters(ref relayServerData);
 
+            if (networkDriver.IsCreated)
+                networkDriver.Dispose();
+
             networkDriver = NetworkDriver.Create(settings);
             if (networkDriver.Bind(NetworkEndPoint.AnyIpv4) != 0)
             {
@@ -197,6 +199,9 @@ public class RelayManager : MonoBehaviour
                     Debug.Log("Host client bound to Relay server");
                 }
             }
+
+            if (Connections.IsCreated)
+                Connections.Dispose();
 
             Connections = new NativeList<NetworkConnection>(maxConnections, Allocator.Persistent);
             LobbyGUI.Instance.joinCodeText.text = joinCode;
@@ -216,7 +221,7 @@ public class RelayManager : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < Connections.Length; i++)
+        for (int i = Connections.Length - 1; i >= 0; i--)
         {
             DisconnectPlayer(i);
         }
@@ -224,20 +229,34 @@ public class RelayManager : MonoBehaviour
 
     private void DisconnectPlayer(int index)
     {
-        networkDriver.Disconnect(Connections[index]);
-        Connections[index] = default(NetworkConnection);
+        if (Connections[index].IsCreated)
+        {
+            Debug.Log("Player disconnected from host");
+            networkDriver.Disconnect(Connections[index]);
+            Connections[index] = default(NetworkConnection);
+        }
+        Connections.RemoveAt(index);
     }
 
     public void DeleteLobby()
     {
         Debug.Log("Lobby deleted");
         DisconnectAllPlayers();
+
+        if (networkDriver.IsCreated)
+        {
+            networkDriver.Dispose();
+        }
     }
 
     private void OnApplicationQuit()
     {
         Debug.Log("Server app stopped");
         DeleteLobby();
-        networkDriver.Dispose();
+
+        if (Connections.IsCreated)
+        {
+            Connections.Dispose();
+        }
     }
 }
