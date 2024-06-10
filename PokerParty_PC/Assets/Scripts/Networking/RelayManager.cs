@@ -16,10 +16,12 @@ using UnityEngine.Assertions;
 using System;
 using PokerParty_SharedDLL;
 using Unity.Services.Relay.Models;
+using System.Threading;
 
 public class RelayManager : MonoBehaviour
 {
     public static RelayManager Instance;
+    static bool ReadyToQuit = false;
 
     [SerializeField] private Button createJoinCodeButton;
 
@@ -249,20 +251,73 @@ public class RelayManager : MonoBehaviour
 
         createJoinCodeButton.interactable = true;
 
+        StartCoroutine(DisposeDriver());
+    }
+
+    private IEnumerator DisposeDriver()
+    {
+        yield return new WaitForSeconds(1f);
         if (networkDriver.IsCreated)
         {
+            Debug.Log("Host disposed");
             networkDriver.Dispose();
         }
     }
 
-    private void OnApplicationQuit()
+    private IEnumerator DisposeConnections()
     {
-        Debug.Log("Server app stopped");
-        DeleteLobby();
+        yield return new WaitForSeconds(1f);
+        if (Connections.IsCreated)
+        {
+            Debug.Log("Connections disposed");
+            Connections.Dispose();
+        }
+    }
+
+    static bool WantsToQuit()
+    {
+        if (!Instance.networkDriver.IsCreated)
+            return true;
+
+        Instance.StartCoroutine(Instance.StartQutiting());
+
+        return ReadyToQuit;
+    }
+
+    IEnumerator StartQutiting()
+    {
+        Debug.Log("Lobby deleted");
+        DisconnectAllPlayers();
+        LobbyGUI.Instance.ClearDisplay();
+        ChatGUI.Instance.ClearChat();
+
+        createJoinCodeButton.interactable = true;
+
+        StartCoroutine(DisposeConnections());
+
+        yield return new WaitForSeconds(1f);
+
+        if (networkDriver.IsCreated)
+        {
+            Debug.Log("Host disposed");
+            networkDriver.Dispose();
+        }
 
         if (Connections.IsCreated)
         {
+            Debug.Log("Connections disposed");
             Connections.Dispose();
         }
+
+        ReadyToQuit = true;
+        Debug.Log("Server app stopped");
+        Application.Quit();
+    }
+
+
+    [RuntimeInitializeOnLoadMethod]
+    static void RunOnStart()
+    {
+        Application.wantsToQuit += WantsToQuit;
     }
 }

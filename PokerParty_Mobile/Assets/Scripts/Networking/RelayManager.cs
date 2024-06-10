@@ -11,10 +11,13 @@ using Unity.Collections;
 using System.Threading.Tasks;
 using PokerParty_SharedDLL;
 using System;
+using System.Collections;
 
 public class RelayManager : MonoBehaviour
 {
     public static RelayManager Instance;
+
+    static bool ReadyToQuit;
 
     private NetworkDriver networkDriver;
     private NetworkConnection connection;
@@ -26,7 +29,6 @@ public class RelayManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            networkDriver = NetworkDriver.Create();
         }
         else
         {
@@ -151,7 +153,6 @@ public class RelayManager : MonoBehaviour
 
         connection = networkDriver.Connect();
 
-
         Debug.Log("Joined Relay with Join Code: " + joinCode);
     }
 
@@ -218,13 +219,37 @@ public class RelayManager : MonoBehaviour
 
         SendMessageToHost(NetworkMessageType.DisconnectMessage, disconnectMessageInString);
     }
-    private void OnApplicationQuit()
+
+    static bool WantsToQuit()
     {
-        Debug.Log("Client app stopped");
+        if (!Instance.networkDriver.IsCreated)
+            return true;
+
+        Instance.StartCoroutine(Instance.StartQutiting());
+
+        return ReadyToQuit;
+    }
+
+    IEnumerator StartQutiting()
+    {
         DisconnectFromHost();
+
+        yield return new WaitForSeconds(1f);
+
         if (networkDriver.IsCreated)
         {
+            Debug.Log("Network driver disposed");
             networkDriver.Dispose();
         }
+
+        ReadyToQuit = true;
+        Debug.Log("Client app stopped");
+        Application.Quit();
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    static void RunOnStart()
+    {
+        Application.wantsToQuit += WantsToQuit;
     }
 }
