@@ -114,7 +114,7 @@ public class LobbyGUI : MonoBehaviour
 
     private void DeleteLobby()
     {
-        RelayManager.Instance.DeleteLobby();
+        RelayManager.Instance.DeleteLobbyAndDisposeNetworkDriver();
         joinCodeText.text = "";
         LobbyPanel.SetActive(false);
     }

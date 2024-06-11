@@ -73,6 +73,7 @@ public class NetworkingGUI : MonoBehaviour
     {
         joinBtn.interactable = false;
         RelayManager.Instance.JoinRelay(joinCodeInputField.text);
+        joinCodeInputField.text = string.Empty;
     }
 
     private void DisconnectFromHost()

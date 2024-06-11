@@ -204,6 +204,7 @@ public class RelayManager : MonoBehaviour
         if (connection.IsCreated)
         {
             SendDisconnectMessageToHost();
+            StartCoroutine(DisposeNetworkDriver());
         }
     }
 
@@ -230,17 +231,20 @@ public class RelayManager : MonoBehaviour
         return ReadyToQuit;
     }
 
+    IEnumerator DisposeNetworkDriver()
+    {
+        yield return new WaitForSeconds(1f);
+        if (networkDriver.IsCreated)
+        {
+            networkDriver.Dispose();
+        }
+    }
+
     IEnumerator StartQutiting()
     {
         DisconnectFromHost();
 
-        yield return new WaitForSeconds(1f);
-
-        if (networkDriver.IsCreated)
-        {
-            Debug.Log("Network driver disposed");
-            networkDriver.Dispose();
-        }
+        yield return DisposeNetworkDriver();
 
         ReadyToQuit = true;
         Debug.Log("Client app stopped");

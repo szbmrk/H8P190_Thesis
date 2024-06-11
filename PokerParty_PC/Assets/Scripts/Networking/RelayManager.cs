@@ -111,9 +111,6 @@ public class RelayManager : MonoBehaviour
                         }
 
                         break;
-                    case NetworkEvent.Type.Disconnect:
-                        Debug.Log("AAAAAAAA");
-                        break;
                 }
             }
         }
@@ -178,8 +175,8 @@ public class RelayManager : MonoBehaviour
             var allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-
             RelayServerData relayServerData = new RelayServerData(allocation, "udp");
+
 
             var settings = new NetworkSettings();
             settings.WithRelayParameters(ref relayServerData);
@@ -248,9 +245,12 @@ public class RelayManager : MonoBehaviour
         DisconnectAllPlayers();
         LobbyGUI.Instance.ClearDisplay();
         ChatGUI.Instance.ClearChat();
-
         createJoinCodeButton.interactable = true;
+    }
 
+    public void DeleteLobbyAndDisposeNetworkDriver()
+    {
+        DeleteLobby();
         StartCoroutine(DisposeDriver());
     }
 
@@ -297,17 +297,8 @@ public class RelayManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        if (networkDriver.IsCreated)
-        {
-            Debug.Log("Host disposed");
-            networkDriver.Dispose();
-        }
-
-        if (Connections.IsCreated)
-        {
-            Debug.Log("Connections disposed");
-            Connections.Dispose();
-        }
+        yield return DisposeDriver();
+        yield return DisposeConnections();
 
         ReadyToQuit = true;
         Debug.Log("Server app stopped");
