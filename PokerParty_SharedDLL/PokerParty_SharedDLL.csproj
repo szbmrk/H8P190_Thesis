@@ -46,6 +46,7 @@
     <Compile Include="Networking\Message Models\ConnectionMessage.cs" />
     <Compile Include="Networking\Message Models\DisconnectMessage.cs" />
     <Compile Include="Networking\Message Models\ChatMessage.cs" />
+    <Compile Include="Networking\Message Models\ReadyMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

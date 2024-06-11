@@ -9,12 +9,11 @@ using UnityEngine.UI;
 public class LobbyGUI : MonoBehaviour
 {
     public static LobbyGUI Instance;
-
     public TextMeshProUGUI joinCodeText;
 
-    [SerializeField] private Button sendTestMessageBtn;
     [SerializeField] private Button disconnectAllPlayersBtn;
     [SerializeField] private Button deleteLobbyBtn;
+    [SerializeField] private Button startGameBtn;
 
     [SerializeField] private TextMeshProUGUI playerCount;
     [SerializeField] private GameObject LobbyPanel;
@@ -24,23 +23,34 @@ public class LobbyGUI : MonoBehaviour
     private int numOfPlayers = 0;
     private int yOffset = -110;
 
-    private void Awake()
+    private void Start()
     {
         if (Instance == null)
             Instance = this;
 
-        sendTestMessageBtn.onClick.AddListener(() => RelayManager.Instance.SendMessageToPlayers("hello from host"));
-        disconnectAllPlayersBtn.onClick.AddListener(DisconnectAllPlayers);
-        deleteLobbyBtn.onClick.AddListener(DeleteLobby);
+        disconnectAllPlayersBtn.onClick.AddListener(LobbyManager.Instance.DisconnectAllPlayers);
+        deleteLobbyBtn.onClick.AddListener(LobbyManager.Instance.DeleteLobby);
+    }
+
+    private void Update()
+    {
+        if (LobbyManager.Instance.joinedPlayers.Count >= 2 && LobbyManager.Instance.AreAllPlayersReady())
+        {
+            startGameBtn.interactable = true;
+        }
+        else
+        {
+            startGameBtn.interactable = false;
+        }
     }
 
     public void DisplayNewPlayer(Player player)
     {
-        Transform playerCard = null;
+        Transform playerCardTransform = null;
 
         if (numOfPlayers >= parentForPlayerCards.childCount)
         {
-            playerCard = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
+            playerCardTransform = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
         }
         else
         {
@@ -49,19 +59,23 @@ public class LobbyGUI : MonoBehaviour
                 PlayerCard playerCardComponent = parentForPlayerCards.GetChild(i).GetComponent<PlayerCard>();
                 if (playerCardComponent.isPlayerAssigned == false) 
                 {
-                    playerCard = parentForPlayerCards.GetChild(i);
+                    playerCardTransform = parentForPlayerCards.GetChild(i);
                 }
             }
         }
 
-        playerCard.GetComponent<PlayerCard>().assignedPlayer = player;
-        playerCard.GetComponent<PlayerCard>().isPlayerAssigned = true;
-        playerCard.GetComponent<PlayerCard>().RefreshData();
+        PlayerCard playerCard = playerCardTransform.GetComponent<PlayerCard>();
+
+        playerCard.assignedPlayer = player;
+        playerCard.isPlayerAssigned = true;
+
+        playerCardTransform.GetComponent<PlayerCard>().RefreshData();
 
         float yPos = numOfPlayers * yOffset;
-        playerCard.GetComponent<RectTransform>().localPosition = new Vector3(0, yPos, 0);
+        playerCardTransform.GetComponent<RectTransform>().localPosition = new Vector3(0, yPos, 0);
 
         playerCard.gameObject.SetActive(true);
+        LobbyManager.Instance.joinedPlayers.Add(playerCard);
 
         numOfPlayers++;
         RefreshPlayerCountText();
@@ -72,17 +86,14 @@ public class LobbyGUI : MonoBehaviour
 
         if (numOfPlayers == 0) return;
 
-        for (int i = 0; i < parentForPlayerCards.childCount; i++)
-        {
-            PlayerCard playerCard = parentForPlayerCards.GetChild(i).GetComponent<PlayerCard>();
-            if (playerCard.assignedPlayer.Equals(player))
-            {
-                playerCard.assignedPlayer = null;
-                playerCard.isPlayerAssigned = false;
-                playerCard.gameObject.SetActive(false);
-                PlayerColorManager.RemoveColorFromPlayer(player.username);
-            }
-        }
+        PlayerCard playerCard = LobbyManager.Instance.GetPlayerCardForPlayer(player);
+
+        if (playerCard == null) return;
+
+        playerCard.assignedPlayer = null;
+        playerCard.isPlayerAssigned = false;
+        playerCard.gameObject.SetActive(false);
+        PlayerColorManager.RemoveColorFromPlayer(player.username);
 
         numOfPlayers--;
         RefreshPlayerCountText();
@@ -92,35 +103,27 @@ public class LobbyGUI : MonoBehaviour
     {
         if (numOfPlayers == 0) return;
 
-        for (int i = 0; i < parentForPlayerCards.childCount; i++)
+        foreach (PlayerCard player in LobbyManager.Instance.joinedPlayers)
         {
-            Destroy(parentForPlayerCards.GetChild(i).gameObject);
+            Destroy(player.gameObject);
         }
 
         numOfPlayers = 0;
+        LobbyManager.Instance.joinedPlayers.Clear();
         RefreshPlayerCountText();
-    }
-
-    private void DisconnectAllPlayers()
-    {
-        RelayManager.Instance.DisconnectAllPlayers();
-        ClearDisplay();
     }
 
     private void RefreshPlayerCountText()
     {
         playerCount.text = numOfPlayers.ToString() + "/8";
     }
-
-    private void DeleteLobby()
-    {
-        RelayManager.Instance.DeleteLobbyAndDisposeNetworkDriver();
-        joinCodeText.text = "";
-        LobbyPanel.SetActive(false);
-    }
-
     public void ShowPanel()
     {
         LobbyPanel.SetActive(true);
+    }
+
+    public void HidePanel()
+    {
+        LobbyPanel.SetActive(false);
     }
 }

@@ -110,6 +110,13 @@ public class RelayManager : MonoBehaviour
                             break;
                         }
 
+                        if (type == NetworkMessageType.ReadyMessage)
+                        {
+                            ReadyMessage readyMessage = JsonUtility.FromJson<ReadyMessage>(data);
+                            LobbyManager.Instance.ModifyPlayerReady(readyMessage);
+                            break;
+                        }
+
                         break;
                 }
             }

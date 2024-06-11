@@ -12,6 +12,9 @@ public class NetworkingGUI : MonoBehaviour
     public Button joinBtn;
     [SerializeField] private Button sendTestMsgBtn;
     [SerializeField] private Button disconnectBtn;
+    [SerializeField] private Button readyBtn;
+
+    private bool isReady = false;
 
     [SerializeField] private GameObject notJoinedPanel;
     [SerializeField] private GameObject joinedPanel;
@@ -31,6 +34,7 @@ public class NetworkingGUI : MonoBehaviour
         joinBtn.onClick.AddListener(JoinRelay);
         disconnectBtn.onClick.AddListener(DisconnectFromHost);
         sendTestMsgBtn.onClick.AddListener(SendChatMessageToHost);
+        readyBtn.onClick.AddListener(Ready);
     }
 
     public void ShowJoinedPanel(bool value)
@@ -65,7 +69,7 @@ public class NetworkingGUI : MonoBehaviour
             StartCoroutine(DisplayErrorText("Cannot send more than 500 characters at once!"));
         }
 
-        RelayManager.Instance.SendChatMessageToHost(messageInput.text);
+        MessageSender.SendChatMessageToHost(messageInput.text);
         messageInput.text = string.Empty;
     }
 
@@ -81,6 +85,24 @@ public class NetworkingGUI : MonoBehaviour
         joinBtn.interactable = true;
         disconnectBtn.interactable = false;
         RelayManager.Instance.DisconnectFromHost();
+    }
+
+    private void Ready()
+    {
+        if (isReady)
+        {
+            readyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Ready";
+            isReady = false;
+            disconnectBtn.interactable = true;
+        }
+        else
+        {
+            readyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Not Ready";
+            isReady = true;
+            disconnectBtn.interactable = false;
+        }
+
+        MessageSender.SendReadyMessageToHost(isReady);
     }
 
     public IEnumerator DisplayErrorText(string error)

@@ -4,7 +4,8 @@
     {
         ChatMessage,
         DisconnectMessage,
-        ConnectionMessage
+        ConnectionMessage,
+        ReadyMessage
     }
 
 }

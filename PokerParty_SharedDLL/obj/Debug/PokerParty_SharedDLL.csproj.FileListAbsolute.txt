@@ -4,3 +4,9 @@ C:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.csproj.Asse
 C:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.csproj.CoreCompileInputs.cache
 C:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.dll
 C:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.pdb
+D:\H8P190_Thesis\PokerParty_SharedDLL\bin\Debug\PokerParty_SharedDLL.dll
+D:\H8P190_Thesis\PokerParty_SharedDLL\bin\Debug\PokerParty_SharedDLL.pdb
+D:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.csproj.AssemblyReference.cache
+D:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.csproj.CoreCompileInputs.cache
+D:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.dll
+D:\H8P190_Thesis\PokerParty_SharedDLL\obj\Debug\PokerParty_SharedDLL.pdb

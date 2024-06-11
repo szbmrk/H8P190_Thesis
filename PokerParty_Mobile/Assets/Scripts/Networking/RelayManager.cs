@@ -67,7 +67,7 @@ public class RelayManager : MonoBehaviour
 
                 case NetworkEvent.Type.Connect:
                     Debug.Log("Player connected to the Host");
-                    SendPlayerDataToHost();
+                    MessageSender.SendPlayerDataToHost();
                     NetworkingGUI.Instance.ShowJoinedPanel(true);
                     break;
 
@@ -130,7 +130,7 @@ public class RelayManager : MonoBehaviour
 
             networkDriver = NetworkDriver.Create(settings);
 
-            BindToHostAndSendPlayerData(networkDriver);
+            BindToHost(networkDriver);
         }
         catch (RelayServiceException e)
         {
@@ -139,7 +139,7 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    private void BindToHostAndSendPlayerData(NetworkDriver networkDriver)
+    private void BindToHost(NetworkDriver networkDriver)
     {
         if (networkDriver.Bind(NetworkEndPoint.AnyIpv4) != 0)
         {
@@ -152,73 +152,18 @@ public class RelayManager : MonoBehaviour
         }
 
         connection = networkDriver.Connect();
+        MessageSender.Initalize(networkDriver, connection);
 
         Debug.Log("Joined Relay with Join Code: " + joinCode);
-    }
-
-    private void SendPlayerDataToHost()
-    {
-        ConnectionMessage connectionMessage = new ConnectionMessage
-        {
-            connectedPlayer = PlayerManager.LoggedInPlayer
-        };
-
-
-        string connectionMessageInString = JsonUtility.ToJson(connectionMessage);
-
-        SendMessageToHost(NetworkMessageType.ConnectionMessage, connectionMessageInString);
-    }
-
-    public void SendChatMessageToHost(string message)
-    {
-        ChatMessage chatMessage = new ChatMessage
-        {
-            player = PlayerManager.LoggedInPlayer,
-            message = message
-        };
-
-        string simpleMessageInString = JsonUtility.ToJson(chatMessage);
-
-        SendMessageToHost(NetworkMessageType.ChatMessage, simpleMessageInString);
-    }
-
-    private void SendMessageToHost(NetworkMessageType type, FixedString512Bytes msg)
-    {
-        if (!connection.IsCreated)
-        {
-            Debug.LogError("Player isn't connected. No Host client to send message to.");
-            return;
-        }
-
-        if (networkDriver.BeginSend(connection, out DataStreamWriter writer) == 0)
-        {
-            writer.WriteUInt((uint)type);
-            writer.WriteFixedString512(msg);
-            networkDriver.EndSend(writer);
-            Debug.Log($"Message sent: {msg}");
-        }
     }
 
     public void DisconnectFromHost()
     {
         if (connection.IsCreated)
         {
-            SendDisconnectMessageToHost();
+            MessageSender.SendDisconnectMessageToHost();
             StartCoroutine(DisposeNetworkDriver());
         }
-    }
-
-    private void SendDisconnectMessageToHost()
-    {
-        DisconnectMessage disconnectMessage = new DisconnectMessage
-        {
-            disconnectedPlayer = PlayerManager.LoggedInPlayer
-        };
-
-
-        string disconnectMessageInString = JsonUtility.ToJson(disconnectMessage);
-
-        SendMessageToHost(NetworkMessageType.DisconnectMessage, disconnectMessageInString);
     }
 
     static bool WantsToQuit()
