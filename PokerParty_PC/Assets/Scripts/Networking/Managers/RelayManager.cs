@@ -71,7 +71,6 @@ public class RelayManager : MonoBehaviour
         {
             Assert.IsTrue(Connections[i].IsCreated);
 
-            // Resolve event queue.
             NetworkEvent.Type eventType;
             while ((eventType = networkDriver.PopEventForConnection(Connections[i], out var stream)) != NetworkEvent.Type.Empty)
             {
@@ -79,64 +78,16 @@ public class RelayManager : MonoBehaviour
                 {
                     case NetworkEvent.Type.Data:
                         NetworkMessageType type = (NetworkMessageType)Enum.ToObject(typeof(NetworkMessageType), stream.ReadUInt());
+
                         FixedString512Bytes msg = stream.ReadFixedString512();
                         string data = msg.ToString();
 
                         Debug.Log($"Type: {type}");
                         Debug.Log($"Data received: {data}");
 
-                        if (type == NetworkMessageType.ConnectionMessage)
-                        {
-                            ConnectionMessage connectionData = JsonUtility.FromJson<ConnectionMessage>(data);
-                            LobbyGUI.Instance.DisplayNewPlayer(connectionData.connectedPlayer);
-                            break;
-                        }
-
-                        if (type == NetworkMessageType.DisconnectMessage)
-                        {
-                            Debug.Log("Player got disconnected from the Host");
-
-                            DisconnectMessage disconnectMessage = JsonUtility.FromJson<DisconnectMessage>(data);
-                            LobbyGUI.Instance.RemovePlayerFromDisplay(disconnectMessage.disconnectedPlayer);
-
-                            DisconnectPlayer(i);
-                            break;
-                        }
-
-                        if (type == NetworkMessageType.ChatMessage)
-                        {
-                            ChatMessage chatMessage = JsonUtility.FromJson<ChatMessage>(data);
-                            ChatGUI.Instance.AddChat(chatMessage);
-                            break;
-                        }
-
-                        if (type == NetworkMessageType.ReadyMessage)
-                        {
-                            ReadyMessage readyMessage = JsonUtility.FromJson<ReadyMessage>(data);
-                            LobbyManager.Instance.ModifyPlayerReady(readyMessage);
-                            break;
-                        }
-
+                        NetworkMessageManager.ProcessMesage(type, data, i);
                         break;
                 }
-            }
-        }
-    }
-
-    public void SendMessageToPlayers(string msg)
-    {
-        if (Connections.Length == 0)
-        {
-            Debug.LogError("No players connected to send messages to.");
-            return;
-        }
-
-        for (int i = 0; i < Connections.Length; i++)
-        {
-            if (networkDriver.BeginSend(Connections[i], out var writer) == 0)
-            {
-                writer.WriteFixedString32(msg);
-                networkDriver.EndSend(writer);
             }
         }
     }
@@ -235,7 +186,7 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    private void DisconnectPlayer(int index)
+    public void DisconnectPlayer(int index)
     {
         if (Connections[index].IsCreated)
         {
@@ -311,7 +262,6 @@ public class RelayManager : MonoBehaviour
         Debug.Log("Server app stopped");
         Application.Quit();
     }
-
 
     [RuntimeInitializeOnLoadMethod]
     static void RunOnStart()
