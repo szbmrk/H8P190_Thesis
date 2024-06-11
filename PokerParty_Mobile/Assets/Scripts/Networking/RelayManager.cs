@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
@@ -9,9 +7,8 @@ using Unity.Networking.Transport;
 using Unity.Services.Relay.Models;
 using Unity.Collections;
 using System.Threading.Tasks;
-using PokerParty_SharedDLL;
-using System;
 using System.Collections;
+using System;
 
 public class RelayManager : MonoBehaviour
 {
@@ -117,6 +114,12 @@ public class RelayManager : MonoBehaviour
         try
         {
             this.joinCode = joinCode.Trim();
+
+            if (string.IsNullOrEmpty(this.joinCode))
+            {
+                throw new Exception("Join code is empty");
+            }
+
             JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(this.joinCode);
 
             RelayServerData relayServerData = new RelayServerData(allocation, "udp");
@@ -132,10 +135,9 @@ public class RelayManager : MonoBehaviour
 
             BindToHost(networkDriver);
         }
-        catch (RelayServiceException e)
+        catch (Exception e)
         {
-            NetworkingGUI.Instance.joinBtn.interactable = true;
-            StartCoroutine(NetworkingGUI.Instance.DisplayErrorText(e.Message));
+            NetworkingGUI.Instance.JoinError(e.Message);
         }
     }
 
@@ -143,13 +145,10 @@ public class RelayManager : MonoBehaviour
     {
         if (networkDriver.Bind(NetworkEndPoint.AnyIpv4) != 0)
         {
-            NetworkingGUI.Instance.joinBtn.interactable = true;
-            StartCoroutine(NetworkingGUI.Instance.DisplayErrorText("Failed to bind to any IP"));
+            throw new NetworkBindingException("Failed to bind to any IP");
         }
-        else
-        {
-            Debug.Log("Player client bound to Relay server");
-        }
+
+        Debug.Log("Player client bound to Relay server");
 
         connection = networkDriver.Connect();
         MessageSender.Initalize(networkDriver, connection);

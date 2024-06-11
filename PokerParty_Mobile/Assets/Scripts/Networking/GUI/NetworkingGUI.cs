@@ -80,6 +80,13 @@ public class NetworkingGUI : MonoBehaviour
         joinCodeInputField.text = string.Empty;
     }
 
+    public void JoinError(string error)
+    {
+        joinBtn.interactable = true;
+        Debug.LogError(error);
+        StartCoroutine(DisplayErrorText(error));
+    }
+
     private void DisconnectFromHost()
     {
         joinBtn.interactable = true;
