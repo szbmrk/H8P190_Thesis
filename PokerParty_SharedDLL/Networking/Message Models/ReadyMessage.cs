@@ -3,9 +3,9 @@
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class ReadyMessage
+    public class ReadyMessage : ANetworkMessage
     {
-        public Player player;
         public bool isReady;
+        public override NetworkMessageType Type => NetworkMessageType.ReadyMessage;
     }
 }

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Authentication\Models\Player.cs" />
     <Compile Include="Networking\Enums\NetworkMessageType.cs" />
+    <Compile Include="Networking\Message Models\ANetworkMessage.cs" />
     <Compile Include="Networking\Message Models\ConnectionMessage.cs" />
     <Compile Include="Networking\Message Models\DisconnectMessage.cs" />
     <Compile Include="Networking\Message Models\ChatMessage.cs" />

@@ -3,9 +3,9 @@
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class ConnectionMessage
+    public class ConnectionMessage : ANetworkMessage
     {
-        public Player connectedPlayer;
+        public override NetworkMessageType Type => NetworkMessageType.ConnectionMessage;
     }
 
 }

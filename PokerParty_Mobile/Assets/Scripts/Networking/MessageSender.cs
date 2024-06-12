@@ -18,12 +18,10 @@ public class MessageSender
     {
         ConnectionMessage connectionMessage = new ConnectionMessage
         {
-            connectedPlayer = PlayerManager.LoggedInPlayer
+            player = PlayerManager.LoggedInPlayer
         };
 
-        string connectionMessageInString = JsonUtility.ToJson(connectionMessage);
-
-        SendMessageToHost(NetworkMessageType.ConnectionMessage, connectionMessageInString);
+        SendMessageToHost(connectionMessage);
     }
 
     public static void SendChatMessageToHost(string message)
@@ -34,22 +32,17 @@ public class MessageSender
             message = message
         };
 
-        string simpleMessageInString = JsonUtility.ToJson(chatMessage);
-
-        SendMessageToHost(NetworkMessageType.ChatMessage, simpleMessageInString);
+        SendMessageToHost(chatMessage);
     }
 
     public static void SendDisconnectMessageToHost()
     {
         DisconnectMessage disconnectMessage = new DisconnectMessage
         {
-            disconnectedPlayer = PlayerManager.LoggedInPlayer
+            player = PlayerManager.LoggedInPlayer
         };
 
-
-        string disconnectMessageInString = JsonUtility.ToJson(disconnectMessage);
-
-        SendMessageToHost(NetworkMessageType.DisconnectMessage, disconnectMessageInString);
+        SendMessageToHost(disconnectMessage);
     }
 
     public static void SendReadyMessageToHost(bool isReady)
@@ -60,12 +53,10 @@ public class MessageSender
             isReady = isReady
         };
 
-        string readyMessageInString = JsonUtility.ToJson(readyMessage);
-
-        SendMessageToHost(NetworkMessageType.ReadyMessage, readyMessageInString);
+        SendMessageToHost(readyMessage);
     }
 
-    private static void SendMessageToHost(NetworkMessageType type, FixedString512Bytes msg)
+    private static void SendMessageToHost(ANetworkMessage message)
     {
         if (!connection.IsCreated)
         {
@@ -73,12 +64,14 @@ public class MessageSender
             return;
         }
 
+        string messageInString = JsonUtility.ToJson(message);
+
         if (networkDriver.BeginSend(connection, out DataStreamWriter writer) == 0)
         {
-            writer.WriteUInt((uint)type);
-            writer.WriteFixedString512(msg);
+            writer.WriteUInt((uint)message.Type);
+            writer.WriteFixedString512(messageInString);
             networkDriver.EndSend(writer);
-            Debug.Log($"Message sent: {msg}");
+            Debug.Log($"Message sent: {messageInString}");
         }
     }
 }

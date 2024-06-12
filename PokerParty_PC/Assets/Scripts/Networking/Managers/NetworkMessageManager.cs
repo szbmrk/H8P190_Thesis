@@ -8,29 +8,33 @@ public static class NetworkMessageManager
         switch (type)
         {
             case NetworkMessageType.ConnectionMessage:
-                ConnectionMessage connectionData = JsonUtility.FromJson<ConnectionMessage>(data);
-                LobbyGUI.Instance.DisplayNewPlayer(connectionData.connectedPlayer);
+                ConnectionMessage connectionData = FromStringToJson<ConnectionMessage>(data);
+                LobbyGUI.Instance.DisplayNewPlayer(connectionData.player);
                 break;
 
             case NetworkMessageType.DisconnectMessage:
                 Debug.Log("Player got disconnected from the Host");
 
-                DisconnectMessage disconnectMessage = JsonUtility.FromJson<DisconnectMessage>(data);
-                LobbyGUI.Instance.RemovePlayerFromDisplay(disconnectMessage.disconnectedPlayer);
+                DisconnectMessage disconnectMessage = FromStringToJson<DisconnectMessage>(data);
+                LobbyGUI.Instance.RemovePlayerFromDisplay(disconnectMessage.player);
 
                 RelayManager.Instance.DisconnectPlayer(indexOfConnection);
                 break;
 
             case NetworkMessageType.ChatMessage:
-                ChatMessage chatMessage = JsonUtility.FromJson<ChatMessage>(data);
+                ChatMessage chatMessage = FromStringToJson<ChatMessage>(data);
                 ChatGUI.Instance.AddChat(chatMessage);
                 break;
 
             case NetworkMessageType.ReadyMessage:
-                ReadyMessage readyMessage = JsonUtility.FromJson<ReadyMessage>(data);
+                ReadyMessage readyMessage = FromStringToJson<ReadyMessage>(data);
                 LobbyManager.Instance.ModifyPlayerReady(readyMessage);
                 break;
         }
-      
+    }
+
+    private static T FromStringToJson<T>(string message)
+    {
+        return JsonUtility.FromJson<T>(message);
     }
 }

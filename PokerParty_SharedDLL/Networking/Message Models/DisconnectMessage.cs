@@ -3,8 +3,8 @@
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class DisconnectMessage
+    public class DisconnectMessage : ANetworkMessage
     {
-        public Player disconnectedPlayer;
+        public override NetworkMessageType Type => NetworkMessageType.DisconnectMessage;
     }
 }

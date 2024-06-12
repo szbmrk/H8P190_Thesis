@@ -3,9 +3,10 @@
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class ChatMessage
+    public class ChatMessage : ANetworkMessage
     {
-        public Player player;
         public string message;
+
+        public override NetworkMessageType Type => NetworkMessageType.ChatMessage;
     }
 }
