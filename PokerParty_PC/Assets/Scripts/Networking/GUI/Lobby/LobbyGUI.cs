@@ -126,6 +126,7 @@ public class LobbyGUI : MonoBehaviour
     {
         playerCount.text = numOfPlayers.ToString() + "/8";
     }
+
     public void ShowPanel()
     {
         LobbyPanel.SetActive(true);
