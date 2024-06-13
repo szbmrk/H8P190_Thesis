@@ -30,6 +30,17 @@ public class LobbyManager : MonoBehaviour
         LobbyGUI.Instance.joinCodeText.text = string.Empty;
     }
 
+    public void AddPlayer(Player player)
+    {
+        joinedPlayers.Add(LobbyGUI.Instance.DisplayNewPlayer(player));
+    }
+
+    public void RemovePlayer(Player player)
+    {
+        joinedPlayers.Remove(joinedPlayers.Find(p => p.assignedPlayer.Equals(player)));
+        LobbyGUI.Instance.RemovePlayerFromDisplay(player);
+    }
+
     public void ModifyPlayerReady(ReadyMessage readyMessage)
     {
         GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.isReady);

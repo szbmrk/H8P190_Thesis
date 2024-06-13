@@ -44,13 +44,15 @@ public class LobbyGUI : MonoBehaviour
         }
     }
 
-    public void DisplayNewPlayer(Player player)
+    public PlayerCard DisplayNewPlayer(Player player)
     {
         Transform playerCardTransform = null;
 
         if (numOfPlayers >= parentForPlayerCards.childCount)
         {
             playerCardTransform = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
+            float yPos = numOfPlayers * yOffset;
+            playerCardTransform.GetComponent<RectTransform>().localPosition = new Vector3(0, yPos, 0);
         }
         else
         {
@@ -68,17 +70,14 @@ public class LobbyGUI : MonoBehaviour
 
         playerCard.assignedPlayer = player;
         playerCard.isPlayerAssigned = true;
-
         playerCardTransform.GetComponent<PlayerCard>().RefreshData();
 
-        float yPos = numOfPlayers * yOffset;
-        playerCardTransform.GetComponent<RectTransform>().localPosition = new Vector3(0, yPos, 0);
-
         playerCard.gameObject.SetActive(true);
-        LobbyManager.Instance.joinedPlayers.Add(playerCard);
 
         numOfPlayers++;
         RefreshPlayerCountText();
+
+        return playerCard;
     }
 
     public void RemovePlayerFromDisplay(Player player)
