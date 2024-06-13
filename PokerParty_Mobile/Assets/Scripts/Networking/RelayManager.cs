@@ -14,9 +14,7 @@ public class RelayManager : MonoBehaviour
 {
     public static RelayManager Instance;
 
-    static bool ReadyToQuit;
-
-    private NetworkDriver networkDriver;
+    public NetworkDriver networkDriver;
     private NetworkConnection connection;
 
     private string joinCode;
@@ -165,40 +163,12 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    static bool WantsToQuit()
+    public IEnumerator DisposeNetworkDriver()
     {
-        if (!Instance.networkDriver.IsCreated)
-            return true;
-
-        Instance.StartCoroutine(Instance.StartQutiting());
-
-        return ReadyToQuit;
-    }
-
-    IEnumerator DisposeNetworkDriver()
-    {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         if (networkDriver.IsCreated)
         {
             networkDriver.Dispose();
         }
-    }
-
-    IEnumerator StartQutiting()
-    {
-        DisconnectFromHost();
-
-        StopCoroutine(DisposeNetworkDriver());
-        yield return DisposeNetworkDriver();
-
-        ReadyToQuit = true;
-        Debug.Log("Client app stopped");
-        Application.Quit();
-    }
-
-    [RuntimeInitializeOnLoadMethod]
-    static void RunOnStart()
-    {
-        Application.wantsToQuit += WantsToQuit;
     }
 }

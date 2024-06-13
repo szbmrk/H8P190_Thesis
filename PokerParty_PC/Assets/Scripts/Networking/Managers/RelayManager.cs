@@ -25,7 +25,7 @@ public class RelayManager : MonoBehaviour
 
     [SerializeField] private Button createJoinCodeButton;
 
-    private NetworkDriver networkDriver;
+    public NetworkDriver networkDriver;
     private NativeList<NetworkConnection> Connections;
 
     private async void Awake()
@@ -204,15 +204,11 @@ public class RelayManager : MonoBehaviour
         LobbyGUI.Instance.ClearDisplay();
         ChatGUI.Instance.ClearChat();
         createJoinCodeButton.interactable = true;
-    }
-
-    public void DeleteLobbyAndDisposeNetworkDriver()
-    {
-        DeleteLobby();
         StartCoroutine(DisposeDriver());
+        StartCoroutine(DisposeConnections());
     }
 
-    private IEnumerator DisposeDriver()
+    public IEnumerator DisposeDriver()
     {
         yield return new WaitForSeconds(1f);
         if (networkDriver.IsCreated)
@@ -222,7 +218,7 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    private IEnumerator DisposeConnections()
+    public IEnumerator DisposeConnections()
     {
         yield return new WaitForSeconds(1f);
         if (Connections.IsCreated)
@@ -231,32 +227,5 @@ public class RelayManager : MonoBehaviour
             Connections.Dispose();
         }
     }
-
-    static bool WantsToQuit()
-    {
-        if (!Instance.networkDriver.IsCreated)
-            return true;
-
-        Instance.StartCoroutine(Instance.StartQutiting());
-
-        return ReadyToQuit;
-    }
-
-    IEnumerator StartQutiting()
-    {
-        DeleteLobby();
-
-        yield return DisposeDriver();
-        yield return DisposeConnections();
-
-        ReadyToQuit = true;
-        Debug.Log("Server app stopped");
-        Application.Quit();
-    }
-
-    [RuntimeInitializeOnLoadMethod]
-    static void RunOnStart()
-    {
-        Application.wantsToQuit += WantsToQuit;
-    }
+    
 }

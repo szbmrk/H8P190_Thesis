@@ -25,7 +25,7 @@ public class LobbyManager : MonoBehaviour
 
     public void DeleteLobby()
     {
-        RelayManager.Instance.DeleteLobbyAndDisposeNetworkDriver();
+        RelayManager.Instance.DeleteLobby();
         LobbyGUI.Instance.HidePanel();
         LobbyGUI.Instance.joinCodeText.text = string.Empty;
     }
