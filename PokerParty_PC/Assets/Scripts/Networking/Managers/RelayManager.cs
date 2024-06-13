@@ -21,7 +21,6 @@ using System.Threading;
 public class RelayManager : MonoBehaviour
 {
     public static RelayManager Instance;
-    static bool ReadyToQuit = false;
 
     [SerializeField] private Button createJoinCodeButton;
 
