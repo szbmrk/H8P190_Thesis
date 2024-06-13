@@ -244,16 +244,7 @@ public class RelayManager : MonoBehaviour
 
     IEnumerator StartQutiting()
     {
-        Debug.Log("Lobby deleted");
-        DisconnectAllPlayers();
-        LobbyGUI.Instance.ClearDisplay();
-        ChatGUI.Instance.ClearChat();
-
-        createJoinCodeButton.interactable = true;
-
-        StartCoroutine(DisposeConnections());
-
-        yield return new WaitForSeconds(1f);
+        DeleteLobby();
 
         yield return DisposeDriver();
         yield return DisposeConnections();

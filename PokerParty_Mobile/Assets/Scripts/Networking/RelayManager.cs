@@ -177,7 +177,7 @@ public class RelayManager : MonoBehaviour
 
     IEnumerator DisposeNetworkDriver()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         if (networkDriver.IsCreated)
         {
             networkDriver.Dispose();
@@ -188,6 +188,7 @@ public class RelayManager : MonoBehaviour
     {
         DisconnectFromHost();
 
+        StopCoroutine(DisposeNetworkDriver());
         yield return DisposeNetworkDriver();
 
         ReadyToQuit = true;

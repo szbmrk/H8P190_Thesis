@@ -37,8 +37,14 @@ public class LobbyManager : MonoBehaviour
 
     public void RemovePlayer(Player player)
     {
-        joinedPlayers.Remove(joinedPlayers.Find(p => p.assignedPlayer.Equals(player)));
         LobbyGUI.Instance.RemovePlayerFromDisplay(player);
+        joinedPlayers.Remove(joinedPlayers.Find(p => p.assignedPlayer.Equals(player)));
+    }
+
+    public void RemoveAllPlayers()
+    {
+        LobbyGUI.Instance.ClearDisplay();
+        joinedPlayers.Clear();
     }
 
     public void ModifyPlayerReady(ReadyMessage readyMessage)

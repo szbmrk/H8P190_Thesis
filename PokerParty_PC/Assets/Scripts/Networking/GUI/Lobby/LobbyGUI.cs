@@ -104,13 +104,12 @@ public class LobbyGUI : MonoBehaviour
     {
         if (numOfPlayers == 0) return;
 
-        foreach (PlayerCard player in LobbyManager.Instance.joinedPlayers)
+        for (int i = 0; i < parentForPlayerCards.childCount; i++)
         {
-            Destroy(player.gameObject);
+            Destroy(parentForPlayerCards.GetChild(i).gameObject);
         }
 
         numOfPlayers = 0;
-        LobbyManager.Instance.joinedPlayers.Clear();
         RefreshPlayerCountText();
     }
 
