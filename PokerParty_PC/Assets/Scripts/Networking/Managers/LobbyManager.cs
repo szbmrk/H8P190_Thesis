@@ -22,6 +22,7 @@ public class LobbyManager : MonoBehaviour
         RelayManager.Instance.DisconnectAllPlayers();
         LobbyGUI.Instance.ClearDisplay();
     }
+
     public void DeleteLobby()
     {
         RelayManager.Instance.DeleteLobbyAndDisposeNetworkDriver();
@@ -29,14 +30,14 @@ public class LobbyManager : MonoBehaviour
         LobbyGUI.Instance.joinCodeText.text = string.Empty;
     }
 
-    public void ModifyPlayerReady(ReadyMessage ready)
+    public void ModifyPlayerReady(ReadyMessage readyMessage)
     {
-        GetPlayerCardForPlayer(ready.player).SetReady(ready.isReady);
+        GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.isReady);
     }
 
     public PlayerCard GetPlayerCardForPlayer(Player player)
     {
-        foreach(PlayerCard playerCard in joinedPlayers)
+        foreach (PlayerCard playerCard in joinedPlayers)
         {
             if (playerCard.assignedPlayer.Equals(player))
             {
