@@ -58,7 +58,6 @@ public class LobbyManager : MonoBehaviour
 
         return null;
     }
-
     public bool AreAllPlayersReady()
     {
         return joinedPlayers.All(player => player.IsReady);

@@ -51,8 +51,6 @@ public class LobbyGUI : MonoBehaviour
         if (numOfPlayers >= parentForPlayerCards.childCount)
         {
             playerCardTransform = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
-            float yPos = numOfPlayers * yOffset;
-            playerCardTransform.GetComponent<RectTransform>().localPosition = new Vector3(0, yPos, 0);
         }
         else
         {
@@ -75,7 +73,9 @@ public class LobbyGUI : MonoBehaviour
         playerCard.gameObject.SetActive(true);
 
         numOfPlayers++;
+
         RefreshPlayerCountText();
+        RepositionCards();
 
         return playerCard;
     }
@@ -97,6 +97,7 @@ public class LobbyGUI : MonoBehaviour
 
         numOfPlayers--;
         RefreshPlayerCountText();
+        RepositionCards();
     }
 
     public void ClearDisplay()
@@ -111,6 +112,15 @@ public class LobbyGUI : MonoBehaviour
         numOfPlayers = 0;
         LobbyManager.Instance.joinedPlayers.Clear();
         RefreshPlayerCountText();
+    }
+
+    private void RepositionCards()
+    {
+        for (int i = 0; i < parentForPlayerCards.childCount; i++)
+        {
+            float yPos = i * yOffset;
+            parentForPlayerCards.GetChild(i).GetComponent<RectTransform>().localPosition = new Vector3(0, yPos, 0);
+        }
     }
 
     private void RefreshPlayerCountText()
