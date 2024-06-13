@@ -89,11 +89,8 @@ public class LobbyGUI : MonoBehaviour
 
         if (playerCard == null) return;
 
-        playerCard.assignedPlayer = null;
-        playerCard.isPlayerAssigned = false;
-        playerCard.SetReady(false);
+        playerCard.ResetData();
         playerCard.gameObject.SetActive(false);
-        PlayerColorManager.RemoveColorFromPlayer(player.username);
 
         numOfPlayers--;
         RefreshPlayerCountText();

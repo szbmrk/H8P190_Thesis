@@ -38,7 +38,7 @@ public class LobbyManager : MonoBehaviour
     public void RemovePlayer(Player player)
     {
         LobbyGUI.Instance.RemovePlayerFromDisplay(player);
-        joinedPlayers.Remove(joinedPlayers.Find(p => p.assignedPlayer.Equals(player)));
+        joinedPlayers.Remove(GetPlayerCardForPlayer(player));
     }
 
     public void RemoveAllPlayers()
@@ -54,15 +54,7 @@ public class LobbyManager : MonoBehaviour
 
     public PlayerCard GetPlayerCardForPlayer(Player player)
     {
-        foreach (PlayerCard playerCard in joinedPlayers)
-        {
-            if (playerCard.assignedPlayer.Equals(player))
-            {
-                return playerCard;
-            }
-        }
-
-        return null;
+        return joinedPlayers.Find(p => p.assignedPlayer.Equals(player));
     }
     public bool AreAllPlayersReady()
     {

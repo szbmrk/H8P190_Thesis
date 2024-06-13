@@ -22,6 +22,14 @@ public class PlayerCard : MonoBehaviour
         LevelText.text = $"Level: {assignedPlayer.level}";
     }
 
+    public void ResetData()
+    {
+        isPlayerAssigned = false;
+        SetReady(false);
+        PlayerColorManager.RemoveColorFromPlayer(assignedPlayer.username);
+
+    }
+
     public bool IsReady
     {
         get
