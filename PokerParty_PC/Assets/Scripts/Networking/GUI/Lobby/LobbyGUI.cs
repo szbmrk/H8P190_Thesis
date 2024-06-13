@@ -34,7 +34,7 @@ public class LobbyGUI : MonoBehaviour
 
     private void Update()
     {
-        if (LobbyManager.Instance.joinedPlayers.Count >= 2 && LobbyManager.Instance.AreAllPlayersReady())
+        if (LobbyManager.Instance.joinedPlayers.Count >= 3 && LobbyManager.Instance.AreAllPlayersReady())
         {
             startGameBtn.interactable = true;
         }
@@ -57,7 +57,7 @@ public class LobbyGUI : MonoBehaviour
             for (int i = 0; i < parentForPlayerCards.childCount; i++)
             {
                 PlayerCard playerCardComponent = parentForPlayerCards.GetChild(i).GetComponent<PlayerCard>();
-                if (playerCardComponent.isPlayerAssigned == false) 
+                if (playerCardComponent.isPlayerAssigned == false)
                 {
                     playerCardTransform = parentForPlayerCards.GetChild(i);
                 }
