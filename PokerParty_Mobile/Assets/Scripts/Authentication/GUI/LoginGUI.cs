@@ -12,11 +12,20 @@ public class LoginGUI : MonoBehaviour
     [SerializeField] private Button dontHaveAnAccountBtn;
     [SerializeField] private Button loginBtn;
 
+    [SerializeField] private Toggle KeepMeLoggedInCheckBox;
+
     [SerializeField] private GameObject registerPanel;
     private void Awake()
     {
         dontHaveAnAccountBtn.onClick.AddListener(ShowRegisterPanel);
-        loginBtn.onClick.AddListener(loginToAccount);
+        loginBtn.onClick.AddListener(LoginButtonClick);
+
+        if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
+        {
+            Debug.Log("Logging in automatically");
+            LoginToAccount(PlayerPrefs.GetString("username"), PlayerPrefs.GetString("password"));
+        }
+
     }
 
     private void ShowRegisterPanel()
@@ -25,11 +34,16 @@ public class LoginGUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private async void loginToAccount()
+    private void LoginButtonClick()
     {
         string username = usernameInputField.text;
         string password = passwordInputField.text;
 
+        LoginToAccount(username, password);
+    }
+
+    private async void LoginToAccount(string username, string password)
+    {
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
             Debug.LogError("Username or password is empty");
@@ -38,6 +52,13 @@ public class LoginGUI : MonoBehaviour
 
         try
         {
+            if (KeepMeLoggedInCheckBox.isOn)
+            {
+                Debug.Log("Saving login data");
+                PlayerPrefs.SetString("username", username);
+                PlayerPrefs.SetString("password", password);
+            }
+
             await AuthManager.Instance.Login(username, password);
         }
         catch (Exception e)
@@ -45,6 +66,8 @@ public class LoginGUI : MonoBehaviour
             Debug.LogError(e.Message);
             usernameInputField.text = "";
             passwordInputField.text = "";
+            PlayerPrefs.DeleteKey("username");
+            PlayerPrefs.DeleteKey("password");
             return;
         }
 
