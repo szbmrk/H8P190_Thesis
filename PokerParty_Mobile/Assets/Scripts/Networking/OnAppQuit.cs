@@ -7,7 +7,6 @@ public class OnAppQuit : MonoBehaviour
 
     private static OnAppQuit Instance;
 
-
     [RuntimeInitializeOnLoadMethod]
     static void RunOnStart()
     {
