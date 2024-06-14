@@ -1,10 +1,11 @@
 import express from "express";
 import { login, register } from "../controllers/authentication.js";
+import { addNewGame } from "../controllers/game.js";
 
 const router = express.Router()
 
 router.post('/register', register)
 router.post('/login', login)
-
+router.post('/game', addNewGame)
 
 export default router
