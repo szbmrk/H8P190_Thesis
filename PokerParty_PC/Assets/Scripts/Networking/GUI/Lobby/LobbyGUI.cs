@@ -126,6 +126,7 @@ public class LobbyGUI : MonoBehaviour
 
     public void ShowPanel()
     {
+        Loader.Instance.StopLoading();
         LobbyPanel.SetActive(true);
     }
 

@@ -16,8 +16,9 @@ public class RegisterGUI : MonoBehaviour
 
     private void Awake()
     {
+        Loader.Instance.StopLoading();
         alreadyHaveAnAccountBtn.onClick.AddListener(ShowLoginPanel);
-        signInBtn.onClick.AddListener(RegisterAccount);
+        signInBtn.onClick.AddListener(RegisterButtonClick);
     }
 
     private void ShowLoginPanel()
@@ -26,13 +27,22 @@ public class RegisterGUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private async void RegisterAccount()
+    private void RegisterButtonClick()
     {
+        signInBtn.interactable = false;
         string username = playerNameInputField.text;
         string password = passwordInputField.text;
         string passwordAgain = passwordAgainInputField.text;
 
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        RegisterAccount(username, password, passwordAgain);
+        signInBtn.interactable = true;
+    }
+
+    private async void RegisterAccount(string playerName, string password, string passwordAgain)
+    {
+        Loader.Instance.StartLoading();
+
+        if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
         {
             Debug.LogError("Username or password is empty");
             return;
@@ -46,7 +56,7 @@ public class RegisterGUI : MonoBehaviour
 
         try
         {
-            await AuthManager.Instance.Register(username, password);
+            await AuthManager.Instance.Register(playerName, password);
         }
         catch (Exception e)
         {
@@ -54,6 +64,7 @@ public class RegisterGUI : MonoBehaviour
             playerNameInputField.text = "";
             passwordInputField.text = "";
             passwordAgainInputField.text = "";
+            Loader.Instance.StopLoading();
             return;
         }
 

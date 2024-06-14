@@ -127,13 +127,14 @@ public class RelayManager : MonoBehaviour
     {
         try
         {
+            Loader.Instance.StartLoading();
+
             createJoinCodeButton.interactable = false;
 
             var allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             RelayServerData relayServerData = new RelayServerData(allocation, "udp");
-
 
             var settings = new NetworkSettings();
             settings.WithRelayParameters(ref relayServerData);
@@ -144,13 +145,13 @@ public class RelayManager : MonoBehaviour
             networkDriver = NetworkDriver.Create(settings);
             if (networkDriver.Bind(NetworkEndPoint.AnyIpv4) != 0)
             {
-                Debug.LogError("Host client failed to bind");
+                throw new Exception("Host client failed to bind");
             }
             else
             {
                 if (networkDriver.Listen() != 0)
                 {
-                    Debug.LogError("Host client failed to listen");
+                    throw new Exception("Host client failed to listen");
                 }
                 else
                 {
@@ -165,8 +166,9 @@ public class RelayManager : MonoBehaviour
             LobbyGUI.Instance.joinCodeText.text = joinCode;
             LobbyGUI.Instance.ShowPanel();
         }
-        catch (RelayServiceException e)
+        catch (Exception e)
         {
+            Loader.Instance.StopLoading();
             Debug.LogError($"Error creating join code: {e.Message}");
         }
     }

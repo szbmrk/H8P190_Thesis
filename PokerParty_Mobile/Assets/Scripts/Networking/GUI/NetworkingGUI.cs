@@ -50,6 +50,7 @@ public class NetworkingGUI : MonoBehaviour
             disconnectBtn.interactable = false;
         }
 
+        Loader.Instance.StopLoading();
         joinedPanel.SetActive(value);
         notJoinedPanel.SetActive(!value);
     }
@@ -75,6 +76,7 @@ public class NetworkingGUI : MonoBehaviour
 
     private void JoinRelay()
     {
+        Loader.Instance.StartLoading();
         joinBtn.interactable = false;
         RelayManager.Instance.JoinRelay(joinCodeInputField.text);
         joinCodeInputField.text = string.Empty;
@@ -82,6 +84,7 @@ public class NetworkingGUI : MonoBehaviour
 
     public void JoinError(string error)
     {
+        Loader.Instance.StopLoading();
         joinBtn.interactable = true;
         Debug.LogError(error);
         StartCoroutine(DisplayErrorText(error));
@@ -89,6 +92,7 @@ public class NetworkingGUI : MonoBehaviour
 
     private void DisconnectFromHost()
     {
+        Loader.Instance.StartLoading();
         joinBtn.interactable = true;
         disconnectBtn.interactable = false;
         RelayManager.Instance.DisconnectFromHost();

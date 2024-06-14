@@ -17,6 +17,8 @@ public class LoginGUI : MonoBehaviour
     [SerializeField] private GameObject registerPanel;
     private void Awake()
     {
+        Loader.Instance.StopLoading();
+
         dontHaveAnAccountBtn.onClick.AddListener(ShowRegisterPanel);
         loginBtn.onClick.AddListener(LoginButtonClick);
 
@@ -36,14 +38,18 @@ public class LoginGUI : MonoBehaviour
 
     private void LoginButtonClick()
     {
+        loginBtn.interactable = false;
         string username = playerNameInputField.text;
         string password = passwordInputField.text;
 
         LoginToAccount(username, password);
+        loginBtn.interactable = true;
     }
 
     private async void LoginToAccount(string playerName, string password)
     {
+        Loader.Instance.StartLoading();
+
         if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
         {
             Debug.LogError("PlayerName or password is empty");
@@ -68,6 +74,7 @@ public class LoginGUI : MonoBehaviour
             passwordInputField.text = "";
             PlayerPrefs.DeleteKey("playerName");
             PlayerPrefs.DeleteKey("password");
+            Loader.Instance.StopLoading();
             return;
         }
 
