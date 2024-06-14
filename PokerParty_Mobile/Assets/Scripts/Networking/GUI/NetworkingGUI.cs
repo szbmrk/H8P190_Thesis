@@ -43,11 +43,13 @@ public class NetworkingGUI : MonoBehaviour
         {
             joinBtn.interactable = false;
             disconnectBtn.interactable = true;
+            LogoutGUI.Instance.HideLogoutBtn();
         }
         else
         {
             joinBtn.interactable = true;
             disconnectBtn.interactable = false;
+            LogoutGUI.Instance.ShowLogoutBtn();
         }
 
         Loader.Instance.StopLoading();
