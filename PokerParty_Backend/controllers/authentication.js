@@ -6,7 +6,7 @@ export const register = async (req, res) => {
 
     try {
         let player = await Player.findOne({ playerName });
-        if (user) {
+        if (player) {
             return res.status(400).json({ msg: 'Player already exists' });
         }
 
@@ -27,7 +27,7 @@ export const login = async (req, res) => {
     const { playerName, password } = req.body;
 
     try {
-        let player = await User.findOne({ playerName });
+        let player = await Player.findOne({ playerName });
         if (!player) {
             return res.status(400).json({ msg: 'Invalid playerName', player: null });
         }
