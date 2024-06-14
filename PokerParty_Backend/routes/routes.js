@@ -6,6 +6,6 @@ const router = express.Router()
 
 router.post('/register', register)
 router.post('/login', login)
-router.post('/game', addNewGame)
+router.post('/games', addNewGame)
 
 export default router
