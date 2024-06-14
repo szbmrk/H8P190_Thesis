@@ -1,14 +1,14 @@
 import { Game } from "../models/game.js";
 
 export const addNewGame = async (req, res) => {
-    const { playerName, ELOGained, XPGained, Position } = req.body;
+    const { playerName, ELOGained, XPGained, position } = req.body;
 
     try {
         let game = new Game({
             playerName,
             ELOGained,
             XPGained,
-            Position
+            position
         });
 
         await game.save();
