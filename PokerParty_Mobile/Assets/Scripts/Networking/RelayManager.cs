@@ -70,6 +70,7 @@ public class RelayManager : MonoBehaviour
                     Debug.Log("Player got disconnected from the Host");
                     connection = default(NetworkConnection);
                     NetworkingGUI.Instance.ShowJoinedPanel(false);
+                    StartCoroutine(DisposeNetworkDriver());
                     break;
             }
         }
@@ -159,7 +160,6 @@ public class RelayManager : MonoBehaviour
         if (connection.IsCreated)
         {
             MessageSender.SendDisconnectMessageToHost();
-            StartCoroutine(DisposeNetworkDriver());
         }
     }
 
