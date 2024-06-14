@@ -17,7 +17,7 @@ public class LobbyGUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI playerCount;
     [SerializeField] private GameObject LobbyPanel;
-    [SerializeField] private PlayerCard playerCardPrefab;
+    [SerializeField] private LobbyPlayerCard playerCardPrefab;
     [SerializeField] private Transform parentForPlayerCards;
 
     private int numOfPlayers = 0;
@@ -44,7 +44,7 @@ public class LobbyGUI : MonoBehaviour
         }
     }
 
-    public PlayerCard DisplayNewPlayer(Player player)
+    public LobbyPlayerCard DisplayNewPlayer(Player player)
     {
         Transform playerCardTransform = null;
 
@@ -56,7 +56,7 @@ public class LobbyGUI : MonoBehaviour
         {
             for (int i = 0; i < parentForPlayerCards.childCount; i++)
             {
-                PlayerCard playerCardComponent = parentForPlayerCards.GetChild(i).GetComponent<PlayerCard>();
+                LobbyPlayerCard playerCardComponent = parentForPlayerCards.GetChild(i).GetComponent<LobbyPlayerCard>();
                 if (playerCardComponent.isPlayerAssigned == false)
                 {
                     playerCardTransform = parentForPlayerCards.GetChild(i);
@@ -64,11 +64,11 @@ public class LobbyGUI : MonoBehaviour
             }
         }
 
-        PlayerCard playerCard = playerCardTransform.GetComponent<PlayerCard>();
+        LobbyPlayerCard playerCard = playerCardTransform.GetComponent<LobbyPlayerCard>();
 
         playerCard.assignedPlayer = player;
         playerCard.isPlayerAssigned = true;
-        playerCardTransform.GetComponent<PlayerCard>().RefreshData();
+        playerCardTransform.GetComponent<LobbyPlayerCard>().RefreshData();
 
         playerCard.gameObject.SetActive(true);
 
@@ -85,7 +85,7 @@ public class LobbyGUI : MonoBehaviour
 
         if (numOfPlayers == 0) return;
 
-        PlayerCard playerCard = LobbyManager.Instance.GetPlayerCardForPlayer(player);
+        LobbyPlayerCard playerCard = LobbyManager.Instance.GetPlayerCardForPlayer(player);
 
         if (playerCard == null) return;
 

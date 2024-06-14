@@ -9,15 +9,15 @@ public static class NetworkMessageManager
         {
             case NetworkMessageType.ConnectionMessage:
                 ConnectionMessage connectionData = FromStringToJson<ConnectionMessage>(data);
-                LobbyManager.Instance.AddPlayer(connectionData.player);
+                LobbyManager.Instance.AddPlayer(connectionData.player, indexOfConnection);
                 break;
 
             case NetworkMessageType.DisconnectMessage:
                 Debug.Log("Player got disconnected from the Host");
 
                 DisconnectMessage disconnectMessage = FromStringToJson<DisconnectMessage>(data);
-                LobbyManager.Instance.RemovePlayer(disconnectMessage.player);
 
+                LobbyManager.Instance.RemovePlayer(disconnectMessage.player);
                 RelayManager.Instance.DisconnectPlayer(indexOfConnection);
                 break;
 

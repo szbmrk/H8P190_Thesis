@@ -1,18 +1,25 @@
 ﻿using TMPro;
 using UnityEngine;
 using PokerParty_SharedDLL;
+using UnityEngine.UI;
 
-public class PlayerCard : MonoBehaviour
+public class LobbyPlayerCard : MonoBehaviour
 { 
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI ELOText;
     [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private GameObject readyIcon;
+    [SerializeField] private Button kickBtn;
 
-    private bool isReady = false;
 
     public Player assignedPlayer;
     public bool isPlayerAssigned = false;
+    [HideInInspector] public int indexInConnectionsArray = 0;
+
+    private void Awake()
+    {
+        kickBtn.onClick.AddListener(KickPlayer);
+    }
 
     public void RefreshData()
     {
@@ -30,6 +37,7 @@ public class PlayerCard : MonoBehaviour
 
     }
 
+    private bool isReady = false;
     public bool IsReady
     {
         get
@@ -37,10 +45,15 @@ public class PlayerCard : MonoBehaviour
             return isReady;
         }
     }
-
     public void SetReady(bool ready)
     {
         isReady = ready;
         readyIcon.SetActive(ready);
+    }
+
+    private void KickPlayer()
+    {
+        LobbyManager.Instance.RemovePlayer(assignedPlayer);
+        RelayManager.Instance.DisconnectPlayer(indexInConnectionsArray);
     }
 }

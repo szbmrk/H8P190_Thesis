@@ -9,7 +9,7 @@ using UnityEngine;
 public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance;
-    public List<PlayerCard> joinedPlayers = new List<PlayerCard>();
+    [HideInInspector] public List<LobbyPlayerCard> joinedPlayers = new List<LobbyPlayerCard>();
 
     private void Awake()
     {
@@ -30,9 +30,11 @@ public class LobbyManager : MonoBehaviour
         LobbyGUI.Instance.joinCodeText.text = string.Empty;
     }
 
-    public void AddPlayer(Player player)
+    public void AddPlayer(Player player, int indexInConnectionsArray)
     {
-        joinedPlayers.Add(LobbyGUI.Instance.DisplayNewPlayer(player));
+        LobbyPlayerCard newPlayer = LobbyGUI.Instance.DisplayNewPlayer(player);
+        newPlayer.indexInConnectionsArray = indexInConnectionsArray;
+        joinedPlayers.Add(newPlayer);
     }
 
     public void RemovePlayer(Player player)
@@ -52,7 +54,7 @@ public class LobbyManager : MonoBehaviour
         GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.isReady);
     }
 
-    public PlayerCard GetPlayerCardForPlayer(Player player)
+    public LobbyPlayerCard GetPlayerCardForPlayer(Player player)
     {
         return joinedPlayers.Find(p => p.assignedPlayer.Equals(player));
     }
