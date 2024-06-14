@@ -9,5 +9,5 @@ using PokerParty_SharedDLL;
 public class LoginResponse
 {
     public string msg;
-    public Player user;
+    public Player player;
 }

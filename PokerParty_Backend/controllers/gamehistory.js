@@ -1,11 +1,11 @@
 import { Game } from "../models/game.js";
 
 export const addNewGame = async (req, res) => {
-    const { player, ELOGained, XPGained, Position } = req.body;
+    const { playerName, ELOGained, XPGained, Position } = req.body;
 
     try {
         let game = new Game({
-            player,
+            playerName,
             ELOGained,
             XPGained,
             Position

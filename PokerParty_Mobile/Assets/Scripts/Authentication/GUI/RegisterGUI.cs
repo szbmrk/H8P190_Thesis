@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class RegisterGUI : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField usernameInputField;
+    [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField passwordAgainInputField;
 
@@ -28,7 +28,7 @@ public class RegisterGUI : MonoBehaviour
 
     private async void RegisterAccount()
     {
-        string username = usernameInputField.text;
+        string username = playerNameInputField.text;
         string password = passwordInputField.text;
         string passwordAgain = passwordAgainInputField.text;
 
@@ -51,7 +51,7 @@ public class RegisterGUI : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError(e.Message);
-            usernameInputField.text = "";
+            playerNameInputField.text = "";
             passwordInputField.text = "";
             passwordAgainInputField.text = "";
             return;

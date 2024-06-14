@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LoginGUI : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField usernameInputField;
+    [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
 
     [SerializeField] private Button dontHaveAnAccountBtn;
@@ -20,10 +20,10 @@ public class LoginGUI : MonoBehaviour
         dontHaveAnAccountBtn.onClick.AddListener(ShowRegisterPanel);
         loginBtn.onClick.AddListener(LoginButtonClick);
 
-        if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
+        if (PlayerPrefs.HasKey("playerName") && PlayerPrefs.HasKey("password"))
         {
             Debug.Log("Logging in automatically");
-            LoginToAccount(PlayerPrefs.GetString("username"), PlayerPrefs.GetString("password"));
+            LoginToAccount(PlayerPrefs.GetString("playerName"), PlayerPrefs.GetString("password"));
         }
 
     }
@@ -36,17 +36,17 @@ public class LoginGUI : MonoBehaviour
 
     private void LoginButtonClick()
     {
-        string username = usernameInputField.text;
+        string username = playerNameInputField.text;
         string password = passwordInputField.text;
 
         LoginToAccount(username, password);
     }
 
-    private async void LoginToAccount(string username, string password)
+    private async void LoginToAccount(string playerName, string password)
     {
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
         {
-            Debug.LogError("Username or password is empty");
+            Debug.LogError("PlayerName or password is empty");
             return;
         }
 
@@ -55,18 +55,18 @@ public class LoginGUI : MonoBehaviour
             if (KeepMeLoggedInCheckBox.isOn)
             {
                 Debug.Log("Saving login data");
-                PlayerPrefs.SetString("username", username);
+                PlayerPrefs.SetString("playerName", playerName);
                 PlayerPrefs.SetString("password", password);
             }
 
-            await AuthManager.Instance.Login(username, password);
+            await AuthManager.Instance.Login(playerName, password);
         }
         catch (Exception e)
         {
             Debug.LogError(e.Message);
-            usernameInputField.text = "";
+            playerNameInputField.text = "";
             passwordInputField.text = "";
-            PlayerPrefs.DeleteKey("username");
+            PlayerPrefs.DeleteKey("playerName");
             PlayerPrefs.DeleteKey("password");
             return;
         }

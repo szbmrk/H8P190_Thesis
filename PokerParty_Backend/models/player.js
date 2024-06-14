@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const UserSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
+const PlayerSchema = new mongoose.Schema({
+    playerName: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     ELO: { type: Number, default: 1000 },
     gamesPlayed: { type: Number, default: 0 },
@@ -25,4 +25,4 @@ UserSchema.pre('save', async function (next) {
     }
 });
 
-export const User = mongoose.model('User', UserSchema);
+export const Player = mongoose.model('Player', PlayerSchema);

@@ -16,8 +16,8 @@ public class PlayerCard : MonoBehaviour
 
     public void RefreshData()
     {
-        playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.username);
-        playerNameText.text = assignedPlayer.username;
+        playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.playerName);
+        playerNameText.text = assignedPlayer.playerName;
         ELOText.text = $"ELO: {assignedPlayer.ELO}";
         LevelText.text = $"Level: {assignedPlayer.level}";
     }
@@ -26,7 +26,7 @@ public class PlayerCard : MonoBehaviour
     {
         isPlayerAssigned = false;
         SetReady(false);
-        PlayerColorManager.RemoveColorFromPlayer(assignedPlayer.username);
+        PlayerColorManager.RemoveColorFromPlayer(assignedPlayer.playerName);
 
     }
 

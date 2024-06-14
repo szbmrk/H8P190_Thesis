@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import { User } from "./user";
 
 const GameSchema = new mongoose.Schema({
-    player: { type: User, required: true },
+    playerName: { type: String, required: true },
     ELOGained: { type: Number, required: true },
     XPGained: { type: Number, required: true },
     Position: { type: Number, required: true },

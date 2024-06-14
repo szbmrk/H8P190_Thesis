@@ -9,7 +9,7 @@ namespace PokerParty_SharedDLL
     [Serializable]
     public class Player
     {
-        public string username;
+        public string playerName;
         public int ELO;
         public int gamesPlayed;
         public int gamesWon;
@@ -18,7 +18,7 @@ namespace PokerParty_SharedDLL
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Username: ").Append(username).Append("\n");
+            sb.Append("PlayerName: ").Append(playerName).Append("\n");
             sb.Append("ELO: ").Append(ELO).Append("\n");
             sb.Append("Games Played: ").Append(gamesPlayed).Append("\n");
             sb.Append("Games Won: ").Append(gamesWon).Append("\n");
@@ -32,14 +32,14 @@ namespace PokerParty_SharedDLL
             if (obj == null || !(obj is Player)) return false;
 
             Player other = obj as Player;
-            if (this.username == other.username) return true;
+            if (this.playerName == other.playerName) return true;
 
             return false;
         }
 
         public override int GetHashCode()
         {
-            return username.GetHashCode();
+            return playerName.GetHashCode();
         }
     }
 

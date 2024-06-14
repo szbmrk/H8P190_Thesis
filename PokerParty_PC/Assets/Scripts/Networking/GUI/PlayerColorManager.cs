@@ -5,11 +5,11 @@ public static class PlayerColorManager
 {
     private class ColorForPlayer
     {
-        public string username;
+        public string playerName;
         public Color color;
         public ColorForPlayer(Color color)
         {
-            username = string.Empty;
+            playerName = string.Empty;
             this.color = color;
         }
     }
@@ -26,11 +26,11 @@ public static class PlayerColorManager
         new ColorForPlayer(new Color(0.812f, 0.553f, 0.38f))
     };
 
-    public static Color GetColor(string username)
+    public static Color GetColor(string playerName)
     {
         foreach (ColorForPlayer colorForPlayer in ColorForPlayers) 
         {
-            if (colorForPlayer.username == username) return colorForPlayer.color;
+            if (colorForPlayer.playerName == playerName) return colorForPlayer.color;
         } 
 
         while (true)
@@ -38,19 +38,19 @@ public static class PlayerColorManager
             System.Random rnd = new System.Random();
             int randomIndex = rnd.Next(1, 8);
 
-            if (ColorForPlayers[randomIndex].username == "")
+            if (ColorForPlayers[randomIndex].playerName == string.Empty)
             {
-                ColorForPlayers[randomIndex].username = username;
+                ColorForPlayers[randomIndex].playerName = playerName;
                 return ColorForPlayers[randomIndex].color;
             }
         }
     }
 
-    public static void RemoveColorFromPlayer(string username)
+    public static void RemoveColorFromPlayer(string playerName)
     {
         foreach (ColorForPlayer colorForPlayer in ColorForPlayers)
         {
-            if (colorForPlayer.username == username) colorForPlayer.username = "";
+            if (colorForPlayer.playerName == playerName) colorForPlayer.playerName = string.Empty;
         }
     }
 }

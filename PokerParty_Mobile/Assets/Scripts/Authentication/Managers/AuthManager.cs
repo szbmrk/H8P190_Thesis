@@ -14,7 +14,7 @@ public class AuthManager : MonoBehaviour
     [Serializable]
     private class PostData
     {
-        public string username;
+        public string playerName;
         public string password;
     }
 
@@ -24,11 +24,11 @@ public class AuthManager : MonoBehaviour
             Instance = this;
     }
 
-    public async Task Register(string username, string password)
+    public async Task Register(string playerName, string password)
     {
         PostData registerData = new PostData
         {
-            username = username,
+            playerName = playerName,
             password = password
         };
 
@@ -45,7 +45,7 @@ public class AuthManager : MonoBehaviour
     {
         PostData loginData = new PostData
         {
-            username = username,
+            playerName = username,
             password = password
         };
 
@@ -57,6 +57,6 @@ public class AuthManager : MonoBehaviour
             throw new InvalidLoginException(loginResponse.msg);
         }
 
-        PlayerManager.LoggedInPlayer = loginResponse.user;
+        PlayerManager.LoggedInPlayer = loginResponse.player;
     }
 }

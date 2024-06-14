@@ -13,7 +13,7 @@ public class PlayerCard : MonoBehaviour
 
     public void DisplayData(Player player)
     {
-        playerNameText.text = player.username;
+        playerNameText.text = player.playerName;
         ELOText.text = $"ELO: {player.ELO}";
         levelText.text = $"Level: {player.level}";
         gamesPlayedText.text = $"Games Played: {player.gamesPlayed}";
