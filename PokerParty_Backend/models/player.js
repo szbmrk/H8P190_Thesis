@@ -12,7 +12,7 @@ const PlayerSchema = new mongoose.Schema({
     created_at: { type: Date, default: Date.now },
 }, { versionKey: false });
 
-UserSchema.pre('save', async function (next) {
+PlayerSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
         return next();
     }

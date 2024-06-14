@@ -1,6 +1,6 @@
 import express from "express";
 import { login, register } from "../controllers/authentication.js";
-import { addNewGame } from "../controllers/game.js";
+import { addNewGame } from "../controllers/gamehistory.js";
 
 const router = express.Router()
 
