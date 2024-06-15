@@ -44,13 +44,13 @@ public class RegisterGUI : MonoBehaviour
 
         if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
         {
-            Debug.LogError("Username or password is empty");
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "PlayerName or password is empty");
             return;
         }
 
         if (password != passwordAgain)
         {
-            Debug.LogError("Passwords do not match");
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Passwords do not match");
             return;
         }
 
@@ -60,11 +60,11 @@ public class RegisterGUI : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError(e.Message);
             playerNameInputField.text = "";
             passwordInputField.text = "";
             passwordAgainInputField.text = "";
             Loader.Instance.StopLoading();
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, e.Message);
             return;
         }
 

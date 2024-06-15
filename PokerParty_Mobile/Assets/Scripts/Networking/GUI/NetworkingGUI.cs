@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class NetworkingGUI : MonoBehaviour
 {
     public static NetworkingGUI Instance;
@@ -21,8 +20,6 @@ public class NetworkingGUI : MonoBehaviour
 
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private TMP_InputField messageInput;
-
-    [SerializeField] private TextMeshProUGUI errorText;
 
     private void Awake()
     {
@@ -61,19 +58,17 @@ public class NetworkingGUI : MonoBehaviour
     {
         if (string.IsNullOrEmpty(messageInput.text))
         {
-            Debug.LogError("Cannot send empty message!");
-            StartCoroutine(DisplayErrorText("Cannot send empty message!"));
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Cannot send empty message");
             return;
         }
 
         if (messageInput.text.Length > 500)
         {
-            Debug.LogError("Cannot send more than 500 characters at once!");
-            StartCoroutine(DisplayErrorText("Cannot send more than 500 characters at once!"));
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Cannot send more than 500 characters at once");
+            return;
         }
 
         MessageSender.SendChatMessageToHost(messageInput.text);
-        messageInput.text = string.Empty;
     }
 
     private void JoinRelay()
@@ -84,12 +79,11 @@ public class NetworkingGUI : MonoBehaviour
         joinCodeInputField.text = string.Empty;
     }
 
-    public void JoinError(string error)
+    public void ShowJoinError(string error)
     {
         Loader.Instance.StopLoading();
         joinBtn.interactable = true;
-        Debug.LogError(error);
-        StartCoroutine(DisplayErrorText(error));
+        PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, error);
     }
 
     private void DisconnectFromHost()
@@ -116,12 +110,5 @@ public class NetworkingGUI : MonoBehaviour
         }
 
         MessageSender.SendReadyMessageToHost(isReady);
-    }
-
-    public IEnumerator DisplayErrorText(string error)
-    {
-        errorText.text = error;
-        yield return new WaitForSeconds(5f);
-        errorText.text = string.Empty;
     }
 }

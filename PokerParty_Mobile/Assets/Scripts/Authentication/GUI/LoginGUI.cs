@@ -69,12 +69,12 @@ public class LoginGUI : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError(e.Message);
             playerNameInputField.text = "";
             passwordInputField.text = "";
             PlayerPrefs.DeleteKey("playerName");
             PlayerPrefs.DeleteKey("password");
             Loader.Instance.StopLoading();
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, e.Message);
             return;
         }
 

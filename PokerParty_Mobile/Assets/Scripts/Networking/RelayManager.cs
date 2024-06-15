@@ -136,7 +136,7 @@ public class RelayManager : MonoBehaviour
         }
         catch (Exception e)
         {
-            NetworkingGUI.Instance.JoinError(e.Message);
+            NetworkingGUI.Instance.ShowJoinError(e.Message);
         }
     }
 

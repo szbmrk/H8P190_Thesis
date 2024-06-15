@@ -3474,6 +3474,7 @@ GameObject:
   - component: {fileID: 1826921868}
   - component: {fileID: 1826921869}
   - component: {fileID: 1826921870}
+  - component: {fileID: 1826921871}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3589,7 +3590,6 @@ MonoBehaviour:
   joinedPanel: {fileID: 1558691090}
   joinCodeInputField: {fileID: 2086493059}
   messageInput: {fileID: 194865109}
-  errorText: {fileID: 469743476}
 --- !u!114 &1826921869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3616,6 +3616,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logoutBtn: {fileID: 1412858721}
+--- !u!114 &1826921871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826921863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1182ac968a387604583c6f0831b68d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 1337862126387541846, guid: 7432081291f9e4446ac4a997afc2da26, type: 3}
+  canvas: {fileID: 1826921867}
 --- !u!1 &2014119440
 GameObject:
   m_ObjectHideFlags: 0
