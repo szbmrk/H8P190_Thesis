@@ -38,7 +38,6 @@ public class LobbyGUI : MonoBehaviour
         ClearPlayers();
         ChatGUI.Instance.ClearChat();
         yield return LobbyManager.Instance.DeleteLobby();
-        Loader.Instance.StopLoading();
 
         SceneManager.LoadScene("MainMenu");
     }
