@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using System.Collections;
 using System;
 
-public class RelayManager : MonoBehaviour
+public class ConnectionManager : MonoBehaviour
 {
-    public static RelayManager Instance;
+    public static ConnectionManager Instance;
 
     public NetworkDriver networkDriver;
     private NetworkConnection connection;
@@ -22,15 +22,9 @@ public class RelayManager : MonoBehaviour
     private async void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
 
-        await InitializeUnityServices();
+        await AuthAndServicesManager.InitializeUnityServices();
     }
 
     private void Update()
@@ -73,38 +67,6 @@ public class RelayManager : MonoBehaviour
                     StartCoroutine(DisposeNetworkDriver());
                     break;
             }
-        }
-    }
-
-    private async Task InitializeUnityServices()
-    {
-        if (!UnityServices.State.Equals(ServicesInitializationState.Initialized))
-        {
-            await UnityServices.InitializeAsync();
-        }
-
-        if (!AuthenticationService.Instance.IsSignedIn)
-        {
-            await SignInAnonymouslyAsync();
-        }
-    }
-
-    async Task SignInAnonymouslyAsync()
-    {
-        try
-        {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            Debug.Log("Sign in anonymously succeeded!");
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
-
-        }
-        catch (AuthenticationException ex)
-        {
-            Debug.LogException(ex);
-        }
-        catch (RequestFailedException ex)
-        {
-            Debug.LogException(ex);
         }
     }
 

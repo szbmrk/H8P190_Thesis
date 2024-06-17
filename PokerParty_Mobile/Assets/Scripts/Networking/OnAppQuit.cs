@@ -20,7 +20,7 @@ public class OnAppQuit : MonoBehaviour
 
     public static bool WantsToQuit()
     {
-        if (Instance == null || RelayManager.Instance == null || !RelayManager.Instance.networkDriver.IsCreated)
+        if (Instance == null || ConnectionManager.Instance == null || !ConnectionManager.Instance.networkDriver.IsCreated)
             return true;
 
         Instance.StartCoroutine(Instance.StartQuiting());
@@ -30,10 +30,10 @@ public class OnAppQuit : MonoBehaviour
 
     IEnumerator StartQuiting()
     {
-        RelayManager.Instance.DisconnectFromHost();
+        ConnectionManager.Instance.DisconnectFromHost();
 
-        RelayManager.Instance.StopAllCoroutines();
-        yield return RelayManager.Instance.DisposeNetworkDriver();
+        ConnectionManager.Instance.StopAllCoroutines();
+        yield return ConnectionManager.Instance.DisposeNetworkDriver();
 
         ReadyToQuit = true;
         Debug.Log("Client app stopped");
