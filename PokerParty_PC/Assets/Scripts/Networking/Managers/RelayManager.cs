@@ -127,9 +127,6 @@ public class RelayManager : MonoBehaviour
     {
         try
         {
-            PopupManager.Instance.ShowPopup(PopupType.SuccessPopup, "Test popup");
-            return;
-
             Loader.Instance.StartLoading();
 
             createJoinCodeButton.interactable = false;
