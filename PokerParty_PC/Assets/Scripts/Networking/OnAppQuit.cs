@@ -21,7 +21,7 @@ public class OnAppQuit : MonoBehaviour
 
     public static bool WantsToQuit()
     {
-        if (Instance == null || RelayManager.Instance == null || !RelayManager.Instance.networkDriver.IsCreated)
+        if (Instance == null || ConnectionManager.Instance == null || !ConnectionManager.Instance.networkDriver.IsCreated)
             return true;
 
         Instance.StartCoroutine(Instance.StartQuiting());
@@ -31,12 +31,10 @@ public class OnAppQuit : MonoBehaviour
 
     IEnumerator StartQuiting()
     {
-        RelayManager.Instance.DeleteLobby();
+        ConnectionManager.Instance.StopAllCoroutines();
+        LobbyManager.Instance.StopAllCoroutines();
 
-        RelayManager.Instance.StopAllCoroutines();
-
-        yield return RelayManager.Instance.DisposeDriver();
-        yield return RelayManager.Instance.DisposeConnections();
+        yield return LobbyGUI.Instance.DeleteLobby();
 
         ReadyToQuit = true;
         Debug.Log("Server app stopped");

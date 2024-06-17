@@ -67,10 +67,9 @@ public class RelayManager : MonoBehaviour
                     break;
 
                 case NetworkEvent.Type.Disconnect:
-                    Debug.Log("Player got disconnected from the Host");
                     connection = default(NetworkConnection);
                     NetworkingGUI.Instance.ShowJoinedPanel(false);
-                    PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected by the Host");
+                    PopupManager.Instance.ShowPopup(PopupType.BasicPopup, "You got disconnected from the game");
                     StartCoroutine(DisposeNetworkDriver());
                     break;
             }

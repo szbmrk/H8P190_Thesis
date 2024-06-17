@@ -54,6 +54,6 @@ public class LobbyPlayerCard : MonoBehaviour
     private void KickPlayer()
     {
         LobbyManager.Instance.RemovePlayer(assignedPlayer);
-        RelayManager.Instance.DisconnectPlayer(indexInConnectionsArray);
+        ConnectionManager.Instance.DisconnectPlayer(indexInConnectionsArray);
     }
 }

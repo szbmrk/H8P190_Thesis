@@ -2,5 +2,5 @@
 {
     ErrorPopup,
     SuccessPopup,
-    BasicsPopup
+    BasicPopup
 }

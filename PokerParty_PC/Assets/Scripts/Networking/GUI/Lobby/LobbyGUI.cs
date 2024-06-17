@@ -5,13 +5,13 @@ using TMPro;
 using UnityEngine;
 using PokerParty_SharedDLL;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyGUI : MonoBehaviour
 {
     public static LobbyGUI Instance;
     public TextMeshProUGUI joinCodeText;
 
-    [SerializeField] private Button disconnectAllPlayersBtn;
     [SerializeField] private Button deleteLobbyBtn;
     [SerializeField] private Button startGameBtn;
 
@@ -28,20 +28,19 @@ public class LobbyGUI : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
-        disconnectAllPlayersBtn.onClick.AddListener(LobbyManager.Instance.DisconnectAllPlayers);
-        deleteLobbyBtn.onClick.AddListener(LobbyManager.Instance.DeleteLobby);
+        deleteLobbyBtn.onClick.AddListener(() => StartCoroutine(DeleteLobby()));
     }
 
-    private void Update()
+    public IEnumerator DeleteLobby()
     {
-        if (LobbyManager.Instance.joinedPlayers.Count >= 3 && LobbyManager.Instance.AreAllPlayersReady())
-        {
-            startGameBtn.interactable = true;
-        }
-        else
-        {
-            startGameBtn.interactable = false;
-        }
+        Loader.Instance.StartLoading();
+        joinCodeText.text = string.Empty;
+        ClearPlayers();
+        ChatGUI.Instance.ClearChat();
+        yield return LobbyManager.Instance.DeleteLobby();
+        Loader.Instance.StopLoading();
+
+        SceneManager.LoadScene("MainMenu");
     }
 
     public LobbyPlayerCard DisplayNewPlayer(Player player)
@@ -74,7 +73,7 @@ public class LobbyGUI : MonoBehaviour
 
         numOfPlayers++;
 
-        RefreshPlayerCountText();
+        RefreshPlayerCount();
         RepositionCards();
 
         return playerCard;
@@ -93,11 +92,11 @@ public class LobbyGUI : MonoBehaviour
         playerCard.gameObject.SetActive(false);
 
         numOfPlayers--;
-        RefreshPlayerCountText();
+        RefreshPlayerCount();
         RepositionCards();
     }
 
-    public void ClearDisplay()
+    public void ClearPlayers()
     {
         if (numOfPlayers == 0) return;
 
@@ -107,7 +106,7 @@ public class LobbyGUI : MonoBehaviour
         }
 
         numOfPlayers = 0;
-        RefreshPlayerCountText();
+        RefreshPlayerCount();
     }
 
     private void RepositionCards()
@@ -119,19 +118,18 @@ public class LobbyGUI : MonoBehaviour
         }
     }
 
-    private void RefreshPlayerCountText()
+    private void RefreshPlayerCount()
     {
+        if (numOfPlayers >= 3 && LobbyManager.Instance.AreAllPlayersReady())
+            startGameBtn.interactable = true;
+        else 
+            startGameBtn.interactable = false;
+
         playerCount.text = numOfPlayers.ToString() + "/8";
     }
 
     public void ShowPanel()
     {
-        Loader.Instance.StopLoading();
         LobbyPanel.SetActive(true);
-    }
-
-    public void HidePanel()
-    {
-        LobbyPanel.SetActive(false);
     }
 }

@@ -27,7 +27,7 @@ public class Popup : MonoBehaviour
             case PopupType.SuccessPopup:
                 popupText.color = new Color(0.3f, 1f, 0.32f);
                 break;
-            case PopupType.BasicsPopup:
+            case PopupType.BasicPopup:
                 popupText.color = Color.white;
                 break;
             default:

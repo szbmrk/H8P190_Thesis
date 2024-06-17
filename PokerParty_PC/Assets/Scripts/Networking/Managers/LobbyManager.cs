@@ -1,9 +1,7 @@
 ﻿using PokerParty_SharedDLL;
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
@@ -17,17 +15,11 @@ public class LobbyManager : MonoBehaviour
             Instance = this;
     }
 
-    public void DisconnectAllPlayers()
+    public IEnumerator DeleteLobby()
     {
-        RelayManager.Instance.DisconnectAllPlayers();
-        LobbyGUI.Instance.ClearDisplay();
-    }
-
-    public void DeleteLobby()
-    {
-        RelayManager.Instance.DeleteLobby();
-        LobbyGUI.Instance.HidePanel();
-        LobbyGUI.Instance.joinCodeText.text = string.Empty;
+        ConnectionManager.Instance.DisconnectAllPlayers();
+        yield return ConnectionManager.Instance.DisposeDriverAndConnections();
+        Debug.Log("Lobby deleted");
     }
 
     public void AddPlayer(Player player, int indexInConnectionsArray)
@@ -43,12 +35,6 @@ public class LobbyManager : MonoBehaviour
         joinedPlayers.Remove(GetPlayerCardForPlayer(player));
     }
 
-    public void RemoveAllPlayers()
-    {
-        LobbyGUI.Instance.ClearDisplay();
-        joinedPlayers.Clear();
-    }
-
     public void ModifyPlayerReady(ReadyMessage readyMessage)
     {
         GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.isReady);
@@ -58,6 +44,7 @@ public class LobbyManager : MonoBehaviour
     {
         return joinedPlayers.Find(p => p.assignedPlayer.Equals(player));
     }
+
     public bool AreAllPlayersReady()
     {
         return joinedPlayers.All(player => player.IsReady);
