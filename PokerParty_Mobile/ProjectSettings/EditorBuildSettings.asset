@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Authentication.unity
     guid: a6669497ec47f17488f3813eb7f53588
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Scenes/Lobby.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 5d45fd689376610448dbed95179001ba, type: 2}

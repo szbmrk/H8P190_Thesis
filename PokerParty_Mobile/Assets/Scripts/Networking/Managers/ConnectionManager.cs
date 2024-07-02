@@ -22,7 +22,10 @@ public class ConnectionManager : MonoBehaviour
     private async void Awake()
     {
         if (Instance == null)
+        { 
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         await AuthAndServicesManager.InitializeUnityServices();
     }
