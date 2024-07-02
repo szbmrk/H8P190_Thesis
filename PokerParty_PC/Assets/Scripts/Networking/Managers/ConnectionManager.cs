@@ -20,7 +20,10 @@ public class ConnectionManager : MonoBehaviour
     private async void Start()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         await AuthAndServicesManager.InitializeUnityServices();
         CreateRelayAndJoinCode();

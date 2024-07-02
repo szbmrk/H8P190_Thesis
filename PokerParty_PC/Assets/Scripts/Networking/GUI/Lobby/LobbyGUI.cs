@@ -29,6 +29,12 @@ public class LobbyGUI : MonoBehaviour
             Instance = this;
 
         deleteLobbyBtn.onClick.AddListener(() => StartCoroutine(DeleteLobby()));
+        startGameBtn.onClick.AddListener(StartGame);
+    }
+    
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Game");
     }
 
     public IEnumerator DeleteLobby()
