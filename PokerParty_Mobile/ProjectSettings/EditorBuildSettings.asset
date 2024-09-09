@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: e126d734fbfa26b4799ca70d5477c9cf
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 5d45fd689376610448dbed95179001ba, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 450f1aa22bfe63e48a2f70204e4b048b, type: 2}

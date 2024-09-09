@@ -69,8 +69,8 @@ public class NetworkingGUI : MonoBehaviour
             return;
         }
 
-        messageInput.text = string.Empty;
         MessageSender.SendChatMessageToHost(messageInput.text);
+        messageInput.text = string.Empty;
     }
 
     private void JoinRelay()

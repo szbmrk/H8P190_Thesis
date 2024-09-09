@@ -78,6 +78,6 @@ public class LoginGUI : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Lobby");
     }
 }
