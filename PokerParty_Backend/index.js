@@ -4,7 +4,6 @@ import router from "./routes/routes.js"
 import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
-import { seedData } from "./helper/seed.js"
 
 dotenv.config()
 
@@ -20,5 +19,3 @@ mongoose.connect(process.env.MONGODB_URI).then(() => console.log('MongoDB connec
     .catch(err => console.log(err));
 
 app.listen(PORT, () => console.log("Server started on port: " + PORT))
-
-seedData()
