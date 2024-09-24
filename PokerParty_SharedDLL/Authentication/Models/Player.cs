@@ -9,6 +9,7 @@ namespace PokerParty_SharedDLL
     [Serializable]
     public class Player
     {
+        public int _id;
         public string playerName;
         public int ELO;
         public int gamesPlayed;
