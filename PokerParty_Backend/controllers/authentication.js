@@ -9,7 +9,7 @@ export const register = async (req, res) => {
             SELECT * FROM players WHERE "playerName" = ${playerName}
         `;
 
-        if (existingPlayer.count > 0) {
+        if (existingPlayer.rows.length > 0) {
             return res.status(400).json({ msg: 'Player already exists' });
         }
 
@@ -37,11 +37,11 @@ export const login = async (req, res) => {
             SELECT * FROM players WHERE "playerName" = ${playerName}
         `;
 
-        if (result.count === 0) {
+        if (result.rows.length === 0) {
             return res.status(400).json({ msg: 'Invalid playerName', player: null });
         }
 
-        const player = result[0];
+        const player = result.rows[0];
 
         const isMatch = await bcrypt.compare(password, player.password);
 
