@@ -1,43 +1,55 @@
-import { Player } from "../models/player.js";
+import { sql } from '@vercel/postgres';
 import bcrypt from "bcrypt";
 
 export const register = async (req, res) => {
     const { playerName, password } = req.body;
 
     try {
-        let player = await Player.findOne({ playerName });
-        if (player) {
+        const existingPlayer = await sql`
+            SELECT * FROM players WHERE "playerName" = ${playerName}
+        `;
+
+        if (existingPlayer.count > 0) {
             return res.status(400).json({ msg: 'Player already exists' });
         }
 
-        player = new Player({
-            playerName,
-            password
-        });
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        await player.save();
+        await sql`
+            INSERT INTO players ("playerName", "password")
+            VALUES (${playerName}, ${hashedPassword})
+        `;
+
         res.status(201).json({ msg: 'Player registered successfully' });
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-}
+};
 
 export const login = async (req, res) => {
     const { playerName, password } = req.body;
 
     try {
-        let player = await Player.findOne({ playerName });
-        if (!player) {
+        const result = await sql`
+            SELECT * FROM players WHERE "playerName" = ${playerName}
+        `;
+
+        if (result.count === 0) {
             return res.status(400).json({ msg: 'Invalid playerName', player: null });
         }
 
+        const player = result[0];
+
         const isMatch = await bcrypt.compare(password, player.password);
+
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid credentials', player: null });
         }
 
-        res.status(200).json({ msg: 'Player logged in successfully', player: player });
+        res.status(200).json({ msg: 'Player logged in successfully', player });
 
     } catch (err) {
         console.error(err.message);

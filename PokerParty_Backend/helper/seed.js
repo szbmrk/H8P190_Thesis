@@ -1,35 +1,67 @@
-import { Player } from "../models/player.js";
-import { Game } from "../models/game.js";
-import { Log } from "../models/log.js";
-import { PlayerGame } from "../models/playergame.js";
+import { sql } from '@vercel/postgres';
+import dotenv from "dotenv";
+import bcrypt from 'bcrypt';
+dotenv.config();
 
-export async function seedData() {
-    const players = await Player.create([
-        { playerName: 'Alice', password: 'password123', ELO: 1200, gamesPlayed: 10, gamesWon: 6, XP: 500, level: 3 },
-        { playerName: 'Bob', password: 'securepass', ELO: 1100, gamesPlayed: 8, gamesWon: 3, XP: 400, level: 2 },
-        { playerName: 'Charlie', password: 'chessMaster', ELO: 1300, gamesPlayed: 15, gamesWon: 10, XP: 750, level: 4 }
-    ]);
+const hashPassword = async (password) => {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
+};
 
-    const games = await Game.create([
-        {},
-        {},
-        {}
-    ]);
+const clearDatabase = async () => {
+    await sql`TRUNCATE TABLE player_games, log, games, players RESTART IDENTITY CASCADE`;
+};
 
-    await Log.create([
-        { gameId: games[0]._id, log: 'Game started' },
-        { gameId: games[1]._id, log: 'Game started' },
-        { gameId: games[2]._id, log: 'Game started' }
-    ]);
+const seedPlayers = async () => {
+    const hashedPassword1 = await hashPassword('password123');
+    const hashedPassword2 = await hashPassword('password456');
 
-    await PlayerGame.create([
-        { playerId: players[0]._id, gameId: games[0]._id, ELOGained: 15, XPGained: 50, position: 1 },
-        { playerId: players[1]._id, gameId: games[0]._id, ELOGained: -15, XPGained: 30, position: 2 },
-        { playerId: players[2]._id, gameId: games[1]._id, ELOGained: 10, XPGained: 40, position: 1 },
-        { playerId: players[0]._id, gameId: games[1]._id, ELOGained: -10, XPGained: 25, position: 2 },
-        { playerId: players[1]._id, gameId: games[2]._id, ELOGained: 5, XPGained: 35, position: 1 },
-        { playerId: players[2]._id, gameId: games[2]._id, ELOGained: -5, XPGained: 20, position: 2 }
-    ]);
+    await sql`
+    INSERT INTO players ("playerName", password, "ELO", "gamesPlayed", "gamesWon", "XP", level)
+    VALUES
+      (${'Player1'}, ${hashedPassword1}, 1200, 5, 3, 150, 2),
+      (${'Player2'}, ${hashedPassword2}, 1100, 7, 2, 200, 3);
+  `;
+};
 
-    console.log('Seed data inserted successfully');
-}
+const seedGames = async () => {
+    await sql`
+    INSERT INTO games (created_at)
+    VALUES
+      (NOW()),
+      (NOW());
+  `;
+};
+
+const seedPlayerGames = async () => {
+    await sql`
+    INSERT INTO player_games ("playerId", "gameId", "ELOGained", "XPGained", position)
+    VALUES
+      (1, 1, 10, 50, 1),
+      (2, 1, -5, 20, 2);
+  `;
+};
+
+const seedLogs = async () => {
+    await sql`
+    INSERT INTO log ("gameId", log, created_at)
+    VALUES
+      (1, 'Player1 won the match with a full house.', NOW()),
+      (2, 'Player2 folded early in the game.', NOW());
+  `;
+};
+
+const seedDatabase = async () => {
+    try {
+        await clearDatabase();
+        await seedPlayers();
+        await seedGames();
+        await seedPlayerGames();
+        await seedLogs();
+        console.log('Database seeded successfully!');
+    } catch (err) {
+        console.error('Error seeding the database', err);
+    }
+};
+
+seedDatabase();
