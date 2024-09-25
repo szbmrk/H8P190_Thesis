@@ -5,9 +5,7 @@ export const register = async (req, res) => {
     const { playerName, password } = req.body;
 
     try {
-        const existingPlayer = await sql`
-            SELECT * FROM players WHERE "playerName" = ${playerName}
-        `;
+        const existingPlayer = await sql`SELECT * FROM players WHERE "playerName" = ${playerName}`;
 
         if (existingPlayer.rows.length > 0) {
             return res.status(400).json({ msg: 'Player already exists' });
@@ -16,10 +14,8 @@ export const register = async (req, res) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        await sql`
-            INSERT INTO players ("playerName", "password")
-            VALUES (${playerName}, ${hashedPassword})
-        `;
+        await sql`INSERT INTO players ("playerName", "password")
+                  VALUES (${playerName}, ${hashedPassword})`;
 
         res.status(201).json({ msg: 'Player registered successfully' });
 
@@ -33,9 +29,7 @@ export const login = async (req, res) => {
     const { playerName, password } = req.body;
 
     try {
-        const result = await sql`
-            SELECT * FROM players WHERE "playerName" = ${playerName}
-        `;
+        const result = await sql`SELECT * FROM players WHERE "playerName" = ${playerName}`;
 
         if (result.rows.length === 0) {
             return res.status(400).json({ msg: 'Invalid playerName', player: null });
