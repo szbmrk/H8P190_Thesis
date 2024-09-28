@@ -23,7 +23,7 @@ public static class PlayerColorManager
         new ColorForPlayer(new Color(0.412f, 0.463f, 1.0f)),
         new ColorForPlayer(new Color(0.749f, 1.0f, 0.412f)),
         new ColorForPlayer(new Color(0.984f, 0.506f, 1.0f)),
-        new ColorForPlayer(new Color(0.812f, 0.553f, 0.38f))
+        new ColorForPlayer(new Color(0.812f, 0.553f, 0.38f)),
     };
 
     public static Color GetColor(string playerName)
@@ -51,6 +51,14 @@ public static class PlayerColorManager
         foreach (ColorForPlayer colorForPlayer in ColorForPlayers)
         {
             if (colorForPlayer.playerName == playerName) colorForPlayer.playerName = string.Empty;
+        }
+    }
+
+    public static void ResetColors()
+    {
+        foreach (ColorForPlayer colorForPlayer in ColorForPlayers)
+        {
+            colorForPlayer.playerName = string.Empty;
         }
     }
 }
