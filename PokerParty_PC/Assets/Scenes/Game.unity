@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58434646e00def0478b9b7b03744c506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSeats: []
   seatPositions:
   - {fileID: 7531501917725283738}
   - {fileID: 4637871818107273093}
@@ -588,6 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086f3982c058ac14a8052fa9e7531f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitingFor: {fileID: 1846417131}
 --- !u!1 &1309344513
 GameObject:
   m_ObjectHideFlags: 0
