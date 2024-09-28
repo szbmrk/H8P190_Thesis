@@ -54,31 +54,14 @@ public class LobbyGUI : MonoBehaviour
 
     public LobbyPlayerCard DisplayNewPlayer(Player player)
     {
-        Transform playerCardTransform = null;
-
-        if (numOfPlayers >= parentForPlayerCards.childCount)
-        {
-            playerCardTransform = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
-        }
-        else
-        {
-            for (int i = 0; i < parentForPlayerCards.childCount; i++)
-            {
-                LobbyPlayerCard playerCardComponent = parentForPlayerCards.GetChild(i).GetComponent<LobbyPlayerCard>();
-                if (playerCardComponent.isPlayerAssigned == false)
-                {
-                    playerCardTransform = parentForPlayerCards.GetChild(i);
-                }
-            }
-        }
-
+        Transform playerCardTransform = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
         LobbyPlayerCard playerCard = playerCardTransform.GetComponent<LobbyPlayerCard>();
-
         playerCard.assignedPlayer = player;
-        playerCard.isPlayerAssigned = true;
         playerCardTransform.GetComponent<LobbyPlayerCard>().RefreshData();
 
         playerCard.gameObject.SetActive(true);
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(parentForPlayerCards.GetComponent<RectTransform>());
 
         numOfPlayers++;
 
@@ -90,7 +73,6 @@ public class LobbyGUI : MonoBehaviour
 
     public void RemovePlayerFromDisplay(Player player)
     {
-
         if (numOfPlayers == 0) return;
 
         LobbyPlayerCard playerCard = LobbyManager.Instance.GetPlayerCardForPlayer(player);
@@ -98,7 +80,7 @@ public class LobbyGUI : MonoBehaviour
         if (playerCard == null) return;
 
         playerCard.ResetData();
-        playerCard.gameObject.SetActive(false);
+        Destroy(playerCard.gameObject);
 
         numOfPlayers--;
         RefreshPlayerCount();

@@ -13,7 +13,6 @@ public class LobbyPlayerCard : MonoBehaviour
 
 
     public Player assignedPlayer;
-    public bool isPlayerAssigned = false;
     [HideInInspector] public int indexInConnectionsArray = 0;
 
     private void Awake()
@@ -31,10 +30,8 @@ public class LobbyPlayerCard : MonoBehaviour
 
     public void ResetData()
     {
-        isPlayerAssigned = false;
         SetReady(false);
         PlayerColorManager.RemoveColorFromPlayer(assignedPlayer.playerName);
-
     }
 
     private bool isReady = false;

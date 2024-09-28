@@ -116,4 +116,11 @@ public class NetworkingGUI : MonoBehaviour
         ReadyMessage message = new ReadyMessage { isReady = isReady };
         MessageSender.SendMessageToHost(message);
     }
+
+    public void ResetReadyButton()
+    {
+        isReady = false;
+        readyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Ready";
+        disconnectBtn.interactable = true;
+    }
 }

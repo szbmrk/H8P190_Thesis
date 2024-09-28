@@ -632,7 +632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &139847129587397669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -676,6 +676,7 @@ MonoBehaviour:
   readyIcon: {fileID: 535998753670564074}
   kickBtn: {fileID: 4083806614375181432}
   assignedPlayer:
+    _id: 0
     playerName: 
     ELO: 0
     gamesPlayed: 0
@@ -683,6 +684,7 @@ MonoBehaviour:
     XP: 0
     level: 0
   isPlayerAssigned: 0
+  indexInConnectionsArray: 0
 --- !u!1 &5181845330119741605
 GameObject:
   m_ObjectHideFlags: 0
