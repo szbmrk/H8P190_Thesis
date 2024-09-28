@@ -62,6 +62,7 @@ public class TablePlayerCard : MonoBehaviour
     public void StartTurn()
     {
         isTurn = true;
+        GameManager.Instance.SetWaitingFor(assignedPlayer.playerName);
         RefreshData();
     }
 }
