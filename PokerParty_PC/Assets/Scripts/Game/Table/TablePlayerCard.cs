@@ -17,6 +17,7 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private GameObject dealerIcon;
     [SerializeField] private GameObject smallBlindIcon;
     [SerializeField] private GameObject bigBlindIcon;
+    [SerializeField] private GameObject turnIcon;
 
     [HideInInspector] public Player assignedPlayer;
     [HideInInspector] public int indexInConnectionsArray = 0;
@@ -40,5 +41,21 @@ public class TablePlayerCard : MonoBehaviour
         dealerIcon.SetActive(isDealer);
         smallBlindIcon.SetActive(isSmallBlind);
         bigBlindIcon.SetActive(isBigBlind);
+        turnIcon.SetActive(isTurn);
+
+        if (isTurn)
+            playerNameText.text = $"<b>{assignedPlayer.playerName}</b>";
+        else 
+            playerNameText.text = assignedPlayer.playerName;
+    }
+
+    public void RefreshData()
+    {
+        MoneyText.text = $"{money} $";
+        turnIcon.SetActive(isTurn);
+        if (isTurn)
+            playerNameText.text = $"<b>{assignedPlayer.playerName}</b>";
+        else
+            playerNameText.text = assignedPlayer.playerName;
     }
 }
