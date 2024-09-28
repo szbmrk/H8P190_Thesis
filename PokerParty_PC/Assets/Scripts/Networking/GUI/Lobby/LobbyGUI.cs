@@ -125,7 +125,7 @@ public class LobbyGUI : MonoBehaviour
 
     private void RefreshPlayerCount()
     {
-        if (numOfPlayers >= 3 && LobbyManager.Instance.AreAllPlayersReady())
+        if (numOfPlayers >= 4 && LobbyManager.Instance.AreAllPlayersReady())
             startGameBtn.interactable = true;
         else 
             startGameBtn.interactable = false;
