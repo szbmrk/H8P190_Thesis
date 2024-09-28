@@ -35,6 +35,9 @@ public class LobbyGUI : MonoBehaviour
     
     public void StartGame()
     {
+        Settings.StartingMoney = 5000;
+        Settings.PlayerCount = numOfPlayers;
+        ConnectionManager.Instance.SendMessageToAllConnections("Game Started!");
         SceneManager.LoadScene("Game");
     }
 

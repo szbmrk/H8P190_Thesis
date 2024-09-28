@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using PokerParty_SharedDLL;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,7 +70,8 @@ public class NetworkingGUI : MonoBehaviour
             return;
         }
 
-        MessageSender.SendChatMessageToHost(messageInput.text);
+        ChatMessage chatMessage = new ChatMessage { message = messageInput.text };
+        MessageSender.SendMessageToHost(chatMessage);
         messageInput.text = string.Empty;
     }
 
@@ -111,6 +113,7 @@ public class NetworkingGUI : MonoBehaviour
             disconnectBtn.interactable = false;
         }
 
-        MessageSender.SendReadyMessageToHost(isReady);
+        ReadyMessage message = new ReadyMessage { isReady = isReady };
+        MessageSender.SendMessageToHost(message);
     }
 }

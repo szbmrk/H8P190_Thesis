@@ -9,6 +9,8 @@ using Unity.Collections;
 using System.Threading.Tasks;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
+using PokerParty_SharedDLL;
 
 public class ConnectionManager : MonoBehaviour
 {
@@ -55,11 +57,13 @@ public class ConnectionManager : MonoBehaviour
                 case NetworkEvent.Type.Data:
                     FixedString32Bytes msg = stream.ReadFixedString32();
                     Debug.Log($"Player received msg: {msg}");
+                    if (msg.ToString() == "Game Started!")
+                        SceneManager.LoadScene("Game");
                     break;
 
                 case NetworkEvent.Type.Connect:
                     Debug.Log("Player connected to the Host");
-                    MessageSender.SendPlayerDataToHost();
+                    MessageSender.SendMessageToHost(new ConnectionMessage());
                     NetworkingGUI.Instance.ShowJoinedPanel(true);
                     break;
 
@@ -124,7 +128,7 @@ public class ConnectionManager : MonoBehaviour
     {
         if (connection.IsCreated)
         {
-            MessageSender.SendDisconnectMessageToHost();
+            MessageSender.SendMessageToHost(new DisconnectMessage());
         }
     }
 

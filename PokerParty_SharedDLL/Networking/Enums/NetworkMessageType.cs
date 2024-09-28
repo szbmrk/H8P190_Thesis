@@ -5,7 +5,8 @@
         ChatMessage,
         DisconnectMessage,
         ConnectionMessage,
-        ReadyMessage
+        ReadyMessage,
+        LoadedToGameMessage
     }
 
 }

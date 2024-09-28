@@ -6,6 +6,7 @@ using Unity.Networking.Transport;
 using Unity.Networking.Transport.Relay;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -153,6 +154,24 @@ public class ConnectionManager : MonoBehaviour
             networkDriver.Disconnect(Connections[index]);
             Connections[index] = default(NetworkConnection);
             Connections.RemoveAt(index);
+        }
+    }
+
+    public void SendMessageToAllConnections(string message)
+    {
+        for (int i = 0; i < Connections.Length; i++)
+        {
+            SendMessageToConnection(Connections[i], message);
+        }
+    }
+
+    private void SendMessageToConnection(NetworkConnection connection, string message)
+    {
+        if (networkDriver.BeginSend(connection, out DataStreamWriter writer) == 0)
+        {
+            writer.WriteFixedString512(message);
+            networkDriver.EndSend(writer);
+            Debug.Log($"Message sent: {message}");
         }
     }
 

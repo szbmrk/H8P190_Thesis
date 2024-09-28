@@ -14,50 +14,10 @@ public class MessageSender
         MessageSender.connection = connection;
     }
 
-    public static void SendPlayerDataToHost()
+    public static void SendMessageToHost(ANetworkMessage message)
     {
-        ConnectionMessage connectionMessage = new ConnectionMessage
-        {
-            player = PlayerManager.LoggedInPlayer
-        };
+        message.player = PlayerManager.LoggedInPlayer;
 
-        SendMessageToHost(connectionMessage);
-    }
-
-    public static void SendChatMessageToHost(string message)
-    {
-        ChatMessage chatMessage = new ChatMessage
-        {
-            player = PlayerManager.LoggedInPlayer,
-            message = message
-        };
-
-        SendMessageToHost(chatMessage);
-    }
-
-    public static void SendDisconnectMessageToHost()
-    {
-        DisconnectMessage disconnectMessage = new DisconnectMessage
-        {
-            player = PlayerManager.LoggedInPlayer
-        };
-
-        SendMessageToHost(disconnectMessage);
-    }
-
-    public static void SendReadyMessageToHost(bool isReady)
-    {
-        ReadyMessage readyMessage = new ReadyMessage
-        {
-            player = PlayerManager.LoggedInPlayer,
-            isReady = isReady
-        };
-
-        SendMessageToHost(readyMessage);
-    }
-
-    private static void SendMessageToHost(ANetworkMessage message)
-    {
         if (!connection.IsCreated)
         {
             Debug.LogError("Player isn't connected. No Host client to send message to.");

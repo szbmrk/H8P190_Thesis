@@ -26,6 +26,9 @@ public class LogoutGUI : MonoBehaviour
         PlayerPrefs.DeleteKey("username");
         PlayerPrefs.DeleteKey("password");
 
+        if (ConnectionManager.Instance != null)
+            Destroy(ConnectionManager.Instance.gameObject);
+
         SceneManager.LoadScene("Authentication");
     }
 

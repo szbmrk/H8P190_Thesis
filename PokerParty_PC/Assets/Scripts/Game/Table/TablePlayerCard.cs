@@ -22,7 +22,7 @@ public class TablePlayerCard : MonoBehaviour
     [HideInInspector] public Player assignedPlayer;
     [HideInInspector] public int indexInConnectionsArray = 0;
 
-    [HideInInspector] public int money = 5000;
+    [HideInInspector] public int money;
 
     [HideInInspector] public bool isDealer;
     [HideInInspector] public bool isSmallBlind;
@@ -30,23 +30,23 @@ public class TablePlayerCard : MonoBehaviour
 
     [HideInInspector] public bool isTurn;
 
+    private void Start()
+    {
+        money = Settings.StartingMoney;
+    }
+
     public void LoadData()
     {
         playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.playerName);
         playerNameText.text = assignedPlayer.playerName;
         ELOText.text = $"ELO: {assignedPlayer.ELO}";
         LevelText.text = $"Level: {assignedPlayer.level}";
-        MoneyText.text = $"{money} $";
 
         dealerIcon.SetActive(isDealer);
         smallBlindIcon.SetActive(isSmallBlind);
         bigBlindIcon.SetActive(isBigBlind);
-        turnIcon.SetActive(isTurn);
 
-        if (isTurn)
-            playerNameText.text = $"<b>{assignedPlayer.playerName}</b>";
-        else 
-            playerNameText.text = assignedPlayer.playerName;
+        RefreshData();
     }
 
     public void RefreshData()
@@ -57,5 +57,11 @@ public class TablePlayerCard : MonoBehaviour
             playerNameText.text = $"<b>{assignedPlayer.playerName}</b>";
         else
             playerNameText.text = assignedPlayer.playerName;
+    }
+
+    public void StartTurn()
+    {
+        isTurn = true;
+        RefreshData();
     }
 }

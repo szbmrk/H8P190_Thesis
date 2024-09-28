@@ -6,6 +6,7 @@ using PokerParty_SharedDLL;
 public class TableManager : MonoBehaviour
 {
     public static TableManager Instance;
+    public List<TablePlayerCard> players = new List<TablePlayerCard>();
     public Deck deck;
 
     private void Awake()

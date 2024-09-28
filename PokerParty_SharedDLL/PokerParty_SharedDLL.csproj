@@ -49,6 +49,7 @@
     <Compile Include="Networking\Message Models\ConnectionMessage.cs" />
     <Compile Include="Networking\Message Models\DisconnectMessage.cs" />
     <Compile Include="Networking\Message Models\ChatMessage.cs" />
+    <Compile Include="Networking\Message Models\LoadedToGameMessage.cs" />
     <Compile Include="Networking\Message Models\ReadyMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

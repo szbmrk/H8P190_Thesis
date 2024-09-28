@@ -1903,11 +1903,11 @@ RectTransform:
   - {fileID: 533536516}
   - {fileID: 2140479813}
   - {fileID: 1097373078}
-  - {fileID: 171552712}
   - {fileID: 377340120}
   - {fileID: 826163246}
   - {fileID: 1342593313}
   - {fileID: 1856092642}
+  - {fileID: 171552712}
   m_Father: {fileID: 2110496839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
