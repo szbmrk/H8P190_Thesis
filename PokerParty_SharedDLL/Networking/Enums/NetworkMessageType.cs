@@ -6,7 +6,9 @@
         DisconnectMessage,
         ConnectionMessage,
         ReadyMessage,
-        LoadedToGameMessage
+        LoadedToGameMessage,
+        GameStartedMessage,
+        EveryoneLoadedMessage
     }
 
 }

@@ -14,7 +14,7 @@ public class MessageSender
         MessageSender.connection = connection;
     }
 
-    public static void SendMessageToHost(ANetworkMessage message)
+    public static void SendMessageToHost(ANetworkMessageMobile message)
     {
         message.player = PlayerManager.LoggedInPlayer;
 

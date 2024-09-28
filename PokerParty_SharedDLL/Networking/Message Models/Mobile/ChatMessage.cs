@@ -3,7 +3,7 @@
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class ChatMessage : ANetworkMessage
+    public class ChatMessage : ANetworkMessageMobile
     {
         public string message;
 

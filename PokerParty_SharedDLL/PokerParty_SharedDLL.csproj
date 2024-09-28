@@ -45,12 +45,15 @@
     <Compile Include="Game\Card.cs" />
     <Compile Include="Game\Deck.cs" />
     <Compile Include="Networking\Enums\NetworkMessageType.cs" />
-    <Compile Include="Networking\Message Models\ANetworkMessage.cs" />
-    <Compile Include="Networking\Message Models\ConnectionMessage.cs" />
-    <Compile Include="Networking\Message Models\DisconnectMessage.cs" />
-    <Compile Include="Networking\Message Models\ChatMessage.cs" />
-    <Compile Include="Networking\Message Models\LoadedToGameMessage.cs" />
-    <Compile Include="Networking\Message Models\ReadyMessage.cs" />
+    <Compile Include="Networking\Message Models\ANetworkMessageMobile.cs" />
+    <Compile Include="Networking\Message Models\ANetworkMessagePC.cs" />
+    <Compile Include="Networking\Message Models\Mobile\ConnectionMessage.cs" />
+    <Compile Include="Networking\Message Models\Mobile\DisconnectMessage.cs" />
+    <Compile Include="Networking\Message Models\Mobile\ChatMessage.cs" />
+    <Compile Include="Networking\Message Models\Mobile\LoadedToGameMessage.cs" />
+    <Compile Include="Networking\Message Models\Mobile\ReadyMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\EveryoneLoadedMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\GameStartedMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

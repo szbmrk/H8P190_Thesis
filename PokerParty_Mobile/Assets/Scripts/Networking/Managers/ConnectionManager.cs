@@ -55,10 +55,15 @@ public class ConnectionManager : MonoBehaviour
             switch (eventType)
             {
                 case NetworkEvent.Type.Data:
-                    FixedString32Bytes msg = stream.ReadFixedString32();
-                    Debug.Log($"Player received msg: {msg}");
-                    if (msg.ToString() == "Game Started!")
-                        SceneManager.LoadScene("Game");
+                    NetworkMessageType type = (NetworkMessageType)Enum.ToObject(typeof(NetworkMessageType), stream.ReadUInt());
+
+                    FixedString512Bytes msg = stream.ReadFixedString512();
+                    string data = msg.ToString();
+
+                    Debug.Log($"Type: {type}");
+                    Debug.Log($"Data received: {data}");
+
+                    NetworkMessageManager.ProcessMesage(type, data);
                     break;
 
                 case NetworkEvent.Type.Connect:

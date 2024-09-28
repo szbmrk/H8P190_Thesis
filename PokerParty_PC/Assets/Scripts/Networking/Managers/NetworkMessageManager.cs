@@ -30,6 +30,11 @@ public static class NetworkMessageManager
                 ReadyMessage readyMessage = FromStringToJson<ReadyMessage>(data);
                 LobbyManager.Instance.ModifyPlayerReady(readyMessage);
                 break;
+
+            case NetworkMessageType.LoadedToGameMessage:
+                LoadedToGameMessage loadedToGameMessage = FromStringToJson<LoadedToGameMessage>(data);
+                TableManager.Instance.PlayerLoaded(loadedToGameMessage.player, indexOfConnection);
+                break;
         }
     }
 

@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Loader.Instance.StartLoading();
         MessageSender.SendMessageToHost(new LoadedToGameMessage());
+    }
+
+    public void EveryOneLoaded()
+    {
+        Loader.Instance.StopLoading();
     }
 }

@@ -157,7 +157,7 @@ public class ConnectionManager : MonoBehaviour
         }
     }
 
-    public void SendMessageToAllConnections(string message)
+    public void SendMessageToAllConnections(ANetworkMessagePC message)
     {
         for (int i = 0; i < Connections.Length; i++)
         {
@@ -165,13 +165,16 @@ public class ConnectionManager : MonoBehaviour
         }
     }
 
-    private void SendMessageToConnection(NetworkConnection connection, string message)
+    private void SendMessageToConnection(NetworkConnection connection, ANetworkMessagePC message)
     {
+        string messageInString = JsonUtility.ToJson(message);
+
         if (networkDriver.BeginSend(connection, out DataStreamWriter writer) == 0)
         {
-            writer.WriteFixedString512(message);
+            writer.WriteUInt((uint)message.Type);
+            writer.WriteFixedString512(messageInString);
             networkDriver.EndSend(writer);
-            Debug.Log($"Message sent: {message}");
+            Debug.Log($"Message sent: {messageInString}");
         }
     }
 

@@ -2,12 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PokerParty_SharedDLL;
+using System.Linq;
 
 public class TableManager : MonoBehaviour
 {
     public static TableManager Instance;
-    public List<TablePlayerCard> players = new List<TablePlayerCard>();
-    public Deck deck;
+    private List<TablePlayerCard> playerSeats = new List<TablePlayerCard>();
+    private Deck deck;
+
+    int playersToConnect = Settings.PlayerCount;
+
+    public List<Transform> seatPositions = new List<Transform>();
+
+    public GameObject playerCardPrefab;
+
+    [HideInInspector] public int turnCount = 0;
+
+    [HideInInspector] public int moneyInPot = 0;
 
     private void Awake()
     {
@@ -17,8 +28,8 @@ public class TableManager : MonoBehaviour
 
     private void Start()
     {
+        Loader.Instance.StartLoading();
         CreateDeck();
-        AssignSeatsToPlayers();
     }
 
     private void CreateDeck()
@@ -29,8 +40,41 @@ public class TableManager : MonoBehaviour
         Debug.Log("Deck count: " + deck.cards.Count);
     }
 
-    private void AssignSeatsToPlayers()
+    public void PlayerLoaded(Player player, int indexOfConnection)
     {
+        playersToConnect--;
+        TablePlayerCard newPlayer = Instantiate(playerCardPrefab).GetComponent<TablePlayerCard>();
+        newPlayer.assignedPlayer = player;
+        newPlayer.indexInConnectionsArray = indexOfConnection;
+        playerSeats.Add(newPlayer);
 
+        if (playersToConnect == 0)
+        {
+            AssignRolesAndShuffleTheOrderOfPlayers();
+            Loader.Instance.StopLoading();
+            ConnectionManager.Instance.SendMessageToAllConnections(new EveryoneLoadedMessage());
+            StartFirstTurn();
+        }
+    }
+
+    private void AssignRolesAndShuffleTheOrderOfPlayers()
+    {
+        playerSeats = playerSeats.OrderBy(x => Random.Range(0, 100)).ToList();
+
+        playerSeats[0].isDealer = true;
+        playerSeats[1].isSmallBlind = true;
+        playerSeats[2].isBigBlind = true;
+
+        for (int i = 0; i < playerSeats.Count; i++)
+        {
+            playerSeats[i].transform.position = seatPositions[i].position;
+            playerSeats[i].LoadData();
+        }
+    }
+
+    public void StartFirstTurn()
+    {
+        turnCount++;
+        playerSeats[1].StartTurn();
     }
 }

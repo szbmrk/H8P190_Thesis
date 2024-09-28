@@ -3,7 +3,7 @@
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class ReadyMessage : ANetworkMessage
+    public class ReadyMessage : ANetworkMessageMobile
     {
         public bool isReady;
         public override NetworkMessageType Type => NetworkMessageType.ReadyMessage;
