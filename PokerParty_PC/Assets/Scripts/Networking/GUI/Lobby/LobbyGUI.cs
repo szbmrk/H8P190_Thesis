@@ -14,6 +14,7 @@ public class LobbyGUI : MonoBehaviour
 
     [SerializeField] private Button deleteLobbyBtn;
     [SerializeField] private Button startGameBtn;
+    [SerializeField] private GameObject minimumPlayersText;
 
     [SerializeField] private TextMeshProUGUI playerCount;
     [SerializeField] private GameObject LobbyPanel;
@@ -126,9 +127,15 @@ public class LobbyGUI : MonoBehaviour
     private void RefreshPlayerCount()
     {
         if (numOfPlayers >= 4 && LobbyManager.Instance.AreAllPlayersReady())
+        {
             startGameBtn.interactable = true;
-        else 
+            minimumPlayersText.SetActive(false);
+        }
+        else
+        {
             startGameBtn.interactable = false;
+            minimumPlayersText.SetActive(true);
+        }
 
         playerCount.text = numOfPlayers.ToString() + "/8";
     }
