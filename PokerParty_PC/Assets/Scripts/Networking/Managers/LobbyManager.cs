@@ -19,6 +19,7 @@ public class LobbyManager : MonoBehaviour
     {
         ConnectionManager.Instance.DisconnectAllPlayers();
         yield return ConnectionManager.Instance.DisposeDriverAndConnections();
+        Destroy(ConnectionManager.Instance.gameObject);
         Debug.Log("Lobby deleted");
     }
 
