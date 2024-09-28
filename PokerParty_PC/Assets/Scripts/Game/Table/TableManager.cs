@@ -46,6 +46,7 @@ public class TableManager : MonoBehaviour
         TablePlayerCard newPlayer = Instantiate(playerCardPrefab).GetComponent<TablePlayerCard>();
         newPlayer.assignedPlayer = player;
         newPlayer.indexInConnectionsArray = indexOfConnection;
+        newPlayer.gameObject.SetActive(false);
         playerSeats.Add(newPlayer);
 
         if (playersToConnect == 0)
@@ -60,6 +61,7 @@ public class TableManager : MonoBehaviour
     private void AssignRolesAndShuffleTheOrderOfPlayers()
     {
         playerSeats = playerSeats.OrderBy(x => Random.Range(0, 100)).ToList();
+        playerSeats.ForEach(x => x.gameObject.SetActive(true));
 
         playerSeats[0].isDealer = true;
         playerSeats[1].isSmallBlind = true;
