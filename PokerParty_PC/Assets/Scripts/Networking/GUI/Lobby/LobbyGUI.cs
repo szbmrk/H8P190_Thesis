@@ -22,7 +22,6 @@ public class LobbyGUI : MonoBehaviour
     [SerializeField] private Transform parentForPlayerCards;
 
     private int numOfPlayers = 0;
-    private int yOffset = -110;
 
     private void Start()
     {
@@ -65,9 +64,6 @@ public class LobbyGUI : MonoBehaviour
 
         numOfPlayers++;
 
-        RefreshPlayerCount();
-        RepositionCards();
-
         return playerCard;
     }
 
@@ -83,8 +79,6 @@ public class LobbyGUI : MonoBehaviour
         Destroy(playerCard.gameObject);
 
         numOfPlayers--;
-        RefreshPlayerCount();
-        RepositionCards();
     }
 
     public void ClearPlayers()
@@ -100,16 +94,7 @@ public class LobbyGUI : MonoBehaviour
         RefreshPlayerCount();
     }
 
-    private void RepositionCards()
-    {
-        for (int i = 0; i < parentForPlayerCards.childCount; i++)
-        {
-            float yPos = i * yOffset;
-            parentForPlayerCards.GetChild(i).GetComponent<RectTransform>().localPosition = new Vector3(0, yPos, 0);
-        }
-    }
-
-    private void RefreshPlayerCount()
+    public void RefreshPlayerCount()
     {
         if (numOfPlayers >= 4 && LobbyManager.Instance.AreAllPlayersReady())
         {

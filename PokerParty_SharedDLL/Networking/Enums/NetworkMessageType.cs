@@ -8,7 +8,8 @@
         ReadyMessage,
         LoadedToGameMessage,
         GameStartedMessage,
-        EveryoneLoadedMessage
+        EveryoneLoadedMessage,
+        YourTurnMessage,
+        GameInfoMessage
     }
-
 }

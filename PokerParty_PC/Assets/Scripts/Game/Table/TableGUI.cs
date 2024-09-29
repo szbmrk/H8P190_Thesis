@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+
+public class TableGUI : MonoBehaviour
+{
+    public static TableGUI Instance;
+
+    public List<Transform> seatPositions = new List<Transform>();
+
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
+
+    public void DisplayPlayer(TablePlayerCard card, int i)
+    {
+        card.transform.position = seatPositions[i].position;
+        card.gameObject.SetActive(true);
+        card.LoadData();
+    }
+}

@@ -7,18 +7,22 @@ using System.Linq;
 public class TableManager : MonoBehaviour
 {
     public static TableManager Instance;
+    
     private List<TablePlayerCard> playerSeats = new List<TablePlayerCard>();
-    private Deck deck;
+    [SerializeField] private Transform parentForSeats;
+    
+    public GameObject playerCardPrefab;
 
     int playersToConnect = Settings.PlayerCount;
 
-    public List<Transform> seatPositions = new List<Transform>();
-
-    public GameObject playerCardPrefab;
-
+    private Deck deck;
     [HideInInspector] public int turnCount = 0;
-
     [HideInInspector] public int moneyInPot = 0;
+
+    // 1% of starting money
+    [HideInInspector] public int smallBlindBet = (int)(Settings.StartingMoney * 0.01);
+    // 2% of starting money
+    [HideInInspector] public int bigBlindBet = (int)(Settings.StartingMoney * 0.02);
 
     private void Awake()
     {
@@ -43,7 +47,7 @@ public class TableManager : MonoBehaviour
     public void PlayerLoaded(Player player, int indexOfConnection)
     {
         playersToConnect--;
-        TablePlayerCard newPlayer = Instantiate(playerCardPrefab).GetComponent<TablePlayerCard>();
+        TablePlayerCard newPlayer = Instantiate(playerCardPrefab, parentForSeats).GetComponent<TablePlayerCard>();
         newPlayer.assignedPlayer = player;
         newPlayer.indexInConnectionsArray = indexOfConnection;
         newPlayer.gameObject.SetActive(false);
@@ -57,11 +61,9 @@ public class TableManager : MonoBehaviour
             StartFirstTurn();
         }
     }
-
     private void AssignRolesAndShuffleTheOrderOfPlayers()
     {
         playerSeats = playerSeats.OrderBy(x => Random.Range(0, 100)).ToList();
-        playerSeats.ForEach(x => x.gameObject.SetActive(true));
 
         playerSeats[0].isDealer = true;
         playerSeats[1].isSmallBlind = true;
@@ -69,8 +71,7 @@ public class TableManager : MonoBehaviour
 
         for (int i = 0; i < playerSeats.Count; i++)
         {
-            playerSeats[i].transform.position = seatPositions[i].position;
-            playerSeats[i].LoadData();
+            TableGUI.Instance.DisplayPlayer(playerSeats[i], i);
         }
     }
 

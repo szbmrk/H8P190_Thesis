@@ -44,6 +44,7 @@
     <Compile Include="Authentication\Models\Player.cs" />
     <Compile Include="Game\Card.cs" />
     <Compile Include="Game\Deck.cs" />
+    <Compile Include="Game\Enums\PossibleActions.cs" />
     <Compile Include="Networking\Enums\NetworkMessageType.cs" />
     <Compile Include="Networking\Message Models\ANetworkMessageMobile.cs" />
     <Compile Include="Networking\Message Models\ANetworkMessagePC.cs" />
@@ -53,7 +54,9 @@
     <Compile Include="Networking\Message Models\Mobile\LoadedToGameMessage.cs" />
     <Compile Include="Networking\Message Models\Mobile\ReadyMessage.cs" />
     <Compile Include="Networking\Message Models\PC\EveryoneLoadedMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\GameInfoMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameStartedMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\YourTurnMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
