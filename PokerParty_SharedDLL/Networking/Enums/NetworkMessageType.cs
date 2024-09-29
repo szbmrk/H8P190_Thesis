@@ -10,6 +10,8 @@
         GameStartedMessage,
         EveryoneLoadedMessage,
         YourTurnMessage,
+        NotYourTurnMessage,
+        DealCardsMessage,
         GameInfoMessage
     }
 }

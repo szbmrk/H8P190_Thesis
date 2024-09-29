@@ -16,8 +16,21 @@ public static class NetworkMessageManager
             case NetworkMessageType.GameStartedMessage:
                 SceneManager.LoadScene("Game");
                 break;
-            case NetworkMessageType.EveryoneLoadedMessage:
-                GameManager.Instance.EveryOneLoaded();
+            case NetworkMessageType.GameInfoMessage:
+                GameInfoMessage gameInfoMessage = FromStringToJson<GameInfoMessage>(data);
+                GameGUI.Instance.SetGameInfo(gameInfoMessage);
+                break;
+            case NetworkMessageType.DealCardsMessage:
+                DealCardsMessage dealCardsMessage = FromStringToJson<DealCardsMessage>(data);
+                CardsGUI.Instance.SetCards(dealCardsMessage.Cards);
+                break;
+            case NetworkMessageType.YourTurnMessage:
+                YourTurnMessage yourTurnMessage = FromStringToJson<YourTurnMessage>(data);
+                GameGUI.Instance.StartTurn(yourTurnMessage);
+                break;
+            case NetworkMessageType.NotYourTurnMessage:
+                NotYourTurnMessage notYourTurnMessage = FromStringToJson<NotYourTurnMessage>(data);
+                GameGUI.Instance.WaitingFor(notYourTurnMessage.PlayerInTurn);
                 break;
         }
     }

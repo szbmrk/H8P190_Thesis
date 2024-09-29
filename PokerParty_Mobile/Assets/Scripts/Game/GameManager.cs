@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [SerializeField] private GameObject inGamePanel;
+
     private void Awake()
     {
         if (Instance == null)
@@ -15,12 +17,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //Loader.Instance.StartLoading();
-        //MessageSender.SendMessageToHost(new LoadedToGameMessage());
-    }
-
-    public void EveryOneLoaded()
-    {
-        Loader.Instance.StopLoading();
+        Loader.Instance.StartLoading();
+        MessageSender.SendMessageToHost(new LoadedToGameMessage());
     }
 }

@@ -8,13 +8,12 @@ namespace PokerParty_SharedDLL
 {
     public class GameInfoMessage : ANetworkMessagePC
     {
-        public bool ISsDealer { get; set; }
-        public bool isSmallBlind { get; set; }
+        public bool IsDealer { get; set; }
+        public bool IsSmallBlind { get; set; }
         public bool IsBigBlind { get; set; }
 
         public int SmallBlindAmount { get; set; }
         public int BigBlindAmount { get; set; }
-
         public int StartingMoney { get; set; }
 
         public override NetworkMessageType Type => NetworkMessageType.GameInfoMessage;

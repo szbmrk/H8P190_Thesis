@@ -10,6 +10,6 @@ namespace PokerParty_SharedDLL
     public class NotYourTurnMessage : ANetworkMessagePC
     {
         public string PlayerInTurn { get; set; }
-        public override NetworkMessageType Type => NetworkMessageType.YourTurnMessage;
+        public override NetworkMessageType Type => NetworkMessageType.NotYourTurnMessage;
     }
 }

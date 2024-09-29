@@ -56,11 +56,12 @@ public class TableManager : MonoBehaviour
         if (playersToConnect == 0)
         {
             AssignRolesAndShuffleTheOrderOfPlayers();
-            Loader.Instance.StopLoading();
-            ConnectionManager.Instance.SendMessageToAllConnections(new EveryoneLoadedMessage());
+            SendGameInfoToPlayers();
             StartFirstTurn();
+            Loader.Instance.StopLoading();
         }
     }
+
     private void AssignRolesAndShuffleTheOrderOfPlayers()
     {
         playerSeats = playerSeats.OrderBy(x => Random.Range(0, 100)).ToList();
@@ -75,9 +76,61 @@ public class TableManager : MonoBehaviour
         }
     }
 
+    public void SendGameInfoToPlayers()
+    {
+        for (int i = 0; i < playerSeats.Count; i++)
+        {
+            GameInfoMessage gameInfoMessage = new GameInfoMessage();
+            gameInfoMessage.StartingMoney = Settings.StartingMoney;
+            gameInfoMessage.SmallBlindAmount = smallBlindBet;
+            gameInfoMessage.BigBlindAmount = bigBlindBet;
+            gameInfoMessage.IsDealer = playerSeats[i].isDealer;
+            gameInfoMessage.IsSmallBlind = playerSeats[i].isSmallBlind;
+            gameInfoMessage.IsBigBlind = playerSeats[i].isBigBlind;
+
+            int indexInConnections = playerSeats[i].indexInConnectionsArray;
+            ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], gameInfoMessage);
+        }
+    }
+
     public void StartFirstTurn()
     {
         turnCount++;
         playerSeats[1].StartTurn();
+        PossibleActions[] possibleActions = new PossibleActions[] { PossibleActions.SMALL_BLIND_BET };
+        SendTurnMessage(1, possibleActions);
+    }
+
+    public void SendTurnMessage(int playerIndex, PossibleActions[] possibleActions, int previousBet = 0)
+    {
+        YourTurnMessage yourTurnMessage = new YourTurnMessage();
+        yourTurnMessage.PossibleActions = possibleActions;
+        yourTurnMessage.PreviousBet = previousBet;
+        int indexInConnections = playerSeats[playerIndex].indexInConnectionsArray;
+        ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], yourTurnMessage);
+
+        NotYourTurnMessage notYourTurnMessage = new NotYourTurnMessage();
+        notYourTurnMessage.PlayerInTurn = playerSeats[playerIndex].assignedPlayer.playerName;
+
+        for (int i = 0; i < playerSeats.Count; i++)
+        {
+            if (i != playerIndex)
+            {
+                indexInConnections = playerSeats[i].indexInConnectionsArray;
+                ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], notYourTurnMessage);
+            }
+        }
+    }
+
+    public void DealCardsToPlayers()
+    {
+        for (int i = 0; i < playerSeats.Count; i++)
+        {
+            Card[] cards = new Card[] { deck.Draw(), deck.Draw() };
+            DealCardsMessage dealCardsMessage = new DealCardsMessage();
+            dealCardsMessage.Cards = cards;
+            int indexInConnections = playerSeats[i].indexInConnectionsArray;
+            ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], dealCardsMessage);
+        }
     }
 }

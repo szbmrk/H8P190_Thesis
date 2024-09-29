@@ -164,7 +164,7 @@ public class ConnectionManager : MonoBehaviour
         }
     }
 
-    private void SendMessageToConnection(NetworkConnection connection, ANetworkMessagePC message)
+    public void SendMessageToConnection(NetworkConnection connection, ANetworkMessagePC message)
     {
         string messageInString = JsonUtility.ToJson(message);
 

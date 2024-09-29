@@ -18,7 +18,7 @@ namespace PokerParty_SharedDLL
             if (value == 11) return "Jack";
             if (value == 12) return "Queen";
             if (value == 13) return "King";
-            if (value == 14) return "Ace";
+            if (value == 14) return "A";
             return value.ToString();
         }
 
@@ -30,7 +30,7 @@ namespace PokerParty_SharedDLL
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Value: ").Append(value).Append("\n");
+            sb.Append("Value: ").Append(GetValueString()).Append("\n");
             sb.Append("Suit: ").Append(suit).Append("\n");
             return sb.ToString();
         }

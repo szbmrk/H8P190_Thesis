@@ -1,44 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PokerParty_SharedDLL
 {
     public class Deck
     {
-        public List<Card> cards;
+        public Stack<Card> cards;
 
         public Deck()
         {
-            cards = new List<Card>();
+            cards = new Stack<Card>();
             for (int i = 2; i < 15; i++)
             {
-                cards.Add(new Card(i, "Hearts"));
-                cards.Add(new Card(i, "Diamonds"));
-                cards.Add(new Card(i, "Clubs"));
-                cards.Add(new Card(i, "Spades"));
+                cards.Push(new Card(i, "Hearts"));
+                cards.Push(new Card(i, "Diamonds"));
+                cards.Push(new Card(i, "Clubs"));
+                cards.Push(new Card(i, "Spades"));
             }
         }
 
         public void Shuffle()
         {
             Random rng = new Random();
-            int n = cards.Count;
-            while (n > 1)
+            Card[] cardArray = cards.ToArray();
+            cards.Clear();
+            foreach (Card card in cardArray.OrderBy(a => rng.Next()))
             {
-                n--;
-                int k = rng.Next(n + 1);
-                Card value = cards[k];
-                cards[k] = cards[n];
-                cards[n] = value;
+                cards.Push(card);
             }
         }
 
         public Card Draw()
         {
-            Card card = cards[0];
-            cards.RemoveAt(0);
-            return card;
+            return cards.Pop();
         }
 
         public override string ToString()
