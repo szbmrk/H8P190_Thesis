@@ -28,19 +28,18 @@ public class LobbyManager : MonoBehaviour
         LobbyPlayerCard newPlayer = LobbyGUI.Instance.DisplayNewPlayer(player);
         newPlayer.indexInConnectionsArray = indexInConnectionsArray;
         joinedPlayers.Add(newPlayer);
-        LobbyGUI.Instance.RefreshPlayerCount();
     }
 
     public void RemovePlayer(Player player)
     {
         LobbyGUI.Instance.RemovePlayerFromDisplay(player);
         joinedPlayers.Remove(GetPlayerCardForPlayer(player));
-        LobbyGUI.Instance.RefreshPlayerCount();
     }
 
     public void ModifyPlayerReady(ReadyMessage readyMessage)
     {
         GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.isReady);
+        LobbyGUI.Instance.RefreshPlayerCount();
     }
 
     public LobbyPlayerCard GetPlayerCardForPlayer(Player player)

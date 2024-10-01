@@ -13,10 +13,7 @@ public static class NetworkMessageManager
                 break;
 
             case NetworkMessageType.DisconnectMessage:
-                Debug.Log("Player got disconnected from the Host");
-
                 DisconnectMessage disconnectMessage = FromStringToJson<DisconnectMessage>(data);
-
                 LobbyManager.Instance.RemovePlayer(disconnectMessage.player);
                 ConnectionManager.Instance.DisconnectPlayer(indexOfConnection);
                 break;

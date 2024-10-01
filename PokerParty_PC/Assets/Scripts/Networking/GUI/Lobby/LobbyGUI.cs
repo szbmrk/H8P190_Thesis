@@ -63,7 +63,7 @@ public class LobbyGUI : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(parentForPlayerCards.GetComponent<RectTransform>());
 
         numOfPlayers++;
-
+        RefreshPlayerCount();
         return playerCard;
     }
 
@@ -79,6 +79,7 @@ public class LobbyGUI : MonoBehaviour
         Destroy(playerCard.gameObject);
 
         numOfPlayers--;
+        RefreshPlayerCount();
     }
 
     public void ClearPlayers()

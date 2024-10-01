@@ -2566,7 +2566,7 @@ MonoBehaviour:
   playerCount: {fileID: 171552713}
   LobbyPanel: {fileID: 1293239805}
   playerCardPrefab: {fileID: 538982840624562071, guid: d0eabb922c4f61c4aab09f19eb28ecd7, type: 3}
-  parentForPlayerCards: {fileID: 1151939876}
+  parentForPlayerCards: {fileID: 632995252}
 --- !u!1 &1856092641
 GameObject:
   m_ObjectHideFlags: 0
