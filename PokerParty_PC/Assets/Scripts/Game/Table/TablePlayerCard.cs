@@ -32,7 +32,6 @@ public class TablePlayerCard : MonoBehaviour
 
     private void Start()
     {
-        money = Settings.StartingMoney;
     }
 
     public void LoadData()
@@ -45,13 +44,12 @@ public class TablePlayerCard : MonoBehaviour
         dealerIcon.SetActive(isDealer);
         smallBlindIcon.SetActive(isSmallBlind);
         bigBlindIcon.SetActive(isBigBlind);
-
-        RefreshData();
+        RefreshMoney(Settings.StartingMoney);
+        RefreshTurnIcon();
     }
 
-    public void RefreshData()
+    public void RefreshTurnIcon()
     {
-        MoneyText.text = $"{money} $";
         turnIcon.SetActive(isTurn);
         if (isTurn)
             playerNameText.text = $"<b>{assignedPlayer.playerName}</b>";
@@ -59,10 +57,15 @@ public class TablePlayerCard : MonoBehaviour
             playerNameText.text = assignedPlayer.playerName;
     }
 
+    public void RefreshMoney(int money)
+    {
+        this.money = money;
+        MoneyText.text = $"{money} $";
+    }
     public void StartTurn()
     {
         isTurn = true;
         GameManager.Instance.SetWaitingFor(assignedPlayer.playerName);
-        RefreshData();
+        RefreshTurnIcon();
     }
 }
