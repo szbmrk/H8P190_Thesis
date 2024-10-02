@@ -1,4 +1,4 @@
-import { sql } from "@vercel/postgres";
+import { db } from '../database/db.js';
 import { readFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -9,14 +9,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const sqlFilePath = path.join(__dirname, '../database/db.sql');
 
-const createDatabase = async () => {
+export const createDatabase = async () => {
     try {
         const createTablesSQL = await readFile(sqlFilePath, 'utf8');
-        await sql.query(createTablesSQL);
+        await db.query(createTablesSQL);
         console.log('Tables created (if not already existing)');
     } catch (err) {
         console.error('Error creating the database', err);
     }
 };
-
-createDatabase();

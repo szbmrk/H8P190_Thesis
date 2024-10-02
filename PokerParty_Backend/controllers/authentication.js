@@ -1,11 +1,12 @@
-import { sql } from '@vercel/postgres';
+import { db } from "../database/db.js";
 import bcrypt from "bcrypt";
 
 export const register = async (req, res) => {
     const { playerName, password } = req.body;
 
     try {
-        const existingPlayer = await sql`SELECT * FROM players WHERE "playerName" = ${playerName}`;
+        const existingPlayerQuery = 'SELECT * FROM players WHERE "playerName" = $1';
+        const existingPlayer = await db.query(existingPlayerQuery, [playerName]);
 
         if (existingPlayer.rows.length > 0) {
             return res.status(400).json({ msg: 'Player already exists' });
@@ -14,8 +15,8 @@ export const register = async (req, res) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        await sql`INSERT INTO players ("playerName", "password")
-                  VALUES (${playerName}, ${hashedPassword})`;
+        const insertQuery = 'INSERT INTO players ("playerName", "password") VALUES ($1, $2)';
+        await db.query(insertQuery, [playerName, hashedPassword]);
 
         res.status(201).json({ msg: 'Player registered successfully' });
 
@@ -29,7 +30,8 @@ export const login = async (req, res) => {
     const { playerName, password } = req.body;
 
     try {
-        const result = await sql`SELECT * FROM players WHERE "playerName" = ${playerName}`;
+        const loginQuery = 'SELECT * FROM players WHERE "playerName" = $1';
+        const result = await db.query(loginQuery, [playerName]);
 
         if (result.rows.length === 0) {
             return res.status(400).json({ msg: 'Invalid playerName', player: null });

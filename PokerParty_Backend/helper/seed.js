@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import { db } from "../database/db.js";
 import dotenv from "dotenv";
 import bcrypt from 'bcrypt';
 dotenv.config();
@@ -8,52 +8,48 @@ const hashPassword = async (password) => {
     return await bcrypt.hash(password, saltRounds);
 };
 
-const clearDatabase = async () => {
-    await sql`TRUNCATE TABLE player_games, log, games, players RESTART IDENTITY CASCADE`;
+const checkIfAlreadySeeded = async () => {
+    const playerQuery = 'SELECT * FROM players WHERE "playerName" = $1';
+    const player = await db.query(playerQuery, ['Player1']);
+    return player.rows.length > 0;
 };
 
 const seedPlayers = async () => {
     const hashedPassword1 = await hashPassword('password123');
     const hashedPassword2 = await hashPassword('password456');
 
-    await sql`
-    INSERT INTO players ("playerName", password, "ELO", "gamesPlayed", "gamesWon", "XP", level)
-    VALUES
-      (${'Player1'}, ${hashedPassword1}, 1200, 5, 3, 150, 2),
-      (${'Player2'}, ${hashedPassword2}, 1100, 7, 2, 200, 3);
-  `;
+    const createPlayersQuery = 'INSERT INTO players ("_id", "playerName", password, "ELO", "gamesPlayed", "gamesWon", "XP", level) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+    await db.query(createPlayersQuery, [1, 'Player1', hashedPassword1, 1000, 10, 5, 100, 1]);
+    await db.query(createPlayersQuery, [2, 'Player2', hashedPassword2, 900, 8, 3, 80, 1]);
 };
 
 const seedGames = async () => {
-    await sql`
-    INSERT INTO games (created_at)
-    VALUES
-      (NOW()),
-      (NOW());
-  `;
+    await db.query('INSERT INTO games ("_id", created_at) VALUES (1, NOW())');
+    await db.query('INSERT INTO games ("_id", created_at) VALUES (2, NOW())');
 };
 
 const seedPlayerGames = async () => {
-    await sql`
-    INSERT INTO player_games ("playerId", "gameId", "ELOGained", "XPGained", position)
-    VALUES
-      (1, 1, 10, 50, 1),
-      (2, 1, -5, 20, 2);
-  `;
+    const createPlayerGamesQuery = 'INSERT INTO player_games ("playerId", "gameId", "ELOGained", "XPGained", "position") VALUES ($1, $2, $3, $4, $5)';
+    await db.query(createPlayerGamesQuery, [1, 1, 10, 10, 1]);
+    await db.query(createPlayerGamesQuery, [2, 1, -10, 5, 2]);
+    await db.query(createPlayerGamesQuery, [1, 2, 10, 10, 2]);
+    await db.query(createPlayerGamesQuery, [2, 2, -10, 5, 1]);
 };
 
 const seedLogs = async () => {
-    await sql`
-    INSERT INTO log ("gameId", log, created_at)
-    VALUES
-      (1, 'Player1 won the match with a full house.', NOW()),
-      (2, 'Player2 folded early in the game.', NOW());
-  `;
+    const logQuery = 'INSERT INTO logs ("gameId", log, created_at) VALUES ($1, $2, NOW())';
+    await db.query(logQuery, [1, 'Player1 wins!']);
+    await db.query(logQuery, [2, 'Player2 wins!']);
 };
 
-const seedDatabase = async () => {
+export const seedDatabase = async () => {
     try {
-        await clearDatabase();
+        const alreadySeeded = await checkIfAlreadySeeded();
+        if (alreadySeeded) {
+            console.log('Database already seeded');
+            return;
+        }
+
         await seedPlayers();
         await seedGames();
         await seedPlayerGames();
@@ -63,5 +59,3 @@ const seedDatabase = async () => {
         console.error('Error seeding the database', err);
     }
 };
-
-seedDatabase();
