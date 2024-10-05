@@ -17,9 +17,5 @@ app.use(bodyParser.urlencoded({ extended: false }))
 await createDatabase()
 await seedDatabase()
 
-app.get("/", (req, res) => {
-    res.send("Server is running")
-})
-
 app.use('/api', router)
 app.listen(PORT, () => console.log("Server started on port: " + PORT))
