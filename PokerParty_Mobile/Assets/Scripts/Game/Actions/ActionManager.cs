@@ -29,32 +29,32 @@ public class ActionManager : MonoBehaviour
             Instance = this;
     }
 
-    private void EnableAction(PossibleActions action)
+    private void EnableAction(PossibleAction action)
     {
         switch (action)
         {
-            case PossibleActions.SMALL_BLIND_BET:
+            case PossibleAction.SMALL_BLIND_BET:
                 currentActions.Add(Instantiate(smallBlindPrefab, parentForActions));
                 break;
-            case PossibleActions.BIG_BLIND_BET:
+            case PossibleAction.BIG_BLIND_BET:
                 currentActions.Add(Instantiate(bigBlindPrefab, parentForActions));
                 break;
-            case PossibleActions.CALL:
+            case PossibleAction.CALL:
                 currentActions.Add(Instantiate(callPrefab, parentForActions));
                 break;
-            case PossibleActions.CHECK:
+            case PossibleAction.CHECK:
                 currentActions.Add(Instantiate(checkPrefab, parentForActions));
                 break;
-            case PossibleActions.ALL_IN:
+            case PossibleAction.ALL_IN:
                 currentActions.Add(Instantiate(allInPrefab, parentForActions));
                 break;
-            case PossibleActions.FOLD:
+            case PossibleAction.FOLD:
                 currentActions.Add(Instantiate(foldPrefab, parentForActions));
                 break;
-            case PossibleActions.BET:
+            case PossibleAction.BET:
                 currentActions.Add(Instantiate(betPrefab, parentForActions));
                 break;
-            case PossibleActions.RAISE:
+            case PossibleAction.RAISE:
                 currentActions.Add(Instantiate(raisePrefab, parentForActions));
                 break;
             default:
@@ -62,9 +62,9 @@ public class ActionManager : MonoBehaviour
         }
     }
 
-    public void EnableActions(PossibleActions[] possibleActions)
+    public void EnableActions(PossibleAction[] possibleActions)
     {
-        foreach (PossibleActions action in possibleActions)
+        foreach (PossibleAction action in possibleActions)
         {
             EnableAction(action);
         }

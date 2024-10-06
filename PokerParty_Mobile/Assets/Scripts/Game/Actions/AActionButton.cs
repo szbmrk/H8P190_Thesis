@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokerParty_SharedDLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,8 +19,8 @@ public abstract class AActionButton : MonoBehaviour
     private void OnClick()
     {
         ActionManager.Instance.DisableActions();
-        OnButtonSubmit();
+        MessageSender.SendMessageToHost(MessageToSend());
     }
 
-    public abstract void OnButtonSubmit();
+    public abstract TurnDoneMessage MessageToSend();
 }

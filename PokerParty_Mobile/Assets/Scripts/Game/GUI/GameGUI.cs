@@ -33,10 +33,14 @@ public class GameGUI : MonoBehaviour
         waitingFor.SetActive(false);
     }
 
-    public void SetGameInfo(GameInfoMessage gameInfo)
+    public void StartGame()
     {
         Loader.Instance.StopLoading();
-        moneyText.text = $"{gameInfo.StartingMoney} $";
         inGamePanel.SetActive(true);
+    }
+
+    public void UpdateMoney()
+    {
+        moneyText.text = $"{GameManager.Instance.money} $";
     }
 }

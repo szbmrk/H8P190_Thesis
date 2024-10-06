@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject inGamePanel;
 
     public Card[] cards = new Card[2];
+    public int money;
 
     private void Awake()
     {
@@ -36,8 +37,15 @@ public class GameManager : MonoBehaviour
 
     public void SetGameInfo(GameInfoMessage gameInfo)
     {
-        Loader.Instance.StopLoading();
-        GameGUI.Instance.SetGameInfo(gameInfo);
+        UpdateMoney(gameInfo.StartingMoney);
+        Settings.SetSettings(gameInfo);
+        GameGUI.Instance.StartGame();
+    }
+
+    public void UpdateMoney(int money)
+    {
+        this.money = money;
+        GameGUI.Instance.UpdateMoney();
     }
 
     public void SetCards(DealCardsMessage dealCards)
