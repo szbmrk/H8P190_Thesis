@@ -97,11 +97,11 @@ public class TableManager : MonoBehaviour
     {
         turnCount++;
         playerSeats[1].StartTurn();
-        PossibleActions[] possibleActions = new PossibleActions[] { PossibleActions.SMALL_BLIND_BET };
+        PossibleAction[] possibleActions = new PossibleAction[] { PossibleAction.SMALL_BLIND_BET };
         SendTurnMessage(1, possibleActions);
     }
 
-    public void SendTurnMessage(int playerIndex, PossibleActions[] possibleActions, int previousBet = 0)
+    public void SendTurnMessage(int playerIndex, PossibleAction[] possibleActions, int previousBet = 0)
     {
         YourTurnMessage yourTurnMessage = new YourTurnMessage();
         yourTurnMessage.PossibleActions = possibleActions;

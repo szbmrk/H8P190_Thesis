@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PokerParty_SharedDLL
 {
-    public enum PossibleActions
+    public enum PossibleAction
     {
         SMALL_BLIND_BET, //kötelező tét
         BIG_BLIND_BET, //kötelező tét
