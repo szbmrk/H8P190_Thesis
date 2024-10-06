@@ -38,7 +38,7 @@ public class LobbyManager : MonoBehaviour
 
     public void ModifyPlayerReady(ReadyMessage readyMessage)
     {
-        GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.isReady);
+        GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.IsReady);
         LobbyGUI.Instance.RefreshPlayerCount();
     }
 
