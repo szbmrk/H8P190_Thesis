@@ -1566,11 +1566,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889164466}
   m_CullTransparentMesh: 1
+--- !u!1 &1940583968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1940583969}
+  - component: {fileID: 1940583970}
+  m_Layer: 0
+  m_Name: ActionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1940583969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940583968}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1940583970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940583968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb92c02aec37e647a54b1c5efa52f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentForActions: {fileID: 662247790}
+  allInPrefab: {fileID: 3274078189494613603, guid: 7b818af9d719c374284b526360ef8010, type: 3}
+  callPrefab: {fileID: 3246338062262623657, guid: 709be2bf5958b704e82a13f662e5b3d3, type: 3}
+  checkPrefab: {fileID: 6290396198254930294, guid: 2f3c1f55694ac0b46bb28808e7439192, type: 3}
+  foldPrefab: {fileID: 118743786543760451, guid: b562e546a07ceb343ab2faf83c874844, type: 3}
+  raisePrefab: {fileID: 6275272640959349879, guid: 19ee73b5ef2f76443b66321c805042bb, type: 3}
+  betPrefab: {fileID: 6667396046511829136, guid: 835dc3404dc95f943acf27ed2dad5904, type: 3}
+  smallBlindPrefab: {fileID: 5377704945624201226, guid: 3d6ddc3782721b042969f03b4975a67e, type: 3}
+  bigBlindPrefab: {fileID: 3629201783999753017, guid: 111e494178df0b745a0a499a2eeb1430, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 377520149}
   - {fileID: 789810845}
+  - {fileID: 1940583969}
   - {fileID: 1717908022}
   - {fileID: 495930932}

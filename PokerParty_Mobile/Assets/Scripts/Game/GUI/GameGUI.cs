@@ -28,15 +28,15 @@ public class GameGUI : MonoBehaviour
         waitingForText.text = $"Waiting for \"{playerName}\" ...";
     }
 
-    public void StartTurn(YourTurnMessage yourTurnMessage)
+    public void StartTurn()
     {
         waitingFor.SetActive(false);
     }
 
     public void SetGameInfo(GameInfoMessage gameInfo)
     {
-        moneyText.text = $"{gameInfo.StartingMoney} $";
         Loader.Instance.StopLoading();
+        moneyText.text = $"{gameInfo.StartingMoney} $";
         inGamePanel.SetActive(true);
     }
 }

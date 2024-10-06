@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject inGamePanel;
 
+    public Card[] cards = new Card[2];
+
     private void Awake()
     {
         if (Instance == null)
@@ -19,5 +21,28 @@ public class GameManager : MonoBehaviour
     {
         Loader.Instance.StartLoading();
         MessageSender.SendMessageToHost(new LoadedToGameMessage());
+    }
+
+    public void WaitingFor(string playerName)
+    {
+        GameGUI.Instance.WaitingFor(playerName);
+    }
+
+    public void StartTurn(YourTurnMessage yourTurnMessage)
+    {
+        GameGUI.Instance.StartTurn();
+        ActionManager.Instance.EnableActions(yourTurnMessage.PossibleActions);
+    }
+
+    public void SetGameInfo(GameInfoMessage gameInfo)
+    {
+        Loader.Instance.StopLoading();
+        GameGUI.Instance.SetGameInfo(gameInfo);
+    }
+
+    public void SetCards(DealCardsMessage dealCards)
+    {
+        cards = dealCards.Cards;
+        CardsGUI.Instance.SetCards(cards);
     }
 }

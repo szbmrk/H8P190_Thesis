@@ -18,19 +18,19 @@ public static class NetworkMessageManager
                 break;
             case NetworkMessageType.GameInfoMessage:
                 GameInfoMessage gameInfoMessage = FromStringToJson<GameInfoMessage>(data);
-                GameGUI.Instance.SetGameInfo(gameInfoMessage);
+                GameManager.Instance.SetGameInfo(gameInfoMessage);
                 break;
             case NetworkMessageType.DealCardsMessage:
                 DealCardsMessage dealCardsMessage = FromStringToJson<DealCardsMessage>(data);
-                CardsGUI.Instance.SetCards(dealCardsMessage.Cards);
+                GameManager.Instance.SetCards(dealCardsMessage);
                 break;
             case NetworkMessageType.YourTurnMessage:
                 YourTurnMessage yourTurnMessage = FromStringToJson<YourTurnMessage>(data);
-                GameGUI.Instance.StartTurn(yourTurnMessage);
+                GameManager.Instance.StartTurn(yourTurnMessage);
                 break;
             case NetworkMessageType.NotYourTurnMessage:
                 NotYourTurnMessage notYourTurnMessage = FromStringToJson<NotYourTurnMessage>(data);
-                GameGUI.Instance.WaitingFor(notYourTurnMessage.PlayerInTurn);
+                GameManager.Instance.WaitingFor(notYourTurnMessage.PlayerInTurn);
                 break;
         }
     }
