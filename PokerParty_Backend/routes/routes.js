@@ -6,9 +6,17 @@ import { validateRequest } from "../middleware/validateRequest.js";
 
 const router = express.Router()
 
-router.post('/register', validateRequest(['playerName', 'password']), register)
-router.post('/login', validateRequest(['playerName', 'password']), login)
+router.post('/register', validateRequest([
+    { field: 'playerName', type: 'string', required: true },
+    { field: 'password', type: 'string', required: true }
+]), register)
+router.post('/login', validateRequest([
+    { field: 'playerName', type: 'string', required: true },
+    { field: 'password', type: 'string', required: true }
+]), login)
 router.post('/game', createGame)
-router.post('/log/:gameId', validateRequest(['log']), createLog)
+router.post('/log/:gameId', validateRequest([
+    { field: 'log', type: 'string', required: true }
+]), createLog)
 
 export default router
