@@ -8,7 +8,7 @@ public class TableManager : MonoBehaviour
 {
     public static TableManager Instance;
     
-    private List<TablePlayerCard> playerSeats = new List<TablePlayerCard>();
+    public List<TablePlayerCard> playerSeats = new List<TablePlayerCard>();
     [SerializeField] private Transform parentForSeats;
     
     public GameObject playerCardPrefab;
@@ -16,7 +16,6 @@ public class TableManager : MonoBehaviour
     int playersToConnect = Settings.PlayerCount;
 
     private Deck deck;
-    [HideInInspector] public int turnCount = 0;
     [HideInInspector] public int moneyInPot = 0;
 
     // 1% of starting money
@@ -57,7 +56,7 @@ public class TableManager : MonoBehaviour
         {
             AssignRolesAndShuffleTheOrderOfPlayers();
             SendGameInfoToPlayers();
-            StartFirstTurn();
+            TurnManager.StartFirstTurn();
             Loader.Instance.StopLoading();
         }
     }
@@ -90,35 +89,6 @@ public class TableManager : MonoBehaviour
 
             int indexInConnections = playerSeats[i].indexInConnectionsArray;
             ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], gameInfoMessage);
-        }
-    }
-
-    public void StartFirstTurn()
-    {
-        turnCount++;
-        playerSeats[1].StartTurn();
-        PossibleAction[] possibleActions = new PossibleAction[] { PossibleAction.SMALL_BLIND_BET };
-        SendTurnMessage(1, possibleActions);
-    }
-
-    public void SendTurnMessage(int playerIndex, PossibleAction[] possibleActions, int previousBet = 0)
-    {
-        YourTurnMessage yourTurnMessage = new YourTurnMessage();
-        yourTurnMessage.PossibleActions = possibleActions;
-        yourTurnMessage.PreviousBet = previousBet;
-        int indexInConnections = playerSeats[playerIndex].indexInConnectionsArray;
-        ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], yourTurnMessage);
-
-        NotYourTurnMessage notYourTurnMessage = new NotYourTurnMessage();
-        notYourTurnMessage.PlayerInTurn = playerSeats[playerIndex].assignedPlayer.playerName;
-
-        for (int i = 0; i < playerSeats.Count; i++)
-        {
-            if (i != playerIndex)
-            {
-                indexInConnections = playerSeats[i].indexInConnectionsArray;
-                ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], notYourTurnMessage);
-            }
         }
     }
 
