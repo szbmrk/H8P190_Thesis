@@ -1943,6 +1943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 295198096970631317}
   - component: {fileID: 8215861183471054830}
+  - component: {fileID: 5163996005667209339}
   m_Layer: 5
   m_Name: Bet
   m_TagString: Untagged
@@ -1989,6 +1990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca191a610b3f214e8a8fd70ab14ed78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  submitBtn: {fileID: 5163996005667209339}
   plus: {fileID: 364232796594619538}
   minus: {fileID: 3738172528374128237}
   _25: {fileID: 1498389132977999360}
@@ -1998,8 +2000,22 @@ MonoBehaviour:
   moneyInput: {fileID: 5804238897594717601}
   submitBtnText: {fileID: 7258529957651223716}
   submitText: Bet
-  minimumValue: 0
+  minValue: 0
   maxValue: 0
+--- !u!114 &5163996005667209339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6667396046511829136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3af59cc2ce13747982012a29a8ca42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0
+  action: 4
 --- !u!1 &6730521954921373985
 GameObject:
   m_ObjectHideFlags: 0

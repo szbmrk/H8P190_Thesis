@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 3328097750301818010}
   - component: {fileID: 8582873062687801962}
   - component: {fileID: 5008964277359017662}
+  - component: {fileID: 6048207455125197120}
   m_Layer: 5
   m_Name: Big Blind
   m_TagString: Untagged
@@ -255,3 +256,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6048207455125197120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629201783999753017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3af59cc2ce13747982012a29a8ca42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0
+  action: 1

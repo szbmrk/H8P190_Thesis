@@ -14,6 +14,8 @@ public static class Settings
     public static int SmallBLindAmount;
     public static int BigBLindAmount;
 
+    public static int PreviousBet;
+
     public static void SetSettings(GameInfoMessage gameInfo)
     {
         IsDealer = gameInfo.IsDealer;

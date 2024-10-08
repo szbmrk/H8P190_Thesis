@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public void StartTurn(YourTurnMessage yourTurnMessage)
     {
         GameGUI.Instance.StartTurn();
+        Settings.PreviousBet = yourTurnMessage.PreviousBet;
         ActionManager.Instance.EnableActions(yourTurnMessage.PossibleActions);
     }
 

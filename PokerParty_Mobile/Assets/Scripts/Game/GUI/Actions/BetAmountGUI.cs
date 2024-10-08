@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using PokerParty_SharedDLL;
 
 public class BetAmountGUI : MonoBehaviour
 {
+    [SerializeField] private ActionButton submitBtn;
     [SerializeField] private Button plus;
     [SerializeField] private Button minus;
     [SerializeField] private Button _25;
@@ -22,6 +24,7 @@ public class BetAmountGUI : MonoBehaviour
     [HideInInspector] public int minValue;
     [HideInInspector] public int maxValue;
 
+    private PossibleAction originalAction;
 
     public void Initialize(int minValue, int maxValue)
     {
@@ -41,6 +44,7 @@ public class BetAmountGUI : MonoBehaviour
         SetSliderValue(minValue);
         moneyInput.onEndEdit.AddListener((value) => OnInputEndEdit(value));
         slider.onValueChanged.AddListener((value) => SetSliderValue((int)value));
+        originalAction = submitBtn.action;
     }
 
     private void Update()
@@ -54,11 +58,13 @@ public class BetAmountGUI : MonoBehaviour
         {
             plus.interactable = false;
             submitBtnText.text = "All in";
+            submitBtn.action = PossibleAction.ALL_IN;
         }
         else
         {
             plus.interactable = true;
             submitBtnText.text = $"{submitText} ({slider.value} $)";
+            submitBtn.action = originalAction;
         }
     }
 
@@ -91,6 +97,7 @@ public class BetAmountGUI : MonoBehaviour
         slider.value = value;
         moneyInput.text = value.ToString() + " $";
         submitBtnText.text = $"{submitText} ({value} $)";
+        submitBtn.amount = value;
     }
 
     private void OnInputEndEdit(string value)
