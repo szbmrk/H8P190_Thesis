@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public static class RequestManager
 {
-    private static string baseUrl = "https://szobocloud.duckdns.org/pokerparty";
+    private static string baseUrl = "https://szobocloud.duckdns.org/pokerparty-api";
 
     public static async Task<UnityWebRequest> SendPostRequest(string url, string json)
     {
