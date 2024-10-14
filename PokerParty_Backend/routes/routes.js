@@ -3,6 +3,7 @@ import { login, register } from "../controllers/authentication.js";
 import { createGame } from "../controllers/game.js";
 import { createLog } from "../controllers/log.js";
 import { validateRequest } from "../middleware/validateRequest.js";
+import { sendResetPasswordEmail } from "../controllers/resetPassword.js";
 
 const router = express.Router()
 

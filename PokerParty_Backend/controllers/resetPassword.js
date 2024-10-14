@@ -1,4 +1,4 @@
-import { sendEmail } from "../helper/sendEmail";
+import { sendEmail } from "../helper/sendEmail.js";
 
 export const sendResetPasswordEmail = async (req, res) => {
     const { email, playerName } = req.body;
