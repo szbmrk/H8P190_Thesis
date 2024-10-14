@@ -2,7 +2,7 @@ import { db } from "../database/db.js";
 import { sendEmail } from "../helper/sendEmail.js";
 import crypto from "crypto";
 
-export const sendResetPasswordEmail = async (req, res) => {
+export const sendPasswordResetEmail = async (req, res) => {
     const { email, playerName } = req.body;
 
     try {
@@ -25,12 +25,12 @@ export const sendResetPasswordEmail = async (req, res) => {
         const playerId = player.rows[0]._id;
         const toEmail = player.rows[0].email;
 
-        const resetPasswordToken = await generateResetPasswordToken();
+        const passwordResetToken = await generatePasswordResetToken();
 
-        const updateResetPasswordTokenQuery = 'UPDATE players SET "passwordResetToken" = $1 WHERE _id = $2';
-        await db.query(updateResetPasswordTokenQuery, [resetPasswordToken, playerId]);
+        const updatePasswrdResetTokenQuery = 'UPDATE players SET "passwordResetToken" = $1 WHERE _id = $2';
+        await db.query(updatePasswrdResetTokenQuery, [passwordResetToken, playerId]);
 
-        const resetUrl = `https://pokerparty.szobo.dev/resetPassword?token=${resetPasswordToken}`;
+        const resetUrl = `https://pokerparty.szobo.dev/passwordReset?token=${passwordResetToken}`;
 
         try {
             await sendEmail(
@@ -51,8 +51,8 @@ export const sendResetPasswordEmail = async (req, res) => {
     }
 };
 
-const generateResetPasswordToken = async () => {
-    const resetPasswordToken = crypto.randomBytes(20).toString('hex');
-    const hashedToken = crypto.createHash('sha256').update(resetPasswordToken).digest('hex');
+const generatePasswordResetToken = async () => {
+    const passwordResetToken = crypto.randomBytes(20).toString('hex');
+    const hashedToken = crypto.createHash('sha256').update(passwordResetToken).digest('hex');
     return hashedToken;
 };
