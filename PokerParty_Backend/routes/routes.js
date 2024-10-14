@@ -10,5 +10,6 @@ router.post('/register', validateRequest(['playerName', 'email', 'password']), r
 router.post('/login', validateRequest(['playerName', 'password']), login)
 router.post('/game', createGame)
 router.post('/log/:gameId', validateRequest(['log']), createLog)
+router.post('/reset-password', validateRequest(['email', 'playerName'], true), sendResetPasswordEmail)
 
 export default router
