@@ -18,9 +18,9 @@ const seedPlayers = async () => {
     const hashedPassword1 = await hashPassword('password123');
     const hashedPassword2 = await hashPassword('password456');
 
-    const createPlayersQuery = 'INSERT INTO players ("_id", "playerName", email, password, "ELO", "gamesPlayed", "gamesWon", "XP", level) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
-    await db.query(createPlayersQuery, [1, 'Player1', 'player1@gmail.com', hashedPassword1, 1000, 10, 5, 100, 1]);
-    await db.query(createPlayersQuery, [2, 'Player2', 'player2@gmail.com', hashedPassword2, 900, 8, 3, 80, 1]);
+    const createPlayersQuery = 'INSERT INTO players ("playerName", email, password, "ELO", "gamesPlayed", "gamesWon", "XP", level) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+    await db.query(createPlayersQuery, ['Player1', 'player1@gmail.com', hashedPassword1, 1000, 10, 5, 100, 1]);
+    await db.query(createPlayersQuery, ['Player2', 'player2@gmail.com', hashedPassword2, 900, 8, 3, 80, 1]);
 };
 
 const seedGames = async () => {
