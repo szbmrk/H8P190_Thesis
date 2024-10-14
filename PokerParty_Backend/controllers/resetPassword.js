@@ -27,7 +27,7 @@ export const sendResetPasswordEmail = async (req, res) => {
 
         const resetPasswordToken = await generateResetPasswordToken();
 
-        const updateResetPasswordTokenQuery = 'UPDATE players SET "resetPasswordToken" = $1 WHERE _id = $2';
+        const updateResetPasswordTokenQuery = 'UPDATE players SET "passwordResetToken" = $1 WHERE _id = $2';
         await db.query(updateResetPasswordTokenQuery, [resetPasswordToken, playerId]);
 
         const resetUrl = `https://pokerparty.szobo.dev/resetPassword?token=${resetPasswordToken}`;
