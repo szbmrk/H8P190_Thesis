@@ -12,7 +12,15 @@ public class AuthManager : MonoBehaviour
     public static AuthManager Instance;
 
     [Serializable]
-    private class PostData
+    private class RegisterData
+    {
+        public string email;
+        public string playerName;
+        public string password;
+    }
+
+    [Serializable]
+    private class LoginData
     {
         public string playerName;
         public string password;
@@ -24,10 +32,11 @@ public class AuthManager : MonoBehaviour
             Instance = this;
     }
 
-    public async Task Register(string playerName, string password)
+    public async Task Register(string email, string playerName, string password)
     {
-        PostData registerData = new PostData
+        RegisterData registerData = new RegisterData
         {
+            email = email,
             playerName = playerName,
             password = password
         };
@@ -41,11 +50,11 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    public async Task Login(string username, string password)
+    public async Task Login(string playerName, string password)
     {
-        PostData loginData = new PostData
+        LoginData loginData = new LoginData
         {
-            playerName = username,
+            playerName = playerName,
             password = password
         };
 

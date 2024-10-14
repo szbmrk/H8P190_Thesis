@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class RegisterGUI : MonoBehaviour
 {
+    [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField passwordAgainInputField;
@@ -30,21 +31,22 @@ public class RegisterGUI : MonoBehaviour
     private void RegisterButtonClick()
     {
         signInBtn.interactable = false;
+        string email = emailInputField.text;
         string username = playerNameInputField.text;
         string password = passwordInputField.text;
         string passwordAgain = passwordAgainInputField.text;
 
-        RegisterAccount(username, password, passwordAgain);
+        RegisterAccount(email, username, password, passwordAgain);
         signInBtn.interactable = true;
     }
 
-    private async void RegisterAccount(string playerName, string password, string passwordAgain)
+    private async void RegisterAccount(string email, string playerName, string password, string passwordAgain)
     {
         Loader.Instance.StartLoading();
 
-        if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
         {
-            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "PlayerName or password is empty");
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Email or PlayerName or password is empty");
             return;
         }
 
@@ -56,13 +58,11 @@ public class RegisterGUI : MonoBehaviour
 
         try
         {
-            await AuthManager.Instance.Register(playerName, password);
+            await AuthManager.Instance.Register(email, playerName, password);
         }
         catch (Exception e)
         {
-            playerNameInputField.text = "";
-            passwordInputField.text = "";
-            passwordAgainInputField.text = "";
+            ResetFields();
             Loader.Instance.StopLoading();
             PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, e.Message);
             return;
@@ -70,5 +70,13 @@ public class RegisterGUI : MonoBehaviour
 
         Loader.Instance.StopLoading();
         ShowLoginPanel();
+    }
+
+    private void ResetFields()
+    {
+        emailInputField.text = "";
+        playerNameInputField.text = "";
+        passwordInputField.text = "";
+        passwordAgainInputField.text = "";
     }
 }
