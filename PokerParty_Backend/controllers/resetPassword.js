@@ -2,6 +2,11 @@ import { sendEmail } from "../helper/sendEmail.js";
 
 export const sendResetPasswordEmail = async (req, res) => {
     const { email, playerName } = req.body;
+    console.log(email, playerName);
+    if (email)
+        console.log('email');
+    if (playerName)
+        console.log('playerName');
 
     try {
         let player = null;
