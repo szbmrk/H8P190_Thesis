@@ -17,16 +17,16 @@ CREATE TABLE IF NOT EXISTS GAMES (
 
 CREATE TABLE IF NOT EXISTS PLAYER_GAMES (
     "_id" SERIAL PRIMARY KEY,
-    "playerId" INTEGER REFERENCES PLAYERS("_id"),
-    "gameId" INTEGER REFERENCES GAMES("_id"),
-    "ELOGained" INTEGER,
-    "XPGained" INTEGER,
-    "position" INTEGER CHECK ("position" >= 1)
+    "playerId" INTEGER REFERENCES PLAYERS("_id") NOT NULL,
+    "gameId" INTEGER REFERENCES GAMES("_id") NOT NULL,
+    "ELOGained" INTEGER NOT NULL,
+    "XPGained" INTEGER NOT NULL,
+    "position" INTEGER CHECK ("position" >= 1) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS LOGS (
     "_id" SERIAL PRIMARY KEY,
-    "gameId" INTEGER REFERENCES GAMES("_id"),
-    "log" TEXT,
+    "gameId" INTEGER REFERENCES GAMES("_id") NOT NULL,
+    "log" TEXT NOT NULL,
     "created_at" TIMESTAMP DEFAULT NOW()
 );
