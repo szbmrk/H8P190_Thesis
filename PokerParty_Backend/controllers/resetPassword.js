@@ -1,5 +1,6 @@
 import { db } from "../database/db.js";
 import { sendEmail } from "../helper/sendEmail.js";
+import crypto from "crypto";
 
 export const sendResetPasswordEmail = async (req, res) => {
     const { email, playerName } = req.body;
