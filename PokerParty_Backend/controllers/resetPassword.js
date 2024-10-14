@@ -21,10 +21,10 @@ export const sendResetPasswordEmail = async (req, res) => {
             return res.status(400).json({ msg: 'Invalid email or playerName' });
         }
 
-        const email = player.rows[0].email;
+        const toEmail = player.rows[0].email;
 
         try {
-            await sendEmail(email, 'Reset Password', 'Click on the link to reset your password');
+            await sendEmail(toEmail, 'Reset Password', 'Click on the link to reset your password');
             return res.status(200).json({ msg: 'Email sent successfully' });
         }
         catch (err) {
