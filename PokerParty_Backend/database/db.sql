@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS PLAYERS (
     "_id" SERIAL PRIMARY KEY,
     "playerName" TEXT UNIQUE NOT NULL,
+    "email" TEXT UNIQUE NOT NULL,
     "password" TEXT NOT NULL,
+    "passwordResetToken" TEXT DEFAULT NULL,
     "ELO" INTEGER DEFAULT 1000,
     "gamesPlayed" INTEGER DEFAULT 0,
     "gamesWon" INTEGER DEFAULT 0,
