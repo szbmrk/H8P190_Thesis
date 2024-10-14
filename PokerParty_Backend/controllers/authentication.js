@@ -2,21 +2,28 @@ import { db } from "../database/db.js";
 import bcrypt from "bcrypt";
 
 export const register = async (req, res) => {
-    const { playerName, password } = req.body;
+    const { playerName, email, password } = req.body;
 
     try {
-        const existingPlayerQuery = 'SELECT * FROM players WHERE "playerName" = $1';
-        const existingPlayer = await db.query(existingPlayerQuery, [playerName]);
+        const existingPlayerNameQuery = 'SELECT * FROM players WHERE "playerName" = $1';
+        const existingPlayer = await db.query(existingPlayerNameQuery, [playerName]);
 
         if (existingPlayer.rows.length > 0) {
-            return res.status(400).json({ msg: 'Player already exists' });
+            return res.status(400).json({ msg: `Player with ${playerName} playerName already exists` });
+        }
+
+        const existingPlayerEmailQuery = 'SELECT * FROM players WHERE email = $1';
+        const existingEmail = await db.query(existingPlayerEmailQuery, [email]);
+
+        if (existingEmail.rows.length > 0) {
+            return res.status(400).json({ msg: `Player with ${email} email already exists` });
         }
 
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const insertQuery = 'INSERT INTO players ("playerName", "password") VALUES ($1, $2)';
-        await db.query(insertQuery, [playerName, hashedPassword]);
+        const insertQuery = 'INSERT INTO players ("playerName", "email", "password") VALUES ($1, $2, $3)';
+        await db.query(insertQuery, [playerName, email, hashedPassword]);
 
         res.status(201).json({ msg: 'Player registered successfully' });
 
