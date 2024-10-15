@@ -60,8 +60,7 @@ const generatePasswordResetToken = async () => {
 export const ChangePassword = async (req, res) => {
     const { newPassword, passwordResetToken } = req.body;
 
-    const hashedToken = crypto.createHash('sha256').update(passwordResetToken).digest('hex');
-    const player = await db.query('SELECT * FROM players WHERE "passwordResetToken" = $1', [hashedToken]);
+    const player = await db.query('SELECT * FROM players WHERE "passwordResetToken" = $1', [passwordResetToken]);
 
     if (player.rows.length === 0) {
         return res.status(400).json({ msg: 'Invalid password reset token' });
