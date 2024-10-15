@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
             'newPassword' => $newPassword
         );
 
-        $ch = curl_init("http://localhost:5000/password-reset");
+        $ch = curl_init("http://localhost:5000/change-password");
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
