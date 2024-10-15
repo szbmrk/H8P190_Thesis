@@ -56,3 +56,26 @@ const generatePasswordResetToken = async () => {
     const hashedToken = crypto.createHash('sha256').update(passwordResetToken).digest('hex');
     return hashedToken;
 };
+
+export const ChangePassword = async (req, res) => {
+    const { newPassword, passwordResetToken } = req.body;
+
+    const hashedToken = crypto.createHash('sha256').update(passwordResetToken).digest('hex');
+    const player = await db.query('SELECT * FROM players WHERE "passwordResetToken" = $1', [hashedToken]);
+
+    if (player.rows.length === 0) {
+        return res.status(400).json({ msg: 'Invalid password reset token' });
+    }
+
+    const playerId = player.rows[0]._id;
+    const hashedPassword = await hashPassword(newPassword);
+
+    try {
+        const updatePasswordQuery = 'UPDATE players SET password = $1, "passwordResetToken" = $2 WHERE _id = $3';
+        await db.query(updatePasswordQuery, [hashedPassword, null, playerId]);
+        return res.status(200).json({ msg: 'Password updated successfully' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+}
