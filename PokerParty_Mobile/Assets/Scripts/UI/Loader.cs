@@ -15,6 +15,7 @@ public class Loader : MonoBehaviour
     public void StartLoading()
     {
         loader.SetActive(true);
+        loader.transform.SetAsLastSibling();
     }
 
     public void StopLoading()
