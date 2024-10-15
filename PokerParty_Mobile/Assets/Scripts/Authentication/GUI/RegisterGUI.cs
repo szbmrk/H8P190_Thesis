@@ -50,9 +50,16 @@ public class RegisterGUI : MonoBehaviour
             return;
         }
 
+        if (!EmailValidator.IsValidEmail(email))
+        {
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Invalid email");
+            return;
+        }
+
         if (password != passwordAgain)
         {
             PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Passwords do not match");
+            ResetPasswords();
             return;
         }
 
@@ -72,11 +79,16 @@ public class RegisterGUI : MonoBehaviour
         ShowLoginPanel();
     }
 
+    private void ResetPasswords()
+    {
+        passwordInputField.text = "";
+        passwordAgainInputField.text = "";
+    }
+
     private void ResetFields()
     {
         emailInputField.text = "";
-        playerNameInputField.text = "";
-        passwordInputField.text = "";
+        ResetPasswords();
         passwordAgainInputField.text = "";
     }
 }
