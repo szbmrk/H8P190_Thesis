@@ -47,18 +47,21 @@ public class RegisterGUI : MonoBehaviour
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
         {
             PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Email or PlayerName or password is empty");
+            Loader.Instance.StopLoading();
             return;
         }
 
         if (!EmailValidator.IsValidEmail(email))
         {
             PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Invalid email");
+            Loader.Instance.StopLoading();
             return;
         }
 
         if (password != passwordAgain)
         {
             PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Passwords do not match");
+            Loader.Instance.StopLoading();
             ResetPasswords();
             return;
         }
@@ -87,8 +90,8 @@ public class RegisterGUI : MonoBehaviour
 
     private void ResetFields()
     {
+        playerNameInputField.text = "";
         emailInputField.text = "";
         ResetPasswords();
-        passwordAgainInputField.text = "";
     }
 }
