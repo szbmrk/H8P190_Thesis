@@ -1,6 +1,6 @@
 import { db } from "../database/db.js";
 import bcrypt from "bcrypt";
-import { HashPassword } from "../helper/passwordHash.js";
+import { hashPassword } from "../helper/passwordHash.js";
 
 export const register = async (req, res) => {
     const { playerName, email, password } = req.body;
