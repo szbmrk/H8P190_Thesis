@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
         $error = "Passwords do not match!";
     } else {
         $data = array(
-            'token' => $token,
+            'passwordResetToken' => $token,
             'newPassword' => $newPassword
         );
 
@@ -30,9 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
             $error = "API Request Error: " . curl_error($ch);
         } else {
             $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $responseBody = json_decode($response, true);
 
-            if ($statusCode == 200) {
+            if ($statusCode === 200) {
                 $success = "Password updated successfully!";
+            } elseif ($statusCode >= 400 && isset($responseBody['message'])) {
+                $error = "Error: " . htmlspecialchars($responseBody['message']);
             } else {
                 $error = "Error: Unable to update password (HTTP Status $statusCode)";
             }
@@ -52,19 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
     <title>Password Reset</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
 
         .container {
-            background-color: white;
-            padding: 20px;
+            background-color: #fff;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
         }
@@ -72,43 +76,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
         h2 {
             text-align: center;
             color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
         }
 
         input[type="password"],
         input[type="submit"] {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 10px 0 20px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         input[type="submit"] {
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
             border: none;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
 
         .error,
         .success {
             text-align: center;
-            color: white;
             padding: 10px;
-            margin-top: 10px;
+            margin-bottom: 20px;
             border-radius: 5px;
+            font-size: 14px;
         }
 
         .error {
-            background-color: #f44336;
+            background-color: #f8d7da;
+            color: #721c24;
         }
 
         .success {
-            background-color: #4CAF50;
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .token-error {
+            background-color: #ffc107;
+            color: #856404;
         }
     </style>
 </head>
@@ -135,7 +155,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
                 <input type="submit" value="Reset Password">
             </form>
         <?php else: ?>
-            <div class="error">A token is required to reset your password. Please check the link you received.</div>
+            <div class="token-error">A valid token is required to reset your password. Please check the link you received.
+            </div>
         <?php endif; ?>
     </div>
 
