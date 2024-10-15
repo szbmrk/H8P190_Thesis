@@ -1,4 +1,5 @@
 import { db } from "../database/db.js";
+import { hashPassword } from "../helper/passwordHash.js";
 import { sendEmail } from "../helper/sendEmail.js";
 import crypto from "crypto";
 

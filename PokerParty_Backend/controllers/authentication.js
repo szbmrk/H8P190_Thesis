@@ -1,5 +1,6 @@
 import { db } from "../database/db.js";
 import bcrypt from "bcrypt";
+import { HashPassword } from "../helper/passwordHash.js";
 
 export const register = async (req, res) => {
     const { playerName, email, password } = req.body;
@@ -19,8 +20,7 @@ export const register = async (req, res) => {
             return res.status(400).json({ msg: `Player with ${email} email already exists` });
         }
 
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const hashedPassword = hashPassword(password);
 
         const insertQuery = 'INSERT INTO players ("playerName", "email", "password") VALUES ($1, $2, $3)';
         await db.query(insertQuery, [playerName, email, hashedPassword]);
