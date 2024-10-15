@@ -68,7 +68,7 @@ public class RegisterGUI : MonoBehaviour
 
         try
         {
-            await AuthManager.Instance.Register(email, playerName, password);
+            await AuthManager.Register(email, playerName, password);
         }
         catch (Exception e)
         {

@@ -7,10 +7,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using PokerParty_SharedDLL;
 
-public class AuthManager : MonoBehaviour
+public static class AuthManager
 {
-    public static AuthManager Instance;
-
     [Serializable]
     private class RegisterData
     {
@@ -26,13 +24,7 @@ public class AuthManager : MonoBehaviour
         public string password;
     }
 
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-    }
-
-    public async Task Register(string email, string playerName, string password)
+    public static async Task Register(string email, string playerName, string password)
     {
         RegisterData registerData = new RegisterData
         {
@@ -50,7 +42,7 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    public async Task Login(string playerName, string password)
+    public static async Task Login(string playerName, string password)
     {
         LoginData loginData = new LoginData
         {

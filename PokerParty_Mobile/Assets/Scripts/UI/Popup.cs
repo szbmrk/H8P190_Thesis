@@ -4,20 +4,19 @@ using UnityEngine.UI;
 
 public class Popup : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI popupText;
-    [SerializeField] private Button okButton;
+    [SerializeField] protected TextMeshProUGUI popupText;
+    [SerializeField] protected Button okButton;
 
     public float animationDuration = 0.5f;
     private Vector3 originalScale;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        okButton.onClick.AddListener(ClosePopup);
         originalScale = transform.localScale;
         transform.localScale = Vector3.zero;
     }
 
-    public void SetText (PopupType type, string text)
+    public void SetData (PopupType type, string text)
     {
         switch (type)
         {
@@ -35,6 +34,7 @@ public class Popup : MonoBehaviour
         }
 
         popupText.text = text;
+        okButton.onClick.AddListener(ClosePopup);
     }
 
     public void ShowPopup()
@@ -42,7 +42,7 @@ public class Popup : MonoBehaviour
         LeanTween.scale(gameObject, originalScale, animationDuration).setEase(LeanTweenType.easeOutBack);
     }
 
-    private void ClosePopup()
+    protected void ClosePopup()
     {
         LeanTween.scale(gameObject, Vector3.zero, animationDuration).setEase(LeanTweenType.easeInBack).setOnComplete(OnPopupClosed);
     }

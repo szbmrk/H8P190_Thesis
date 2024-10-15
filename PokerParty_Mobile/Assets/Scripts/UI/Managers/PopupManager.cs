@@ -9,7 +9,10 @@ public class PopupManager : MonoBehaviour
 {
     public static PopupManager Instance;
     [SerializeField] private GameObject popupPrefab;
+    [SerializeField] private GameObject inputPopupPrefab;
     [SerializeField] private Transform canvas;
+
+    public InputPopup currentInputPopup;
 
     private void Awake()
     {
@@ -20,7 +23,17 @@ public class PopupManager : MonoBehaviour
     {
         GameObject newPopup = Instantiate(popupPrefab, canvas);
         Popup popup = newPopup.GetComponent<Popup>();
-        popup.SetText(type, text);
+        popup.SetData(type, text);
         popup.ShowPopup();
+    }
+
+    public void ShowInputPopup(string header, string placeHolderText, string buttonText, Func<Task<bool>> methodToCall)
+    {
+        GameObject newPopup = Instantiate(inputPopupPrefab, canvas);
+        InputPopup popup = newPopup.GetComponent<InputPopup>();
+        popup.SetData(header, placeHolderText, buttonText);
+        popup.SetOnSubmit(methodToCall);
+        popup.ShowPopup();
+        currentInputPopup = popup;
     }
 }

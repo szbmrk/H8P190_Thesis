@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ public class LoginGUI : MonoBehaviour
 
     [SerializeField] private Button dontHaveAnAccountBtn;
     [SerializeField] private Button loginBtn;
+    [SerializeField] private Button forgotPasswordBtn;
 
     [SerializeField] private Toggle KeepMeLoggedInCheckBox;
 
@@ -21,6 +23,7 @@ public class LoginGUI : MonoBehaviour
 
         dontHaveAnAccountBtn.onClick.AddListener(ShowRegisterPanel);
         loginBtn.onClick.AddListener(LoginButtonClick);
+        forgotPasswordBtn.onClick.AddListener(ForgotPasswordButtonClick);
 
         if (PlayerPrefs.HasKey("playerName") && PlayerPrefs.HasKey("password"))
         {
@@ -52,7 +55,8 @@ public class LoginGUI : MonoBehaviour
 
         if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(password))
         {
-            Debug.LogError("PlayerName or password is empty");
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "PlayerName or password is empty");
+            Loader.Instance.StopLoading();
             return;
         }
 
@@ -65,7 +69,7 @@ public class LoginGUI : MonoBehaviour
                 PlayerPrefs.SetString("password", password);
             }
 
-            await AuthManager.Instance.Login(playerName, password);
+            await AuthManager.Login(playerName, password);
         }
         catch (Exception e)
         {
@@ -79,5 +83,31 @@ public class LoginGUI : MonoBehaviour
         }
 
         SceneManager.LoadScene("Lobby");
+    }
+
+    private void ForgotPasswordButtonClick()
+    {
+        PopupManager.Instance.ShowInputPopup("Password Reset", "Enter email or playerName", "Send email", SendForgotPasswordEmail);
+    }
+
+    private async Task<bool> SendForgotPasswordEmail()
+    {
+        Loader.Instance.StartLoading();
+
+        try
+        {
+            string emailOrPlayername  = PopupManager.Instance.currentInputPopup.inputField.text;
+            string response = await PasswordResetManager.SendPasswordResetEmail(emailOrPlayername);
+            PopupManager.Instance.ShowPopup(PopupType.SuccessPopup, response);
+        }
+        catch (Exception e)
+        {
+            Loader.Instance.StopLoading();
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, e.Message);
+            return false;
+        }
+
+        Loader.Instance.StopLoading();
+        return true;
     }
 }

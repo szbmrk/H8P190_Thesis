@@ -24,4 +24,20 @@ public static class RequestManager
 
         return request;
     }
+
+    public static async Task<UnityWebRequest> SendPutRequest(string url, string json)
+    {
+        UnityWebRequest request = new UnityWebRequest(baseUrl + url, "PUT");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        var operation = request.SendWebRequest();
+
+        while (!operation.isDone)
+            await Task.Yield();
+
+        return request;
+    }
 }
