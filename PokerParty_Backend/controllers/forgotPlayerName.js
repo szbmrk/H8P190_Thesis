@@ -1,4 +1,4 @@
-import { db } from "../database/db";
+import { db } from "../database/db.js";
 
 export const sendForgotPlayerNameEmail = async (req, res) => {
     const { email } = req.body;
