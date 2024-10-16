@@ -35,10 +35,11 @@ export const sendPasswordResetEmail = async (req, res) => {
 
         try {
             await sendEmail(
-                toEmail,
-                'PokerParty - Password Reset',
-                `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste this into your browser to complete the process:\n\n${resetUrl}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`
+                player.rows[0].email,
+                'PokerParty - Player Reset Request',
+                getEmailText(resetUrl)
             );
+
             return res.status(200).json({ msg: `Email sent successfully to ${toEmail}` });
         }
         catch (err) {
@@ -50,6 +51,25 @@ export const sendPasswordResetEmail = async (req, res) => {
         console.error(err.message);
         res.status(500).json({ msg: 'Server error' });
     }
+};
+
+const getEmailText = (resetUrl) => {
+    `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <h2 style="color: #ff6600; text-align: center;">PokerParty</h2>
+            <p>Hello,</p>
+            <p>You are receiving this email because you (or someone else) have requested a password reset for your PokerParty account.</p>
+            <p>To reset your password, please click the button below:</p>
+            <p style="text-align: center;">
+                <a href="${resetUrl}" style="background-color: #ff6600; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+                    Reset Password
+                </a>
+            </p>
+            <p>If you did not request this, you can safely ignore this email.</p>
+            <p>Thanks for being part of PokerParty!</p>
+            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+            <p style="text-align: center; font-size: 12px; color: #777;">&copy; 2024 PokerParty. All rights reserved.</p>
+        </div>`
 };
 
 const generatePasswordResetToken = async () => {
