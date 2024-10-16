@@ -54,7 +54,7 @@ export const sendPasswordResetEmail = async (req, res) => {
 };
 
 const getEmailText = (resetUrl) => {
-    `
+    return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <h2 style="color: #ff6600; text-align: center;">PokerParty</h2>
             <p>Hello,</p>
