@@ -1,8 +1,9 @@
+import { db } from "../database/db";
+
 export const sendForgotPlayerNameEmail = async (req, res) => {
     const { email } = req.body;
 
     try {
-
         const player = await db.query('SELECT * FROM players WHERE email = $1', [email]);
 
         if (player.rows.length === 0) {
