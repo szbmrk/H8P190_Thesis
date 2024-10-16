@@ -17,7 +17,7 @@ export const sendForgotPlayerNameEmail = async (req, res) => {
                 'PokerParty - Forgot Player Name',
                 `You are receiving this email because you (or someone else) have requested your player name for your account.\n\nYour player name is: ${player.rows[0].playerName}\n\nIf you did not request this, please ignore this email.\n`
             );
-            return res.status(200).json({ msg: `Email sent successfully to ${toEmail}` });
+            return res.status(200).json({ msg: `Email sent successfully to ${player.rows[0].email}` });
         }
         catch (err) {
             console.error(err.message);
