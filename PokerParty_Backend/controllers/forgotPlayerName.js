@@ -1,4 +1,5 @@
 import { db } from "../database/db.js";
+import { sendEmail } from "../helper/sendEmail.js";
 
 export const sendForgotPlayerNameEmail = async (req, res) => {
     const { email } = req.body;
