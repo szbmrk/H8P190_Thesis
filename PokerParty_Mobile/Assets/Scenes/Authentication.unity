@@ -2481,7 +2481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 1337862126387541846, guid: 7432081291f9e4446ac4a997afc2da26, type: 3}
-  inputPopupPrefab: {fileID: 6317958118896344878, guid: 56e6fcc3271461349be3de6c587e3d6d, type: 3}
+  inputPopupPrefab: {fileID: 2687156171374137517, guid: 56e6fcc3271461349be3de6c587e3d6d, type: 3}
   canvas: {fileID: 726244227}
   currentInputPopup: {fileID: 0}
 --- !u!1 &731384476

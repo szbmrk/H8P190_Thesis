@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class InputPopup : Popup
 {
+    [SerializeField] private Button closeBtn;
     public TMP_InputField inputField;
 
     Func<Task<bool>> methodToCall;
@@ -17,6 +19,7 @@ public class InputPopup : Popup
     {
         base.Awake();
         base.okButton.onClick.AddListener(OnClickSubmit);
+        closeBtn.onClick.AddListener(ClosePopup);
     }
 
     public void SetData(string header, string inputPlaceHolderText, string buttonText)
