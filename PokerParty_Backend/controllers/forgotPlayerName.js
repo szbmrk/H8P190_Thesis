@@ -38,7 +38,7 @@ const getEmailText = (playerName) => {
         <p>Hi there,</p>
         <p>You are receiving this email because you (or someone else) requested your player name to log in to your PokerParty account.</p>
         <p style="font-size: 18px; font-weight: bold;">Your player name is: 
-            <span style="color: #ff6600;">${player.rows[0].playerName}</span>
+            <span style="color: #ff6600;">${playerName}</span>
         </p>
         <p>If you didn’t request this information, please ignore this email. No further action is required on your part.</p>
         <p>Thank you for playing with us!</p>
