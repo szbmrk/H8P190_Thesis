@@ -1,7 +1,7 @@
 ﻿using PokerParty_SharedDLL;
 using UnityEngine;
 
-public static class NetworkMessageManager
+public static class NetworkMessageHandler
 {
     public static void ProcessMesage(NetworkMessageType type, string data, int indexOfConnection)
     {
@@ -31,6 +31,10 @@ public static class NetworkMessageManager
             case NetworkMessageType.LoadedToGameMessage:
                 LoadedToGameMessage loadedToGameMessage = FromStringToJson<LoadedToGameMessage>(data);
                 TableManager.Instance.PlayerLoaded(loadedToGameMessage.player, indexOfConnection);
+                break;
+            case NetworkMessageType.TurnDoneMessage:
+                TurnDoneMessage turnDoneMessage = FromStringToJson<TurnDoneMessage>(data);
+                TableManager.Instance.PlayerTurnDone(turnDoneMessage);
                 break;
         }
     }

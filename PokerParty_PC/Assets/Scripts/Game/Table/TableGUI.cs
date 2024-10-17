@@ -8,9 +8,7 @@ using UnityEngine;
 public class TableGUI : MonoBehaviour
 {
     public static TableGUI Instance;
-
     public List<Transform> seatPositions = new List<Transform>();
-
 
     private void Awake()
     {

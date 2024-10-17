@@ -23,15 +23,22 @@ public class ActionButton : MonoBehaviour
     {
         SetAmount();
         ActionManager.Instance.DisableActions();
+        UpdateMoney();
         MessageSender.SendMessageToHost(MessageToSend());
+    }
+
+    private void UpdateMoney()
+    {
+        GameManager.Instance.UpdateMoney(GameManager.Instance.money - amount);
     }
 
     public TurnDoneMessage MessageToSend()
     {
         TurnDoneMessage turnDoneMessage = new TurnDoneMessage()
         {
-            Amount = amount,
-            Action = action
+            ActionAmount = amount,
+            Action = action,
+            NewMoney = GameManager.Instance.money,
         };
 
         return turnDoneMessage;

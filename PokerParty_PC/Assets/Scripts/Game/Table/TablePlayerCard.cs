@@ -30,10 +30,6 @@ public class TablePlayerCard : MonoBehaviour
 
     [HideInInspector] public bool isTurn;
 
-    private void Start()
-    {
-    }
-
     public void LoadData()
     {
         playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.playerName);
@@ -62,10 +58,17 @@ public class TablePlayerCard : MonoBehaviour
         this.money = money;
         MoneyText.text = $"{money} $";
     }
+
     public void StartTurn()
     {
         isTurn = true;
         GameManager.Instance.SetWaitingFor(assignedPlayer.playerName);
+        RefreshTurnIcon();
+    }
+
+    public void TurnDone()
+    {
+        isTurn = false;
         RefreshTurnIcon();
     }
 }

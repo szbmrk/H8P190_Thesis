@@ -103,4 +103,10 @@ public class TableManager : MonoBehaviour
             ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], dealCardsMessage);
         }
     }
+
+    public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)
+    {
+        playerSeats.Find(p => p.assignedPlayer.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.NewMoney);
+        playerSeats.Find(p => p.assignedPlayer.Equals(turnDoneMessage.player)).TurnDone();
+    }
 }

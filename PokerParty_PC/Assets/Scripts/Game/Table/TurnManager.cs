@@ -18,6 +18,14 @@ public static class TurnManager
         SendTurnMessage(1, possibleActions);
     }
 
+    public static void StartSecondTurn()
+    {
+        turnCount++;
+        TableManager.Instance.playerSeats[2].StartTurn();
+        PossibleAction[] possibleActions = new PossibleAction[] { PossibleAction.BIG_BLIND_BET };
+        SendTurnMessage(2, possibleActions, TableManager.Instance.smallBlindBet);
+    }
+
     public static void SendTurnMessage(int playerIndex, PossibleAction[] possibleActions, int previousBet = 0)
     {
         List<TablePlayerCard> playerSeats = TableManager.Instance.playerSeats;
