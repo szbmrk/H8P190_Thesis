@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f3f6f9;
+            background-color: #1b1b1b;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -51,17 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
         }
 
         .container {
-            background-color: #ffffff;
+            background-color: #2c2c2c;
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             width: 100%;
             max-width: 400px;
             text-align: center;
+            color: #e0e0e0;
         }
 
         h2 {
-            color: #008000;
+            color: #00cc66;
             margin-bottom: 25px;
             font-size: 1.8rem;
             font-weight: 600;
@@ -69,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
 
         label {
             font-size: 15px;
-            color: #333333;
+            color: #e0e0e0;
             margin-bottom: 8px;
             display: block;
             text-align: left;
@@ -81,7 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
             padding: 15px;
             margin: 12px 0 25px;
             border-radius: 8px;
-            border: 1px solid #dddddd;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #e0e0e0;
             box-sizing: border-box;
             font-size: 1rem;
             outline: none;
@@ -89,12 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
         }
 
         input[type="password"]:focus {
-            border-color: #008000;
-            box-shadow: 0 0 6px rgba(0, 128, 0, 0.3);
+            border-color: #00cc66;
+            box-shadow: 0 0 6px rgba(0, 204, 102, 0.5);
         }
 
         input[type="submit"] {
-            background-color: #008000;
+            background-color: #00cc66;
             color: white;
             border: none;
             cursor: pointer;
@@ -104,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
         }
 
         input[type="submit"]:hover {
-            background-color: #006400;
+            background-color: #00994c;
             transform: translateY(-2px);
         }
 
@@ -162,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
                 <input type="submit" value="Reset Password">
             </form>
         <?php else: ?>
-            <div class="error">A valid token is required to reset your password. Please check the link you received.
+            <div class="token-error">A valid token is required to reset your password. Please check the link you received.
             </div>
         <?php endif; ?>
     </div>
