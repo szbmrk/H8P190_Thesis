@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
                 <input type="submit" value="Reset Password">
             </form>
         <?php else: ?>
-            <div class="token-error">A valid token is required to reset your password. Please check the link you received.
+            <div class="token-error">A valid token is required to reset your password. Please check the email you received.
             </div>
         <?php endif; ?>
     </div>
