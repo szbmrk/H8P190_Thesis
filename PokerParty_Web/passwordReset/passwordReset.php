@@ -18,22 +18,12 @@ function reset_password($token, $newPassword, $confirmPassword)
     );
 
     $context = stream_context_create($options);
-    $result = @file_get_contents($url, false, $context);  // @ suppresses error, but we want to manually handle it
+    $result = file_get_contents($url, false, $context);
 
-    // Check if the request was successful
     if ($result === FALSE) {
-        $error = error_get_last();
-        var_dump($error); // Debugging line to inspect error
-
         return array('status' => 'error', 'message' => 'An error occurred while processing your request. Please try again.');
     }
 
-    // Decode the response and check if it's valid JSON
     $response = json_decode($result, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        var_dump($result);  // Debugging line to inspect the raw result
-        return array('status' => 'error', 'message' => 'Invalid response from API.');
-    }
-
     return array('status' => 'success', 'message' => $response['msg']);
 }
