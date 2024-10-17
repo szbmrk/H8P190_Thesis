@@ -31,7 +31,6 @@ public class InputPopup : Popup
 
     private async void OnClickSubmit()
     {
-        Debug.Log("asdasdd");
         if (methodToCall != null) 
         {
             if (await methodToCall.Invoke())
