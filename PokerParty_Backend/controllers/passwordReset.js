@@ -57,7 +57,7 @@ const getEmailText = (resetUrl) => {
     return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
         <h2 style="color: #008000; text-align: center; font-size: 28px; margin-bottom: 20px;">PokerParty</h2>
-        <p style="font-size: 16px; text-align: center; color: #333;">Hello,</p>
+        <p style="font-size: 16px; text-align: center; color: #333;">Hi there,</p>
         <p style="font-size: 16px; text-align: center; color: #333;">
             You are receiving this email because you (or someone else) have requested a password reset for your PokerParty account.
         </p>
