@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
     if ($newPassword !== $confirmPassword) {
         $error = "Passwords do not match!";
     } else {
-
         $url = "http://localhost:5000/api/change-password";
         $data = array('passwordResetToken' => $token, 'newPassword' => $newPassword);
 
@@ -29,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
             $response = json_decode($result, true);
             $success = $response['msg'];
         }
-
     }
 }
 ?>
@@ -40,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset</title>
+    <title>Password Reset - PokerParty</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #f3f6f9;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -59,11 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
+            text-align: center;
         }
 
         h2 {
-            text-align: center;
-            color: #333333;
+            color: #008000;
             margin-bottom: 25px;
             font-size: 1.8rem;
             font-weight: 600;
@@ -71,9 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
 
         label {
             font-size: 15px;
-            color: #666666;
-            margin-bottom: 5px;
+            color: #333333;
+            margin-bottom: 8px;
             display: block;
+            text-align: left;
         }
 
         input[type="password"],
@@ -90,13 +89,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
         }
 
         input[type="password"]:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+            border-color: #008000;
+            box-shadow: 0 0 6px rgba(0, 128, 0, 0.3);
         }
 
         input[type="submit"] {
-            background-color: #007bff;
-            color: #ffffff;
+            background-color: #008000;
+            color: white;
             border: none;
             cursor: pointer;
             font-size: 1rem;
@@ -105,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $token) {
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #006400;
             transform: translateY(-2px);
         }
 
