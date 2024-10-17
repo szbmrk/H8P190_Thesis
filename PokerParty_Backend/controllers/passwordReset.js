@@ -55,21 +55,29 @@ export const sendPasswordResetEmail = async (req, res) => {
 
 const getEmailText = (resetUrl) => {
     return `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-            <h2 style="color: #ff6600; text-align: center;">PokerParty</h2>
-            <p>Hello,</p>
-            <p>You are receiving this email because you (or someone else) have requested a password reset for your PokerParty account.</p>
-            <p>To reset your password, please click the button below:</p>
-            <p style="text-align: center;">
-                <a href="${resetUrl}" style="background-color: #ff6600; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">
-                    Reset Password
-                </a>
-            </p>
-            <p>If you did not request this, you can safely ignore this email.</p>
-            <p>Thanks for being part of PokerParty!</p>
-            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
-            <p style="text-align: center; font-size: 12px; color: #777;">&copy; 2024 PokerParty. All rights reserved.</p>
-        </div>`
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+        <h2 style="color: #008000; text-align: center; font-size: 28px; margin-bottom: 20px;">PokerParty</h2>
+        <p style="font-size: 16px; text-align: center; color: #333;">Hello,</p>
+        <p style="font-size: 16px; text-align: center; color: #333;">
+            You are receiving this email because you (or someone else) have requested a password reset for your PokerParty account.
+        </p>
+        <p style="font-size: 16px; text-align: center; color: #333;">
+            To reset your password, click the button below:
+        </p>
+        <p style="text-align: center; margin: 30px 0;">
+            <a href="${resetUrl}" style="background-color: #008000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-size: 16px; display: inline-block;">
+                Reset Password
+            </a>
+        </p>
+        <p style="font-size: 14px; text-align: center; color: #333;">
+            If you did not request this, please ignore this email. Your account remains secure.
+        </p>
+        <p style="font-size: 14px; text-align: center; color: #333; margin-top: 40px;">
+            Thank you for playing with us at PokerParty!
+        </p>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 40px 0;" />
+        <p style="text-align: center; font-size: 12px; color: #777;">&copy; 2024 PokerParty. All rights reserved.</p>
+    </div>`;
 };
 
 const generatePasswordResetToken = async () => {
