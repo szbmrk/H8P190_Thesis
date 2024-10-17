@@ -23,7 +23,7 @@ public class LogoutGUI : MonoBehaviour
 
     private void Logout()
     {
-        PlayerPrefs.DeleteKey("username");
+        PlayerPrefs.DeleteKey("playerName");
         PlayerPrefs.DeleteKey("password");
 
         if (ConnectionManager.Instance != null)
