@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class NetworkMessageManager
+public static class NetworkMessageHandler
 {
     public static void ProcessMesage(NetworkMessageType type, string data)
     {

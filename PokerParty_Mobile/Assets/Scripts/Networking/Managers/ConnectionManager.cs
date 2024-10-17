@@ -63,7 +63,7 @@ public class ConnectionManager : MonoBehaviour
                     Debug.Log($"Type: {type}");
                     Debug.Log($"Data received: {data}");
 
-                    NetworkMessageManager.ProcessMesage(type, data);
+                    NetworkMessageHandler.ProcessMesage(type, data);
                     break;
 
                 case NetworkEvent.Type.Connect:
