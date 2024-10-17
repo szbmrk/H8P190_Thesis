@@ -8,7 +8,7 @@ AWS.config.update({
 
 const ses = new AWS.SES();
 
-export const sendEmail = async (to, subject, text) => {
+export const sendEmail = async (to, subject, html) => {
     const params = {
         Source: process.env.SENDER_EMAIL,
         Destination: {
@@ -16,9 +16,9 @@ export const sendEmail = async (to, subject, text) => {
         },
         Message: {
             Body: {
-                Text: {
+                Html: {
                     Charset: "UTF-8",
-                    Data: text,
+                    Data: html,
                 },
             },
             Subject: {

@@ -36,7 +36,7 @@ export const sendPasswordResetEmail = async (req, res) => {
         try {
             await sendEmail(
                 player.rows[0].email,
-                'PokerParty - Player Reset Request',
+                'PokerParty - Password Reset Request',
                 getEmailText(resetUrl)
             );
 
