@@ -13,6 +13,7 @@ public class LoginGUI : MonoBehaviour
     [SerializeField] private Button dontHaveAnAccountBtn;
     [SerializeField] private Button loginBtn;
     [SerializeField] private Button forgotPasswordBtn;
+    [SerializeField] private Button forgotPlayerName;
 
     [SerializeField] private Toggle KeepMeLoggedInCheckBox;
 
@@ -24,6 +25,7 @@ public class LoginGUI : MonoBehaviour
         dontHaveAnAccountBtn.onClick.AddListener(ShowRegisterPanel);
         loginBtn.onClick.AddListener(LoginButtonClick);
         forgotPasswordBtn.onClick.AddListener(ForgotPasswordButtonClick);
+        forgotPlayerName.onClick.AddListener(ForgotPlayerNameButtonClick);
 
         if (PlayerPrefs.HasKey("playerName") && PlayerPrefs.HasKey("password"))
         {
@@ -90,6 +92,11 @@ public class LoginGUI : MonoBehaviour
         PopupManager.Instance.ShowInputPopup("Password Reset", "Enter email or playerName", "Send email", SendForgotPasswordEmail);
     }
 
+    private void ForgotPlayerNameButtonClick()
+    {
+        PopupManager.Instance.ShowInputPopup("Player Name Reminder", "Enter email", "Send email", SendForgotPlayerNameEmail);
+    }
+
     private async Task<bool> SendForgotPasswordEmail()
     {
         Loader.Instance.StartLoading();
@@ -98,6 +105,27 @@ public class LoginGUI : MonoBehaviour
         {
             string emailOrPlayername  = PopupManager.Instance.currentInputPopup.inputField.text;
             string response = await PasswordResetManager.SendPasswordResetEmail(emailOrPlayername);
+            PopupManager.Instance.ShowPopup(PopupType.SuccessPopup, response);
+        }
+        catch (Exception e)
+        {
+            Loader.Instance.StopLoading();
+            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, e.Message);
+            return false;
+        }
+
+        Loader.Instance.StopLoading();
+        return true;
+    }
+
+    private async Task<bool> SendForgotPlayerNameEmail()
+    {
+        Loader.Instance.StartLoading();
+
+        try
+        {
+            string email = PopupManager.Instance.currentInputPopup.inputField.text;
+            string response = await ForgotPlayerNameManager.SendPlayerNameReminderEmail(email);
             PopupManager.Instance.ShowPopup(PopupType.SuccessPopup, response);
         }
         catch (Exception e)

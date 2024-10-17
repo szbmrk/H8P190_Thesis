@@ -23,7 +23,7 @@ public static class PasswordResetManager
     public static async Task<string> SendPasswordResetEmail(string emailOrPlayerName)
     {
         if (string.IsNullOrEmpty(emailOrPlayerName))
-            throw new Exception("Email or playerName is empty");
+            throw new Exception("Email or playerName is empty!");
 
         bool isEmail = false;
 
@@ -33,7 +33,7 @@ public static class PasswordResetManager
             isEmail = false;
 
         if (isEmail && !EmailValidator.IsValidEmail(emailOrPlayerName))
-            throw new Exception("Invalid email adress");
+            throw new Exception("Invalid email adress!");
 
         object resetPasswordData = null;
         if (isEmail)
