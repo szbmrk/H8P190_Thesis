@@ -1201,6 +1201,7 @@ GameObject:
   - component: {fileID: 1717908023}
   - component: {fileID: 1717908024}
   - component: {fileID: 1717908025}
+  - component: {fileID: 1717908026}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1336,6 +1337,22 @@ MonoBehaviour:
   card1: {fileID: 1363952416}
   card2: {fileID: 882695204}
   switchButton: {fileID: 1664528806}
+--- !u!114 &1717908026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717908018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1182ac968a387604583c6f0831b68d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 6267085566415340365, guid: 7432081291f9e4446ac4a997afc2da26, type: 3}
+  inputPopupPrefab: {fileID: 3180069650525773017, guid: 56e6fcc3271461349be3de6c587e3d6d, type: 3}
+  canvas: {fileID: 1717908022}
+  currentInputPopup: {fileID: 0}
 --- !u!1 &1772459718
 GameObject:
   m_ObjectHideFlags: 0

@@ -3529,8 +3529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1182ac968a387604583c6f0831b68d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 1337862126387541846, guid: 7432081291f9e4446ac4a997afc2da26, type: 3}
-  inputPopupPrefab: {fileID: 0}
+  popupPrefab: {fileID: 6267085566415340365, guid: 7432081291f9e4446ac4a997afc2da26, type: 3}
+  inputPopupPrefab: {fileID: 3180069650525773017, guid: 56e6fcc3271461349be3de6c587e3d6d, type: 3}
   canvas: {fileID: 1826921867}
   currentInputPopup: {fileID: 0}
 --- !u!1 &2014119440
