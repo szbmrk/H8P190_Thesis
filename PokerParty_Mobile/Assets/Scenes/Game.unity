@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &96055665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 35
+  m_Spacing: 40
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1616,7 +1616,7 @@ MonoBehaviour:
   callPrefab: {fileID: 3246338062262623657, guid: 709be2bf5958b704e82a13f662e5b3d3, type: 3}
   checkPrefab: {fileID: 6290396198254930294, guid: 2f3c1f55694ac0b46bb28808e7439192, type: 3}
   foldPrefab: {fileID: 118743786543760451, guid: b562e546a07ceb343ab2faf83c874844, type: 3}
-  raisePrefab: {fileID: 6275272640959349879, guid: 19ee73b5ef2f76443b66321c805042bb, type: 3}
+  raisePrefab: {fileID: 7695355029023198036, guid: 19ee73b5ef2f76443b66321c805042bb, type: 3}
   betPrefab: {fileID: 6667396046511829136, guid: 835dc3404dc95f943acf27ed2dad5904, type: 3}
   smallBlindPrefab: {fileID: 5377704945624201226, guid: 3d6ddc3782721b042969f03b4975a67e, type: 3}
   bigBlindPrefab: {fileID: 3629201783999753017, guid: 111e494178df0b745a0a499a2eeb1430, type: 3}
