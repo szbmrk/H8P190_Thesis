@@ -13,17 +13,31 @@ public static class TurnManager
     public static void StartFirstTurn()
     {
         turnCount++;
-        TableManager.Instance.playerSeats[1].StartTurn();
-        PossibleAction[] possibleActions = new PossibleAction[] { PossibleAction.SMALL_BLIND_BET };
+        TablePlayerCard playerCard = TableManager.Instance.playerSeats[1];
+        playerCard.StartTurn();
+
+        PossibleAction[] possibleActions = null; 
+
+        if (playerCard.money < TableManager.Instance.smallBlindBet)
+            possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
+        else
+            possibleActions = new PossibleAction[] { PossibleAction.SMALL_BLIND_BET };
+
         SendTurnMessage(1, possibleActions);
     }
 
     public static void StartSecondTurn()
     {
         turnCount++;
-        TableManager.Instance.playerSeats[2].StartTurn();
-        PossibleAction[] possibleActions = new PossibleAction[] { PossibleAction.BIG_BLIND_BET };
-        SendTurnMessage(2, possibleActions, TableManager.Instance.smallBlindBet);
+        TablePlayerCard playerCard = TableManager.Instance.playerSeats[2];
+        playerCard.StartTurn();
+        PossibleAction[] possibleActions = null;
+        if (playerCard.money < TableManager.Instance.bigBlindBet)
+            possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
+        else
+            possibleActions = new PossibleAction[] { PossibleAction.BIG_BLIND_BET };
+
+        SendTurnMessage(2, possibleActions, TableManager.Instance.previousBet);
     }
 
     public static void SendTurnMessage(int playerIndex, PossibleAction[] possibleActions, int previousBet = 0)
@@ -47,5 +61,18 @@ public static class TurnManager
                 ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], notYourTurnMessage);
             }
         }
+    }
+
+    public static void HandleTurnDone(TurnDoneMessage turnDoneMessage)
+    {
+        if (turnCount == 1)
+            StartSecondTurn();
+
+        if ( turnCount == 2)
+        {
+            TableManager.Instance.DealCardsToPlayers();
+        }
+
+        TableManager.Instance.moneyInPot += turnDoneMessage.ActionAmount;
     }
 }

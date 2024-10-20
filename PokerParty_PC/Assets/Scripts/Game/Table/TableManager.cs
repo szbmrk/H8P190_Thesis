@@ -15,13 +15,15 @@ public class TableManager : MonoBehaviour
 
     int playersToConnect = Settings.PlayerCount;
 
-    private Deck deck;
+    [HideInInspector] public Deck deck;
     [HideInInspector] public int moneyInPot = 0;
 
     // 1% of starting money
     [HideInInspector] public int smallBlindBet = (int)(Settings.StartingMoney * 0.01);
     // 2% of starting money
     [HideInInspector] public int bigBlindBet = (int)(Settings.StartingMoney * 0.02);
+
+    [HideInInspector] public int previousBet = 0;
 
     private void Awake()
     {
@@ -96,7 +98,7 @@ public class TableManager : MonoBehaviour
     {
         for (int i = 0; i < playerSeats.Count; i++)
         {
-            Card[] cards = new Card[] { deck.Draw(), deck.Draw() };
+            Card[] cards = TexasHoldEm.DealCardsToPlayer(deck);
             DealCardsMessage dealCardsMessage = new DealCardsMessage();
             dealCardsMessage.Cards = cards;
             int indexInConnections = playerSeats[i].indexInConnectionsArray;
@@ -108,5 +110,6 @@ public class TableManager : MonoBehaviour
     {
         playerSeats.Find(p => p.assignedPlayer.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.NewMoney);
         playerSeats.Find(p => p.assignedPlayer.Equals(turnDoneMessage.player)).TurnDone();
+        TurnManager.HandleTurnDone(turnDoneMessage);
     }
 }
