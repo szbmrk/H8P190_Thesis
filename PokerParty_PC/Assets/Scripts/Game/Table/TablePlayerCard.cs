@@ -18,11 +18,10 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private GameObject smallBlindIcon;
     [SerializeField] private GameObject bigBlindIcon;
     [SerializeField] private GameObject turnIcon;
+    [SerializeField] private GameObject outOfTurn;
 
-    [HideInInspector] public Player assignedPlayer;
-    [HideInInspector] public int indexInConnectionsArray = 0;
-
-    [HideInInspector] public int money;
+    [HideInInspector] public PlayerTurnInfo turnInfo;
+    [HideInInspector] public int indexInConnectionsArray;
 
     [HideInInspector] public bool isDealer;
     [HideInInspector] public bool isSmallBlind;
@@ -32,10 +31,10 @@ public class TablePlayerCard : MonoBehaviour
 
     public void LoadData()
     {
-        playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.playerName);
-        playerNameText.text = assignedPlayer.playerName;
-        ELOText.text = $"ELO: {assignedPlayer.ELO}";
-        LevelText.text = $"Level: {assignedPlayer.level}";
+        playerNameText.color = PlayerColorManager.GetColor(turnInfo.player.playerName);
+        playerNameText.text = turnInfo.player.playerName;
+        ELOText.text = $"ELO: {turnInfo.player.ELO}";
+        LevelText.text = $"Level: {turnInfo.player.level}";
 
         dealerIcon.SetActive(isDealer);
         smallBlindIcon.SetActive(isSmallBlind);
@@ -48,21 +47,20 @@ public class TablePlayerCard : MonoBehaviour
     {
         turnIcon.SetActive(isTurn);
         if (isTurn)
-            playerNameText.text = $"<b>{assignedPlayer.playerName}</b>";
+            playerNameText.text = $"<b>{turnInfo.player.playerName}</b>";
         else
-            playerNameText.text = assignedPlayer.playerName;
+            playerNameText.text = turnInfo.player.playerName;
     }
 
     public void RefreshMoney(int money)
     {
-        this.money = money;
         MoneyText.text = $"{money} $";
     }
 
     public void StartTurn()
     {
         isTurn = true;
-        GameManager.Instance.SetWaitingFor(assignedPlayer.playerName);
+        GameManager.Instance.SetWaitingFor(turnInfo.player.playerName);
         RefreshTurnIcon();
     }
 
@@ -70,5 +68,20 @@ public class TablePlayerCard : MonoBehaviour
     {
         isTurn = false;
         RefreshTurnIcon();
+    }
+
+    public void OutOfTurn()
+    {
+        outOfTurn.SetActive(true);
+    }
+
+    public override bool Equals(object other)
+    {
+        if (other == null || !(other is TablePlayerCard))
+            return false;
+
+        TablePlayerCard otherPlayer = other as TablePlayerCard;
+
+        return otherPlayer.turnInfo.player.Equals(turnInfo.player);
     }
 }

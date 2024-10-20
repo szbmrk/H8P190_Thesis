@@ -20,4 +20,9 @@ public class GameManager : MonoBehaviour
         waitingFor.gameObject.SetActive(true);
         waitingFor.text = $"Waiting for {playerName} ...";
     }
+
+    public void GameOver()
+    {
+
+    }
 }

@@ -55,7 +55,7 @@ public class ActionButton : MonoBehaviour
                 amount = Settings.BigBLindAmount;
                 break;
             case PossibleAction.CALL:
-                amount = Settings.PreviousBet;
+                amount = Settings.MoneyNeededToCall;
                 break;
             case PossibleAction.ALL_IN:
                 amount = GameManager.Instance.money;

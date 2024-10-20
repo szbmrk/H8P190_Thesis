@@ -23,12 +23,9 @@ public class TableManager : MonoBehaviour
     // 2% of starting money
     [HideInInspector] public int bigBlindBet = (int)(Settings.StartingMoney * 0.02);
 
-    [HideInInspector] public int previousBet = 0;
-
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        Instance = this;
     }
 
     private void Start()
@@ -36,29 +33,31 @@ public class TableManager : MonoBehaviour
         Loader.Instance.StartLoading();
         CreateDeck();
     }
-
+    
     private void CreateDeck()
     {
         deck = new Deck();
         deck.Shuffle();
-        Debug.Log("Deck created and shuffled");
-        Debug.Log("Deck count: " + deck.cards.Count);
     }
 
     public void PlayerLoaded(Player player, int indexOfConnection)
     {
         playersToConnect--;
+        
         TablePlayerCard newPlayer = Instantiate(playerCardPrefab, parentForSeats).GetComponent<TablePlayerCard>();
-        newPlayer.assignedPlayer = player;
-        newPlayer.indexInConnectionsArray = indexOfConnection;
         newPlayer.gameObject.SetActive(false);
+
+        PlayerTurnInfo playerTurnInfo = new PlayerTurnInfo(player);
+        newPlayer.turnInfo = playerTurnInfo;
+        newPlayer.indexInConnectionsArray = indexOfConnection;
+
         playerSeats.Add(newPlayer);
 
         if (playersToConnect == 0)
         {
             AssignRolesAndShuffleTheOrderOfPlayers();
             SendGameInfoToPlayers();
-            TurnManager.StartFirstTurn();
+            TurnManager.Instance.StartFirstTurn();
             Loader.Instance.StopLoading();
         }
     }
@@ -106,10 +105,25 @@ public class TableManager : MonoBehaviour
         }
     }
 
+    public void DealFlop()
+    {
+
+    }
+
+    public void DealTurn()
+    {
+
+    }
+
+    public void DealRiver()
+    {
+
+    }
+
     public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        playerSeats.Find(p => p.assignedPlayer.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.NewMoney);
-        playerSeats.Find(p => p.assignedPlayer.Equals(turnDoneMessage.player)).TurnDone();
-        TurnManager.HandleTurnDone(turnDoneMessage);
+        playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.NewMoney);
+        playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).TurnDone();
+        TurnManager.Instance.HandleTurnDone(turnDoneMessage);
     }
 }
