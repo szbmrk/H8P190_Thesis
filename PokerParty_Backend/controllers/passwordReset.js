@@ -62,10 +62,10 @@ const getEmailText = (resetUrl) => {
             You are receiving this email because you (or someone else) have requested a password reset for your PokerParty account.
         </p>
         <p style="font-size: 16px; text-align: center; color: #333;">
-            To reset your password, click the button below:
+            To reset your password, click the link below:
         </p>
         <p style="text-align: center; margin: 30px 0;">
-            <a href="${resetUrl}" style="background-color: #008000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-size: 16px; display: inline-block;">
+            <a href="${resetUrl}" style="color: #008000; text-decoration: underline; font-size: 16px;">
                 Reset Password
             </a>
         </p>
