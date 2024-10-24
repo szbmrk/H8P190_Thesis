@@ -3,7 +3,7 @@ import bodyParser from "body-parser"
 import router from "./routes/routes.js"
 import cors from "cors"
 import dotenv from "dotenv"
-import { createDatabase } from "./helper/createtables.js"
+import { createDatabase } from "./helper/createTables.js"
 import { seedDatabase } from "./helper/seed.js"
 
 dotenv.config()
