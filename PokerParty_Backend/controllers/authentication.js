@@ -52,7 +52,12 @@ export const login = async (req, res) => {
             return res.status(400).json({ msg: 'Invalid credentials', player: null });
         }
 
-        res.status(200).json({ msg: 'Player logged in successfully', player });
+        const safePlayer = {
+            ...player,
+            password: undefined
+        };
+
+        res.status(200).json({ msg: 'Player logged in successfully', safePlayer });
 
     } catch (err) {
         console.error(err.message);
