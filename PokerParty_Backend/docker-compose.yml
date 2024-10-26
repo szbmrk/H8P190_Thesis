@@ -11,7 +11,8 @@ services:
     ports:
       - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - pokerparty_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   api:
     build:
@@ -24,7 +25,7 @@ services:
     ports:
       - "${PORT}:${PORT}"
     depends_on:
-      - db
+        - db
 
 volumes:
-  db_data:
+  pokerparty_data:
