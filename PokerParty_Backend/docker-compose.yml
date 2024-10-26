@@ -4,6 +4,7 @@ services:
   db:
     image: postgres:13
     container_name: pokerparty_db
+    restart: always
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
