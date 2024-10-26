@@ -1,12 +1,7 @@
 import { db } from "../database/db.js";
 import dotenv from "dotenv";
-import bcrypt from 'bcrypt';
+import { hashPassword } from "./passwordHash.js";
 dotenv.config();
-
-const hashPassword = async (password) => {
-    const saltRounds = 10;
-    return await bcrypt.hash(password, saltRounds);
-};
 
 const checkIfAlreadySeeded = async () => {
     const playerQuery = 'SELECT * FROM players WHERE "playerName" = $1';

@@ -20,7 +20,7 @@ export const register = async (req, res) => {
             return res.status(400).json({ msg: `Player with ${email} email already exists` });
         }
 
-        const hashedPassword = hashPassword(password);
+        const hashedPassword = await hashPassword(password);
 
         const insertQuery = 'INSERT INTO players ("playerName", "email", "password") VALUES ($1, $2, $3)';
         await db.query(insertQuery, [playerName, email, hashedPassword]);
