@@ -114,6 +114,7 @@ public class TableManager : MonoBehaviour
         {
             tableCards.Add(Instantiate(playerCardPrefab, partentForCards).GetComponent<TableCard>());
             tableCards[i].SetCard(deck.Draw());
+            TableGUI.Instance.DisplayCard(tableCards[i], i);
         }
     }
 

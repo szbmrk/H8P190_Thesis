@@ -300,7 +300,7 @@ MonoBehaviour:
   playerCardPrefab: {fileID: 8913401704595148067, guid: 6107ba9d93d831347aef928e5d383fd1, type: 3}
   tableCards: []
   partentForCards: {fileID: 1437265119}
-  tableCardPrefab: {fileID: 0}
+  tableCardPrefab: {fileID: 8435116478468247721, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
   moneyInPot: 0
   smallBlindBet: 0
   bigBlindBet: 0
