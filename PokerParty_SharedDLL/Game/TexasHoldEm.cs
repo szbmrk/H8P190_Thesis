@@ -27,6 +27,10 @@ namespace PokerParty_SharedDLL
 
         public static int EvaluateHand(Card[] hand)
         {
+            //hand is assumed to be 7 cards
+            //hand[0] and hand[1] are the player's cards
+            //hand[2] through hand[6] are the community cards
+
             return 0;
         }
     }
