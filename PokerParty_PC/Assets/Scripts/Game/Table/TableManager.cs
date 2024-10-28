@@ -10,8 +10,11 @@ public class TableManager : MonoBehaviour
     
     public List<TablePlayerCard> playerSeats = new List<TablePlayerCard>();
     [SerializeField] private Transform parentForSeats;
-    
     public GameObject playerCardPrefab;
+    
+    public List<TableCard> tableCards = new List<TableCard>();
+    [SerializeField] private Transform partentForCards;
+    public GameObject tableCardPrefab;
 
     int playersToConnect = Settings.PlayerCount;
 
@@ -105,19 +108,31 @@ public class TableManager : MonoBehaviour
         }
     }
 
+    public void DealCardsToTable()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            tableCards.Add(Instantiate(playerCardPrefab, partentForCards).GetComponent<TableCard>());
+            tableCards[i].SetCard(deck.Draw());
+        }
+    }
+
     public void DealFlop()
     {
-
+        for (int i = 0; i < 3; i++)
+        {
+            tableCards[i].Flip();
+        }
     }
 
     public void DealTurn()
     {
-
+        tableCards[3].Flip();
     }
 
     public void DealRiver()
     {
-
+        tableCards[4].Flip();
     }
 
     public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)
