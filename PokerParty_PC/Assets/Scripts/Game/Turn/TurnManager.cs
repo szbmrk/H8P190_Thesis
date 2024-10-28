@@ -70,7 +70,7 @@ public class TurnManager : MonoBehaviour
         .FindAll(player => IsPlayerStillInGame(player)).Count;
 
     private int PlayersNeedToCallCount => TableManager.Instance.playerSeats
-        .FindAll(player => player.turnInfo.moneyPutInPot <TableManager.Instance.moneyInPot && IsPlayerStillInGame(player)).Count;
+        .FindAll(player => player.turnInfo.moneyPutInPot < TableManager.Instance.moneyInPot && IsPlayerStillInGame(player)).Count;
 
     private int MoneyNeededToCall => TableManager.Instance.moneyInPot - currentPlayerInTurn.turnInfo.moneyPutInPot;
 
@@ -153,7 +153,6 @@ public class TurnManager : MonoBehaviour
         UpdateCurrentPlayersTurnInfo(turnDoneMessage);
         CheckIfTurnIsOver();
 
-
         SetNextPlayerInTurn();
 
         if (turnState == TurnState.FIRST_TURN)
@@ -194,6 +193,7 @@ public class TurnManager : MonoBehaviour
             }
             else if (turnState == TurnState.RIVER)
             {
+                GameManager.Instance.GameOver();
             }
 
             return;
@@ -206,6 +206,7 @@ public class TurnManager : MonoBehaviour
         {
             currentPlayerInTurn.turnInfo.folded = true;
             currentPlayerInTurn.OutOfTurn();
+            return;
         }
 
         if (turnDoneMessage.Action == PossibleAction.ALL_IN)
@@ -213,6 +214,7 @@ public class TurnManager : MonoBehaviour
             currentPlayerInTurn.turnInfo.wentAllIn = true;
             currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.ActionAmount;
             currentPlayerInTurn.OutOfTurn();
+            return;
         }
 
         currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.ActionAmount;
