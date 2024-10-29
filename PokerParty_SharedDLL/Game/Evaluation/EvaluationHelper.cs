@@ -55,18 +55,39 @@ namespace PokerParty_SharedDLL
             return HandType.None;
         }
 
-        public static bool CheckForStraight(int bitField) 
+        public static HandType CheckForStraight(int bitField) 
         {
             int divisor = bitField & -bitField;
 
             if (bitField / divisor == 31)
-                return true;
+                return HandType.Straight;
 
             //check for ace-low straight
             if (bitField == 0b100000000111100)
-                return true;
+                return HandType.Straight;
 
-            return false; 
+            return HandType.None; 
+        }
+
+        public static HandType CheckForFlushes(Card[] hand)
+        {
+            int bitField = GetFaceValueBitField(hand);
+            if (bitField == 0b111110000000000)
+                return HandType.StraightFlush;
+
+            HandType type = HandType.Flush;
+            string suit = hand[0].suit;
+
+            foreach (Card card in hand)
+            {
+                if (card.suit != suit)
+                    type = HandType.None;
+            }
+
+            if (CheckForStraight(bitField) == HandType.Straight)
+                type = HandType.StraightFlush;
+
+            return type;
         }
     }
 }

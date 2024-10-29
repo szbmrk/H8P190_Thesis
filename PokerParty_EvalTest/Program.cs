@@ -9,16 +9,19 @@ namespace PokerParty_EvalTest
             Card[] river =
             {
                 new Card(10, "Hearts"),
-                new Card(11, "Diamonds"),
-                new Card(12, "Spades"),
-                new Card(13, "Clubs"),
-                new Card(14, "Spades")
+                new Card(2, "Hearts"),
+                new Card(4, "Hearts"),
+                new Card(13, "Hearts"),
+                new Card(14, "Hearts")
             };
 
 
             EvaluationDisplayHelper.DisplayBitFieldFaceValues(river);
             Console.WriteLine();
             EvaluationDisplayHelper.DisplayBitFieldCounts(river);
+
+            Console.WriteLine();
+            Console.WriteLine(EvaluationHelper.CheckForFlush(river));
 
             Console.ReadKey();
         }
