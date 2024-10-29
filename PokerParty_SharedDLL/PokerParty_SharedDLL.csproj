@@ -44,6 +44,7 @@
     <Compile Include="Authentication\Models\Player.cs" />
     <Compile Include="Game\Card.cs" />
     <Compile Include="Game\Deck.cs" />
+    <Compile Include="Game\Enums\HandType.cs" />
     <Compile Include="Game\Enums\PossibleAction.cs" />
     <Compile Include="Game\Evaluation\EvaluationDisplayHelper.cs" />
     <Compile Include="Game\Evaluation\EvaluationHelper.cs" />

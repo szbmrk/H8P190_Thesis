@@ -6,18 +6,19 @@ namespace PokerParty_EvalTest
     {
         static void Main(string[] args)
         {
-            Card[] hand =
+            Card[] river =
             {
-                new Card(9, "Hearts"),
-                new Card(9, "Diamonds"),
-                new Card(9, "Spades"),
-                new Card(9, "Clubs"),
-                new Card(13, "Spades")
+                new Card(10, "Hearts"),
+                new Card(11, "Diamonds"),
+                new Card(12, "Spades"),
+                new Card(13, "Clubs"),
+                new Card(14, "Spades")
             };
 
-            EvaluationDisplayHelper.DisplayBitFieldFaceValues(EvaluationHelper.GetFaceValueBitField(hand));
+
+            EvaluationDisplayHelper.DisplayBitFieldFaceValues(river);
             Console.WriteLine();
-            EvaluationDisplayHelper.DisplayBitFieldCounts(EvaluationHelper.GetFaceValueCountBitField(hand));
+            EvaluationDisplayHelper.DisplayBitFieldCounts(river);
 
             Console.ReadKey();
         }
