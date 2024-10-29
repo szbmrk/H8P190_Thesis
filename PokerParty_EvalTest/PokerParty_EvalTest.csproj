@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="PokerParty_SharedDLL">
+      <HintPath>..\PokerParty_SharedDLL\bin\Debug\PokerParty_SharedDLL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
