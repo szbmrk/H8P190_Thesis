@@ -58,7 +58,7 @@ namespace PokerParty_SharedDLL
             return HandType.None;
         }
 
-        public static HandType CheckForStraight(int bitField) 
+        public static HandType CheckForStraight(int bitField)
         {
             int divisor = bitField & -bitField;
 
@@ -69,7 +69,7 @@ namespace PokerParty_SharedDLL
             if (bitField == 0b100000000111100)
                 return HandType.Straight;
 
-            return HandType.None; 
+            return HandType.None;
         }
 
         public static HandType CheckForFlushes(Card[] hand)
@@ -93,20 +93,6 @@ namespace PokerParty_SharedDLL
             return type;
         }
 
-        public static int[] BreakTies(params Card[][] hands)
-        {
-            int[] scores = new int[hands.Length];
-
-            for (int i = 0; i < hands.Length; i++)
-            {
-                scores[i] = CalculateBreakTieScore(hands[i]);
-            }
-
-            scores.OrderByDescending(score => score);
-
-            return scores;
-        }
-
         private static int CalculateBreakTieScore(Card[] hand)
         {
             Card[] sortedHand = hand
@@ -124,6 +110,48 @@ namespace PokerParty_SharedDLL
             }
 
             return score;
+        }
+
+        private static IEnumerable<PlayerHandInfo> ResolveTies(PlayerHandInfo[] playerHandInfos)
+        {
+            foreach (var player in playerHandInfos)
+            {
+                player.BreakTieScore = CalculateBreakTieScore(player.Hand);
+            }
+
+            return playerHandInfos
+                .OrderByDescending(p => p.BreakTieScore);
+        }
+
+        private static IOrderedEnumerable<IGrouping<HandType, PlayerHandInfo>> GroupAndOrderPlayers(PlayerHandInfo[] playerHandInfos)
+        {
+            return playerHandInfos
+                .GroupBy(player => player.Type)
+                .OrderByDescending(group => (int)group.Key);
+        }
+
+        public static PlayerHandInfo[] CreateOrderedPlayerList(PlayerHandInfo[] playerHandInfos)
+        {
+            var groupedPlayers = GroupAndOrderPlayers(playerHandInfos);
+            List<PlayerHandInfo> orderedPlayers = new List<PlayerHandInfo>();
+
+            foreach (var group in groupedPlayers)
+            {
+                if (group.Count() > 1)
+                {
+                    var playersWithTie = group.ToArray();
+
+                    var sortedTiePlayers = EvaluationHelper.ResolveTies(playersWithTie);
+
+                    orderedPlayers.AddRange(sortedTiePlayers);
+                }
+                else
+                {
+                    orderedPlayers.Add(group.First());
+                }
+            }
+
+            return orderedPlayers.ToArray();
         }
     }
 }

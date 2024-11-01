@@ -94,11 +94,11 @@ namespace PokerParty_EvalTest
         };
 
         public static Card[] InsideStraightDraw = {
-            new Card(14, "Clubs"),
-            new Card(3, "Diamonds"),
-            new Card(4, "Hearts"),
-            new Card(5, "Spades"),
-            new Card(2, "Diamonds")
+            new Card(13, "Clubs"),
+            new Card(12, "Diamonds"),
+            new Card(11, "Hearts"),
+            new Card(10, "Spades"),
+            new Card(9, "Diamonds")
         };
 
         public static Card[][] Hands = {
@@ -121,10 +121,31 @@ namespace PokerParty_EvalTest
     {
         static void Main(string[] args)
         {
+            int playerCount = 1;
+            List<PlayerHandInfo> playerHandInfos = new List<PlayerHandInfo>();
 
             foreach (Card[] hand in PokerHands.Hands)
             {
-                Console.WriteLine(TexasHoldEm.EvaluateHand(hand));
+                Player player = new Player();
+                player.playerName = "Player " + playerCount++;
+                PlayerHandInfo playerHandInfo = new PlayerHandInfo(player, hand);
+                playerHandInfos.Add(playerHandInfo);
+            }
+
+            PlayerHandInfo[] order = TexasHoldEm.DetermineOrder(playerHandInfos.ToArray());
+
+            Console.WriteLine("Order of players:");
+            foreach (PlayerHandInfo handInfo in order)
+            {
+                Console.WriteLine(handInfo.Player.playerName + " - " + handInfo.Type + " - Break Tie score: " + handInfo.BreakTieScore);
+            }
+
+            PlayerHandInfo[] winners = TexasHoldEm.DetermineWinners(order);
+
+            Console.WriteLine("\nWinner(s):");
+            foreach (PlayerHandInfo handInfo in winners)
+            {
+                Console.WriteLine(handInfo.Player.playerName + " - " + handInfo.Type + " - Break Tie score: " + handInfo.BreakTieScore);
             }
 
             Console.ReadKey();

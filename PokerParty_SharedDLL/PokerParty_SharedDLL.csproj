@@ -48,6 +48,7 @@
     <Compile Include="Game\Enums\PossibleAction.cs" />
     <Compile Include="Game\Evaluation\EvaluationDisplayHelper.cs" />
     <Compile Include="Game\Evaluation\EvaluationHelper.cs" />
+    <Compile Include="Game\Evaluation\PlayerHandInfo.cs" />
     <Compile Include="Game\TexasHoldEm.cs" />
     <Compile Include="Networking\Enums\NetworkMessageType.cs" />
     <Compile Include="Networking\Message Models\ANetworkMessageMobile.cs" />

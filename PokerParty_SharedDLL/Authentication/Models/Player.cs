@@ -16,6 +16,7 @@ namespace PokerParty_SharedDLL
         public int gamesWon;
         public int XP;
         public int level;
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
