@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PokerParty_SharedDLL
 {
@@ -16,6 +18,7 @@ namespace PokerParty_SharedDLL
 
             return bitField;
         }
+
         public static long GetFaceValueCountBitField(Card[] hand)
         {
             long bitField = 0;
@@ -73,7 +76,7 @@ namespace PokerParty_SharedDLL
         {
             int bitField = GetFaceValueBitField(hand);
             if (bitField == 0b111110000000000)
-                return HandType.StraightFlush;
+                return HandType.RoyalFlush;
 
             HandType type = HandType.Flush;
             string suit = hand[0].suit;
@@ -88,6 +91,39 @@ namespace PokerParty_SharedDLL
                 type = HandType.StraightFlush;
 
             return type;
+        }
+
+        public static int[] BreakTies(params Card[][] hands)
+        {
+            int[] scores = new int[hands.Length];
+
+            for (int i = 0; i < hands.Length; i++)
+            {
+                scores[i] = CalculateBreakTieScore(hands[i]);
+            }
+
+            scores.OrderByDescending(score => score);
+
+            return scores;
+        }
+
+        public static int CalculateBreakTieScore(Card[] hand)
+        {
+            Card[] sortedHand = hand
+                .GroupBy(card => card.value)
+                .OrderByDescending(group => group.Count())
+                .ThenByDescending(group => group.Key)
+                .SelectMany(group => group)
+                .ToArray();
+
+            int score = 0;
+
+            for (int i = 0; i < sortedHand.Length; i++)
+            {
+                score |= sortedHand[i].value << (16 - (i * 4));
+            }
+
+            return score;
         }
     }
 }

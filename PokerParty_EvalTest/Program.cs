@@ -6,22 +6,38 @@ namespace PokerParty_EvalTest
     {
         static void Main(string[] args)
         {
-            Card[] river =
+            Card[] hand =
             {
-                new Card(10, "Hearts"),
-                new Card(2, "Hearts"),
-                new Card(4, "Hearts"),
-                new Card(13, "Hearts"),
-                new Card(14, "Hearts")
+                new Card(8, "Diamonds"),
+                new Card(6, "Diamonds"),
+                new Card(8, "Diamonds"),
+                new Card(8, "Diamonds"),
+                new Card(6, "Diamonds")
+            };
+
+            Card[] hand1 =
+            {
+                new Card(8, "Hearts"),
+                new Card(6, "Hearts"),
+                new Card(8, "Hearts"),
+                new Card(8, "Hearts"),
+                new Card(6, "Hearts")
             };
 
 
-            EvaluationDisplayHelper.DisplayBitFieldFaceValues(river);
+
+            EvaluationDisplayHelper.DisplayBitFieldFaceValues(hand);
             Console.WriteLine();
-            EvaluationDisplayHelper.DisplayBitFieldCounts(river);
+            
+            EvaluationDisplayHelper.DisplayBitFieldCounts(hand);
+            Console.WriteLine();
+
+            foreach (var item in EvaluationHelper.BreakTies(hand, hand1))
+            {
+                Console.WriteLine(item);
+            }   
 
             Console.WriteLine();
-            Console.WriteLine(EvaluationHelper.CheckForFlush(river));
 
             Console.ReadKey();
         }

@@ -8,16 +8,16 @@ namespace PokerParty_SharedDLL
 {
     public enum HandType
     {
-        RoyalFlush = 10,
-        StraightFlush = 9,
-        FourOfAKind = 8,
-        FullHouse = 7,
-        Flush = 6,
-        Straight = 5,
-        ThreeOfAKind = 4,
-        TwoPair = 3,
-        OnePair = 2,
-        HighCard = 1,
+        RoyalFlush = 100,
+        StraightFlush = 90,
+        FourOfAKind = 80,
+        FullHouse = 70,
+        Flush = 60,
+        Straight = 50,
+        ThreeOfAKind = 40,
+        TwoPair = 30,
+        OnePair = 20,
+        HighCard = 10,
         None = 0
     }
 }

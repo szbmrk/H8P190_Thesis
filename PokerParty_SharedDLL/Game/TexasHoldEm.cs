@@ -25,9 +25,23 @@ namespace PokerParty_SharedDLL
             return cards;
         }
 
-        public static int EvaluateHand(Card[] hand)
+        public static HandType EvaluateHand(Card[] hand)
         {
-            return 0;
+            HandType type = HandType.None;
+
+            int faceValueBitField = EvaluationHelper.GetFaceValueBitField(hand);
+            long faceValueCountBitField = EvaluationHelper.GetFaceValueCountBitField(hand);
+            type = EvaluationHelper.GetHandTypeByCountOfFaceValues(faceValueCountBitField % 15);
+
+            HandType checkForStraight = EvaluationHelper.CheckForStraight(faceValueBitField);
+            if (checkForStraight > type)
+                type = checkForStraight;
+
+            HandType checkForFlushes = EvaluationHelper.CheckForFlushes(hand);
+            if (checkForFlushes > type)
+                type = checkForFlushes;
+
+            return type;
         }
     }
 }
