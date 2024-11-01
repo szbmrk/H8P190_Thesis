@@ -43,5 +43,11 @@ namespace PokerParty_SharedDLL
 
             return type;
         }
+
+        //in case of a tie we give back an array
+        public static Player[] DetermineWinner()
+        {
+            return null;
+        } 
     }
 }

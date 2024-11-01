@@ -87,7 +87,7 @@ namespace PokerParty_SharedDLL
                     type = HandType.None;
             }
 
-            if (CheckForStraight(bitField) == HandType.Straight)
+            if (CheckForStraight(bitField) == HandType.Straight && type == HandType.Flush)
                 type = HandType.StraightFlush;
 
             return type;
@@ -107,7 +107,7 @@ namespace PokerParty_SharedDLL
             return scores;
         }
 
-        public static int CalculateBreakTieScore(Card[] hand)
+        private static int CalculateBreakTieScore(Card[] hand)
         {
             Card[] sortedHand = hand
                 .GroupBy(card => card.value)
