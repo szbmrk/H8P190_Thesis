@@ -74,8 +74,11 @@ public class ConnectionManager : MonoBehaviour
 
                 case NetworkEvent.Type.Disconnect:
                     connection = default(NetworkConnection);
-                    NetworkingGUI.Instance.ShowJoinedPanel(false);
-                    NetworkingGUI.Instance.ResetReadyButton();
+                    if (NetworkingGUI.Instance != null)
+                    {
+                        NetworkingGUI.Instance.ShowJoinedPanel(false);
+                        NetworkingGUI.Instance.ResetReadyButton();
+                    }
                     PopupManager.Instance.ShowPopup(PopupType.BasicPopup, "You got disconnected from the game");
                     StartCoroutine(DisposeNetworkDriver());
                     break;

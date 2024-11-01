@@ -30,10 +30,12 @@ public class OnAppQuit : MonoBehaviour
 
     IEnumerator StartQuiting()
     {
-        ConnectionManager.Instance.DisconnectFromHost();
-
-        ConnectionManager.Instance.StopAllCoroutines();
-        yield return ConnectionManager.Instance.DisposeNetworkDriver();
+        if (ConnectionManager.Instance != null)
+        {
+            ConnectionManager.Instance.DisconnectFromHost();
+            ConnectionManager.Instance.StopAllCoroutines();
+            yield return ConnectionManager.Instance.DisposeNetworkDriver();
+        }
 
         ReadyToQuit = true;
         Debug.Log("Client app stopped");
