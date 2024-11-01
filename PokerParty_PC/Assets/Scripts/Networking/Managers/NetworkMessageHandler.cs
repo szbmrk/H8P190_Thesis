@@ -9,7 +9,8 @@ public static class NetworkMessageHandler
         {
             case NetworkMessageType.ConnectionMessage:
                 ConnectionMessage connectionData = FromStringToJson<ConnectionMessage>(data);
-                LobbyManager.Instance.AddPlayer(connectionData.player, indexOfConnection);
+                if (LobbyManager.Instance != null)
+                    LobbyManager.Instance.AddPlayer(connectionData.player, indexOfConnection);
                 break;
 
             case NetworkMessageType.DisconnectMessage:
