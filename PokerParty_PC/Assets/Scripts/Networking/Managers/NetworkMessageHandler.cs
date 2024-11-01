@@ -14,8 +14,10 @@ public static class NetworkMessageHandler
 
             case NetworkMessageType.DisconnectMessage:
                 DisconnectMessage disconnectMessage = FromStringToJson<DisconnectMessage>(data);
-                LobbyManager.Instance.RemovePlayer(disconnectMessage.player);
-                ConnectionManager.Instance.DisconnectPlayer(indexOfConnection);
+                if (LobbyManager.Instance != null)
+                    LobbyManager.Instance.RemovePlayer(disconnectMessage.player);
+                if (ConnectionManager.Instance != null)
+                    ConnectionManager.Instance.DisconnectPlayer(indexOfConnection);
                 break;
 
             case NetworkMessageType.ChatMessage:

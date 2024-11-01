@@ -31,10 +31,14 @@ public class OnAppQuit : MonoBehaviour
 
     IEnumerator StartQuiting()
     {
-        ConnectionManager.Instance.StopAllCoroutines();
-        LobbyManager.Instance.StopAllCoroutines();
+        if (ConnectionManager.Instance != null)
+            ConnectionManager.Instance.StopAllCoroutines();
 
-        yield return LobbyGUI.Instance.DeleteLobby();
+        if (LobbyManager.Instance != null)
+            LobbyManager.Instance.StopAllCoroutines();
+
+        if (LobbyGUI.Instance != null)
+            yield return LobbyGUI.Instance.DeleteLobby();
 
         ReadyToQuit = true;
         Debug.Log("Server app stopped");

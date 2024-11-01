@@ -84,4 +84,9 @@ public class TablePlayerCard : MonoBehaviour
 
         return otherPlayer.turnInfo.player.Equals(turnInfo.player);
     }
+
+    public override int GetHashCode()
+    {
+        return turnInfo.player.GetHashCode();
+    }
 }
