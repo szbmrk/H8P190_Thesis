@@ -79,7 +79,7 @@ public class ConnectionManager : MonoBehaviour
                         NetworkingGUI.Instance.ShowJoinedPanel(false);
                         NetworkingGUI.Instance.ResetReadyButton();
                     }
-                    PopupManager.Instance.ShowPopup(PopupType.BasicPopup, "You got disconnected from the game");
+                    PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
                     StartCoroutine(DisposeNetworkDriver());
                     break;
             }
@@ -120,7 +120,7 @@ public class ConnectionManager : MonoBehaviour
 
     private void BindToHost(NetworkDriver networkDriver)
     {
-        if (networkDriver.Bind(NetworkEndPoint.AnyIpv4) != 0)
+        if (networkDriver.Bind(NetworkEndpoint.AnyIpv4) != 0)
         {
             throw new NetworkBindingException("Failed to bind to any IP");
         }

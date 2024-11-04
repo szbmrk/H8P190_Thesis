@@ -109,7 +109,7 @@ public class ConnectionManager : MonoBehaviour
             networkDriver.Dispose();
 
         networkDriver = NetworkDriver.Create(settings);
-        if (networkDriver.Bind(NetworkEndPoint.AnyIpv4) != 0)
+        if (networkDriver.Bind(NetworkEndpoint.AnyIpv4) != 0)
         {
             throw new Exception("Host client failed to bind");
         }
