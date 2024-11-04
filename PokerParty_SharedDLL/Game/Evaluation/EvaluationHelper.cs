@@ -93,7 +93,7 @@ namespace PokerParty_SharedDLL
             return type;
         }
 
-        private static int CalculateBreakTieScore(Card[] hand)
+        public static int CalculateBreakTieScore(Card[] hand)
         {
             Card[] sortedHand = hand
                 .GroupBy(card => card.value)

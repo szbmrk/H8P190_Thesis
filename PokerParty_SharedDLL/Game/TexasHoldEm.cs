@@ -48,16 +48,19 @@ namespace PokerParty_SharedDLL
         {
             Card[] bestHand = new Card[5];
             HandType bestHandType = HandType.None;
+            int bestBreakTieScore = 0;
 
             foreach (Card[] hand in hands)
             {
                 Card[] currentHand = new Card[5];
                 Array.Copy(hand, currentHand, 5);
                 HandType currentHandType = EvaluateHand(currentHand);
+                int currentBreakTieScore = EvaluationHelper.CalculateBreakTieScore(currentHand);
 
-                if (currentHandType > bestHandType)
+                if (currentHandType >= bestHandType && currentBreakTieScore > bestBreakTieScore)
                 {
                     bestHand = currentHand;
+                    bestBreakTieScore = currentBreakTieScore;
                     bestHandType = currentHandType;
                 }
             }
