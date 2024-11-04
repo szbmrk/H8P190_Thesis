@@ -83,8 +83,9 @@ namespace PokerParty_SharedDLL
             return EvaluationHelper.CreateOrderedPlayerList(playerHandInfos);
         }
 
-        public static PlayerHandInfo[] DetermineWinners(params PlayerHandInfo[] orderedPlayers)
+        public static PlayerHandInfo[] DetermineWinners(params PlayerHandInfo[] playerHandInfos)
         {
+            PlayerHandInfo[] orderedPlayers = DetermineOrder(playerHandInfos);
             HandType bestHandType = orderedPlayers[0].Type;
             int bestTieScore = orderedPlayers[0].BreakTieScore;
 
