@@ -44,6 +44,42 @@ namespace PokerParty_SharedDLL
             return type;
         }
 
+        public static Card[][] GetAllPossibleHands(Card[] cards)
+        {
+            if (cards.Length == 5)
+                return new Card[][] { cards };
+
+            List<Card[]> possibleHands = new List<Card[]>();
+
+            int handSize = 5;
+            int[] indices = new int[handSize];
+
+            for (int i = 0; i < handSize; i++)
+                indices[i] = i;
+
+            while (true)
+            {
+                Card[] hand = new Card[handSize];
+                for (int i = 0; i < handSize; i++)
+                    hand[i] = cards[indices[i]];
+
+                possibleHands.Add(hand);
+
+                int k = handSize - 1;
+                while (k >= 0 && indices[k] == cards.Length - handSize + k)
+                    k--;
+
+                if (k < 0)
+                    break;
+
+                indices[k]++;
+                for (int j = k + 1; j < handSize; j++)
+                    indices[j] = indices[j - 1] + 1;
+            }
+
+            return possibleHands.ToArray();
+        }
+
         public static Card[] GetBestHandOfPlayer(Card[][] hands)
         {
             Card[] bestHand = new Card[5];
