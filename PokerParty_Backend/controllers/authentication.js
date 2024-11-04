@@ -57,7 +57,7 @@ export const login = async (req, res) => {
             password: undefined
         };
 
-        res.status(200).json({ msg: 'Player logged in successfully', safePlayer });
+        res.status(200).json({ msg: 'Player logged in successfully', player: safePlayer });
 
     } catch (err) {
         console.error(err.message);
