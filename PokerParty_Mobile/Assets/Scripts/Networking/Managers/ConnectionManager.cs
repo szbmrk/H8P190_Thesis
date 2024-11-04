@@ -80,10 +80,18 @@ public class ConnectionManager : MonoBehaviour
                         NetworkingGUI.Instance.ResetReadyButton();
                     }
                     PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
+                    PopupManager.Instance.currentPopup.okButton.onClick.AddListener(() => GotDisconnected());
                     StartCoroutine(DisposeNetworkDriver());
                     break;
             }
         }
+    }
+
+    public void GotDisconnected()
+    {
+        if (SceneManager.GetActiveScene().name == "Game")
+            SceneManager.LoadScene("Lobby");
+
     }
 
     public async void JoinRelay(string joinCode)

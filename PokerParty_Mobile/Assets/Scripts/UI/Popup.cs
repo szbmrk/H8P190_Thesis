@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Popup : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI popupText;
-    [SerializeField] protected Button okButton;
+    [SerializeField] public Button okButton;
 
     public float animationDuration = 0.5f;
     private Vector3 originalScale;

@@ -22,12 +22,13 @@ public class ActionButton : MonoBehaviour
         buttonText = GetComponentInChildren<TextMeshProUGUI>();
         button.onClick.AddListener(OnClick);
     }
+
     private void OnClick()
     {
         SetAmount();
-        ActionManager.Instance.DisableActions();
         UpdateMoney();
         MessageSender.SendMessageToHost(MessageToSend());
+        ActionManager.Instance.DisableActions();
     }
 
     private void UpdateMoney()

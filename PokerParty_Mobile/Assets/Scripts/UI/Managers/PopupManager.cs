@@ -12,6 +12,7 @@ public class PopupManager : MonoBehaviour
     [SerializeField] private GameObject inputPopupPrefab;
     [SerializeField] private Transform canvas;
 
+    public Popup currentPopup;
     public InputPopup currentInputPopup;
 
     private void Awake()
@@ -25,6 +26,7 @@ public class PopupManager : MonoBehaviour
         Popup popup = newPopup.GetComponent<Popup>();
         popup.SetData(type, text);
         popup.ShowPopup();
+        currentPopup = popup;
     }
 
     public void ShowInputPopup(string header, string placeHolderText, string buttonText, Func<Task<bool>> methodToCall)
