@@ -22,13 +22,15 @@ public class TableManager : MonoBehaviour
     [HideInInspector] public int moneyInPot = 0;
 
     // 1% of starting money
-    [HideInInspector] public int smallBlindBet = (int)(Settings.StartingMoney * 0.01);
+    [HideInInspector] public int smallBlindBet;
     // 2% of starting money
-    [HideInInspector] public int bigBlindBet = (int)(Settings.StartingMoney * 0.02);
+    [HideInInspector] public int bigBlindBet;
 
     private void Awake()
     {
         Instance = this;
+        smallBlindBet = (int)(Settings.StartingMoney * 0.01);
+        bigBlindBet = (int)(Settings.StartingMoney * 0.02);
     }
 
     private void Start()
@@ -112,7 +114,7 @@ public class TableManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            tableCards.Add(Instantiate(playerCardPrefab, partentForCards).GetComponent<TableCard>());
+            tableCards.Add(Instantiate(tableCardPrefab, partentForCards).GetComponent<TableCard>());
             tableCards[i].card = deck.Draw();
             TableGUI.Instance.DisplayCard(tableCards[i], i);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class TableGUI : MonoBehaviour
@@ -10,6 +11,8 @@ public class TableGUI : MonoBehaviour
     public static TableGUI Instance;
     public List<Transform> seatPositions = new List<Transform>();
     public List<Transform> cardPositions = new List<Transform>();
+
+    [SerializeField] private TextMeshProUGUI moneyInPotText;
 
     private void Awake()
     {
@@ -27,5 +30,10 @@ public class TableGUI : MonoBehaviour
     {
         card.transform.position = cardPositions[i].position;
         card.gameObject.SetActive(true);
+    }
+
+    public void RefreshMoneyInPotText(int potMoney)
+    {
+        moneyInPotText.text = $"Pot: {potMoney} $";
     }
 }

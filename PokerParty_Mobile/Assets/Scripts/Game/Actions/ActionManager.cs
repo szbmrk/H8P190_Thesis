@@ -21,7 +21,7 @@ public class ActionManager : MonoBehaviour
     public GameObject smallBlindPrefab;
     public GameObject bigBlindPrefab;
 
-    List<GameObject> currentActions;
+    List<GameObject> currentActions = new List<GameObject>();
 
     private void Awake()
     {
@@ -66,12 +66,12 @@ public class ActionManager : MonoBehaviour
                 break;
             case PossibleAction.BET:
                 GameObject bet = Instantiate(betPrefab, parentForActions);
-                bet.GetComponent<BetAmountGUI>().Initialize(Settings.SmallBLindAmount, GameManager.Instance.money);
+                bet.GetComponent<BetAmountGUI>().Initialize(1, GameManager.Instance.money);
                 currentActions.Add(bet);
                 break;
             case PossibleAction.RAISE:
                 GameObject raise = Instantiate(raisePrefab, parentForActions);
-                raise.GetComponent<BetAmountGUI>().Initialize(Settings.MoneyNeededToCall + Settings.SmallBLindAmount, GameManager.Instance.money);
+                raise.GetComponent<BetAmountGUI>().Initialize(Settings.MoneyNeededToCall + 1, GameManager.Instance.money);
                 currentActions.Add(raise);
                 break;
             default:

@@ -113,15 +113,19 @@ public class TurnManager : MonoBehaviour
         SendTurnMessage(possibleActions, TableManager.Instance.bigBlindBet);
     }
 
-    public void StartTurnPreflop()
+    public void StartTurn()
     {
         currentPlayerInTurn.StartTurn();
 
         PossibleAction[] possibleActions = null;
-        if (currentPlayerInTurn.turnInfo.money < MoneyNeededToCall)
+        if (highestBet == 0)
+            possibleActions = new PossibleAction[] { PossibleAction.BET, PossibleAction.FOLD };
+        else if (currentPlayerInTurn.turnInfo.money < MoneyNeededToCall)
             possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
-        else
+        else if (currentPlayerInTurn.turnInfo.moneyPutInPot < MoneyNeededToCall)
             possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
+        else if (currentPlayerInTurn.turnInfo.moneyPutInPot == MoneyNeededToCall)
+            possibleActions = new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE };
 
         SendTurnMessage(possibleActions, MoneyNeededToCall);
     }
@@ -172,14 +176,13 @@ public class TurnManager : MonoBehaviour
             TableManager.Instance.DealCardsToPlayers();
             TableManager.Instance.DealCardsToTable();
             turnState = TurnState.PRE_FLOP;
-            StartTurnPreflop();
+            StartTurn();
             return;
         }
 
-        if (turnState == TurnState.PRE_FLOP)
+        if (turnState == TurnState.PRE_FLOP || turnState == TurnState.FLOP || turnState == TurnState.TURN || turnState == TurnState.RIVER)
         {
-            StartTurnPreflop();
-            return;
+            StartTurn();
         }
     }
 
@@ -195,7 +198,15 @@ public class TurnManager : MonoBehaviour
         if (PlayersNeedToCallCount == 0 && currentPlayerInTurn.Equals(lastPlayerInTurn))
         {
             TableManager.Instance.moneyInPot += moneyInTurn;
+            TableGUI.Instance.RefreshMoneyInPotText(TableManager.Instance.moneyInPot);
             moneyInTurn = 0;
+            highestBet = 0;
+
+            if (IsPlayerStillInGame(TableManager.Instance.playerSeats[1]))
+                currentPlayerInTurn = TableManager.Instance.playerSeats[1];
+            else
+                currentPlayerInTurn = GetNextPlayerStillInGame(1);
+
             if (turnState == TurnState.PRE_FLOP)
             {
                 turnState = TurnState.FLOP;
