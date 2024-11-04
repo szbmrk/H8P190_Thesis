@@ -32,6 +32,10 @@ public static class NetworkMessageHandler
                 NotYourTurnMessage notYourTurnMessage = FromStringToJson<NotYourTurnMessage>(data);
                 GameManager.Instance.WaitingFor(notYourTurnMessage.playerInTurn);
                 break;
+            case NetworkMessageType.CommunityCardsChangedMessage:
+                CommunityCardsChanged communityCardsChanged = FromStringToJson<CommunityCardsChanged>(data);
+                CardsGUI.Instance.SetBestHandText(communityCardsChanged);
+                break;
         }
     }
 
