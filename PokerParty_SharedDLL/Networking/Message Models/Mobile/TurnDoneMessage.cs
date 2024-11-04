@@ -9,9 +9,9 @@ namespace PokerParty_SharedDLL
     [Serializable]
     public class TurnDoneMessage : ANetworkMessageMobile
     {
-        public int ActionAmount { get; set; }
-        public PossibleAction Action { get; set; }
-        public int NewMoney { get; set; }
+        public int actionAmount;
+        public PossibleAction action;
+        public int newMoney;
 
         public override NetworkMessageType Type => NetworkMessageType.TurnDoneMessage;
     }

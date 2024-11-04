@@ -84,12 +84,12 @@ public class TableManager : MonoBehaviour
         for (int i = 0; i < playerSeats.Count; i++)
         {
             GameInfoMessage gameInfoMessage = new GameInfoMessage();
-            gameInfoMessage.StartingMoney = Settings.StartingMoney;
-            gameInfoMessage.SmallBlindAmount = smallBlindBet;
-            gameInfoMessage.BigBlindAmount = bigBlindBet;
-            gameInfoMessage.IsDealer = playerSeats[i].isDealer;
-            gameInfoMessage.IsSmallBlind = playerSeats[i].isSmallBlind;
-            gameInfoMessage.IsBigBlind = playerSeats[i].isBigBlind;
+            gameInfoMessage.startingMoney = Settings.StartingMoney;
+            gameInfoMessage.smallBlindAmount = smallBlindBet;
+            gameInfoMessage.bigBlindAmount = bigBlindBet;
+            gameInfoMessage.isDealer = playerSeats[i].isDealer;
+            gameInfoMessage.isSmallBlind = playerSeats[i].isSmallBlind;
+            gameInfoMessage.isBigBlind = playerSeats[i].isBigBlind;
 
             int indexInConnections = playerSeats[i].indexInConnectionsArray;
             ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], gameInfoMessage);
@@ -102,7 +102,7 @@ public class TableManager : MonoBehaviour
         {
             Card[] cards = TexasHoldEm.DealCardsToPlayer(deck);
             DealCardsMessage dealCardsMessage = new DealCardsMessage();
-            dealCardsMessage.Cards = cards;
+            dealCardsMessage.cards = cards;
             int indexInConnections = playerSeats[i].indexInConnectionsArray;
             ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], dealCardsMessage);
         }
@@ -113,32 +113,51 @@ public class TableManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             tableCards.Add(Instantiate(playerCardPrefab, partentForCards).GetComponent<TableCard>());
-            tableCards[i].SetCard(deck.Draw());
+            tableCards[i].card = deck.Draw();
             TableGUI.Instance.DisplayCard(tableCards[i], i);
         }
     }
 
     public void DealFlop()
     {
+        Card[] communityCards = new Card[3];
         for (int i = 0; i < 3; i++)
         {
+            communityCards[i] = tableCards[i].card;
             tableCards[i].Flip();
         }
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = communityCards };
+        ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void DealTurn()
     {
+        Card[] communityCards = new Card[4];
         tableCards[3].Flip();
+        communityCards[0] = tableCards[0].card;
+        communityCards[1] = tableCards[1].card;
+        communityCards[2] = tableCards[2].card;
+        communityCards[3] = tableCards[3].card;
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = communityCards };
+        ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void DealRiver()
     {
         tableCards[4].Flip();
+        Card[] communityCards = new Card[5];
+        communityCards[0] = tableCards[0].card;
+        communityCards[1] = tableCards[1].card;
+        communityCards[2] = tableCards[2].card;
+        communityCards[3] = tableCards[3].card;
+        communityCards[4] = tableCards[4].card;
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = communityCards };
+        ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.NewMoney);
+        playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.newMoney);
         playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).TurnDone();
         TurnManager.Instance.HandleTurnDone(turnDoneMessage);
     }

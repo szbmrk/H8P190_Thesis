@@ -9,8 +9,8 @@ namespace PokerParty_SharedDLL
     [Serializable]
     public class YourTurnMessage : ANetworkMessagePC
     {
-        public PossibleAction[] PossibleActions { get; set; }
-        public int MoneyNeededToCall { get; set; }
+        public PossibleAction[] possibleActions;
+        public int moneyNeededToCall;
         public override NetworkMessageType Type => NetworkMessageType.YourTurnMessage;
     }
 }

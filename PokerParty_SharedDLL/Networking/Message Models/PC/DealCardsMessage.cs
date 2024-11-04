@@ -8,7 +8,7 @@ namespace PokerParty_SharedDLL
 {
     public class DealCardsMessage : ANetworkMessagePC
     {
-        public Card[] Cards { get; set; }
+        public Card[] cards;
         public override NetworkMessageType Type => NetworkMessageType.DealCardsMessage;
     }
 }

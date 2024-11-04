@@ -36,9 +36,9 @@ public class ActionButton : MonoBehaviour
     {
         TurnDoneMessage turnDoneMessage = new TurnDoneMessage()
         {
-            ActionAmount = amount,
-            Action = action,
-            NewMoney = GameManager.Instance.money,
+            actionAmount = amount,
+            action = action,
+            newMoney = GameManager.Instance.money,
         };
 
         return turnDoneMessage;

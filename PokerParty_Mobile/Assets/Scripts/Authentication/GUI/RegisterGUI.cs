@@ -78,6 +78,7 @@ public class RegisterGUI : MonoBehaviour
             return;
         }
 
+        ResetFields();
         Loader.Instance.StopLoading();
         ShowLoginPanel();
     }

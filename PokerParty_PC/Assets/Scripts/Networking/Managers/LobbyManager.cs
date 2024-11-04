@@ -38,12 +38,13 @@ public class LobbyManager : MonoBehaviour
 
     public void ModifyPlayerReady(ReadyMessage readyMessage)
     {
-        GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.IsReady);
+        GetPlayerCardForPlayer(readyMessage.player).SetReady(readyMessage.isReady);
         LobbyGUI.Instance.RefreshPlayerCount();
     }
 
     public LobbyPlayerCard GetPlayerCardForPlayer(Player player)
     {
+        Debug.Log(joinedPlayers.Find(p => p.assignedPlayer.Equals(player)).assignedPlayer);
         return joinedPlayers.Find(p => p.assignedPlayer.Equals(player));
     }
 

@@ -13,6 +13,7 @@
         YourTurnMessage,
         NotYourTurnMessage,
         DealCardsMessage,
+        CommunityCardsChangedMessage,
         GameInfoMessage
     }
 }

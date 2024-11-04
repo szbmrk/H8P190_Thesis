@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class CardsGUI : MonoBehaviour
 
     [SerializeField] private Image card1;
     [SerializeField] private Image card2;
+
+    [SerializeField] private TextMeshProUGUI bestHandText;
 
     [SerializeField] private GameObject switchButton;
 
@@ -27,6 +30,12 @@ public class CardsGUI : MonoBehaviour
         switchButton.SetActive(true);
         card1.sprite = GetSpriteByFileName(cards[0].GetFileNameForSprite());
         card2.sprite = GetSpriteByFileName(cards[1].GetFileNameForSprite());
+    }
+
+    public void SetBestHandText(CommunityCardsChanged communityCardsChanged)
+    {
+        if (!bestHandText.gameObject.activeInHierarchy)
+            bestHandText.gameObject.SetActive(true);
     }
 
     public Sprite GetSpriteByFileName(string fileName)

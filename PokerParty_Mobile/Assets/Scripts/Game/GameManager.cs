@@ -32,13 +32,13 @@ public class GameManager : MonoBehaviour
     public void StartTurn(YourTurnMessage yourTurnMessage)
     {
         GameGUI.Instance.StartTurn();
-        Settings.MoneyNeededToCall = yourTurnMessage.MoneyNeededToCall;
-        ActionManager.Instance.EnableActions(yourTurnMessage.PossibleActions);
+        Settings.MoneyNeededToCall = yourTurnMessage.moneyNeededToCall;
+        ActionManager.Instance.EnableActions(yourTurnMessage.possibleActions);
     }
 
     public void SetGameInfo(GameInfoMessage gameInfo)
     {
-        UpdateMoney(gameInfo.StartingMoney);
+        UpdateMoney(gameInfo.startingMoney);
         Settings.SetSettings(gameInfo);
         GameGUI.Instance.StartGame();
     }
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCards(DealCardsMessage dealCards)
     {
-        cards = dealCards.Cards;
+        cards = dealCards.cards;
         CardsGUI.Instance.SetCards(cards);
     }
 }

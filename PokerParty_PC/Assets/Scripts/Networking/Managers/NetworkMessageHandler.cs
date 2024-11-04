@@ -23,21 +23,25 @@ public static class NetworkMessageHandler
 
             case NetworkMessageType.ChatMessage:
                 ChatMessage chatMessage = FromStringToJson<ChatMessage>(data);
-                ChatGUI.Instance.AddChat(chatMessage);
+                if (ChatGUI.Instance != null)
+                    ChatGUI.Instance.AddChat(chatMessage);
                 break;
 
             case NetworkMessageType.ReadyMessage:
                 ReadyMessage readyMessage = FromStringToJson<ReadyMessage>(data);
-                LobbyManager.Instance.ModifyPlayerReady(readyMessage);
+                if (LobbyManager.Instance != null)
+                    LobbyManager.Instance.ModifyPlayerReady(readyMessage);
                 break;
 
             case NetworkMessageType.LoadedToGameMessage:
                 LoadedToGameMessage loadedToGameMessage = FromStringToJson<LoadedToGameMessage>(data);
-                TableManager.Instance.PlayerLoaded(loadedToGameMessage.player, indexOfConnection);
+                if (TableManager.Instance != null)
+                    TableManager.Instance.PlayerLoaded(loadedToGameMessage.player, indexOfConnection);
                 break;
             case NetworkMessageType.TurnDoneMessage:
                 TurnDoneMessage turnDoneMessage = FromStringToJson<TurnDoneMessage>(data);
-                TableManager.Instance.PlayerTurnDone(turnDoneMessage);
+                if (TableManager.Instance != null)
+                    TableManager.Instance.PlayerTurnDone(turnDoneMessage);
                 break;
         }
     }

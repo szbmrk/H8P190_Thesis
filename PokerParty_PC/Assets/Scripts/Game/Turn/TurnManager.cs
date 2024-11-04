@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum TurnState
 {
-    FIRST_TURN,
-    SECOND_TURN,
+    SMALLBLIND_TURN,
+    BIGBLIND_TURN,
     PRE_FLOP,
     FLOP,
     TURN,
@@ -16,7 +16,7 @@ public class TurnManager : MonoBehaviour
 {
     public static TurnManager Instance;
 
-    private TurnState turnState = TurnState.FIRST_TURN;
+    private TurnState turnState = TurnState.SMALLBLIND_TURN;
     private TablePlayerCard currentPlayerInTurn;
     private TablePlayerCard lastPlayerInTurn
     {
@@ -96,7 +96,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartSecondTurn()
     {
-        turnState = TurnState.SECOND_TURN;
+        turnState = TurnState.BIGBLIND_TURN;
         currentPlayerInTurn.StartTurn();
 
         PossibleAction[] possibleActions = null;
@@ -109,9 +109,8 @@ public class TurnManager : MonoBehaviour
         SendTurnMessage(possibleActions, TableManager.Instance.bigBlindBet);
     }
 
-    public void StartTurnPreFlop()
+    public void StartTurnPreflop()
     {
-        turnState = TurnState.PRE_FLOP;
         currentPlayerInTurn.StartTurn();
 
         PossibleAction[] possibleActions = null;
@@ -128,13 +127,13 @@ public class TurnManager : MonoBehaviour
         List<TablePlayerCard> playerSeats = TableManager.Instance.playerSeats;
 
         YourTurnMessage yourTurnMessage = new YourTurnMessage();
-        yourTurnMessage.PossibleActions = possibleActions;
-        yourTurnMessage.MoneyNeededToCall = moneyNeededToCall;
+        yourTurnMessage.possibleActions = possibleActions;
+        yourTurnMessage.moneyNeededToCall = moneyNeededToCall;
         int indexInConnections = currentPlayerInTurn.indexInConnectionsArray;
         ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], yourTurnMessage);
 
         NotYourTurnMessage notYourTurnMessage = new NotYourTurnMessage();
-        notYourTurnMessage.PlayerInTurn = currentPlayerInTurn.turnInfo.player.playerName;
+        notYourTurnMessage.playerInTurn = currentPlayerInTurn.turnInfo.player.playerName;
 
         foreach (TablePlayerCard player in playerSeats)
         {
@@ -148,22 +147,33 @@ public class TurnManager : MonoBehaviour
 
     public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        TableManager.Instance.moneyInPot += turnDoneMessage.ActionAmount;
+        TableManager.Instance.moneyInPot += turnDoneMessage.actionAmount;
 
         UpdateCurrentPlayersTurnInfo(turnDoneMessage);
         CheckIfTurnIsOver();
 
         SetNextPlayerInTurn();
 
-        if (turnState == TurnState.FIRST_TURN)
+        if (turnState == TurnState.SMALLBLIND_TURN)
+        {
             StartSecondTurn();
+            return;
+        }
 
-        if (turnState == TurnState.SECOND_TURN)
+        if (turnState == TurnState.BIGBLIND_TURN)
         {
             TableManager.Instance.DealCardsToPlayers();
-            StartTurnPreFlop();
+            TableManager.Instance.DealCardsToTable();
+            turnState = TurnState.PRE_FLOP;
+            StartTurnPreflop();
+            return;
         }
-        
+
+        if (turnState == TurnState.PRE_FLOP)
+        {
+            StartTurnPreflop();
+            return;
+        }
     }
 
     private void CheckIfTurnIsOver()
@@ -195,28 +205,26 @@ public class TurnManager : MonoBehaviour
             {
                 GameManager.Instance.GameOver();
             }
-
-            return;
         }
     }
 
     private void UpdateCurrentPlayersTurnInfo(TurnDoneMessage turnDoneMessage)
     {
-        if (turnDoneMessage.Action == PossibleAction.FOLD)
+        if (turnDoneMessage.action == PossibleAction.FOLD)
         {
             currentPlayerInTurn.turnInfo.folded = true;
             currentPlayerInTurn.OutOfTurn();
             return;
         }
 
-        if (turnDoneMessage.Action == PossibleAction.ALL_IN)
+        if (turnDoneMessage.action == PossibleAction.ALL_IN)
         {
             currentPlayerInTurn.turnInfo.wentAllIn = true;
-            currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.ActionAmount;
+            currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.actionAmount;
             currentPlayerInTurn.OutOfTurn();
             return;
         }
 
-        currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.ActionAmount;
+        currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.actionAmount;
     }
 }

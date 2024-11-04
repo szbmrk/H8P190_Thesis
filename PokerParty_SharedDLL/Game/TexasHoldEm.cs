@@ -16,15 +16,6 @@ namespace PokerParty_SharedDLL
             return cards;
         }
 
-        public static Card[] DealFlop(Deck deck)
-        {
-            Card[] cards = new Card[3];
-            cards[0] = deck.Draw();
-            cards[1] = deck.Draw();
-            cards[2] = deck.Draw();
-            return cards;
-        }
-
         private static HandType EvaluateHand(Card[] hand)
         {
             HandType type = HandType.None;

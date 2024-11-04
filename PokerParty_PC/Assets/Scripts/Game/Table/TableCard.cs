@@ -8,12 +8,7 @@ using PokerParty_SharedDLL;
 
 public class TableCard : MonoBehaviour
 {
-    private Card card;
-
-    public void SetCard(Card card)
-    {
-        this.card = card;
-    }
+    public Card card;
 
     public void Flip()
     {

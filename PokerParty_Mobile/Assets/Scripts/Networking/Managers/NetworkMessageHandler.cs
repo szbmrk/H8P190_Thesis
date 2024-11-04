@@ -30,7 +30,7 @@ public static class NetworkMessageHandler
                 break;
             case NetworkMessageType.NotYourTurnMessage:
                 NotYourTurnMessage notYourTurnMessage = FromStringToJson<NotYourTurnMessage>(data);
-                GameManager.Instance.WaitingFor(notYourTurnMessage.PlayerInTurn);
+                GameManager.Instance.WaitingFor(notYourTurnMessage.playerInTurn);
                 break;
         }
     }

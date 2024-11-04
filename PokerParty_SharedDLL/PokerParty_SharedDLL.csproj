@@ -59,6 +59,7 @@
     <Compile Include="Networking\Message Models\Mobile\LoadedToGameMessage.cs" />
     <Compile Include="Networking\Message Models\Mobile\ReadyMessage.cs" />
     <Compile Include="Networking\Message Models\Mobile\TurnDoneMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\CommunityCardsChangedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\DealCardsMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameInfoMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameStartedMessage.cs" />
