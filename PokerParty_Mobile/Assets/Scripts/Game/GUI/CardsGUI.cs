@@ -36,6 +36,16 @@ public class CardsGUI : MonoBehaviour
     {
         if (!bestHandText.gameObject.activeInHierarchy)
             bestHandText.gameObject.SetActive(true);
+
+        Card[] cards = new Card[2 + communityCardsChanged.communityCards.Length];
+        cards[0] = GameManager.Instance.cards[0];
+        cards[1] = GameManager.Instance.cards[1];
+        for (int i = 0; i < communityCardsChanged.communityCards.Length; i++)
+        {
+            cards[i + 2] = communityCardsChanged.communityCards[i];
+        }
+
+        bestHandText.text = TexasHoldEm.GetBestHandOfPlayer(TexasHoldEm.GetAllPossibleHands(cards)).ToString();
     }
 
     public Sprite GetSpriteByFileName(string fileName)
