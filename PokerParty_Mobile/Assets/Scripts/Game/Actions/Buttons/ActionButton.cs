@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,11 @@ public class ActionButton : MonoBehaviour
     public PossibleAction action;
 
     Button button;
+    public TextMeshProUGUI buttonText;
     private void Awake()
     {
         button = GetComponent<Button>();
+        buttonText = GetComponentInChildren<TextMeshProUGUI>();
         button.onClick.AddListener(OnClick);
     }
     private void OnClick()

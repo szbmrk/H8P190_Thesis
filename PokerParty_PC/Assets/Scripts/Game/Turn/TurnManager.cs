@@ -18,6 +18,10 @@ public class TurnManager : MonoBehaviour
 
     private TurnState turnState = TurnState.SMALLBLIND_TURN;
     private TablePlayerCard currentPlayerInTurn;
+
+    private int moneyInTurn = 0;
+    private int highestBet = 0;
+
     private TablePlayerCard lastPlayerInTurn
     {
         get
@@ -70,9 +74,9 @@ public class TurnManager : MonoBehaviour
         .FindAll(player => IsPlayerStillInGame(player)).Count;
 
     private int PlayersNeedToCallCount => TableManager.Instance.playerSeats
-        .FindAll(player => player.turnInfo.moneyPutInPot < TableManager.Instance.moneyInPot && IsPlayerStillInGame(player)).Count;
+        .FindAll(player => player.turnInfo.moneyPutInPot < highestBet && IsPlayerStillInGame(player)).Count;
 
-    private int MoneyNeededToCall => TableManager.Instance.moneyInPot - currentPlayerInTurn.turnInfo.moneyPutInPot;
+    private int MoneyNeededToCall => highestBet - currentPlayerInTurn.turnInfo.moneyPutInPot;
 
     private void Awake()
     {
@@ -147,9 +151,12 @@ public class TurnManager : MonoBehaviour
 
     public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        TableManager.Instance.moneyInPot += turnDoneMessage.actionAmount;
-
+        moneyInTurn += turnDoneMessage.actionAmount;
         UpdateCurrentPlayersTurnInfo(turnDoneMessage);
+
+        if (highestBet < currentPlayerInTurn.turnInfo.moneyPutInPot)
+            highestBet = currentPlayerInTurn.turnInfo.moneyPutInPot;
+
         CheckIfTurnIsOver();
 
         SetNextPlayerInTurn();
@@ -180,12 +187,15 @@ public class TurnManager : MonoBehaviour
     {
         if (PlayersInGameCount == 1)
         {
+            TableManager.Instance.moneyInPot += moneyInTurn;
             GameManager.Instance.GameOver();
             return;
         }
 
         if (PlayersNeedToCallCount == 0 && currentPlayerInTurn.Equals(lastPlayerInTurn))
         {
+            TableManager.Instance.moneyInPot += moneyInTurn;
+            moneyInTurn = 0;
             if (turnState == TurnState.PRE_FLOP)
             {
                 turnState = TurnState.FLOP;
@@ -221,10 +231,12 @@ public class TurnManager : MonoBehaviour
         {
             currentPlayerInTurn.turnInfo.wentAllIn = true;
             currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.actionAmount;
+            currentPlayerInTurn.RefreshMoneyPutIn(currentPlayerInTurn.turnInfo.moneyPutInPot);
             currentPlayerInTurn.OutOfTurn();
             return;
         }
 
         currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.actionAmount;
+        currentPlayerInTurn.RefreshMoneyPutIn(currentPlayerInTurn.turnInfo.moneyPutInPot);
     }
 }

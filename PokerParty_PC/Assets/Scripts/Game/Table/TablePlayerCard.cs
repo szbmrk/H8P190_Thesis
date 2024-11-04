@@ -13,6 +13,7 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ELOText;
     [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private TextMeshProUGUI MoneyText;
+    [SerializeField] private TextMeshProUGUI MoneyPutInText;
 
     [SerializeField] private GameObject dealerIcon;
     [SerializeField] private GameObject smallBlindIcon;
@@ -55,6 +56,11 @@ public class TablePlayerCard : MonoBehaviour
     public void RefreshMoney(int money)
     {
         MoneyText.text = $"{money} $";
+    }
+
+    public void RefreshMoneyPutIn(int money)
+    {
+        MoneyPutInText.text = $"Put in: {money} $";
     }
 
     public void StartTurn()
