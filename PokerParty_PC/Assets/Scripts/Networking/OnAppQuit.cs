@@ -39,6 +39,11 @@ public class OnAppQuit : MonoBehaviour
 
         if (LobbyGUI.Instance != null)
             yield return LobbyGUI.Instance.DeleteLobby();
+        else
+        {
+            ConnectionManager.Instance.DisconnectAllPlayers();
+            yield return ConnectionManager.Instance.DisposeDriverAndConnections();
+        }
 
         ReadyToQuit = true;
         Debug.Log("Server app stopped");

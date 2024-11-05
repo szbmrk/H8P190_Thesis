@@ -54,4 +54,10 @@ public class GameManager : MonoBehaviour
         cards = dealCards.cards;
         CardsGUI.Instance.SetCards(cards);
     }
+
+    public void GameOver()
+    {
+        ActionManager.Instance.DisableActions();
+        GameOverGUI.Instance.ShowGameOverPanel();
+    }
 }

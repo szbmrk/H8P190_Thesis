@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PokerParty_SharedDLL
 {
+    [Serializable]
     public class CommunityCardsChanged : ANetworkMessagePC
     {
         public Card[] communityCards;

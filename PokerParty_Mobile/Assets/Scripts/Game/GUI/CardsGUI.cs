@@ -50,6 +50,7 @@ public class CardsGUI : MonoBehaviour
 
     public Sprite GetSpriteByFileName(string fileName)
     {
+        Debug.Log("GetSpriteByFileName: " + fileName);
         Sprite[] sprites = Resources.LoadAll<Sprite>("Cards");
         foreach (Sprite sprite in sprites)
         {

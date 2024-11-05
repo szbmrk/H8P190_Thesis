@@ -1,5 +1,7 @@
 ﻿using PokerParty_SharedDLL;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum TurnState
@@ -26,25 +28,26 @@ public class TurnManager : MonoBehaviour
     {
         get
         {
-            if (turnState == TurnState.PRE_FLOP) // big blind
+            if (turnState == TurnState.PRE_FLOP)
             {
-                if (IsPlayerStillInGame(TableManager.Instance.playerSeats[2]))
-                    return TableManager.Instance.playerSeats[2];
+                TablePlayerCard bigBlind = TableManager.Instance.playerSeats.Find(p => p.isBigBlind);
+                if (IsPlayerStillInGame(bigBlind))
+                    return bigBlind;
                 else
-                    return GetNextPlayerStillInGame(2);
+                    return GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(bigBlind));
             }
          
-            // dealer
-            if (IsPlayerStillInGame(TableManager.Instance.playerSeats[0]))
-                return TableManager.Instance.playerSeats[0];
+            TablePlayerCard dealer = TableManager.Instance.playerSeats.Find(p => p.isDealer);
+            if (IsPlayerStillInGame(dealer))
+                return dealer;
             else
-                return GetNextPlayerStillInGame(0);
+                return GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(dealer));
         }
     }
 
-    private bool IsPlayerStillInGame(TablePlayerCard player)
+    public bool IsPlayerStillInGame(TablePlayerCard player)
     {
-        return !player.turnInfo.folded && !player.turnInfo.wentAllIn;
+        return !player.turnInfo.folded && !player.turnInfo.wentAllIn && player.turnInfo.money > 0;
     }
 
     private void SetNextPlayerInTurn()
@@ -52,7 +55,7 @@ public class TurnManager : MonoBehaviour
         currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(currentPlayerInTurn)); ;
     }
 
-    private TablePlayerCard GetNextPlayerStillInGame(int currentIndex)
+    public TablePlayerCard GetNextPlayerStillInGame(int currentIndex)
     {
         TablePlayerCard nextPlayer = null;
         int nextPlayerIndex = -1;
@@ -91,7 +94,7 @@ public class TurnManager : MonoBehaviour
         PossibleAction[] possibleActions = null;
 
         if (currentPlayerInTurn.turnInfo.money < TableManager.Instance.smallBlindBet)
-            possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
+            possibleActions = new PossibleAction[] { PossibleAction.ALL_IN };
         else
             possibleActions = new PossibleAction[] { PossibleAction.SMALL_BLIND_BET };
 
@@ -106,7 +109,7 @@ public class TurnManager : MonoBehaviour
         PossibleAction[] possibleActions = null;
 
         if (currentPlayerInTurn.turnInfo.money < TableManager.Instance.bigBlindBet)
-            possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
+            possibleActions = new PossibleAction[] { PossibleAction.ALL_IN };
         else
             possibleActions = new PossibleAction[] { PossibleAction.BIG_BLIND_BET };
 
@@ -161,7 +164,8 @@ public class TurnManager : MonoBehaviour
         if (highestBet < currentPlayerInTurn.turnInfo.moneyPutInPot)
             highestBet = currentPlayerInTurn.turnInfo.moneyPutInPot;
 
-        CheckIfTurnIsOver();
+        if (CheckIfTurnIsOver())
+            return;
 
         SetNextPlayerInTurn();
 
@@ -186,26 +190,23 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    private void CheckIfTurnIsOver()
+    private bool CheckIfTurnIsOver()
     {
         if (PlayersInGameCount == 1)
         {
             TableManager.Instance.moneyInPot += moneyInTurn;
-            GameManager.Instance.GameOver();
-            return;
+            moneyInTurn = 0;
+            highestBet = 0;
+
+            StartCoroutine(TableManager.Instance.ShowDown());
+            return true;
         }
 
         if (PlayersNeedToCallCount == 0 && currentPlayerInTurn.Equals(lastPlayerInTurn))
         {
             TableManager.Instance.moneyInPot += moneyInTurn;
-            TableGUI.Instance.RefreshMoneyInPotText(TableManager.Instance.moneyInPot);
             moneyInTurn = 0;
             highestBet = 0;
-
-            if (IsPlayerStillInGame(TableManager.Instance.playerSeats[1]))
-                currentPlayerInTurn = TableManager.Instance.playerSeats[1];
-            else
-                currentPlayerInTurn = GetNextPlayerStillInGame(1);
 
             if (turnState == TurnState.PRE_FLOP)
             {
@@ -224,9 +225,46 @@ public class TurnManager : MonoBehaviour
             }
             else if (turnState == TurnState.RIVER)
             {
-                GameManager.Instance.GameOver();
+                StartCoroutine(ShowDown());
+                return true;
             }
+            return true;
         }
+
+        return false;
+    }
+
+    private TablePlayerCard GetLastPlayerInGame()
+    {
+        return TableManager.Instance.playerSeats.FindLast(p => IsPlayerStillInGame(p));
+    }
+
+    private bool CheckIfGameIsOver()
+    {
+        return TableManager.Instance.playerSeats.Select(p => p.turnInfo.money > 0).Count() == 1;
+    }
+
+    private IEnumerator ShowDown()
+    {
+        yield return TableManager.Instance.ShowDown();
+        if (CheckIfGameIsOver())
+        {
+            GameManager.Instance.GameOver(GetLastPlayerInGame().turnInfo.player.playerName);
+            yield break;
+        }
+
+        TableManager.Instance.ResetAndRotatePlayers();
+        StartNewTurn();
+    }
+
+    private void StartNewTurn()
+    {
+        TablePlayerCard smallBlind = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
+        if (IsPlayerStillInGame(smallBlind))
+            currentPlayerInTurn = smallBlind;
+        else
+            currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(smallBlind));
+        StartTurn();
     }
 
     private void UpdateCurrentPlayersTurnInfo(TurnDoneMessage turnDoneMessage)

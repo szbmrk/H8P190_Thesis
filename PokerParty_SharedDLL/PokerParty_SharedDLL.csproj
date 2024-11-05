@@ -62,6 +62,7 @@
     <Compile Include="Networking\Message Models\PC\CommunityCardsChangedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\DealCardsMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameInfoMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\GameOverMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameStartedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\NotYourTurnMessage.cs" />
     <Compile Include="Networking\Message Models\PC\YourTurnMessage.cs" />

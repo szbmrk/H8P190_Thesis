@@ -26,6 +26,9 @@ public class TableManager : MonoBehaviour
     // 2% of starting money
     [HideInInspector] public int bigBlindBet;
 
+    public Card[] flippedCommunityCards;
+    private int turnCount = 0;
+
     private void Awake()
     {
         Instance = this;
@@ -104,6 +107,7 @@ public class TableManager : MonoBehaviour
         {
             Card[] cards = TexasHoldEm.DealCardsToPlayer(deck);
             DealCardsMessage dealCardsMessage = new DealCardsMessage();
+            playerSeats[i].turnInfo.cards = cards;
             dealCardsMessage.cards = cards;
             int indexInConnections = playerSeats[i].indexInConnectionsArray;
             ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], dealCardsMessage);
@@ -122,38 +126,38 @@ public class TableManager : MonoBehaviour
 
     public void DealFlop()
     {
-        Card[] communityCards = new Card[3];
+        flippedCommunityCards = new Card[3];
         for (int i = 0; i < 3; i++)
         {
-            communityCards[i] = tableCards[i].card;
+            flippedCommunityCards[i] = tableCards[i].card;
             tableCards[i].Flip();
         }
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = communityCards };
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
         ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void DealTurn()
     {
-        Card[] communityCards = new Card[4];
+        flippedCommunityCards = new Card[4];
         tableCards[3].Flip();
-        communityCards[0] = tableCards[0].card;
-        communityCards[1] = tableCards[1].card;
-        communityCards[2] = tableCards[2].card;
-        communityCards[3] = tableCards[3].card;
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = communityCards };
+        flippedCommunityCards[0] = tableCards[0].card;
+        flippedCommunityCards[1] = tableCards[1].card;
+        flippedCommunityCards[2] = tableCards[2].card;
+        flippedCommunityCards[3] = tableCards[3].card;
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
         ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void DealRiver()
     {
         tableCards[4].Flip();
-        Card[] communityCards = new Card[5];
-        communityCards[0] = tableCards[0].card;
-        communityCards[1] = tableCards[1].card;
-        communityCards[2] = tableCards[2].card;
-        communityCards[3] = tableCards[3].card;
-        communityCards[4] = tableCards[4].card;
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = communityCards };
+        flippedCommunityCards = new Card[5];
+        flippedCommunityCards[0] = tableCards[0].card;
+        flippedCommunityCards[1] = tableCards[1].card;
+        flippedCommunityCards[2] = tableCards[2].card;
+        flippedCommunityCards[3] = tableCards[3].card;
+        flippedCommunityCards[4] = tableCards[4].card;
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
         ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
@@ -162,5 +166,79 @@ public class TableManager : MonoBehaviour
         playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.newMoney);
         playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).TurnDone();
         TurnManager.Instance.HandleTurnDone(turnDoneMessage);
+    }
+
+    public IEnumerator ShowDown()
+    {
+        PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playerSeats.ToArray());
+        GivePotToWinners(winners);
+        moneyInPot = 0;
+        TableGUI.Instance.RefreshMoneyInPotText(moneyInPot);
+
+        if (winners.Length == 1)
+            yield return TableGUI.Instance.showTurnWinner(winners[0].Player.playerName);
+        else
+        {
+            string winnerText = "";
+            for (int i = 0; i < winners.Length; i++)
+            {
+                if (i == winners.Length - 1)
+                    winnerText += winners[i].Player.playerName;
+                else
+                    winnerText += winners[i].Player.playerName + ", ";
+            }
+            yield return TableGUI.Instance.showTurnWinner(winnerText);
+        }
+
+        turnCount++;
+    }
+
+    private void GivePotToWinners(PlayerHandInfo[] winners)
+    {
+        foreach (PlayerHandInfo winner in winners)
+        {
+            playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money += moneyInPot / winners.Length;
+            playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).RefreshMoney(playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money);
+        }
+    }
+
+    public void ResetAndRotatePlayers()
+    {
+        for (int i = 0; i < playerSeats.Count; i++)
+        {
+            playerSeats[i].Reset();
+        }
+
+        if (TurnManager.Instance.IsPlayerStillInGame(playerSeats[0 + turnCount]))
+        {
+            playerSeats[0 + turnCount].isDealer = true;
+        }
+        else
+        {
+            TurnManager.Instance.GetNextPlayerStillInGame(0 + turnCount).isDealer = true;
+        }
+
+        if (TurnManager.Instance.IsPlayerStillInGame(playerSeats[1 + turnCount]))
+        {
+            playerSeats[1 + turnCount].isSmallBlind = true;
+        }
+        else
+        {
+            TurnManager.Instance.GetNextPlayerStillInGame(1 + turnCount).isSmallBlind = true;
+        }
+
+        if (TurnManager.Instance.IsPlayerStillInGame(playerSeats[2 + turnCount]))
+        {
+            playerSeats[2 + turnCount].isBigBlind = true;
+        }
+        else
+        {
+            TurnManager.Instance.GetNextPlayerStillInGame(2 + turnCount).isBigBlind = true;
+        }
+
+        foreach (TablePlayerCard player in playerSeats)
+        {
+            player.SetRoleIcons();
+        }
     }
 }

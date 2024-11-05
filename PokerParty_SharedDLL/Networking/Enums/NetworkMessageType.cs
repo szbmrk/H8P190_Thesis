@@ -14,6 +14,7 @@
         NotYourTurnMessage,
         DealCardsMessage,
         CommunityCardsChangedMessage,
+        GameOverMessage,
         GameInfoMessage
     }
 }

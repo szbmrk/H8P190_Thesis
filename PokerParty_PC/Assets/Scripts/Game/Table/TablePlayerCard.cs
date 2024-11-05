@@ -37,11 +37,28 @@ public class TablePlayerCard : MonoBehaviour
         ELOText.text = $"ELO: {turnInfo.player.ELO}";
         LevelText.text = $"Level: {turnInfo.player.level}";
 
+        SetRoleIcons();
+        RefreshMoney(Settings.StartingMoney);
+        RefreshTurnIcon();
+    }
+
+    public void Reset()
+    {
+        isDealer = false;
+        isSmallBlind = false;
+        isBigBlind = false;
+        isTurn = false;
+        turnInfo.moneyPutInPot = 0;
+        turnInfo.cards = new Card[2];
+        MoneyPutInText.text = "Put in: 0 $";
+        RefreshTurnIcon();
+    }
+
+    public void SetRoleIcons()
+    {
         dealerIcon.SetActive(isDealer);
         smallBlindIcon.SetActive(isSmallBlind);
         bigBlindIcon.SetActive(isBigBlind);
-        RefreshMoney(Settings.StartingMoney);
-        RefreshTurnIcon();
     }
 
     public void RefreshTurnIcon()

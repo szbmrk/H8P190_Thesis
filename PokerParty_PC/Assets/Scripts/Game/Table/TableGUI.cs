@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ public class TableGUI : MonoBehaviour
     public List<Transform> cardPositions = new List<Transform>();
 
     [SerializeField] private TextMeshProUGUI moneyInPotText;
+    [SerializeField] private TextMeshProUGUI turnWinnerText;
 
     private void Awake()
     {
@@ -35,5 +37,13 @@ public class TableGUI : MonoBehaviour
     public void RefreshMoneyInPotText(int potMoney)
     {
         moneyInPotText.text = $"Pot: {potMoney} $";
+    }
+
+    public IEnumerator showTurnWinner(string winnerName)
+    {
+        turnWinnerText.text = $"Turn winner: {winnerName}";
+        turnWinnerText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        turnWinnerText.gameObject.SetActive(false);
     }
 }

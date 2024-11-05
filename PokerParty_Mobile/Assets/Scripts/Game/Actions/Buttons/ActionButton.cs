@@ -20,7 +20,8 @@ public class ActionButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         buttonText = GetComponentInChildren<TextMeshProUGUI>();
-        button.onClick.AddListener(OnClick);
+        if (button != null)
+            button.onClick.AddListener(OnClick);
     }
 
     private void OnClick()

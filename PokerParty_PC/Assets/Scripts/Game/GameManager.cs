@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using PokerParty_SharedDLL;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -21,8 +21,10 @@ public class GameManager : MonoBehaviour
         waitingFor.text = $"Waiting for {playerName} ...";
     }
 
-    public void GameOver()
+    public void GameOver(string winnerName)
     {
-
+        GameOverMessage gameOverMessage = new GameOverMessage();
+        ConnectionManager.Instance.SendMessageToAllConnections(gameOverMessage);
+        GameOverGUI.Instance.Open(winnerName);
     }
 }

@@ -11,6 +11,7 @@ public class PlayerTurnInfo
 
     public int money = Settings.StartingMoney;
     public int moneyPutInPot = 0;
+    public Card[] cards = new Card[2];
 
     public bool wentAllIn = false;
     public bool folded = false;

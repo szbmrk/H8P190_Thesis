@@ -103,14 +103,14 @@ namespace PokerParty_SharedDLL
             }
         }
 
-        public static PlayerHandInfo[] DetermineOrder(params PlayerHandInfo[] playerHandInfos)
+        public static PlayerHandInfo[] DetermineOrder(PlayerHandInfo[] playerHandInfos)
         {
             AssignHandTypes(playerHandInfos);
 
             return EvaluationHelper.CreateOrderedPlayerList(playerHandInfos);
         }
 
-        public static PlayerHandInfo[] DetermineWinners(params PlayerHandInfo[] playerHandInfos)
+        public static PlayerHandInfo[] DetermineWinners(PlayerHandInfo[] playerHandInfos)
         {
             PlayerHandInfo[] orderedPlayers = DetermineOrder(playerHandInfos);
             HandType bestHandType = orderedPlayers[0].Type;
