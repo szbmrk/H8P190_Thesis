@@ -45,12 +45,15 @@ public class CardsGUI : MonoBehaviour
             cards[i + 2] = communityCardsChanged.communityCards[i];
         }
 
-        bestHandText.text = TexasHoldEm.GetBestHandOfPlayer(TexasHoldEm.GetAllPossibleHands(cards)).ToString();
+        Card[][] allPossibleHands = TexasHoldEm.GetAllPossibleHands(cards);
+        Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(allPossibleHands);
+        HandType bestHandType = TexasHoldEm.EvaluateHand(bestHand);
+
+        bestHandText.text = bestHandType.ToString();
     }
 
     public Sprite GetSpriteByFileName(string fileName)
     {
-        Debug.Log("GetSpriteByFileName: " + fileName);
         Sprite[] sprites = Resources.LoadAll<Sprite>("Cards");
         foreach (Sprite sprite in sprites)
         {

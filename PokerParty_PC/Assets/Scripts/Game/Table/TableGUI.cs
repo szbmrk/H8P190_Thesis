@@ -43,7 +43,7 @@ public class TableGUI : MonoBehaviour
     {
         turnWinnerText.text = $"Turn winner: {winnerName}";
         turnWinnerText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         turnWinnerText.gameObject.SetActive(false);
     }
 }

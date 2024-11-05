@@ -147,7 +147,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 684648026}
   - {fileID: 871045979}
   - {fileID: 478928933}
   - {fileID: 1664528807}
@@ -517,12 +516,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 35
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -539,7 +538,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -598,7 +597,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 677353669}
-  m_Father: {fileID: 96055665}
+  m_Father: {fileID: 871045979}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -772,6 +771,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGamePanel: {fileID: 96055664}
+  cards:
+  - value: 0
+    suit: 
+  - value: 0
+    suit: 
   money: 0
 --- !u!114 &789810847
 MonoBehaviour:
@@ -1032,6 +1036,7 @@ RectTransform:
   m_Children:
   - {fileID: 910866830}
   - {fileID: 662247790}
+  - {fileID: 684648026}
   m_Father: {fileID: 96055665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

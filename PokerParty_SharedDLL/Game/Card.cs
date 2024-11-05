@@ -26,7 +26,7 @@ namespace PokerParty_SharedDLL
 
         public string GetFileNameForSprite()
         {
-            return suit + "_" + GetValueString() + ".png";
+            return suit + "_" + GetValueString();
         }
 
         public override string ToString()

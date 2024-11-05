@@ -16,7 +16,7 @@ namespace PokerParty_SharedDLL
             return cards;
         }
 
-        private static HandType EvaluateHand(Card[] hand)
+        public static HandType EvaluateHand(Card[] hand)
         {
             HandType type = HandType.None;
 

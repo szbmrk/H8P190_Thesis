@@ -125,9 +125,9 @@ public class TurnManager : MonoBehaviour
             possibleActions = new PossibleAction[] { PossibleAction.BET, PossibleAction.FOLD };
         else if (currentPlayerInTurn.turnInfo.money < MoneyNeededToCall)
             possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
-        else if (currentPlayerInTurn.turnInfo.moneyPutInPot < MoneyNeededToCall)
+        else if (currentPlayerInTurn.turnInfo.moneyPutInPot < highestBet)
             possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
-        else if (currentPlayerInTurn.turnInfo.moneyPutInPot == MoneyNeededToCall)
+        else if (currentPlayerInTurn.turnInfo.moneyPutInPot == highestBet)
             possibleActions = new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE };
 
         SendTurnMessage(possibleActions, MoneyNeededToCall);
@@ -198,13 +198,14 @@ public class TurnManager : MonoBehaviour
             moneyInTurn = 0;
             highestBet = 0;
 
-            StartCoroutine(TableManager.Instance.ShowDown());
+            TableManager.Instance.StartCoroutine(TableManager.Instance.ShowDown());
             return true;
         }
 
         if (PlayersNeedToCallCount == 0 && currentPlayerInTurn.Equals(lastPlayerInTurn))
         {
             TableManager.Instance.moneyInPot += moneyInTurn;
+            TableGUI.Instance.RefreshMoneyInPotText(TableManager.Instance.moneyInPot);
             moneyInTurn = 0;
             highestBet = 0;
 
@@ -212,16 +213,22 @@ public class TurnManager : MonoBehaviour
             {
                 turnState = TurnState.FLOP;
                 TableManager.Instance.DealFlop();
+                SetStartingPlayerToSmallBlind();
+                StartTurn();
             }
             else if (turnState == TurnState.FLOP)
             {
                 turnState = TurnState.TURN;
                 TableManager.Instance.DealTurn();
+                SetStartingPlayerToSmallBlind();
+                StartTurn();
             }
             else if (turnState == TurnState.TURN)
             {
                 turnState = TurnState.RIVER;
                 TableManager.Instance.DealRiver();
+                SetStartingPlayerToSmallBlind();
+                StartTurn();
             }
             else if (turnState == TurnState.RIVER)
             {
@@ -232,6 +239,15 @@ public class TurnManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void SetStartingPlayerToSmallBlind()
+    {
+        TablePlayerCard smallBlind = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
+        if (IsPlayerStillInGame(smallBlind))
+            currentPlayerInTurn = smallBlind;
+        else
+            currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(smallBlind));
     }
 
     private TablePlayerCard GetLastPlayerInGame()

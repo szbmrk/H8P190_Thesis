@@ -999,7 +999,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Raise to (300 $)
+  m_text: Raise (300 $)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2090,7 +2090,7 @@ MonoBehaviour:
   slider: {fileID: 2921558856999569618}
   moneyInput: {fileID: 1387080724955415110}
   submitBtnText: {fileID: 708966249050940788}
-  submitText: Raise to
+  submitText: Raise
   minValue: 0
   maxValue: 0
 --- !u!1 &8289838292495489815
