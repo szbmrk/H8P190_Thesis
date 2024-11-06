@@ -31,25 +31,20 @@ public class TurnManager : MonoBehaviour
             if (turnState == TurnState.PRE_FLOP)
             {
                 TablePlayerCard bigBlind = TableManager.Instance.playerSeats.Find(p => p.isBigBlind);
-                if (IsPlayerStillInGame(bigBlind))
+                if (bigBlind.IsStillInGame)
                     return bigBlind;
                 else
                     return GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(bigBlind));
             }
          
             TablePlayerCard dealer = TableManager.Instance.playerSeats.Find(p => p.isDealer);
-            if (IsPlayerStillInGame(dealer))
+            if (dealer.IsStillInGame)
                 return dealer;
             else
                 return GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(dealer));
         }
     }
-
-    public bool IsPlayerStillInGame(TablePlayerCard player)
-    {
-        return !player.turnInfo.folded && !player.turnInfo.wentAllIn && player.turnInfo.money > 0;
-    }
-
+    
     private void SetNextPlayerInTurn()
     {
         currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(currentPlayerInTurn)); ;
@@ -67,17 +62,14 @@ public class TurnManager : MonoBehaviour
 
         nextPlayer = TableManager.Instance.playerSeats[nextPlayerIndex];
 
-        if (!IsPlayerStillInGame(nextPlayer))
+        if (!nextPlayer.IsStillInGame)
             return GetNextPlayerStillInGame(nextPlayerIndex);
 
         return nextPlayer;
     }
 
-    private int PlayersInGameCount => TableManager.Instance.playerSeats
-        .FindAll(player => IsPlayerStillInGame(player)).Count;
-
     private int PlayersNeedToCallCount => TableManager.Instance.playerSeats
-        .FindAll(player => player.turnInfo.moneyPutInPot < highestBet && IsPlayerStillInGame(player)).Count;
+        .FindAll(player => player.turnInfo.moneyPutInPot < highestBet && player.IsStillInGame).Count;
 
     private int MoneyNeededToCall => highestBet - currentPlayerInTurn.turnInfo.moneyPutInPot;
 
@@ -192,7 +184,7 @@ public class TurnManager : MonoBehaviour
 
     private bool CheckIfTurnIsOver()
     {
-        if (PlayersInGameCount == 1)
+        if (TableManager.Instance.PlayersInGameCount == 1)
         {
             TableManager.Instance.moneyInPot += moneyInTurn;
             moneyInTurn = 0;
@@ -244,7 +236,7 @@ public class TurnManager : MonoBehaviour
     private void SetStartingPlayerToSmallBlind()
     {
         TablePlayerCard smallBlind = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
-        if (IsPlayerStillInGame(smallBlind))
+        if (smallBlind.IsStillInGame)
             currentPlayerInTurn = smallBlind;
         else
             currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(smallBlind));
@@ -252,7 +244,7 @@ public class TurnManager : MonoBehaviour
 
     private TablePlayerCard GetLastPlayerInGame()
     {
-        return TableManager.Instance.playerSeats.FindLast(p => IsPlayerStillInGame(p));
+        return TableManager.Instance.playerSeats.FindLast(p => p.IsStillInGame);
     }
 
     private bool CheckIfGameIsOver()
@@ -276,7 +268,7 @@ public class TurnManager : MonoBehaviour
     private void StartNewTurn()
     {
         TablePlayerCard smallBlind = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
-        if (IsPlayerStillInGame(smallBlind))
+        if (smallBlind.IsStillInGame)
             currentPlayerInTurn = smallBlind;
         else
             currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(smallBlind));

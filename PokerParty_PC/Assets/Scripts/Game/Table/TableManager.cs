@@ -29,6 +29,10 @@ public class TableManager : MonoBehaviour
     public Card[] flippedCommunityCards;
     private int turnCount = 0;
 
+    private int lastDealerIndex = 0;
+    private int lastSmallBlindIndex = 1;
+    private int lastBigBlindIndex = 2;
+
     private void Awake()
     {
         Instance = this;
@@ -69,6 +73,9 @@ public class TableManager : MonoBehaviour
             Loader.Instance.StopLoading();
         }
     }
+
+    public int PlayersInGameCount => playerSeats
+        .FindAll(player => player.IsStillInGame).Count;
 
     private void AssignRolesAndShuffleTheOrderOfPlayers()
     {
@@ -170,9 +177,9 @@ public class TableManager : MonoBehaviour
 
     public IEnumerator ShowDown()
     {
-        PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playerSeats.ToArray());
+        TablePlayerCard[] playersStillInGame = playerSeats.FindAll(p => !p.turnInfo.folded).ToArray(); 
+        PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playersStillInGame);
         GivePotToWinners(winners);
-        moneyInPot = 0;
         TableGUI.Instance.RefreshMoneyInPotText(moneyInPot);
 
         if (winners.Length == 1)
@@ -200,45 +207,39 @@ public class TableManager : MonoBehaviour
             playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money += moneyInPot / winners.Length;
             playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).RefreshMoney(playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money);
         }
+        moneyInPot = 0;
     }
 
     public void ResetAndRotatePlayers()
     {
-        for (int i = 0; i < playerSeats.Count; i++)
-        {
-            playerSeats[i].Reset();
-        }
+        ResetPlayers();
+        RotatePlayers();
+    }
 
-        if (TurnManager.Instance.IsPlayerStillInGame(playerSeats[0 + turnCount]))
-        {
-            playerSeats[0 + turnCount].isDealer = true;
-        }
-        else
-        {
-            TurnManager.Instance.GetNextPlayerStillInGame(0 + turnCount).isDealer = true;
-        }
-
-        if (TurnManager.Instance.IsPlayerStillInGame(playerSeats[1 + turnCount]))
-        {
-            playerSeats[1 + turnCount].isSmallBlind = true;
-        }
-        else
-        {
-            TurnManager.Instance.GetNextPlayerStillInGame(1 + turnCount).isSmallBlind = true;
-        }
-
-        if (TurnManager.Instance.IsPlayerStillInGame(playerSeats[2 + turnCount]))
-        {
-            playerSeats[2 + turnCount].isBigBlind = true;
-        }
-        else
-        {
-            TurnManager.Instance.GetNextPlayerStillInGame(2 + turnCount).isBigBlind = true;
-        }
-
+    private void ResetPlayers()
+    {
+        lastDealerIndex = playerSeats.IndexOf(playerSeats.Find(p => p.isDealer));
+        lastBigBlindIndex = playerSeats.IndexOf(playerSeats.Find(p => p.isBigBlind));
+        lastSmallBlindIndex = playerSeats.IndexOf(playerSeats.Find(p => p.isSmallBlind));
         foreach (TablePlayerCard player in playerSeats)
         {
-            player.SetRoleIcons();
+            player.Reset();
+        }
+    }
+
+    private void RotatePlayers()
+    {
+        if (playerSeats.Count >= 4)
+        {
+
+        }
+        else if (playerSeats.Count == 3)
+        {
+
+        }
+        else if (playerSeats.Count == 2)
+        {
+
         }
     }
 }

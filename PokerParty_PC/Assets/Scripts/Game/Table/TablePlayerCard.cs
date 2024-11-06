@@ -30,6 +30,14 @@ public class TablePlayerCard : MonoBehaviour
 
     [HideInInspector] public bool isTurn;
 
+    [HideInInspector] public bool IsStillInGame
+    {
+        get
+        {
+            return turnInfo.money > 0 && !turnInfo.folded && !turnInfo.wentAllIn;
+        }
+    }
+
     public void LoadData()
     {
         playerNameText.color = PlayerColorManager.GetColor(turnInfo.player.playerName);
