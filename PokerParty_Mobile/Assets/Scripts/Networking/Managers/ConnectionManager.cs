@@ -85,7 +85,6 @@ public class ConnectionManager : MonoBehaviour
                         GameOverGUI.Instance.ShowGameOverPanel();
                     }
 
-
                     StartCoroutine(DisposeNetworkDriver());
                     break;
             }
