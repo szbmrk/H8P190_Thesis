@@ -73,6 +73,8 @@ public class TurnManager : MonoBehaviour
 
     private int MoneyNeededToCall => highestBet - currentPlayerInTurn.turnInfo.moneyPutInPot;
 
+    private int PlayersStillIngameCount => TableManager.Instance.playerSeats.FindAll(p => p.IsStillInGame).Count;
+
     private void Awake()
     {
         Instance = this;
@@ -205,21 +207,21 @@ public class TurnManager : MonoBehaviour
             {
                 turnState = TurnState.FLOP;
                 TableManager.Instance.DealFlop();
-                SetStartingPlayerToSmallBlind();
+                SetStartingPlayer();
                 StartTurn();
             }
             else if (turnState == TurnState.FLOP)
             {
                 turnState = TurnState.TURN;
                 TableManager.Instance.DealTurn();
-                SetStartingPlayerToSmallBlind();
+                SetStartingPlayer();
                 StartTurn();
             }
             else if (turnState == TurnState.TURN)
             {
                 turnState = TurnState.RIVER;
                 TableManager.Instance.DealRiver();
-                SetStartingPlayerToSmallBlind();
+                SetStartingPlayer();
                 StartTurn();
             }
             else if (turnState == TurnState.RIVER)
@@ -233,8 +235,21 @@ public class TurnManager : MonoBehaviour
         return false;
     }
 
-    private void SetStartingPlayerToSmallBlind()
+    private void SetStartingPlayer()
     {
+        // két játokos esetén a nagyvak kezd
+        if (PlayersStillIngameCount == 2) 
+        {
+            TablePlayerCard bigBlind = TableManager.Instance.playerSeats.Find(p => p.isBigBlind);
+            if (bigBlind.IsStillInGame)
+                currentPlayerInTurn = bigBlind;
+            else
+                currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(bigBlind));
+
+            return;
+        }
+
+        // több játékos esetén a kisvak kezd
         TablePlayerCard smallBlind = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
         if (smallBlind.IsStillInGame)
             currentPlayerInTurn = smallBlind;

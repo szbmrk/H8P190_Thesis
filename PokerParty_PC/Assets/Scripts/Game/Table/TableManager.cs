@@ -229,17 +229,75 @@ public class TableManager : MonoBehaviour
 
     private void RotatePlayers()
     {
-        if (playerSeats.Count >= 4)
+        if (playerSeats.Count >= 3)
         {
+            lastDealerIndex++;
 
+            if (lastDealerIndex >= playerSeats.Count)
+                lastDealerIndex = 0;
+
+            TablePlayerCard newDealer = playerSeats[lastDealerIndex];
+
+            if (!newDealer.IsStillInGame)
+                newDealer = TurnManager.Instance.GetNextPlayerStillInGame(lastDealerIndex);
+
+            newDealer.isDealer = true;
+            lastDealerIndex = playerSeats.IndexOf(newDealer);
+
+            lastSmallBlindIndex = lastDealerIndex + 1;
+            if (lastSmallBlindIndex >= playerSeats.Count)
+                lastSmallBlindIndex = 0;
+
+            TablePlayerCard newSmallBlind = playerSeats[lastSmallBlindIndex];
+            if (!newSmallBlind.IsStillInGame)
+                newSmallBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastSmallBlindIndex);
+
+            newSmallBlind.isSmallBlind = true;
+            lastSmallBlindIndex = playerSeats.IndexOf(newSmallBlind);
+
+            lastBigBlindIndex = lastSmallBlindIndex + 1;
+            if (lastBigBlindIndex >= playerSeats.Count)
+                lastBigBlindIndex = 0;
+
+            TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
+            if (!newBigBlind.IsStillInGame)
+                newBigBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastBigBlindIndex);
+
+            newBigBlind.isBigBlind = true;
+            lastBigBlindIndex = playerSeats.IndexOf(newBigBlind);
         }
-        else if (playerSeats.Count == 3)
+        else
         {
+            lastDealerIndex++;
 
+            if (lastDealerIndex >= playerSeats.Count)
+                lastDealerIndex = 0;
+
+            TablePlayerCard newDealerAndSmallBlind = playerSeats[lastDealerIndex];
+
+            if (!newDealerAndSmallBlind.IsStillInGame)
+                newDealerAndSmallBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastDealerIndex);
+
+            newDealerAndSmallBlind.isDealer = true;
+            newDealerAndSmallBlind.isSmallBlind = true;
+
+            lastDealerIndex = playerSeats.IndexOf(newDealerAndSmallBlind);
+            lastSmallBlindIndex = lastDealerIndex;
+
+            lastBigBlindIndex = lastDealerIndex + 1;
+            if (lastBigBlindIndex >= playerSeats.Count)
+                lastBigBlindIndex = 0;
+
+            TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
+            if (!newBigBlind.IsStillInGame)
+                newBigBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastBigBlindIndex);
+
+            newBigBlind.isBigBlind = true;
         }
-        else if (playerSeats.Count == 2)
-        {
 
+        foreach (TablePlayerCard playerCard in playerSeats)
+        {
+            playerCard.SetRoleIcons();
         }
     }
 }

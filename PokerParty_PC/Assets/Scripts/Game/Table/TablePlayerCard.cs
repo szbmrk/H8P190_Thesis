@@ -34,7 +34,7 @@ public class TablePlayerCard : MonoBehaviour
     {
         get
         {
-            return turnInfo.money > 0 && !turnInfo.folded && !turnInfo.wentAllIn;
+            return turnInfo.money > 0 && !turnInfo.folded && !turnInfo.wentAllIn && !turnInfo.isOutOfGame;
         }
     }
 
@@ -58,7 +58,16 @@ public class TablePlayerCard : MonoBehaviour
         isTurn = false;
         turnInfo.moneyPutInPot = 0;
         turnInfo.cards = new Card[2];
+        turnInfo.folded = false;
         MoneyPutInText.text = "Put in: 0 $";
+        outOfTurn.SetActive(false);
+
+        if (turnInfo.money <= 0)
+        {
+            turnInfo.isOutOfGame = true;
+            OutOfTurn();
+        }
+
         RefreshTurnIcon();
     }
 
