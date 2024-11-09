@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PokerParty_SharedDLL;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +26,7 @@ public class GameOverGUI : MonoBehaviour
 
     private void Start()
     {
-        backToMainBtn.onClick.AddListener(OnBackToMainBtnClick);
+        backToMainBtn.onClick.AddListener(() => StartCoroutine(OnBackToMainBtnClick()));
     }
 
     public void Open(string WinnerName)
@@ -33,8 +35,12 @@ public class GameOverGUI : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    private void OnBackToMainBtnClick()
+    private IEnumerator OnBackToMainBtnClick()
     {
+        Loader.Instance.StartLoading();
+        ConnectionManager.Instance.DisconnectAllPlayers();
+        yield return ConnectionManager.Instance.DisposeDriverAndConnections();
+        Destroy(ConnectionManager.Instance.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 }

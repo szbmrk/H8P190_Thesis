@@ -60,7 +60,6 @@ public class ConnectionManager : MonoBehaviour
                     FixedString512Bytes msg = stream.ReadFixedString512();
                     string data = msg.ToString();
 
-                    Debug.Log($"Type: {type}");
                     Debug.Log($"Data received: {data}");
 
                     NetworkMessageHandler.ProcessMesage(type, data);
@@ -78,20 +77,19 @@ public class ConnectionManager : MonoBehaviour
                     {
                         NetworkingGUI.Instance.ShowJoinedPanel(false);
                         NetworkingGUI.Instance.ResetReadyButton();
+                        PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
                     }
-                    PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
-                    PopupManager.Instance.currentPopup.okButton.onClick.AddListener(() => GotDisconnected());
+
+                    if (GameOverGUI.Instance != null)
+                    {
+                        GameOverGUI.Instance.ShowGameOverPanel();
+                    }
+
+
                     StartCoroutine(DisposeNetworkDriver());
                     break;
             }
         }
-    }
-
-    public void GotDisconnected()
-    {
-        if (SceneManager.GetActiveScene().name == "Game")
-            SceneManager.LoadScene("Lobby");
-
     }
 
     public async void JoinRelay(string joinCode)

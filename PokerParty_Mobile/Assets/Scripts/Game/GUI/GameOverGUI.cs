@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,16 +13,23 @@ public class GameOverGUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        backToMainBtn.onClick.AddListener(OnBackToMainBtnClick);
+        backToMainBtn.onClick.AddListener(() => StartCoroutine(OnBackToMainBtnClick()));
     }
 
     public void ShowGameOverPanel()
     {
+        if (gameOverPanel.activeInHierarchy)
+            return;
+
+        GameGUI.Instance.inGamePanel.SetActive(false);
         gameOverPanel.SetActive(true);
     }
 
-    private void OnBackToMainBtnClick()
+    private IEnumerator OnBackToMainBtnClick()
     {
+        Loader.Instance.StartLoading();
+        yield return ConnectionManager.Instance.DisposeNetworkDriver();
+        Destroy(ConnectionManager.Instance.gameObject);
         SceneManager.LoadScene("Lobby");
     }
 }

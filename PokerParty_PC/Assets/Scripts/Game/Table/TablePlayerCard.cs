@@ -66,6 +66,7 @@ public class TablePlayerCard : MonoBehaviour
         {
             turnInfo.isOutOfGame = true;
             OutOfTurn();
+            ConnectionManager.Instance.DisconnectPlayer(indexInConnectionsArray);
         }
 
         RefreshTurnIcon();
