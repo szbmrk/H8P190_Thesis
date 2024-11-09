@@ -210,7 +210,22 @@ public class TableManager : MonoBehaviour
         moneyInPot = 0;
     }
 
-    public void ResetAndRotatePlayers()
+    public void StartNewGame()
+    {
+        ClearTable();
+        ResetAndRotatePlayers();
+    }
+
+    private void ClearTable()
+    {
+        foreach (TableCard card in tableCards)
+        {
+            Destroy(card.gameObject);
+        }
+        tableCards.Clear();
+    }
+
+    private void ResetAndRotatePlayers()
     {
         ResetPlayers();
         RotatePlayers();

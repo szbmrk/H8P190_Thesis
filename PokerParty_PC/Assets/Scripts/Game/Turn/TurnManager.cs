@@ -82,7 +82,8 @@ public class TurnManager : MonoBehaviour
 
     public void StartFirstTurn()
     {
-        currentPlayerInTurn = TableManager.Instance.playerSeats[1];
+        turnState = TurnState.SMALLBLIND_TURN;
+        currentPlayerInTurn = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
         currentPlayerInTurn.StartTurn();
 
         PossibleAction[] possibleActions = null;
@@ -276,8 +277,8 @@ public class TurnManager : MonoBehaviour
             yield break;
         }
 
-        TableManager.Instance.ResetAndRotatePlayers();
-        StartNewTurn();
+        TableManager.Instance.StartNewGame();
+        StartFirstTurn();
     }
 
     private void StartNewTurn()
