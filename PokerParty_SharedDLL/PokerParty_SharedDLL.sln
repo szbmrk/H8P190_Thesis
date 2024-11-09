@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerParty_SharedDLL", "PokerParty_SharedDLL.csproj", "{016C7BC5-C2ED-4314-82DB-825984933245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerParty_SharedDLL.UnitTests", "..\PokerParty_SharedDLL.UnitTests\PokerParty_SharedDLL.UnitTests.csproj", "{EA0BE434-6034-4574-BF54-D45A3B05BEF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerParty_SharedDLL.Tests", "..\PokerParty_SharedDLL.Tests\PokerParty_SharedDLL.Tests.csproj", "{F946845A-8DF1-46B6-AB75-0561D25BD38D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{016C7BC5-C2ED-4314-82DB-825984933245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016C7BC5-C2ED-4314-82DB-825984933245}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016C7BC5-C2ED-4314-82DB-825984933245}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA0BE434-6034-4574-BF54-D45A3B05BEF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA0BE434-6034-4574-BF54-D45A3B05BEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA0BE434-6034-4574-BF54-D45A3B05BEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA0BE434-6034-4574-BF54-D45A3B05BEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F946845A-8DF1-46B6-AB75-0561D25BD38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F946845A-8DF1-46B6-AB75-0561D25BD38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F946845A-8DF1-46B6-AB75-0561D25BD38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F946845A-8DF1-46B6-AB75-0561D25BD38D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
