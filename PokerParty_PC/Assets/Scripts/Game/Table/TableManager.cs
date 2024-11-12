@@ -213,6 +213,7 @@ public class TableManager : MonoBehaviour
     public void StartNewGame()
     {
         ClearTable();
+        ReshufleDeck();
         ResetAndRotatePlayers();
     }
 
@@ -240,6 +241,12 @@ public class TableManager : MonoBehaviour
         {
             player.Reset();
         }
+    }
+
+    private void ReshufleDeck()
+    {
+        deck = new Deck();
+        deck.Shuffle();
     }
 
     private void RotatePlayers()
