@@ -42,8 +42,8 @@ public class TableGUI : MonoBehaviour
     public IEnumerator showTurnWinner(string winnerName)
     {
         turnWinnerText.text = $"Turn winner: {winnerName}";
-        turnWinnerText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(5f);
-        turnWinnerText.gameObject.SetActive(false);
+        turnWinnerText.transform.parent.gameObject.SetActive(true);
+        yield return new WaitForSeconds(7f);
+        turnWinnerText.transform.parent.gameObject.SetActive(false);
     }
 }
