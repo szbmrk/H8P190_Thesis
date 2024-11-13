@@ -12,7 +12,7 @@ services:
     ports:
       - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - pokerparty_data:/var/lib/postgresql/data
+      - ./pokerparty_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   api:
