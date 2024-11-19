@@ -120,10 +120,14 @@ public class TurnManager : MonoBehaviour
             possibleActions = new PossibleAction[] { PossibleAction.BET, PossibleAction.FOLD };
         else if (currentPlayerInTurn.turnInfo.money < MoneyNeededToCall)
             possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
-        else if (currentPlayerInTurn.turnInfo.moneyPutInPot < highestBet)
-            possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
+        else if (currentPlayerInTurn.turnInfo.money >= MoneyNeededToCall)
+        {
+            possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.FOLD };
+            if (currentPlayerInTurn.turnInfo.money > MoneyNeededToCall)
+                possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
+        }
         else if (currentPlayerInTurn.turnInfo.moneyPutInPot == highestBet)
-            possibleActions = new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE };
+            possibleActions = new PossibleAction[] { PossibleAction.CHECK };
 
         SendTurnMessage(possibleActions, MoneyNeededToCall);
     }
