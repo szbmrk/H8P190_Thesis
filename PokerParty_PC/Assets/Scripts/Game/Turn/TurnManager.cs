@@ -88,12 +88,12 @@ public class TurnManager : MonoBehaviour
 
         PossibleAction[] possibleActions = null;
 
-        if (currentPlayerInTurn.turnInfo.money < TableManager.Instance.smallBlindBet)
+        if (currentPlayerInTurn.turnInfo.money < MatchManager.Instance.smallBlindBet)
             possibleActions = new PossibleAction[] { PossibleAction.ALL_IN };
         else
             possibleActions = new PossibleAction[] { PossibleAction.SMALL_BLIND_BET };
 
-        SendTurnMessage(possibleActions, TableManager.Instance.smallBlindBet);
+        SendTurnMessage(possibleActions, MatchManager.Instance.smallBlindBet);
     }
 
     public void StartSecondTurn()
@@ -103,12 +103,12 @@ public class TurnManager : MonoBehaviour
 
         PossibleAction[] possibleActions = null;
 
-        if (currentPlayerInTurn.turnInfo.money < TableManager.Instance.bigBlindBet)
+        if (currentPlayerInTurn.turnInfo.money < MatchManager.Instance.bigBlindBet)
             possibleActions = new PossibleAction[] { PossibleAction.ALL_IN };
         else
             possibleActions = new PossibleAction[] { PossibleAction.BIG_BLIND_BET };
 
-        SendTurnMessage(possibleActions, TableManager.Instance.bigBlindBet);
+        SendTurnMessage(possibleActions, MatchManager.Instance.bigBlindBet);
     }
 
     public void StartTurn()
@@ -193,7 +193,7 @@ public class TurnManager : MonoBehaviour
             moneyInTurn = 0;
             highestBet = 0;
 
-            TableManager.Instance.StartCoroutine(TableManager.Instance.ShowDown());
+            MatchManager.Instance.StartCoroutine(MatchManager.Instance.ShowDown());
             return true;
         }
 
@@ -270,7 +270,7 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator ShowDown()
     {
-        yield return TableManager.Instance.ShowDown();
+        yield return MatchManager.Instance.ShowDown();
         if (CheckIfGameIsOver())
         {
             GameManager.Instance.GameOver(GetLastPlayerInGame().turnInfo.player.playerName);

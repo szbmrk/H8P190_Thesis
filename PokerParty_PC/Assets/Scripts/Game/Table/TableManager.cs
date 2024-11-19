@@ -19,25 +19,17 @@ public class TableManager : MonoBehaviour
     int playersToConnect = Settings.PlayerCount;
 
     [HideInInspector] public Deck deck;
-    [HideInInspector] public int moneyInPot = 0;
-
-    // 1% of starting money
-    [HideInInspector] public int smallBlindBet;
-    // 2% of starting money
-    [HideInInspector] public int bigBlindBet;
-
     public Card[] flippedCommunityCards;
-    private int turnCount = 0;
 
     private int lastDealerIndex = 0;
     private int lastSmallBlindIndex = 1;
     private int lastBigBlindIndex = 2;
 
+    [HideInInspector] public int moneyInPot;
+
     private void Awake()
     {
         Instance = this;
-        smallBlindBet = (int)(Settings.StartingMoney * 0.01);
-        bigBlindBet = (int)(Settings.StartingMoney * 0.02);
     }
 
     private void Start()
@@ -68,7 +60,7 @@ public class TableManager : MonoBehaviour
         if (playersToConnect == 0)
         {
             AssignRolesAndShuffleTheOrderOfPlayers();
-            SendGameInfoToPlayers();
+            MatchManager.Instance.SendGameInfoToPlayers();
             TurnManager.Instance.StartFirstTurn();
             Loader.Instance.StopLoading();
         }
@@ -88,23 +80,6 @@ public class TableManager : MonoBehaviour
         for (int i = 0; i < playerSeats.Count; i++)
         {
             TableGUI.Instance.DisplayPlayer(playerSeats[i], i);
-        }
-    }
-
-    public void SendGameInfoToPlayers()
-    {
-        for (int i = 0; i < playerSeats.Count; i++)
-        {
-            GameInfoMessage gameInfoMessage = new GameInfoMessage();
-            gameInfoMessage.startingMoney = Settings.StartingMoney;
-            gameInfoMessage.smallBlindAmount = smallBlindBet;
-            gameInfoMessage.bigBlindAmount = bigBlindBet;
-            gameInfoMessage.isDealer = playerSeats[i].isDealer;
-            gameInfoMessage.isSmallBlind = playerSeats[i].isSmallBlind;
-            gameInfoMessage.isBigBlind = playerSeats[i].isBigBlind;
-
-            int indexInConnections = playerSeats[i].indexInConnectionsArray;
-            ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], gameInfoMessage);
         }
     }
 
@@ -175,37 +150,14 @@ public class TableManager : MonoBehaviour
         TurnManager.Instance.HandleTurnDone(turnDoneMessage);
     }
 
-    public IEnumerator ShowDown()
-    {
-        TablePlayerCard[] playersStillInGame = playerSeats.FindAll(p => !p.turnInfo.folded).ToArray(); 
-        PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playersStillInGame);
-        GivePotToWinners(winners);
-        TableGUI.Instance.RefreshMoneyInPotText(moneyInPot);
-
-        if (winners.Length == 1)
-            yield return TableGUI.Instance.showTurnWinner(winners[0].Player.playerName);
-        else
-        {
-            string winnerText = "";
-            for (int i = 0; i < winners.Length; i++)
-            {
-                if (i == winners.Length - 1)
-                    winnerText += winners[i].Player.playerName;
-                else
-                    winnerText += winners[i].Player.playerName + ", ";
-            }
-            yield return TableGUI.Instance.showTurnWinner(winnerText);
-        }
-
-        turnCount++;
-    }
-
-    private void GivePotToWinners(PlayerHandInfo[] winners)
+    public void GivePotToWinners(PlayerHandInfo[] winners)
     {
         foreach (PlayerHandInfo winner in winners)
         {
-            playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money += moneyInPot / winners.Length;
-            playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).RefreshMoney(playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money);
+            TablePlayerCard winnerCard = playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player));
+            winnerCard.turnInfo.money += moneyInPot / winners.Length;
+            winnerCard.turnInfo.wentAllIn = false;
+            winnerCard.RefreshMoney(playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money);
         }
         moneyInPot = 0;
     }
@@ -248,78 +200,61 @@ public class TableManager : MonoBehaviour
         deck = new Deck();
         deck.Shuffle();
     }
-
     private void RotatePlayers()
     {
         if (playerSeats.Count >= 3)
         {
-            lastDealerIndex++;
-
-            if (lastDealerIndex >= playerSeats.Count)
-                lastDealerIndex = 0;
-
-            TablePlayerCard newDealer = playerSeats[lastDealerIndex];
-
-            if (!newDealer.IsStillInGame)
-                newDealer = TurnManager.Instance.GetNextPlayerStillInGame(lastDealerIndex);
-
-            newDealer.isDealer = true;
-            lastDealerIndex = playerSeats.IndexOf(newDealer);
-
-            lastSmallBlindIndex = lastDealerIndex + 1;
-            if (lastSmallBlindIndex >= playerSeats.Count)
-                lastSmallBlindIndex = 0;
-
-            TablePlayerCard newSmallBlind = playerSeats[lastSmallBlindIndex];
-            if (!newSmallBlind.IsStillInGame)
-                newSmallBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastSmallBlindIndex);
-
-            newSmallBlind.isSmallBlind = true;
-            lastSmallBlindIndex = playerSeats.IndexOf(newSmallBlind);
-
-            lastBigBlindIndex = lastSmallBlindIndex + 1;
-            if (lastBigBlindIndex >= playerSeats.Count)
-                lastBigBlindIndex = 0;
-
-            TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
-            if (!newBigBlind.IsStillInGame)
-                newBigBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastBigBlindIndex);
-
-            newBigBlind.isBigBlind = true;
-            lastBigBlindIndex = playerSeats.IndexOf(newBigBlind);
+            RotateMultiplePlayers();
         }
         else
         {
-            lastDealerIndex++;
-
-            if (lastDealerIndex >= playerSeats.Count)
-                lastDealerIndex = 0;
-
-            TablePlayerCard newDealerAndSmallBlind = playerSeats[lastDealerIndex];
-
-            if (!newDealerAndSmallBlind.IsStillInGame)
-                newDealerAndSmallBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastDealerIndex);
-
-            newDealerAndSmallBlind.isDealer = true;
-            newDealerAndSmallBlind.isSmallBlind = true;
-
-            lastDealerIndex = playerSeats.IndexOf(newDealerAndSmallBlind);
-            lastSmallBlindIndex = lastDealerIndex;
-
-            lastBigBlindIndex = lastDealerIndex + 1;
-            if (lastBigBlindIndex >= playerSeats.Count)
-                lastBigBlindIndex = 0;
-
-            TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
-            if (!newBigBlind.IsStillInGame)
-                newBigBlind = TurnManager.Instance.GetNextPlayerStillInGame(lastBigBlindIndex);
-
-            newBigBlind.isBigBlind = true;
+            RotateFewerPlayers();
         }
 
         foreach (TablePlayerCard playerCard in playerSeats)
         {
             playerCard.SetRoleIcons();
         }
+    }
+
+    private void RotateMultiplePlayers()
+    {
+        lastDealerIndex = GetNextValidPlayerIndex(lastDealerIndex);
+        TablePlayerCard newDealer = playerSeats[lastDealerIndex];
+        newDealer.isDealer = true;
+
+        lastSmallBlindIndex = GetNextValidPlayerIndex(lastDealerIndex + 1);
+        TablePlayerCard newSmallBlind = playerSeats[lastSmallBlindIndex];
+        newSmallBlind.isSmallBlind = true;
+
+        lastBigBlindIndex = GetNextValidPlayerIndex(lastSmallBlindIndex + 1);
+        TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
+        newBigBlind.isBigBlind = true;
+    }
+
+    private void RotateFewerPlayers()
+    {
+        lastDealerIndex = GetNextValidPlayerIndex(lastDealerIndex);
+        TablePlayerCard newDealerAndSmallBlind = playerSeats[lastDealerIndex];
+        newDealerAndSmallBlind.isDealer = true;
+        newDealerAndSmallBlind.isSmallBlind = true;
+
+        lastBigBlindIndex = GetNextValidPlayerIndex(lastDealerIndex + 1);
+        TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
+        newBigBlind.isBigBlind = true;
+    }
+
+    private int GetNextValidPlayerIndex(int startIndex)
+    {
+        int index = startIndex % playerSeats.Count;
+        TablePlayerCard player = playerSeats[index];
+
+        if (!player.IsStillInGame)
+        {
+            player = TurnManager.Instance.GetNextPlayerStillInGame(index);
+            index = playerSeats.IndexOf(player);
+        }
+
+        return index;
     }
 }
