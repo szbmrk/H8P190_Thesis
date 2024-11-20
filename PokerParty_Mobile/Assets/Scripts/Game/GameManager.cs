@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [SerializeField] private GameObject inGamePanel;
-
     public Card[] cards = new Card[2];
     public int money;
 
