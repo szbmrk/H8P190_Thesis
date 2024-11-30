@@ -20,21 +20,24 @@ public class LobbyGUI : MonoBehaviour
     [SerializeField] private GameObject LobbyPanel;
     [SerializeField] private LobbyPlayerCard playerCardPrefab;
     [SerializeField] private Transform parentForPlayerCards;
+    [SerializeField] private TMP_Dropdown startingMoneyDropdown;
 
     private int numOfPlayers = 0;
+    private int startingMoney = 1000;
 
     private void Start()
     {
         if (Instance == null)
             Instance = this;
 
+        startingMoneyDropdown.onValueChanged.AddListener(HandleStartingMoneyDropdownValueChanged);
         deleteLobbyBtn.onClick.AddListener(() => StartCoroutine(DeleteLobby()));
         startGameBtn.onClick.AddListener(StartGame);
     }
     
     public void StartGame()
     {
-        Settings.StartingMoney = 5000;
+        Settings.StartingMoney = startingMoney;
         Settings.PlayerCount = numOfPlayers;
         ConnectionManager.Instance.SendMessageToAllConnections(new GameStartedMessage());
         SceneManager.LoadScene("Game");
@@ -109,6 +112,12 @@ public class LobbyGUI : MonoBehaviour
         }
 
         playerCount.text = numOfPlayers.ToString() + "/8";
+    }
+
+    private void HandleStartingMoneyDropdownValueChanged(int index)
+    {
+        int newStartingMoney = int.Parse(startingMoneyDropdown.options[index].text.Split(' ')[0]);
+        startingMoney = newStartingMoney;
     }
 
     public void ShowPanel()
