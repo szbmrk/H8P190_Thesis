@@ -197,7 +197,7 @@ public class TurnManager : MonoBehaviour
             moneyInTurn = 0;
             highestBet = 0;
 
-            MatchManager.Instance.StartCoroutine(MatchManager.Instance.ShowDown());
+            StartCoroutine(ShowDown());
             return true;
         }
 
