@@ -40,25 +40,39 @@ namespace PokerParty_SharedDLL.Tests
             Assert.Equal(0b000000110000000000000111000000000000000000000000000000000000, EvaluationHelper.GetFaceValueCountBitField(handWithFullHouse3Nine2K));
         }
 
-        /*
         [Theory]
-        [InlineData(HandCollection.HighCard, HandType.HighCard)]
-        public void GetHandTypeByCountOfFaceValues_WhenHands_ShouldReturnCorrectHandType(Card[] hand, HandType expectedHandType)
+        // High Card: No combination
+        [InlineData(14, "Hearts", 12, "Spades", 9, "Diamonds", 6, "Clubs", 4, "Hearts", HandType.HighCard)]
+        // One Pair: A pair of cards with the same value
+        [InlineData(6, "Hearts", 6, "Spades", 3, "Diamonds", 9, "Clubs", 12, "Hearts", HandType.OnePair)]
+        // Two Pair: Two pairs of cards with matching values
+        [InlineData(8, "Hearts", 8, "Spades", 4, "Diamonds", 4, "Clubs", 13, "Hearts", HandType.TwoPair)]
+        // Three of a Kind: Three cards with the same value
+        [InlineData(11, "Hearts", 11, "Spades", 11, "Diamonds", 2, "Clubs", 7, "Spades", HandType.ThreeOfAKind)]
+        // Full House: Three of a kind and a pair
+        [InlineData(9, "Hearts", 9, "Spades", 9, "Diamonds", 12, "Clubs", 12, "Spades", HandType.FullHouse)]
+        // Four of a Kind: Four cards with the same value
+        [InlineData(10, "Hearts", 10, "Spades", 10, "Diamonds", 10, "Clubs", 2, "Hearts", HandType.FourOfAKind)]
+        public void GetHandTypeByCountOfFaceValues_WhenHands_ShouldReturnCorrectHandType(
+            int card1Value, string card1Suit,
+            int card2Value, string card2Suit,
+            int card3Value, string card3Suit,
+            int card4Value, string card4Suit,
+            int card5Value, string card5Suit,
+            HandType expectedHandType)
         {
+            Card[] hand = new Card[]
+            {
+                new Card(card1Value, card1Suit),
+                new Card(card2Value, card2Suit),
+                new Card(card3Value, card3Suit),
+                new Card(card4Value, card4Suit),
+                new Card(card5Value, card5Suit)
+            };
 
+            long mod15Res = EvaluationHelper.GetFaceValueCountBitField(hand) % 15;
+            HandType handType = EvaluationHelper.GetHandTypeByCountOfFaceValues(mod15Res);
+            Assert.Equal(expectedHandType, handType);
         }
-
-        /*
-        public static HandType GetHandTypeByCountOfFaceValues(long mod15Res)
-        {
-            if (mod15Res == 1) return HandType.FourOfAKind;
-            if (mod15Res == 10) return HandType.FullHouse;
-            if (mod15Res == 9) return HandType.ThreeOfAKind;
-            if (mod15Res == 7) return HandType.TwoPair;
-            if (mod15Res == 6) return HandType.OnePair;
-            if (mod15Res == 5) return HandType.HighCard;
-
-            return HandType.None;
-        }*/
     }
 }
