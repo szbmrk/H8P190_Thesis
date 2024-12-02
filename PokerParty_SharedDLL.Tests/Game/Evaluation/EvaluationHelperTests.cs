@@ -74,5 +74,62 @@ namespace PokerParty_SharedDLL.Tests
             HandType handType = EvaluationHelper.GetHandTypeByCountOfFaceValues(mod15Res);
             Assert.Equal(expectedHandType, handType);
         }
+
+        [Theory]
+        // Straight: Five cards in a sequence
+        [InlineData(9, "Hearts", 10, "Spades", 11, "Hearts", 12, "Clubs", 13, "Spades", HandType.Straight)]
+        // Ace Low Straight: Five cards in a sequence with Ace as the lowest card
+        [InlineData(2, "Hearts", 3, "Spades", 4, "Hearts", 5, "Clubs", 14, "Spades", HandType.Straight)]
+        // Not Straight: No sequence
+        [InlineData(2, "Hearts", 3, "Spades", 4, "Hearts", 5, "Clubs", 7, "Spades", HandType.None)]
+        public void CheckForStraight_WhenHands_ShouldReturnCorrectHandType(
+            int card1Value, string card1Suit,
+            int card2Value, string card2Suit,
+            int card3Value, string card3Suit,
+            int card4Value, string card4Suit,
+            int card5Value, string card5Suit,
+            HandType expectedHandType)
+        {
+            Card[] hand = new Card[]
+            {
+                new Card(card1Value, card1Suit),
+                new Card(card2Value, card2Suit),
+                new Card(card3Value, card3Suit),
+                new Card(card4Value, card4Suit),
+                new Card(card5Value, card5Suit)
+            };
+
+            int faceValueBitField = EvaluationHelper.GetFaceValueBitField(hand);
+            Assert.Equal(EvaluationHelper.CheckForStraight(faceValueBitField), expectedHandType);
+        }
+
+        [Theory]
+        // Flush: Five cards of the same suit
+        [InlineData(2, "Hearts", 3, "Hearts", 4, "Hearts", 5, "Hearts", 7, "Hearts", HandType.Flush)]
+        // Straight Flush: Five cards in a sequence of the same suit
+        [InlineData(9, "Hearts", 10, "Hearts", 11, "Hearts", 12, "Hearts", 13, "Hearts", HandType.StraightFlush)]
+        // Royal Flush: A straight flush with Ace as the highest card
+        [InlineData(10, "Hearts", 11, "Hearts", 12, "Hearts", 13, "Hearts", 14, "Hearts", HandType.RoyalFlush)]
+        // Not Flush: No cards of the same suit
+        [InlineData(2, "Hearts", 3, "Spades", 4, "Hearts", 5, "Clubs", 7, "Spades", HandType.None)]
+        public void CheckForFlushes_WhenHands_ShouldReturnCorrectHandType(
+            int card1Value, string card1Suit,
+            int card2Value, string card2Suit,
+            int card3Value, string card3Suit,
+            int card4Value, string card4Suit,
+            int card5Value, string card5Suit,
+            HandType expectedHandType)
+        {
+            Card[] hand = new Card[]
+            {
+                new Card(card1Value, card1Suit),
+                new Card(card2Value, card2Suit),
+                new Card(card3Value, card3Suit),
+                new Card(card4Value, card4Suit),
+                new Card(card5Value, card5Suit)
+            };
+
+            Assert.Equal(EvaluationHelper.CheckForFlushes(hand), expectedHandType);
+        }
     }
 }
