@@ -23,6 +23,7 @@ public class TurnManager : MonoBehaviour
 
     private int moneyInTurn = 0;
     private int highestBet = 0;
+    private bool hasAnyoneBetted = false;
 
     private TablePlayerCard lastPlayerInTurn
     {
@@ -36,7 +37,7 @@ public class TurnManager : MonoBehaviour
                 else
                     return GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(bigBlind));
             }
-         
+
             TablePlayerCard dealer = TableManager.Instance.playerSeats.Find(p => p.isDealer);
             if (dealer.IsStillInGame)
                 return dealer;
@@ -44,7 +45,7 @@ public class TurnManager : MonoBehaviour
                 return GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(dealer));
         }
     }
-    
+
     private void SetNextPlayerInTurn()
     {
         currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(currentPlayerInTurn)); ;
@@ -82,6 +83,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartFirstTurn()
     {
+        hasAnyoneBetted = false;
         turnState = TurnState.SMALLBLIND_TURN;
         currentPlayerInTurn = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
         currentPlayerInTurn.StartTurn();
@@ -116,18 +118,33 @@ public class TurnManager : MonoBehaviour
         currentPlayerInTurn.StartTurn();
 
         PossibleAction[] possibleActions = null;
-        if (highestBet == 0)
-            possibleActions = new PossibleAction[] { PossibleAction.BET, PossibleAction.FOLD };
-        else if (currentPlayerInTurn.turnInfo.money < MoneyNeededToCall)
-            possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
-        else if (currentPlayerInTurn.turnInfo.money >= MoneyNeededToCall)
+        if (!hasAnyoneBetted)
         {
-            possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.FOLD };
-            if (currentPlayerInTurn.turnInfo.money > MoneyNeededToCall)
-                possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
+            possibleActions = new PossibleAction[] { PossibleAction.CHECK, PossibleAction.BET, PossibleAction.FOLD };
         }
-        else if (currentPlayerInTurn.turnInfo.moneyPutInPot == highestBet)
-            possibleActions = new PossibleAction[] { PossibleAction.CHECK };
+        else
+        {
+            if (currentPlayerInTurn == lastPlayerInTurn && MoneyNeededToCall == 0)
+            {
+                possibleActions = new PossibleAction[] { PossibleAction.CHECK, PossibleAction.FOLD };
+
+                if (currentPlayerInTurn.turnInfo.money > 0)
+                    possibleActions = new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE, PossibleAction.FOLD };
+            }
+            else
+            {
+                if (currentPlayerInTurn.turnInfo.money < MoneyNeededToCall)
+                    possibleActions = new PossibleAction[] { PossibleAction.FOLD, PossibleAction.ALL_IN };
+                else if (currentPlayerInTurn.turnInfo.money >= MoneyNeededToCall)
+                {
+
+                    possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.FOLD };
+                    if (currentPlayerInTurn.turnInfo.money > MoneyNeededToCall)
+                        possibleActions = new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
+                }
+            }
+
+        }
 
         SendTurnMessage(possibleActions, MoneyNeededToCall);
     }
@@ -170,6 +187,7 @@ public class TurnManager : MonoBehaviour
 
         if (turnState == TurnState.SMALLBLIND_TURN)
         {
+            hasAnyoneBetted = true;
             StartSecondTurn();
             return;
         }
@@ -243,7 +261,7 @@ public class TurnManager : MonoBehaviour
     private void SetStartingPlayer()
     {
         // két játokos esetén a nagyvak kezd
-        if (PlayersStillIngameCount == 2) 
+        if (PlayersStillIngameCount == 2)
         {
             TablePlayerCard bigBlind = TableManager.Instance.playerSeats.Find(p => p.isBigBlind);
             if (bigBlind.IsStillInGame)
@@ -311,6 +329,11 @@ public class TurnManager : MonoBehaviour
             currentPlayerInTurn.RefreshMoneyPutIn(currentPlayerInTurn.turnInfo.moneyPutInPot);
             currentPlayerInTurn.OutOfTurn();
             return;
+        }
+
+        if (turnDoneMessage.action == PossibleAction.BET)
+        {
+            hasAnyoneBetted = true;
         }
 
         currentPlayerInTurn.turnInfo.moneyPutInPot += turnDoneMessage.actionAmount;
