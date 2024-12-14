@@ -63,13 +63,19 @@ public class TablePlayerCard : MonoBehaviour
         MoneyPutInText.text = "Put in: 0 $";
         outOfTurn.SetActive(false);
 
-        if (turnInfo.money <= 0)
+        if (turnInfo.money <= 0 && gameObject.activeInHierarchy)
         {
             OutOfTurn();
             GameManager.Instance.SendGameOverMessageToPlayer(indexInConnectionsArray);
         }
 
         RefreshTurnIcon();
+    }
+
+    public void Disconnected()
+    {
+        Reset();
+        gameObject.SetActive(false);
     }
 
     public void SetRoleIcons()

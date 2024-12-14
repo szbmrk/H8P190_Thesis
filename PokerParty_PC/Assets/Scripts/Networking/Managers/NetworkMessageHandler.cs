@@ -15,6 +15,8 @@ public static class NetworkMessageHandler
 
             case NetworkMessageType.DisconnectMessage:
                 DisconnectMessage disconnectMessage = FromStringToJson<DisconnectMessage>(data);
+                if (TableManager.Instance != null)
+                    TableManager.Instance.PlayerDisconnected(disconnectMessage.player);
                 if (LobbyManager.Instance != null)
                     LobbyManager.Instance.RemovePlayer(disconnectMessage.player);
                 if (ConnectionManager.Instance != null)

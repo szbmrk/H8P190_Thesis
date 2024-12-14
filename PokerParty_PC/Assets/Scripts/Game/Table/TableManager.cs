@@ -258,6 +258,13 @@ public class TableManager : MonoBehaviour
         return index;
     }
 
+    public void PlayerDisconnected(Player player)
+    {
+        TablePlayerCard playerCard = playerSeats.Find(p => p.turnInfo.player.Equals(player));
+        playerCard.Disconnected();
+        playerCard.turnInfo.money = 0;
+    }
+
     public void SendGameOverMessages()
     {
         List<TablePlayerCard> playersThatAreOut = playerSeats.Select(p => p).Where(p => !p.IsStillInGame).ToList();
