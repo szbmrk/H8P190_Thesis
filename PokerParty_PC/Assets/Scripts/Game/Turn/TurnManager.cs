@@ -48,7 +48,7 @@ public class TurnManager : MonoBehaviour
 
     private void SetNextPlayerInTurn()
     {
-        currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(currentPlayerInTurn)); ;
+        currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(currentPlayerInTurn));
     }
 
     public TablePlayerCard GetNextPlayerStillInGame(int currentIndex)
@@ -175,6 +175,8 @@ public class TurnManager : MonoBehaviour
     public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
     {
         moneyInTurn += turnDoneMessage.actionAmount;
+        TableManager.Instance.moneyInPot += turnDoneMessage.actionAmount;
+        TableGUI.Instance.RefreshMoneyInPotText(TableManager.Instance.moneyInPot);
         UpdateCurrentPlayersTurnInfo(turnDoneMessage);
 
         if (highestBet < currentPlayerInTurn.turnInfo.moneyPutInPot)
@@ -211,7 +213,6 @@ public class TurnManager : MonoBehaviour
     {
         if (TableManager.Instance.PlayersInGameCount == 1)
         {
-            TableManager.Instance.moneyInPot += moneyInTurn;
             moneyInTurn = 0;
             highestBet = 0;
 
@@ -221,8 +222,6 @@ public class TurnManager : MonoBehaviour
 
         if (PlayersNeedToCallCount == 0 && currentPlayerInTurn.Equals(lastPlayerInTurn))
         {
-            TableManager.Instance.moneyInPot += moneyInTurn;
-            TableGUI.Instance.RefreshMoneyInPotText(TableManager.Instance.moneyInPot);
             moneyInTurn = 0;
             highestBet = 0;
 
@@ -302,6 +301,7 @@ public class TurnManager : MonoBehaviour
         TableManager.Instance.StartNewGame();
         StartFirstTurn();
     }
+
 
     private void StartNewTurn()
     {

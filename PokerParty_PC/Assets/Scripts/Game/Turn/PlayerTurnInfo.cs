@@ -15,7 +15,6 @@ public class PlayerTurnInfo
 
     public bool wentAllIn = false;
     public bool folded = false;
-    public bool isOutOfGame = false;
 
     public PlayerTurnInfo(Player player)
     {

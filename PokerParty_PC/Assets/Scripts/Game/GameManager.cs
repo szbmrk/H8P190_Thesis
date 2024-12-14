@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
         waitingFor.text = $"Waiting for {playerName} ...";
     }
 
+    public void SendGameOverMessageToPlayer(int indexInConnectionsArray)
+    {
+        GameOverMessage gameOverMessage = new GameOverMessage();
+        ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnectionsArray], gameOverMessage);
+    }
+
     public void GameOver(string winnerName)
     {
         GameOverMessage gameOverMessage = new GameOverMessage();

@@ -7,11 +7,11 @@ using System.Linq;
 public class TableManager : MonoBehaviour
 {
     public static TableManager Instance;
-    
+
     public List<TablePlayerCard> playerSeats = new List<TablePlayerCard>();
     [SerializeField] private Transform parentForSeats;
     public GameObject playerCardPrefab;
-    
+
     public List<TableCard> tableCards = new List<TableCard>();
     [SerializeField] private Transform partentForCards;
     public GameObject tableCardPrefab;
@@ -37,7 +37,7 @@ public class TableManager : MonoBehaviour
         Loader.Instance.StartLoading();
         CreateDeck();
     }
-    
+
     private void CreateDeck()
     {
         deck = new Deck();
@@ -47,7 +47,7 @@ public class TableManager : MonoBehaviour
     public void PlayerLoaded(Player player, int indexOfConnection)
     {
         playersToConnect--;
-        
+
         TablePlayerCard newPlayer = Instantiate(playerCardPrefab, parentForSeats).GetComponent<TablePlayerCard>();
         newPlayer.gameObject.SetActive(false);
 
@@ -256,5 +256,10 @@ public class TableManager : MonoBehaviour
         }
 
         return index;
+    }
+
+    public void SendGameOverMessages()
+    {
+        List<TablePlayerCard> playersThatAreOut = playerSeats.Select(p => p).Where(p => !p.IsStillInGame).ToList();
     }
 }
