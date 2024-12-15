@@ -29,9 +29,9 @@ public class GameOverGUI : MonoBehaviour
         backToMainBtn.onClick.AddListener(() => StartCoroutine(OnBackToMainBtnClick()));
     }
 
-    public void Open(string WinnerName)
+    public void Open(string winnerName)
     {
-        winnerNameText.text = WinnerName;
+        winnerNameText.text = winnerName;
         gameOverPanel.SetActive(true);
     }
 

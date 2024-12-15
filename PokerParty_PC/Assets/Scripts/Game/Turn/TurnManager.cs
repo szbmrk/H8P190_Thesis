@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public enum TurnState
@@ -53,8 +54,8 @@ public class TurnManager : MonoBehaviour
 
     public TablePlayerCard GetNextPlayerStillInGame(int currentIndex)
     {
-        TablePlayerCard nextPlayer = null;
-        int nextPlayerIndex = -1;
+        TablePlayerCard nextPlayer;
+        int nextPlayerIndex;
 
         if (currentIndex == TableManager.Instance.playerSeats.Count - 1)
             nextPlayerIndex = 0;
@@ -98,7 +99,7 @@ public class TurnManager : MonoBehaviour
         SendTurnMessage(possibleActions, MatchManager.Instance.smallBlindBet);
     }
 
-    public void StartSecondTurn()
+    private void StartSecondTurn()
     {
         turnState = TurnState.BIGBLIND_TURN;
         currentPlayerInTurn.StartTurn();
@@ -113,7 +114,7 @@ public class TurnManager : MonoBehaviour
         SendTurnMessage(possibleActions, MatchManager.Instance.bigBlindBet);
     }
 
-    public void StartTurn()
+    private void StartTurn()
     {
         currentPlayerInTurn.StartTurn();
 
@@ -149,10 +150,10 @@ public class TurnManager : MonoBehaviour
         SendTurnMessage(possibleActions, MoneyNeededToCall);
     }
 
-    public void SendTurnMessage(PossibleAction[] possibleActions, int moneyNeededToCall = 0)
+    private void SendTurnMessage(PossibleAction[] possibleActions, int moneyNeededToCall = 0)
     {
         List<TablePlayerCard> playerSeats = TableManager.Instance.playerSeats;
-
+        
         YourTurnMessage yourTurnMessage = new YourTurnMessage();
         yourTurnMessage.possibleActions = possibleActions;
         yourTurnMessage.moneyNeededToCall = moneyNeededToCall;

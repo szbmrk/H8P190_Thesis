@@ -76,7 +76,7 @@ public class LobbyGUI : MonoBehaviour
 
         LobbyPlayerCard playerCard = LobbyManager.Instance.GetPlayerCardForPlayer(player);
 
-        if (playerCard == null) return;
+        if (!playerCard) return;
 
         playerCard.ResetData();
         Destroy(playerCard.gameObject);
@@ -85,7 +85,7 @@ public class LobbyGUI : MonoBehaviour
         RefreshPlayerCount();
     }
 
-    public void ClearPlayers()
+    private void ClearPlayers()
     {
         if (numOfPlayers == 0) return;
 
