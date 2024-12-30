@@ -9,7 +9,6 @@
         TurnDoneMessage,
         LoadedToGameMessage,
         GameStartedMessage,
-        EveryoneLoadedMessage,
         YourTurnMessage,
         NotYourTurnMessage,
         DealCardsMessage,
