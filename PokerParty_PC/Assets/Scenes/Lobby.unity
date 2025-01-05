@@ -3723,7 +3723,7 @@ MonoBehaviour:
   startGameBtn: {fileID: 377340121}
   minimumPlayersText: {fileID: 1097373077}
   playerCount: {fileID: 171552713}
-  lobbyPanel: {fileID: 0}
+  lobbyPanel: {fileID: 1293239805}
   playerCardPrefab: {fileID: 538982840624562071, guid: d0eabb922c4f61c4aab09f19eb28ecd7, type: 3}
   parentForPlayerCards: {fileID: 632995252}
   startingMoneyDropdown: {fileID: 1155546487}

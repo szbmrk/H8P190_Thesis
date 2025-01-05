@@ -1,18 +1,18 @@
 ﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class NetworkMessageHandler
 {
-    public static void ProcessMesage(NetworkMessageType type, string data)
+    public static void ProcessMessage(NetworkMessageType type, string data)
     {
         switch (type)
         {
+            case NetworkMessageType.PlayerNameAlreadyInUseMessage:
+                NetworkingGUI.Instance.ShowJoinedPanel(false);
+                NetworkingGUI.Instance.ResetReadyButton();
+                PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Player with this name is already in the game");
+                break;
             case NetworkMessageType.GameStartedMessage:
                 SceneManager.LoadScene("Game");
                 break;

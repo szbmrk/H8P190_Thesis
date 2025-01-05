@@ -7,6 +7,7 @@
         ConnectionMessage,
         ReadyMessage,
         TurnDoneMessage,
+        PlayerNameAlreadyInUseMessage,
         LoadedToGameMessage,
         GameStartedMessage,
         YourTurnMessage,

@@ -1,16 +1,15 @@
 ﻿using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NetworkingGUI : MonoBehaviour
 {
     public static NetworkingGUI Instance;
 
-    [SerializeField] private PlayerCard playerCard;
-    
     public Button joinBtn;
-    [SerializeField] private Button sendTestMsgBtn;
+    [SerializeField] private Button sendMsgBtn;
     [SerializeField] private Button disconnectBtn;
     [SerializeField] private Button readyBtn;
 
@@ -20,6 +19,7 @@ public class NetworkingGUI : MonoBehaviour
     [SerializeField] private GameObject joinedPanel;
 
     [SerializeField] private TMP_InputField joinCodeInputField;
+    [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField messageInput;
 
     private void Awake()
@@ -27,11 +27,9 @@ public class NetworkingGUI : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
-        playerCard.DisplayData(PlayerManager.LoggedInPlayer);
-
         joinBtn.onClick.AddListener(JoinRelay);
         disconnectBtn.onClick.AddListener(DisconnectFromHost);
-        sendTestMsgBtn.onClick.AddListener(SendChatMessageToHost);
+        sendMsgBtn.onClick.AddListener(SendChatMessageToHost);
         readyBtn.onClick.AddListener(Ready);
     }
 
@@ -41,13 +39,11 @@ public class NetworkingGUI : MonoBehaviour
         {
             joinBtn.interactable = false;
             disconnectBtn.interactable = true;
-            LogoutGUI.Instance.HideLogoutBtn();
         }
         else
         {
             joinBtn.interactable = true;
             disconnectBtn.interactable = false;
-            LogoutGUI.Instance.ShowLogoutBtn();
         }
 
         Loader.Instance.StopLoading();
@@ -79,7 +75,16 @@ public class NetworkingGUI : MonoBehaviour
     {
         Loader.Instance.StartLoading();
         joinBtn.interactable = false;
+        
+        if (string.IsNullOrEmpty(playerNameInputField.text))
+        {
+            ShowJoinError("Player name is empty!");
+            return;
+        }
+        
+        PlayerManager.LoggedInPlayer = new Player(playerNameInputField.text);
         ConnectionManager.Instance.JoinRelay(joinCodeInputField.text);
+        playerNameInputField.text = string.Empty;
         joinCodeInputField.text = string.Empty;
     }
 

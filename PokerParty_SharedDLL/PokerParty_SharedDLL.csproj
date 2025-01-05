@@ -65,6 +65,7 @@
     <Compile Include="Networking\Message Models\PC\GameStartedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\NewTurnStartedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\NotYourTurnMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\PlayerNameAlreadyInUseMessage.cs" />
     <Compile Include="Networking\Message Models\PC\YourTurnMessage.cs" />
     <Compile Include="Networking\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

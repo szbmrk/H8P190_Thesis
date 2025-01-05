@@ -23,6 +23,18 @@ public class LobbyManager : MonoBehaviour
         Debug.Log("Lobby deleted");
     }
 
+    public bool CheckIfPlayerNameIsAlreadyInUse(Player player, int indexInConnectionsArray)
+    {
+        if (joinedPlayers.Any(p => p.assignedPlayer.PlayerName == player.PlayerName))
+        {
+            ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnectionsArray], new PlayerNameAlreadyInUseMessage());
+            ConnectionManager.Instance.DisconnectPlayer(indexInConnectionsArray);
+            return true;
+        }
+
+        return false;
+    }
+    
     public void AddPlayer(Player player, int indexInConnectionsArray)
     {
         LobbyPlayerCard newPlayer = LobbyGUI.Instance.DisplayNewPlayer(player);

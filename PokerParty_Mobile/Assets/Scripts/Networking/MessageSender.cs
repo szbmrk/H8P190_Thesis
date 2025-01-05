@@ -18,6 +18,7 @@ public class MessageSender
     {
         message.player = PlayerManager.LoggedInPlayer;
 
+        Debug.Log(message.player.PlayerName);
         if (!connection.IsCreated)
         {
             Debug.LogError("Player isn't connected. No Host client to send message to.");

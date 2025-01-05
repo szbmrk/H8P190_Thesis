@@ -5,7 +5,7 @@ namespace PokerParty_SharedDLL
     [Serializable]
     public class Player
     {
-        public string PlayerName { get; set; }
+        public string PlayerName;
         
         public Player(string playerName)
         {
