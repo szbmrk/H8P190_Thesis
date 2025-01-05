@@ -181,6 +181,7 @@ public class TableManager : MonoBehaviour
     private void ResetAndRotatePlayers()
     {
         ResetPlayers();
+        SendNewRoundStartedMessage();
         RotatePlayers();
     }
 
@@ -194,12 +195,19 @@ public class TableManager : MonoBehaviour
             player.Reset();
         }
     }
-
+    
+    private void SendNewRoundStartedMessage()
+    {
+        NewTurnStartedMessage newTurnStartedMessage = new NewTurnStartedMessage();
+        ConnectionManager.Instance.SendMessageToAllConnections(newTurnStartedMessage);
+    }
+    
     private void ReshufleDeck()
     {
         deck = new Deck();
         deck.Shuffle();
     }
+    
     private void RotatePlayers()
     {
         if (playerSeats.Count >= 3)

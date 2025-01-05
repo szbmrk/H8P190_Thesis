@@ -14,10 +14,13 @@ public class CardsGUI : MonoBehaviour
 
     [SerializeField] private Image card1;
     [SerializeField] private Image card2;
-
+    
+    
+    [SerializeField] private GameObject cardsHolder;
+    [SerializeField] private GameObject noCardsInHandText;
+    
     [SerializeField] private TextMeshProUGUI bestHandText;
-
-    [SerializeField] private GameObject switchButton;
+    
 
     private void Awake()
     {
@@ -25,11 +28,19 @@ public class CardsGUI : MonoBehaviour
             Instance = this;
     }
 
+    public void NewRoundStarted()
+    {
+        cardsHolder.SetActive(false);
+        noCardsInHandText.SetActive(true);
+        bestHandText.gameObject.SetActive(false);
+    }
+    
     public void SetCards(Card[] cards)
     {
-        switchButton.SetActive(true);
+        noCardsInHandText.SetActive(false);
         card1.sprite = GetSpriteByFileName(cards[0].GetFileNameForSprite());
         card2.sprite = GetSpriteByFileName(cards[1].GetFileNameForSprite());
+        cardsHolder.SetActive(true);
     }
 
     public void SetBestHandText(CommunityCardsChanged communityCardsChanged)
@@ -52,7 +63,7 @@ public class CardsGUI : MonoBehaviour
         bestHandText.text = bestHandType.ToString();
     }
 
-    public Sprite GetSpriteByFileName(string fileName)
+    private Sprite GetSpriteByFileName(string fileName)
     {
         Sprite[] sprites = Resources.LoadAll<Sprite>("Cards");
         foreach (Sprite sprite in sprites)

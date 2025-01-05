@@ -11,6 +11,7 @@
         GameStartedMessage,
         YourTurnMessage,
         NotYourTurnMessage,
+        NewTurnStartedMessage,
         DealCardsMessage,
         CommunityCardsChangedMessage,
         GameOverMessage,

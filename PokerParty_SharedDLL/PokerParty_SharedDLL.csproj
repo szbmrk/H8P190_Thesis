@@ -64,6 +64,7 @@
     <Compile Include="Networking\Message Models\PC\GameInfoMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameOverMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameStartedMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\NewTurnStartedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\NotYourTurnMessage.cs" />
     <Compile Include="Networking\Message Models\PC\YourTurnMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

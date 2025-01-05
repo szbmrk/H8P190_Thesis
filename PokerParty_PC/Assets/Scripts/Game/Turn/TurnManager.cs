@@ -303,17 +303,6 @@ public class TurnManager : MonoBehaviour
         StartFirstTurn();
     }
 
-
-    private void StartNewTurn()
-    {
-        TablePlayerCard smallBlind = TableManager.Instance.playerSeats.Find(p => p.isSmallBlind);
-        if (smallBlind.IsStillInGame)
-            currentPlayerInTurn = smallBlind;
-        else
-            currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.Instance.playerSeats.IndexOf(smallBlind));
-        StartTurn();
-    }
-
     private void UpdateCurrentPlayersTurnInfo(TurnDoneMessage turnDoneMessage)
     {
         if (turnDoneMessage.action == PossibleAction.FOLD)
