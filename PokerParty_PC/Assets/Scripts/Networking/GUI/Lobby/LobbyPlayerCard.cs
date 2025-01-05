@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class LobbyPlayerCard : MonoBehaviour
 { 
     [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private TextMeshProUGUI ELOText;
-    [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private GameObject readyIcon;
     [SerializeField] private Button kickBtn;
 
@@ -22,16 +20,14 @@ public class LobbyPlayerCard : MonoBehaviour
 
     public void RefreshData()
     {
-        playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.playerName);
-        playerNameText.text = assignedPlayer.playerName;
-        ELOText.text = $"ELO: {assignedPlayer.ELO}";
-        LevelText.text = $"Level: {assignedPlayer.level}";
+        playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.PlayerName);
+        playerNameText.text = assignedPlayer.PlayerName;
     }
 
     public void ResetData()
     {
         SetReady(false);
-        PlayerColorManager.RemoveColorFromPlayer(assignedPlayer.playerName);
+        PlayerColorManager.RemoveColorFromPlayer(assignedPlayer.PlayerName);
     }
 
     private bool isReady = false;

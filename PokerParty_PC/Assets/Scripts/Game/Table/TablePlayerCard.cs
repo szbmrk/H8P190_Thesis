@@ -10,8 +10,6 @@ using UnityEngine;
 public class TablePlayerCard : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private TextMeshProUGUI ELOText;
-    [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private TextMeshProUGUI MoneyText;
     [SerializeField] private TextMeshProUGUI MoneyPutInText;
 
@@ -40,10 +38,8 @@ public class TablePlayerCard : MonoBehaviour
 
     public void LoadData()
     {
-        playerNameText.color = PlayerColorManager.GetColor(turnInfo.player.playerName);
-        playerNameText.text = turnInfo.player.playerName;
-        ELOText.text = $"ELO: {turnInfo.player.ELO}";
-        LevelText.text = $"Level: {turnInfo.player.level}";
+        playerNameText.color = PlayerColorManager.GetColor(turnInfo.player.PlayerName);
+        playerNameText.text = turnInfo.player.PlayerName;
 
         SetRoleIcons();
         RefreshMoney(Settings.StartingMoney);
@@ -89,9 +85,9 @@ public class TablePlayerCard : MonoBehaviour
     {
         turnIcon.SetActive(isTurn);
         if (isTurn)
-            playerNameText.text = $"<b>{turnInfo.player.playerName}</b>";
+            playerNameText.text = $"<b>{turnInfo.player.PlayerName}</b>";
         else
-            playerNameText.text = turnInfo.player.playerName;
+            playerNameText.text = turnInfo.player.PlayerName;
     }
 
     public void RefreshMoney(int money)
@@ -107,7 +103,7 @@ public class TablePlayerCard : MonoBehaviour
     public void StartTurn()
     {
         isTurn = true;
-        GameManager.Instance.SetWaitingFor(turnInfo.player.playerName);
+        GameManager.Instance.SetWaitingFor(turnInfo.player.PlayerName);
         RefreshTurnIcon();
     }
 

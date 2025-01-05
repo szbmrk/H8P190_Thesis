@@ -11,5 +11,14 @@ namespace PokerParty_SharedDLL
         {
             PlayerName = playerName;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is null || !(obj is Player))
+            {
+                return false;
+            }
+            return ((Player)obj).PlayerName == PlayerName;
+        }
     }
 }

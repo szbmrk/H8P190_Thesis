@@ -51,16 +51,16 @@ public class MatchManager : MonoBehaviour
         TableGUI.Instance.RefreshMoneyInPotText(TableManager.Instance.moneyInPot);
 
         if (winners.Length == 1)
-            yield return TableGUI.Instance.showTurnWinner(winners[0].Player.playerName);
+            yield return TableGUI.Instance.showTurnWinner(winners[0].Player.PlayerName);
         else
         {
             string winnerText = "";
             for (int i = 0; i < winners.Length; i++)
             {
                 if (i == winners.Length - 1)
-                    winnerText += winners[i].Player.playerName;
+                    winnerText += winners[i].Player.PlayerName;
                 else
-                    winnerText += winners[i].Player.playerName + ", ";
+                    winnerText += winners[i].Player.PlayerName + ", ";
             }
             yield return TableGUI.Instance.showTurnWinner(winnerText);
         }

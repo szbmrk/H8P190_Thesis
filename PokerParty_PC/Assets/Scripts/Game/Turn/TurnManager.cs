@@ -161,7 +161,7 @@ public class TurnManager : MonoBehaviour
         ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], yourTurnMessage);
 
         NotYourTurnMessage notYourTurnMessage = new NotYourTurnMessage();
-        notYourTurnMessage.playerInTurn = currentPlayerInTurn.turnInfo.player.playerName;
+        notYourTurnMessage.playerInTurn = currentPlayerInTurn.turnInfo.player.PlayerName;
 
         foreach (TablePlayerCard player in playerSeats)
         {
@@ -295,7 +295,7 @@ public class TurnManager : MonoBehaviour
         yield return MatchManager.Instance.ShowDown();
         if (CheckIfGameIsOver())
         {
-            GameManager.Instance.GameOver(GetLastPlayerInGame().turnInfo.player.playerName);
+            GameManager.Instance.GameOver(GetLastPlayerInGame().turnInfo.player.PlayerName);
             yield break;
         }
 

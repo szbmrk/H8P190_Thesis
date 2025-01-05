@@ -8,14 +8,14 @@ namespace PokerParty_SharedDLL
 {
     public class PlayerHandInfo
     {
-        public string PlayerName { get; set; }
+        public Player Player { get; set; }
         public Card[] Hand { get; set; }
         public HandType Type { get; set; }
         public int BreakTieScore { get; set; }
 
-        public PlayerHandInfo(string playerName, Card[] hand)
+        public PlayerHandInfo(Player player, Card[] hand)
         {
-            PlayerName = playerName;
+            Player = player;
             Hand = hand;
         }
     }

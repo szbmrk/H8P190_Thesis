@@ -6,6 +6,7 @@ using UnityEngine;
 using PokerParty_SharedDLL;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class LobbyGUI : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class LobbyGUI : MonoBehaviour
     [SerializeField] private GameObject minimumPlayersText;
 
     [SerializeField] private TextMeshProUGUI playerCount;
-    [SerializeField] private GameObject LobbyPanel;
+    [SerializeField] private GameObject lobbyPanel;
     [SerializeField] private LobbyPlayerCard playerCardPrefab;
     [SerializeField] private Transform parentForPlayerCards;
     [SerializeField] private TMP_Dropdown startingMoneyDropdown;
@@ -122,6 +123,6 @@ public class LobbyGUI : MonoBehaviour
 
     public void ShowPanel()
     {
-        LobbyPanel.SetActive(true);
+        lobbyPanel.SetActive(true);
     }
 }
