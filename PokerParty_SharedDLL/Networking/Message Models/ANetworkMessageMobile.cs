@@ -5,7 +5,7 @@ namespace PokerParty_SharedDLL
     [Serializable]
     public abstract class ANetworkMessageMobile
     {
-        public string playerName;
+        public Player player;
         public abstract NetworkMessageType Type { get; }
     }
 }

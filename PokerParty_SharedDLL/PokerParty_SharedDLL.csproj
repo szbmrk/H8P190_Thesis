@@ -66,6 +66,7 @@
     <Compile Include="Networking\Message Models\PC\NewTurnStartedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\NotYourTurnMessage.cs" />
     <Compile Include="Networking\Message Models\PC\YourTurnMessage.cs" />
+    <Compile Include="Networking\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
