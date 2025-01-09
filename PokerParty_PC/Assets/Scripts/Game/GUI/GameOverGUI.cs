@@ -1,10 +1,4 @@
-﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameOverGUI : MonoBehaviour
 {
-    public static GameOverGUI Instance;
+    public static GameOverGUI instance;
 
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private Button backToMainBtn;
@@ -20,8 +14,8 @@ public class GameOverGUI : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     private void Start()
@@ -38,9 +32,9 @@ public class GameOverGUI : MonoBehaviour
     private IEnumerator OnBackToMainBtnClick()
     {
         Loader.Instance.StartLoading();
-        ConnectionManager.Instance.DisconnectAllPlayers();
-        yield return ConnectionManager.Instance.DisposeDriverAndConnections();
-        Destroy(ConnectionManager.Instance.gameObject);
+        ConnectionManager.instance.DisconnectAllPlayers();
+        yield return ConnectionManager.instance.DisposeDriverAndConnections();
+        Destroy(ConnectionManager.instance.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 }

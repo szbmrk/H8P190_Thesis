@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public class TableGUI : MonoBehaviour
 {
-    public static TableGUI Instance;
+    public static TableGUI instance;
     public List<Transform> seatPositions = new List<Transform>();
     public List<Transform> cardPositions = new List<Transform>();
 
@@ -18,7 +14,7 @@ public class TableGUI : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     public void DisplayPlayer(TablePlayerCard card, int i)
@@ -41,7 +37,7 @@ public class TableGUI : MonoBehaviour
 
     public IEnumerator showTurnWinner(string winnerName)
     {
-        GameManager.Instance.waitingFor.gameObject.SetActive(false);
+        GameManager.instance.waitingFor.gameObject.SetActive(false);
         turnWinnerText.text = $"Turn winner: {winnerName}";
         turnWinnerText.transform.parent.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);

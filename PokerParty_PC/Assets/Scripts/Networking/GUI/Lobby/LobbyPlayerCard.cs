@@ -11,7 +11,7 @@ public class LobbyPlayerCard : MonoBehaviour
 
 
     public Player assignedPlayer;
-    [HideInInspector] public int indexInConnectionsArray = 0;
+    [HideInInspector] public int indexInConnectionsArray;
 
     private void Awake()
     {
@@ -30,14 +30,8 @@ public class LobbyPlayerCard : MonoBehaviour
         PlayerColorManager.RemoveColorFromPlayer(assignedPlayer.PlayerName);
     }
 
-    private bool isReady = false;
-    public bool IsReady
-    {
-        get
-        {
-            return isReady;
-        }
-    }
+    public bool isReady { get; private set; }
+
     public void SetReady(bool ready)
     {
         isReady = ready;
@@ -46,7 +40,7 @@ public class LobbyPlayerCard : MonoBehaviour
 
     private void KickPlayer()
     {
-        LobbyManager.Instance.RemovePlayer(assignedPlayer);
-        ConnectionManager.Instance.DisconnectPlayer(indexInConnectionsArray);
+        LobbyManager.instance.RemovePlayer(assignedPlayer);
+        ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
     }
 }

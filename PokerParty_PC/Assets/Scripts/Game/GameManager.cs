@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using PokerParty_SharedDLL;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
 
     public TextMeshProUGUI waitingFor;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     public void SetWaitingFor(string playerName)
@@ -24,13 +22,13 @@ public class GameManager : MonoBehaviour
     public void SendGameOverMessageToPlayer(int indexInConnectionsArray)
     {
         GameOverMessage gameOverMessage = new GameOverMessage();
-        ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnectionsArray], gameOverMessage);
+        ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnectionsArray], gameOverMessage);
     }
 
     public void GameOver(string winnerName)
     {
         GameOverMessage gameOverMessage = new GameOverMessage();
-        ConnectionManager.Instance.SendMessageToAllConnections(gameOverMessage);
-        GameOverGUI.Instance.Open(winnerName);
+        ConnectionManager.instance.SendMessageToAllConnections(gameOverMessage);
+        GameOverGUI.instance.Open(winnerName);
     }
 }

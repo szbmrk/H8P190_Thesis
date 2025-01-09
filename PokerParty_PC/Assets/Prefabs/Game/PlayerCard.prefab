@@ -1252,8 +1252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 1878568064054669044}
-  MoneyText: {fileID: 2113231920058076948}
-  MoneyPutInText: {fileID: 6596230612908997952}
+  moneyText: {fileID: 2113231920058076948}
+  moneyPutInText: {fileID: 6596230612908997952}
   dealerIcon: {fileID: 3423598380032540994}
   smallBlindIcon: {fileID: 1199812719838034749}
   bigBlindIcon: {fileID: 3663902500902052944}

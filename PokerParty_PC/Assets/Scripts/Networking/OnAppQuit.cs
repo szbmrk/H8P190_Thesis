@@ -3,49 +3,49 @@ using UnityEngine;
 
 public class OnAppQuit : MonoBehaviour 
 {
-    public static bool ReadyToQuit;
+    private static bool _readyToQuit;
 
-    private static OnAppQuit Instance; 
+    private static OnAppQuit _instance; 
 
 
     [RuntimeInitializeOnLoadMethod]
-    static void RunOnStart()
+    private static void RunOnStart()
     {
         Application.wantsToQuit += WantsToQuit;
     }
 
     private void Awake()
     {
-        Instance = this;
+        _instance = this;
     }
 
-    public static bool WantsToQuit()
+    private static bool WantsToQuit()
     {
-        if (Instance == null || ConnectionManager.Instance == null || !ConnectionManager.Instance.networkDriver.IsCreated)
+        if (_instance == null || ConnectionManager.instance == null || !ConnectionManager.instance.NetworkDriver.IsCreated)
             return true;
 
-        Instance.StartCoroutine(Instance.StartQuiting());
+        _instance.StartCoroutine(_instance.StartQuiting());
 
-        return ReadyToQuit;
+        return _readyToQuit;
     }
 
     IEnumerator StartQuiting()
     {
-        if (ConnectionManager.Instance != null)
-            ConnectionManager.Instance.StopAllCoroutines();
+        if (ConnectionManager.instance != null)
+            ConnectionManager.instance.StopAllCoroutines();
 
-        if (LobbyManager.Instance != null)
-            LobbyManager.Instance.StopAllCoroutines();
+        if (LobbyManager.instance != null)
+            LobbyManager.instance.StopAllCoroutines();
 
-        if (LobbyGUI.Instance != null)
-            yield return LobbyGUI.Instance.DeleteLobby();
+        if (LobbyGUI.instance != null)
+            yield return LobbyGUI.instance.DeleteLobby();
         else
         {
-            ConnectionManager.Instance.DisconnectAllPlayers();
-            yield return ConnectionManager.Instance.DisposeDriverAndConnections();
+            ConnectionManager.instance.DisconnectAllPlayers();
+            yield return ConnectionManager.instance.DisposeDriverAndConnections();
         }
 
-        ReadyToQuit = true;
+        _readyToQuit = true;
         Debug.Log("Server app stopped");
         Application.Quit();
     }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ChatGUI : MonoBehaviour
 {
-    public static ChatGUI Instance;
+    public static ChatGUI instance;
 
     [SerializeField] private Transform parentForChatBoxes;
     [SerializeField] private GameObject chatBoxPrefab;
@@ -12,8 +12,8 @@ public class ChatGUI : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     public void AddChat(ChatMessage chatMessage)

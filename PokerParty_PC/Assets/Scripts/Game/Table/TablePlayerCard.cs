@@ -1,17 +1,12 @@
 ﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public class TablePlayerCard : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private TextMeshProUGUI MoneyText;
-    [SerializeField] private TextMeshProUGUI MoneyPutInText;
+    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI moneyPutInText;
 
     [SerializeField] private GameObject dealerIcon;
     [SerializeField] private GameObject smallBlindIcon;
@@ -19,7 +14,7 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private GameObject turnIcon;
     [SerializeField] private GameObject outOfTurn;
 
-    [HideInInspector] public PlayerTurnInfo turnInfo;
+    [HideInInspector] public PlayerTurnInfo TurnInfo;
     [HideInInspector] public int indexInConnectionsArray;
 
     [HideInInspector] public bool isDealer;
@@ -28,15 +23,15 @@ public class TablePlayerCard : MonoBehaviour
 
     [HideInInspector] public bool isTurn;
 
-    [HideInInspector] public bool isStillInGame => turnInfo.money > 0 && !turnInfo.folded && !turnInfo.wentAllIn;
+    public bool isStillInGame => TurnInfo.Money > 0 && !TurnInfo.Folded && !TurnInfo.WentAllIn;
 
     public void LoadData()
     {
-        playerNameText.color = PlayerColorManager.GetColor(turnInfo.player.PlayerName);
-        playerNameText.text = turnInfo.player.PlayerName;
+        playerNameText.color = PlayerColorManager.GetColor(TurnInfo.Player.PlayerName);
+        playerNameText.text = TurnInfo.Player.PlayerName;
 
         SetRoleIcons();
-        RefreshMoney(Settings.StartingMoney);
+        RefreshMoney(Settings.startingMoney);
         RefreshTurnIcon();
     }
 
@@ -46,17 +41,17 @@ public class TablePlayerCard : MonoBehaviour
         isSmallBlind = false;
         isBigBlind = false;
         isTurn = false;
-        turnInfo.moneyPutInPot = 0;
-        turnInfo.cards = new Card[2];
-        turnInfo.folded = false;
-        turnInfo.wentAllIn = false;
-        MoneyPutInText.text = "Put in: 0 $";
+        TurnInfo.MoneyPutInPot = 0;
+        TurnInfo.Cards = new Card[2];
+        TurnInfo.Folded = false;
+        TurnInfo.WentAllIn = false;
+        moneyPutInText.text = "Put in: 0 $";
         outOfTurn.SetActive(false);
 
-        if (turnInfo.money <= 0 && gameObject.activeInHierarchy)
+        if (TurnInfo.Money <= 0 && gameObject.activeInHierarchy)
         {
             OutOfTurn();
-            GameManager.Instance.SendGameOverMessageToPlayer(indexInConnectionsArray);
+            GameManager.instance.SendGameOverMessageToPlayer(indexInConnectionsArray);
         }
 
         RefreshTurnIcon();
@@ -73,7 +68,7 @@ public class TablePlayerCard : MonoBehaviour
         OutOfGame();
         TurnDoneMessage turnDoneMessage = new TurnDoneMessage();
         turnDoneMessage.action = PossibleAction.FOLD;
-        TurnManager.Instance.HandleTurnDone(turnDoneMessage);
+        TurnManager.instance.HandleTurnDone(turnDoneMessage);
     }
 
     public void SetRoleIcons()
@@ -86,23 +81,23 @@ public class TablePlayerCard : MonoBehaviour
     private void RefreshTurnIcon()
     {
         turnIcon.SetActive(isTurn);
-        playerNameText.text = isTurn ? $"<b>{turnInfo.player.PlayerName}</b>" : turnInfo.player.PlayerName;
+        playerNameText.text = isTurn ? $"<b>{TurnInfo.Player.PlayerName}</b>" : TurnInfo.Player.PlayerName;
     }
 
     public void RefreshMoney(int money)
     {
-        MoneyText.text = $"{money} $";
+        moneyText.text = $"{money} $";
     }
 
     public void RefreshMoneyPutIn(int money)
     {
-        MoneyPutInText.text = $"Put in: {money} $";
+        moneyPutInText.text = $"Put in: {money} $";
     }
 
     public void StartTurn()
     {
         isTurn = true;
-        GameManager.Instance.SetWaitingFor(turnInfo.player.PlayerName);
+        GameManager.instance.SetWaitingFor(TurnInfo.Player.PlayerName);
         RefreshTurnIcon();
     }
 
@@ -124,11 +119,11 @@ public class TablePlayerCard : MonoBehaviour
 
         TablePlayerCard otherPlayer = other as TablePlayerCard;
 
-        return otherPlayer.turnInfo.player.Equals(turnInfo.player);
+        return otherPlayer.TurnInfo.Player.Equals(TurnInfo.Player);
     }
 
     public override int GetHashCode()
     {
-        return turnInfo.player.GetHashCode();
+        return TurnInfo.Player.GetHashCode();
     }
 }

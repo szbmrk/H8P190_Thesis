@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using PokerParty_SharedDLL;
 
 public static class EvaluationHelper
 {
-    public static PlayerHandInfo[] CreatePlayerHandInfos(TablePlayerCard[] playerCards)
+    private static PlayerHandInfo[] CreatePlayerHandInfos(TablePlayerCard[] playerCards)
     {
         List<PlayerHandInfo> playerHandInfos = new List<PlayerHandInfo>();
         foreach (TablePlayerCard playerCard in playerCards)
         {
-            Card[] cards = new Card[2 + TableManager.Instance.flippedCommunityCards.Length];
+            Card[] cards = new Card[2 + TableManager.instance.flippedCommunityCards.Length];
 
-            cards[0] = playerCard.turnInfo.cards[0];
-            cards[1] = playerCard.turnInfo.cards[1];
+            cards[0] = playerCard.TurnInfo.Cards[0];
+            cards[1] = playerCard.TurnInfo.Cards[1];
 
-            for (int i = 0; i < TableManager.Instance.flippedCommunityCards.Length; i++)
+            for (int i = 0; i < TableManager.instance.flippedCommunityCards.Length; i++)
             {
-                cards[i + 2] = TableManager.Instance.flippedCommunityCards[i];
+                cards[i + 2] = TableManager.instance.flippedCommunityCards[i];
             }
 
-            PlayerHandInfo playerHandInfo = new PlayerHandInfo(playerCard.turnInfo.player, cards);
+            PlayerHandInfo playerHandInfo = new PlayerHandInfo(playerCard.TurnInfo.Player, cards);
             playerHandInfos.Add(playerHandInfo);
         }
 

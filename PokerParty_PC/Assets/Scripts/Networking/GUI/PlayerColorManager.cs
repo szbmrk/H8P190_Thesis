@@ -5,16 +5,16 @@ public static class PlayerColorManager
 {
     private class ColorForPlayer
     {
-        public string playerName;
-        public Color color;
+        public string PlayerName;
+        public readonly Color Color;
         public ColorForPlayer(Color color)
         {
-            playerName = string.Empty;
-            this.color = color;
+            PlayerName = string.Empty;
+            this.Color = color;
         }
     }
 
-    private static List<ColorForPlayer> ColorForPlayers = new List<ColorForPlayer>
+    private static readonly List<ColorForPlayer> ColorForPlayers = new List<ColorForPlayer>
     {
         new ColorForPlayer(new Color(0.729f, 1.0f, 0.961f)),
         new ColorForPlayer(new Color(1.0f, 0.973f, 0.729f)),
@@ -30,7 +30,7 @@ public static class PlayerColorManager
     {
         foreach (ColorForPlayer colorForPlayer in ColorForPlayers) 
         {
-            if (colorForPlayer.playerName == playerName) return colorForPlayer.color;
+            if (colorForPlayer.PlayerName == playerName) return colorForPlayer.Color;
         } 
 
         while (true)
@@ -38,10 +38,10 @@ public static class PlayerColorManager
             System.Random rnd = new System.Random();
             int randomIndex = rnd.Next(1, 8);
 
-            if (ColorForPlayers[randomIndex].playerName == string.Empty)
+            if (ColorForPlayers[randomIndex].PlayerName == string.Empty)
             {
-                ColorForPlayers[randomIndex].playerName = playerName;
-                return ColorForPlayers[randomIndex].color;
+                ColorForPlayers[randomIndex].PlayerName = playerName;
+                return ColorForPlayers[randomIndex].Color;
             }
         }
     }
@@ -50,7 +50,7 @@ public static class PlayerColorManager
     {
         foreach (ColorForPlayer colorForPlayer in ColorForPlayers)
         {
-            if (colorForPlayer.playerName == playerName) colorForPlayer.playerName = string.Empty;
+            if (colorForPlayer.PlayerName == playerName) colorForPlayer.PlayerName = string.Empty;
         }
     }
 
@@ -58,7 +58,7 @@ public static class PlayerColorManager
     {
         foreach (ColorForPlayer colorForPlayer in ColorForPlayers)
         {
-            colorForPlayer.playerName = string.Empty;
+            colorForPlayer.PlayerName = string.Empty;
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PokerParty_SharedDLL;
@@ -6,22 +5,22 @@ using System.Linq;
 
 public class TableManager : MonoBehaviour
 {
-    public static TableManager Instance;
+    public static TableManager instance;
 
     public List<TablePlayerCard> playerSeats = new List<TablePlayerCard>();
     [SerializeField] private Transform parentForSeats;
     public GameObject playerCardPrefab;
 
     public List<TableCard> tableCards = new List<TableCard>();
-    [SerializeField] private Transform partentForCards;
+    [SerializeField] private Transform parentForCards;
     public GameObject tableCardPrefab;
 
-    int playersToConnect = Settings.PlayerCount;
+    private int playersToConnect = Settings.playerCount;
 
-    [HideInInspector] public Deck deck;
+    private Deck deck;
     public Card[] flippedCommunityCards;
 
-    private int lastDealerIndex = 0;
+    private int lastDealerIndex;
     private int lastSmallBlindIndex = 1;
     private int lastBigBlindIndex = 2;
 
@@ -29,7 +28,7 @@ public class TableManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     private void Start()
@@ -52,7 +51,7 @@ public class TableManager : MonoBehaviour
         newPlayer.gameObject.SetActive(false);
 
         PlayerTurnInfo playerTurnInfo = new PlayerTurnInfo(player);
-        newPlayer.turnInfo = playerTurnInfo;
+        newPlayer.TurnInfo = playerTurnInfo;
         newPlayer.indexInConnectionsArray = indexOfConnection;
 
         playerSeats.Add(newPlayer);
@@ -60,8 +59,8 @@ public class TableManager : MonoBehaviour
         if (playersToConnect == 0)
         {
             AssignRolesAndShuffleTheOrderOfPlayers();
-            MatchManager.Instance.SendGameInfoToPlayers();
-            TurnManager.Instance.StartFirstTurn();
+            MatchManager.instance.SendGameInfoToPlayers();
+            TurnManager.instance.StartFirstTurn();
             Loader.Instance.StopLoading();
         }
     }
@@ -71,7 +70,7 @@ public class TableManager : MonoBehaviour
 
     private void AssignRolesAndShuffleTheOrderOfPlayers()
     {
-        playerSeats = playerSeats.OrderBy(x => Random.Range(0, 100)).ToList();
+        playerSeats = playerSeats.OrderBy(_ => Random.Range(0, 100)).ToList();
 
         playerSeats[0].isDealer = true;
         playerSeats[1].isSmallBlind = true;
@@ -79,7 +78,7 @@ public class TableManager : MonoBehaviour
 
         for (int i = 0; i < playerSeats.Count; i++)
         {
-            TableGUI.Instance.DisplayPlayer(playerSeats[i], i);
+            TableGUI.instance.DisplayPlayer(playerSeats[i], i);
         }
     }
 
@@ -89,10 +88,10 @@ public class TableManager : MonoBehaviour
         {
             Card[] cards = TexasHoldEm.DealCardsToPlayer(deck);
             DealCardsMessage dealCardsMessage = new DealCardsMessage();
-            player.turnInfo.cards = cards;
+            player.TurnInfo.Cards = cards;
             dealCardsMessage.cards = cards;
             int indexInConnections = player.indexInConnectionsArray;
-            ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], dealCardsMessage);
+            ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], dealCardsMessage);
         }
     }
 
@@ -100,9 +99,9 @@ public class TableManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            tableCards.Add(Instantiate(tableCardPrefab, partentForCards).GetComponent<TableCard>());
+            tableCards.Add(Instantiate(tableCardPrefab, parentForCards).GetComponent<TableCard>());
             tableCards[i].card = deck.Draw();
-            TableGUI.Instance.DisplayCard(tableCards[i], i);
+            TableGUI.instance.DisplayCard(tableCards[i], i);
         }
     }
 
@@ -115,7 +114,7 @@ public class TableManager : MonoBehaviour
             tableCards[i].Flip();
         }
         CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
-        ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
+        ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void DealTurn()
@@ -127,7 +126,7 @@ public class TableManager : MonoBehaviour
         flippedCommunityCards[2] = tableCards[2].card;
         flippedCommunityCards[3] = tableCards[3].card;
         CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
-        ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
+        ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void DealRiver()
@@ -140,24 +139,24 @@ public class TableManager : MonoBehaviour
         flippedCommunityCards[3] = tableCards[3].card;
         flippedCommunityCards[4] = tableCards[4].card;
         CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
-        ConnectionManager.Instance.SendMessageToAllConnections(communityCardsChanged);
+        ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.newMoney);
-        playerSeats.Find(p => p.turnInfo.player.Equals(turnDoneMessage.player)).TurnDone();
-        TurnManager.Instance.HandleTurnDone(turnDoneMessage);
+        playerSeats.Find(p => p.TurnInfo.Player.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.newMoney);
+        playerSeats.Find(p => p.TurnInfo.Player.Equals(turnDoneMessage.player)).TurnDone();
+        TurnManager.instance.HandleTurnDone(turnDoneMessage);
     }
 
     public void GivePotToWinners(PlayerHandInfo[] winners)
     {
         foreach (PlayerHandInfo winner in winners)
         {
-            TablePlayerCard winnerCard = playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player));
-            winnerCard.turnInfo.money += moneyInPot / winners.Length;
-            winnerCard.turnInfo.wentAllIn = false;
-            winnerCard.RefreshMoney(playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money);
+            TablePlayerCard winnerCard = playerSeats.Find(p => p.TurnInfo.Player.Equals(winner.Player));
+            winnerCard.TurnInfo.Money += moneyInPot / winners.Length;
+            winnerCard.TurnInfo.WentAllIn = false;
+            winnerCard.RefreshMoney(playerSeats.Find(p => p.TurnInfo.Player.Equals(winner.Player)).TurnInfo.Money);
         }
         moneyInPot = 0;
         
@@ -167,7 +166,7 @@ public class TableManager : MonoBehaviour
     public void StartNewGame()
     {
         ClearTable();
-        ReshufleDeck();
+        ReshuffleDeck();
         ResetAndRotatePlayers();
         RemovePlayersWith0Money();
     }
@@ -202,10 +201,10 @@ public class TableManager : MonoBehaviour
     private void SendNewRoundStartedMessage()
     {
         NewTurnStartedMessage newTurnStartedMessage = new NewTurnStartedMessage();
-        ConnectionManager.Instance.SendMessageToAllConnections(newTurnStartedMessage);
+        ConnectionManager.instance.SendMessageToAllConnections(newTurnStartedMessage);
     }
     
-    private void ReshufleDeck()
+    private void ReshuffleDeck()
     {
         deck = new Deck();
         deck.Shuffle();
@@ -262,7 +261,7 @@ public class TableManager : MonoBehaviour
 
         if (!player.isStillInGame)
         {
-            player = TurnManager.Instance.GetNextPlayerStillInGame(index);
+            player = TurnManager.instance.GetNextPlayerStillInGame(index);
             index = playerSeats.IndexOf(player);
         }
 
@@ -271,9 +270,9 @@ public class TableManager : MonoBehaviour
 
     public void PlayerDisconnected(Player player)
     {
-        TablePlayerCard playerCard = playerSeats.Find(p => p.turnInfo.player.Equals(player));
+        TablePlayerCard playerCard = playerSeats.Find(p => p.TurnInfo.Player.Equals(player));
         playerCard.Disconnected();
-        playerCard.turnInfo.money = 0;
+        playerCard.TurnInfo.Money = 0;
     }
 
     private void RemovePlayersWith0Money()
@@ -288,23 +287,25 @@ public class TableManager : MonoBehaviour
         }
     }
 
-    public void SendRefreshedMoneyMessages()
+    private void SendRefreshedMoneyMessages()
     {
         foreach (TablePlayerCard player in playerSeats)
         {
-            RefreshedMoneyMessage refreshedMoneyMessage = new RefreshedMoneyMessage();
-            refreshedMoneyMessage.newMoney = player.turnInfo.money;
-            ConnectionManager.Instance.SendMessageToConnection(
-                ConnectionManager.Instance.Connections[player.indexInConnectionsArray], refreshedMoneyMessage);
+            RefreshedMoneyMessage refreshedMoneyMessage = new RefreshedMoneyMessage
+            {
+                newMoney = player.TurnInfo.Money
+            };
+            ConnectionManager.instance.SendMessageToConnection(
+                ConnectionManager.instance.Connections[player.indexInConnectionsArray], refreshedMoneyMessage);
         }
     }
 
-    public void SendGameOverMessages(List<TablePlayerCard> players)
+    private void SendGameOverMessages(List<TablePlayerCard> players)
     {
         foreach (TablePlayerCard player in players)
         {
-            ConnectionManager.Instance.SendMessageToConnection(
-                ConnectionManager.Instance.Connections[player.indexInConnectionsArray], new GameOverMessage());   
+            ConnectionManager.instance.SendMessageToConnection(
+                ConnectionManager.instance.Connections[player.indexInConnectionsArray], new GameOverMessage());   
         }
     }
 }

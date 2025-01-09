@@ -1,15 +1,10 @@
 ﻿using PokerParty_SharedDLL;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class MatchManager : MonoBehaviour
 {
-    public static MatchManager Instance;
+    public static MatchManager instance;
 
     // 1% of starting money
     [HideInInspector] public int smallBlindBet;
@@ -20,38 +15,39 @@ public class MatchManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        smallBlindBet = (int)(Settings.StartingMoney * 0.01);
-        bigBlindBet = (int)(Settings.StartingMoney * 0.02);
+        instance = this;
+        smallBlindBet = (int)(Settings.startingMoney * 0.01);
+        bigBlindBet = (int)(Settings.startingMoney * 0.02);
     }
 
     public void SendGameInfoToPlayers()
     {
-        for (int i = 0; i < TableManager.Instance.playerSeats.Count; i++)
+        foreach (TablePlayerCard playerSeat in TableManager.instance.playerSeats)
         {
-            TablePlayerCard playerSeat = TableManager.Instance.playerSeats[i];
-            GameInfoMessage gameInfoMessage = new GameInfoMessage();
-            gameInfoMessage.startingMoney = Settings.StartingMoney;
-            gameInfoMessage.smallBlindAmount = smallBlindBet;
-            gameInfoMessage.bigBlindAmount = bigBlindBet;
-            gameInfoMessage.isDealer = playerSeat.isDealer;
-            gameInfoMessage.isSmallBlind = playerSeat.isSmallBlind;
-            gameInfoMessage.isBigBlind = playerSeat.isBigBlind;
+            GameInfoMessage gameInfoMessage = new GameInfoMessage
+            {
+                startingMoney = Settings.startingMoney,
+                smallBlindAmount = smallBlindBet,
+                bigBlindAmount = bigBlindBet,
+                isDealer = playerSeat.isDealer,
+                isSmallBlind = playerSeat.isSmallBlind,
+                isBigBlind = playerSeat.isBigBlind
+            };
 
             int indexInConnections = playerSeat.indexInConnectionsArray;
-            ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], gameInfoMessage);
+            ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], gameInfoMessage);
         }
     }
 
     public IEnumerator ShowDown()
     {
-        TablePlayerCard[] playersStillInGame = TableManager.Instance.playerSeats.FindAll(p => !p.turnInfo.folded).ToArray();
+        TablePlayerCard[] playersStillInGame = TableManager.instance.playerSeats.FindAll(p => !p.TurnInfo.Folded).ToArray();
         PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playersStillInGame);
-        TableManager.Instance.GivePotToWinners(winners);
-        TableGUI.Instance.RefreshMoneyInPotText(TableManager.Instance.moneyInPot);
+        TableManager.instance.GivePotToWinners(winners);
+        TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
 
         if (winners.Length == 1)
-            yield return TableGUI.Instance.showTurnWinner(winners[0].Player.PlayerName);
+            yield return TableGUI.instance.showTurnWinner(winners[0].Player.PlayerName);
         else
         {
             string winnerText = "";
@@ -62,7 +58,7 @@ public class MatchManager : MonoBehaviour
                 else
                     winnerText += winners[i].Player.PlayerName + ", ";
             }
-            yield return TableGUI.Instance.showTurnWinner(winnerText);
+            yield return TableGUI.instance.showTurnWinner(winnerText);
         }
 
         turnCount++;

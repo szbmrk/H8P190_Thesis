@@ -18,7 +18,7 @@ public static class AuthAndServicesManager
         }
     }
 
-    public static async Task SignInAnonymouslyAsync()
+    private static async Task SignInAnonymouslyAsync()
     {
         try
         {

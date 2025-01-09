@@ -8,20 +8,19 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.UI;
 
 public class ConnectionManager : MonoBehaviour
 {
-    public static ConnectionManager Instance;
+    public static ConnectionManager instance;
 
-    public NetworkDriver networkDriver;
+    public NetworkDriver NetworkDriver;
     public NativeList<NetworkConnection> Connections;
 
     private async void Start()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
@@ -36,15 +35,15 @@ public class ConnectionManager : MonoBehaviour
 
     void UpdateHost()
     {
-        if (!networkDriver.IsCreated || !networkDriver.Bound )
+        if (!NetworkDriver.IsCreated || !NetworkDriver.Bound )
         {
             return;
         }
 
-        networkDriver.ScheduleUpdate().Complete();
+        NetworkDriver.ScheduleUpdate().Complete();
 
         NetworkConnection incomingConnection;
-        while ((incomingConnection = networkDriver.Accept()) != default(NetworkConnection))
+        while ((incomingConnection = NetworkDriver.Accept()) != default(NetworkConnection))
         {
             Debug.Log("Accepted an incoming connection.");
             Connections.Add(incomingConnection);
@@ -56,7 +55,7 @@ public class ConnectionManager : MonoBehaviour
             Assert.IsTrue(Connections[i].IsCreated);
 
             NetworkEvent.Type eventType;
-            while ((eventType = networkDriver.PopEventForConnection(Connections[i], out var stream)) != NetworkEvent.Type.Empty)
+            while ((eventType = NetworkDriver.PopEventForConnection(Connections[i], out var stream)) != NetworkEvent.Type.Empty)
             {
                 switch (eventType)
                 {
@@ -69,7 +68,7 @@ public class ConnectionManager : MonoBehaviour
                         Debug.Log($"Type: {type}");
                         Debug.Log($"Data received: {data}");
 
-                        NetworkMessageHandler.ProcessMesage(type, data, i);
+                        NetworkMessageHandler.ProcessMessage(type, data, i);
                         break;
                 }
             }
@@ -87,8 +86,8 @@ public class ConnectionManager : MonoBehaviour
 
             BindTheHost(allocation, maxConnections);
 
-            LobbyGUI.Instance.joinCodeText.text = joinCode;
-            LobbyGUI.Instance.ShowPanel();
+            LobbyGUI.instance.joinCodeText.text = joinCode;
+            LobbyGUI.instance.ShowPanel();
             Loader.Instance.StopLoading();
         }
         catch (Exception e)
@@ -105,17 +104,17 @@ public class ConnectionManager : MonoBehaviour
         var settings = new NetworkSettings();
         settings.WithRelayParameters(ref relayServerData);
 
-        if (networkDriver.IsCreated)
-            networkDriver.Dispose();
+        if (NetworkDriver.IsCreated)
+            NetworkDriver.Dispose();
 
-        networkDriver = NetworkDriver.Create(settings);
-        if (networkDriver.Bind(NetworkEndpoint.AnyIpv4) != 0)
+        NetworkDriver = NetworkDriver.Create(settings);
+        if (NetworkDriver.Bind(NetworkEndpoint.AnyIpv4) != 0)
         {
             throw new Exception("Host client failed to bind");
         }
         else
         {
-            if (networkDriver.Listen() != 0)
+            if (NetworkDriver.Listen() != 0)
             {
                 throw new Exception("Host client failed to listen");
             }
@@ -150,7 +149,7 @@ public class ConnectionManager : MonoBehaviour
         if (Connections[index].IsCreated)
         {
             Debug.Log("Player disconnected from host");
-            networkDriver.Disconnect(Connections[index]);
+            NetworkDriver.Disconnect(Connections[index]);
             Connections[index] = default(NetworkConnection);
             Connections.RemoveAt(index);
         }
@@ -168,11 +167,11 @@ public class ConnectionManager : MonoBehaviour
     {
         string messageInString = JsonUtility.ToJson(message);
 
-        if (networkDriver.BeginSend(connection, out DataStreamWriter writer) == 0)
+        if (NetworkDriver.BeginSend(connection, out DataStreamWriter writer) == 0)
         {
             writer.WriteUInt((uint)message.Type);
             writer.WriteFixedString512(messageInString);
-            networkDriver.EndSend(writer);
+            NetworkDriver.EndSend(writer);
             Debug.Log($"Message sent: {messageInString}");
         }
     }
@@ -180,10 +179,10 @@ public class ConnectionManager : MonoBehaviour
     private IEnumerator DisposeDriver()
     {
         yield return new WaitForSeconds(1f);
-        if (networkDriver.IsCreated)
+        if (NetworkDriver.IsCreated)
         {
             Debug.Log("Host disposed");
-            networkDriver.Dispose();
+            NetworkDriver.Dispose();
         }
     }
 

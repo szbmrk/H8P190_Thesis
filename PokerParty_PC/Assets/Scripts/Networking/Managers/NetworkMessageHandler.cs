@@ -3,50 +3,50 @@ using UnityEngine;
 
 public static class NetworkMessageHandler
 {
-    public static void ProcessMesage(NetworkMessageType type, string data, int indexOfConnection)
+    public static void ProcessMessage(NetworkMessageType type, string data, int indexOfConnection)
     {
         switch (type)
         {
             case NetworkMessageType.ConnectionMessage:
                 ConnectionMessage connectionData = FromStringToJson<ConnectionMessage>(data);
-                if (LobbyManager.Instance != null)
+                if (LobbyManager.instance != null)
                 {
-                    if (!LobbyManager.Instance.CheckIfPlayerNameIsAlreadyInUse(connectionData.player, indexOfConnection))
-                        LobbyManager.Instance.AddPlayer(connectionData.player, indexOfConnection);
+                    if (!LobbyManager.instance.CheckIfPlayerNameIsAlreadyInUse(connectionData.player, indexOfConnection))
+                        LobbyManager.instance.AddPlayer(connectionData.player, indexOfConnection);
                 }
                 break;
 
             case NetworkMessageType.DisconnectMessage:
                 DisconnectMessage disconnectMessage = FromStringToJson<DisconnectMessage>(data);
-                if (TableManager.Instance != null)
-                    TableManager.Instance.PlayerDisconnected(disconnectMessage.player);
-                if (LobbyManager.Instance != null)
-                    LobbyManager.Instance.RemovePlayer(disconnectMessage.player);
-                if (ConnectionManager.Instance != null)
-                    ConnectionManager.Instance.DisconnectPlayer(indexOfConnection);
+                if (TableManager.instance != null)
+                    TableManager.instance.PlayerDisconnected(disconnectMessage.player);
+                if (LobbyManager.instance != null)
+                    LobbyManager.instance.RemovePlayer(disconnectMessage.player);
+                if (ConnectionManager.instance != null)
+                    ConnectionManager.instance.DisconnectPlayer(indexOfConnection);
                 break;
 
             case NetworkMessageType.ChatMessage:
                 ChatMessage chatMessage = FromStringToJson<ChatMessage>(data);
-                if (ChatGUI.Instance != null)
-                    ChatGUI.Instance.AddChat(chatMessage);
+                if (ChatGUI.instance != null)
+                    ChatGUI.instance.AddChat(chatMessage);
                 break;
 
             case NetworkMessageType.ReadyMessage:
                 ReadyMessage readyMessage = FromStringToJson<ReadyMessage>(data);
-                if (LobbyManager.Instance != null)
-                    LobbyManager.Instance.ModifyPlayerReady(readyMessage);
+                if (LobbyManager.instance != null)
+                    LobbyManager.instance.ModifyPlayerReady(readyMessage);
                 break;
 
             case NetworkMessageType.LoadedToGameMessage:
                 LoadedToGameMessage loadedToGameMessage = FromStringToJson<LoadedToGameMessage>(data);
-                if (TableManager.Instance != null)
-                    TableManager.Instance.PlayerLoaded(loadedToGameMessage.player, indexOfConnection);
+                if (TableManager.instance != null)
+                    TableManager.instance.PlayerLoaded(loadedToGameMessage.player, indexOfConnection);
                 break;
             case NetworkMessageType.TurnDoneMessage:
                 TurnDoneMessage turnDoneMessage = FromStringToJson<TurnDoneMessage>(data);
-                if (TableManager.Instance != null)
-                    TableManager.Instance.PlayerTurnDone(turnDoneMessage);
+                if (TableManager.instance != null)
+                    TableManager.instance.PlayerTurnDone(turnDoneMessage);
                 break;
         }
     }

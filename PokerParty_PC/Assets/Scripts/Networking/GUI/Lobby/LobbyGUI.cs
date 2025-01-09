@@ -1,16 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using PokerParty_SharedDLL;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class LobbyGUI : MonoBehaviour
 {
-    public static LobbyGUI Instance;
+    public static LobbyGUI instance;
     public TextMeshProUGUI joinCodeText;
 
     [SerializeField] private Button deleteLobbyBtn;
@@ -23,24 +20,24 @@ public class LobbyGUI : MonoBehaviour
     [SerializeField] private Transform parentForPlayerCards;
     [SerializeField] private TMP_Dropdown startingMoneyDropdown;
 
-    private int numOfPlayers = 0;
+    private int numOfPlayers;
     private int startingMoney = 1000;
 
     private void Start()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
 
         startingMoneyDropdown.onValueChanged.AddListener(HandleStartingMoneyDropdownValueChanged);
         deleteLobbyBtn.onClick.AddListener(() => StartCoroutine(DeleteLobby()));
         startGameBtn.onClick.AddListener(StartGame);
     }
-    
-    public void StartGame()
+
+    private void StartGame()
     {
-        Settings.StartingMoney = startingMoney;
-        Settings.PlayerCount = numOfPlayers;
-        ConnectionManager.Instance.SendMessageToAllConnections(new GameStartedMessage());
+        Settings.startingMoney = startingMoney;
+        Settings.playerCount = numOfPlayers;
+        ConnectionManager.instance.SendMessageToAllConnections(new GameStartedMessage());
         SceneManager.LoadScene("Game");
     }
 
@@ -49,8 +46,8 @@ public class LobbyGUI : MonoBehaviour
         Loader.Instance.StartLoading();
         joinCodeText.text = string.Empty;
         ClearPlayers();
-        ChatGUI.Instance.ClearChat();
-        yield return LobbyManager.Instance.DeleteLobby();
+        ChatGUI.instance.ClearChat();
+        yield return LobbyManager.instance.DeleteLobby();
 
         SceneManager.LoadScene("MainMenu");
     }
@@ -75,7 +72,7 @@ public class LobbyGUI : MonoBehaviour
     {
         if (numOfPlayers == 0) return;
 
-        LobbyPlayerCard playerCard = LobbyManager.Instance.GetPlayerCardForPlayer(player);
+        LobbyPlayerCard playerCard = LobbyManager.instance.GetPlayerCardForPlayer(player);
 
         if (!playerCard) return;
 
@@ -101,7 +98,7 @@ public class LobbyGUI : MonoBehaviour
 
     public void RefreshPlayerCount()
     {
-        if (numOfPlayers >= 4 && LobbyManager.Instance.AreAllPlayersReady())
+        if (numOfPlayers >= 4 && LobbyManager.instance.AreAllPlayersReady())
         {
             startGameBtn.interactable = true;
             minimumPlayersText.SetActive(false);
