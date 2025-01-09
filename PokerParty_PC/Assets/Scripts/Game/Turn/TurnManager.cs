@@ -6,19 +6,19 @@ using UnityEngine;
 
 public enum TurnState
 {
-    SMALLBLIND_TURN,
-    BIGBLIND_TURN,
-    PRE_FLOP,
-    FLOP,
-    TURN,
-    RIVER
+    SmallBlindTurn,
+    BigBlindTurn,
+    PreFlop,
+    Flop,
+    Turn,
+    River
 }
 
 public class TurnManager : MonoBehaviour
 {
     public static TurnManager instance;
 
-    private TurnState turnState = TurnState.SMALLBLIND_TURN;
+    private TurnState turnState = TurnState.SmallBlindTurn;
     private TablePlayerCard currentPlayerInTurn;
     private TablePlayerCard lastPlayerWhoRaised;
 
@@ -29,7 +29,7 @@ public class TurnManager : MonoBehaviour
     {
         get
         {
-            if (turnState == TurnState.PRE_FLOP)
+            if (turnState == TurnState.PreFlop)
             {
                 TablePlayerCard bigBlind = TableManager.instance.playerSeats.Find(p => p.isBigBlind);
                 return bigBlind.isStillInGame ? bigBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
@@ -73,7 +73,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartFirstTurn()
     {
-        turnState = TurnState.SMALLBLIND_TURN;
+        turnState = TurnState.SmallBlindTurn;
         currentPlayerInTurn = TableManager.instance.playerSeats.Find(p => p.isSmallBlind);
         currentPlayerInTurn.StartTurn();
 
@@ -89,7 +89,7 @@ public class TurnManager : MonoBehaviour
 
     private void StartSecondTurn()
     {
-        turnState = TurnState.BIGBLIND_TURN;
+        turnState = TurnState.BigBlindTurn;
         currentPlayerInTurn.StartTurn();
 
         PossibleAction[] possibleActions = null;
@@ -117,22 +117,19 @@ public class TurnManager : MonoBehaviour
             return new PossibleAction[] { PossibleAction.ALL_IN, PossibleAction.FOLD };
 
         if (currentPlayerInTurn.TurnInfo.Money == moneyNeededToCall)
-        {
             return new PossibleAction[] { PossibleAction.CALL, PossibleAction.FOLD };
-        }
+
+        if (moneyNeededToCall != 0)
+            return new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
         
-        if (moneyNeededToCall == 0)
-        {
-            if (turnState == TurnState.PRE_FLOP)
-                return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE, PossibleAction.FOLD };
-            
-            if (!hasAnyoneBetted)
-                return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.BET, PossibleAction.FOLD };
-            
+        if (turnState == TurnState.PreFlop)
             return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE, PossibleAction.FOLD };
-        }
-        
-        return new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
+            
+        if (!hasAnyoneBetted)
+            return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.BET, PossibleAction.FOLD };
+            
+        return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE, PossibleAction.FOLD };
+
     }
 
     private void SendTurnMessage(PossibleAction[] possibleActions, int moneyNeededToCall = 0)
@@ -178,13 +175,13 @@ public class TurnManager : MonoBehaviour
 
         switch (turnState)
         {
-            case TurnState.SMALLBLIND_TURN:
+            case TurnState.SmallBlindTurn:
                 StartSecondTurn();
                 return;
-            case TurnState.BIGBLIND_TURN:
+            case TurnState.BigBlindTurn:
                 TableManager.instance.DealCardsToPlayers();
                 TableManager.instance.DealCardsToTable();
-                turnState = TurnState.PRE_FLOP;
+                turnState = TurnState.PreFlop;
                 StartTurn();
                 return;
             default:
@@ -216,28 +213,28 @@ public class TurnManager : MonoBehaviour
             lastPlayerWhoRaised = null;
             hasAnyoneBetted = false;
 
-            if (turnState == TurnState.PRE_FLOP)
+            if (turnState == TurnState.PreFlop)
             {
-                turnState = TurnState.FLOP;
+                turnState = TurnState.Flop;
                 TableManager.instance.DealFlop();
                 SetStartingPlayer();
                 StartTurn();
             }
-            else if (turnState == TurnState.FLOP)
+            else if (turnState == TurnState.Flop)
             {
-                turnState = TurnState.TURN;
+                turnState = TurnState.Turn;
                 TableManager.instance.DealTurn();
                 SetStartingPlayer();
                 StartTurn();
             }
-            else if (turnState == TurnState.TURN)
+            else if (turnState == TurnState.Turn)
             {
-                turnState = TurnState.RIVER;
+                turnState = TurnState.River;
                 TableManager.instance.DealRiver();
                 SetStartingPlayer();
                 StartTurn();
             }
-            else if (turnState == TurnState.RIVER)
+            else if (turnState == TurnState.River)
             {
                 StartCoroutine(ShowDown());
                 return true;

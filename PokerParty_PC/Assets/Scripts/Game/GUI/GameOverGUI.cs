@@ -31,7 +31,7 @@ public class GameOverGUI : MonoBehaviour
 
     private IEnumerator OnBackToMainBtnClick()
     {
-        Loader.Instance.StartLoading();
+        Loader.instance.StartLoading();
         ConnectionManager.instance.DisconnectAllPlayers();
         yield return ConnectionManager.instance.DisposeDriverAndConnections();
         Destroy(ConnectionManager.instance.gameObject);

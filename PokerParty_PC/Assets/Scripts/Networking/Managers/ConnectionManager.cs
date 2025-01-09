@@ -79,7 +79,7 @@ public class ConnectionManager : MonoBehaviour
     {
         try
         {
-            Loader.Instance.StartLoading();
+            Loader.instance.StartLoading();
 
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
@@ -88,12 +88,12 @@ public class ConnectionManager : MonoBehaviour
 
             LobbyGUI.instance.joinCodeText.text = joinCode;
             LobbyGUI.instance.ShowPanel();
-            Loader.Instance.StopLoading();
+            Loader.instance.StopLoading();
         }
         catch (Exception e)
         {
-            Loader.Instance.StopLoading();
-            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, e.Message);
+            Loader.instance.StopLoading();
+            PopupManager.instance.ShowPopup(PopupType.ErrorPopup, e.Message);
         }
     }
 

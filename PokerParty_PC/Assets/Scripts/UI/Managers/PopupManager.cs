@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PopupManager : MonoBehaviour
 {
-    public static PopupManager Instance;
+    public static PopupManager instance;
     [SerializeField] private GameObject popupPrefab;
     [SerializeField] private Transform canvas;
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     public void ShowPopup(PopupType type, string text)

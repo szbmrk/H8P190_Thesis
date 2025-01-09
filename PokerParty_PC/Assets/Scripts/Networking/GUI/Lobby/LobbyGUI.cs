@@ -43,7 +43,7 @@ public class LobbyGUI : MonoBehaviour
 
     public IEnumerator DeleteLobby()
     {
-        Loader.Instance.StartLoading();
+        Loader.instance.StartLoading();
         joinCodeText.text = string.Empty;
         ClearPlayers();
         ChatGUI.instance.ClearChat();

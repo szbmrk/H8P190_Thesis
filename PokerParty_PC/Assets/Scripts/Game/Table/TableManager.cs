@@ -33,7 +33,7 @@ public class TableManager : MonoBehaviour
 
     private void Start()
     {
-        Loader.Instance.StartLoading();
+        Loader.instance.StartLoading();
         CreateDeck();
     }
 
@@ -61,7 +61,7 @@ public class TableManager : MonoBehaviour
             AssignRolesAndShuffleTheOrderOfPlayers();
             MatchManager.instance.SendGameInfoToPlayers();
             TurnManager.instance.StartFirstTurn();
-            Loader.Instance.StopLoading();
+            Loader.instance.StopLoading();
         }
     }
 
