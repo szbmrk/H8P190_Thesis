@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokerParty_SharedDLL
 {
@@ -13,9 +9,9 @@ namespace PokerParty_SharedDLL
             int bitField = EvaluationHelper.GetFaceValueBitField(hand);
             string bitString = Convert.ToString(bitField, 2).PadLeft(15, '0');
 
-            for (int i = 0; i < bitString.Length; i++)
+            foreach (char c in bitString)
             {
-                Console.Write(bitString[i] + " ");
+                Console.Write(c + " ");
             }
 
             Console.WriteLine("\nA K Q J T 9 8 7 6 5 4 3 2");

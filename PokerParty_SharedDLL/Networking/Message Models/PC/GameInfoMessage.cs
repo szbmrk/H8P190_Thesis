@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class GameInfoMessage : ANetworkMessagePC
+    public class GameInfoMessage : ANetworkMessagePc
     {
-        public bool isDealer;
-        public bool isSmallBlind;
-        public bool isBigBlind;
+        public bool IsDealer;
+        public bool IsSmallBlind;
+        public bool IsBigBlind;
 
-        public int smallBlindAmount;
-        public int bigBlindAmount;
-        public int startingMoney;
+        public int SmallBlindAmount;
+        public int BigBlindAmount;
+        public int StartingMoney;
 
         public override NetworkMessageType Type => NetworkMessageType.GameInfoMessage;
     }

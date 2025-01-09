@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PokerParty_SharedDLL.Tests
+﻿namespace PokerParty_SharedDLL.Tests
 {
     public class DeckTests
     {
@@ -12,7 +6,7 @@ namespace PokerParty_SharedDLL.Tests
         public void Constructor_WhenCalled_ShouldContain52Cards()
         {
             Deck deck = new Deck();
-            int cardCount = deck.cards.Count;
+            int cardCount = deck.Cards.Count;
             Assert.Equal(52, cardCount);
         }
 
@@ -23,8 +17,8 @@ namespace PokerParty_SharedDLL.Tests
             Deck deck2 = new Deck();
             deck1.Shuffle();
             deck2.Shuffle();
-            Card[] deck1Array = deck1.cards.ToArray();
-            Card[] deck2Array = deck2.cards.ToArray();
+            Card[] deck1Array = deck1.Cards.ToArray();
+            Card[] deck2Array = deck2.Cards.ToArray();
             Assert.NotEqual(deck1Array, deck2Array);
         }
 
@@ -32,9 +26,9 @@ namespace PokerParty_SharedDLL.Tests
         public void Draw_WhenCalled_ShouldReturnCardAndDecreaseDeckSize()
         {
             Deck deck = new Deck();
-            int initialCount = deck.cards.Count;
+            int initialCount = deck.Cards.Count;
             Card drawnCard = deck.Draw();
-            int finalCount = deck.cards.Count;
+            int finalCount = deck.Cards.Count;
             Assert.NotNull(drawnCard);
             Assert.Equal(initialCount - 1, finalCount);
         }
@@ -43,7 +37,7 @@ namespace PokerParty_SharedDLL.Tests
         public void Draw_WhenDeckEmpty_ShouldThrowInvalidOperationException()
         {
             Deck deck = new Deck();
-            while (deck.cards.Count > 0)
+            while (deck.Cards.Count > 0)
             {
                 deck.Draw();
             }

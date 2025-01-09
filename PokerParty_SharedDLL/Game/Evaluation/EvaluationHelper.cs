@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace PokerParty_SharedDLL
@@ -12,7 +11,7 @@ namespace PokerParty_SharedDLL
 
             foreach (Card card in hand)
             {
-                int bitPosition = card.value;
+                int bitPosition = card.Value;
                 bitField |= (1 << bitPosition);
             }
 
@@ -27,7 +26,7 @@ namespace PokerParty_SharedDLL
 
             foreach (Card card in hand)
             {
-                int index = card.value - 2;
+                int index = card.Value - 2;
                 counts[index]++;
             }
 
@@ -79,11 +78,11 @@ namespace PokerParty_SharedDLL
                 return HandType.RoyalFlush;
 
             HandType type = HandType.Flush;
-            string suit = hand[0].suit;
+            string suit = hand[0].Suit;
 
             foreach (Card card in hand)
             {
-                if (card.suit != suit)
+                if (card.Suit != suit)
                     type = HandType.None;
             }
 
@@ -96,7 +95,7 @@ namespace PokerParty_SharedDLL
         public static int CalculateBreakTieScore(Card[] hand)
         {
             Card[] sortedHand = hand
-                .GroupBy(card => card.value)
+                .GroupBy(card => card.Value)
                 .OrderByDescending(group => group.Count())
                 .ThenByDescending(group => group.Key)
                 .SelectMany(group => group)
@@ -106,7 +105,7 @@ namespace PokerParty_SharedDLL
 
             for (int i = 0; i < sortedHand.Length; i++)
             {
-                score |= sortedHand[i].value << (16 - (i * 4));
+                score |= sortedHand[i].Value << (16 - (i * 4));
             }
 
             return score;

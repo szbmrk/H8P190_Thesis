@@ -3,7 +3,7 @@
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public abstract class ANetworkMessagePC
+    public abstract class ANetworkMessagePc
     {
         public abstract NetworkMessageType Type { get; }
     }

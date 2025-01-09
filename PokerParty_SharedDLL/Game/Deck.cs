@@ -7,40 +7,40 @@ namespace PokerParty_SharedDLL
 {
     public class Deck
     {
-        public Stack<Card> cards;
+        public Stack<Card> Cards;
 
         public Deck()
         {
-            cards = new Stack<Card>();
+            Cards = new Stack<Card>();
             for (int i = 2; i < 15; i++)
             {
-                cards.Push(new Card(i, "Hearts"));
-                cards.Push(new Card(i, "Diamonds"));
-                cards.Push(new Card(i, "Clubs"));
-                cards.Push(new Card(i, "Spades"));
+                Cards.Push(new Card(i, "Hearts"));
+                Cards.Push(new Card(i, "Diamonds"));
+                Cards.Push(new Card(i, "Clubs"));
+                Cards.Push(new Card(i, "Spades"));
             }
         }
 
         public void Shuffle()
         {
             Random rng = new Random();
-            Card[] cardArray = cards.ToArray();
-            cards.Clear();
+            Card[] cardArray = Cards.ToArray();
+            Cards.Clear();
             foreach (Card card in cardArray.OrderBy(a => rng.Next()))
             {
-                cards.Push(card);
+                Cards.Push(card);
             }
         }
 
         public Card Draw()
         {
-            return cards.Pop();
+            return Cards.Pop();
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (Card card in cards)
+            foreach (Card card in Cards)
             {
                 sb.Append(card.ToString()).Append("\n");
             }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PokerParty_SharedDLL
+﻿namespace PokerParty_SharedDLL
 {
     public enum HandType
     {

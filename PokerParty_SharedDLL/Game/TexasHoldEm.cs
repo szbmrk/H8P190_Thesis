@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokerParty_SharedDLL
 {
@@ -16,7 +14,7 @@ namespace PokerParty_SharedDLL
             return cards;
         }
 
-        public static HandType EvaluateHand(Card[] hand)
+        private static HandType EvaluateHand(Card[] hand)
         {
             HandType type = HandType.None;
 
@@ -103,7 +101,7 @@ namespace PokerParty_SharedDLL
             }
         }
 
-        public static PlayerHandInfo[] DetermineOrder(PlayerHandInfo[] playerHandInfos)
+        private static PlayerHandInfo[] DetermineOrder(PlayerHandInfo[] playerHandInfos)
         {
             AssignHandTypes(playerHandInfos);
 

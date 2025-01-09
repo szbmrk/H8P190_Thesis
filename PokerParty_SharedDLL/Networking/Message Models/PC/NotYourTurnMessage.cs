@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class NotYourTurnMessage : ANetworkMessagePC
+    public class NotYourTurnMessage : ANetworkMessagePc
     {
-        public string playerInTurn;
+        public string PlayerInTurn;
         public override NetworkMessageType Type => NetworkMessageType.NotYourTurnMessage;
     }
 }

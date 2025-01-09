@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class DealCardsMessage : ANetworkMessagePC
+    public class DealCardsMessage : ANetworkMessagePc
     {
-        public Card[] cards;
+        public Card[] Cards;
         public override NetworkMessageType Type => NetworkMessageType.DealCardsMessage;
     }
 }

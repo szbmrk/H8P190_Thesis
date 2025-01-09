@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PokerParty_SharedDLL
 {
     [Serializable]
-    public class GameOverMessage : ANetworkMessagePC
+    public class GameOverMessage : ANetworkMessagePc
     {
         public override NetworkMessageType Type => NetworkMessageType.GameOverMessage;
     }

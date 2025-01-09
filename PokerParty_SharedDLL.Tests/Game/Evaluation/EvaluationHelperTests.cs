@@ -1,43 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PokerParty_SharedDLL.Tests
 {
     public class EvaluationHelperTests
     {
-        public Card[] handWithStraightFromNinetoK = new Card[]
-        {
+        private readonly Card[] _handWithStraightFromNineToK =
+        [
             new Card(9, "Hearts"),
             new Card(10, "Spades"),
             new Card(11, "Hearts"),
             new Card(12, "Clubs"),
             new Card(13, "Spades")
-        };
+        ];
 
-        public Card[] handWithFullHouse3Nine2K = new Card[]
-        {
+        private readonly Card[] _handWithFullHouse3Nine2K =
+        [
             new Card(9, "Clubs"),
             new Card(9, "Clubs"),
             new Card(9, "Hearts"),
             new Card(13, "Clubs"),
             new Card(13, "Spades")
-        };
+        ];
 
         [Fact]
         public void GetFaceValueBitField_WhenHands_ShouldReturnCorrectBitfield()
         {
-            Assert.Equal(0b011111000000000, EvaluationHelper.GetFaceValueBitField(handWithStraightFromNinetoK));
-            Assert.Equal(0b010001000000000, EvaluationHelper.GetFaceValueBitField(handWithFullHouse3Nine2K));
+            Assert.Equal(0b011111000000000, EvaluationHelper.GetFaceValueBitField(_handWithStraightFromNineToK));
+            Assert.Equal(0b010001000000000, EvaluationHelper.GetFaceValueBitField(_handWithFullHouse3Nine2K));
         }
 
         [Fact]
         public void GetFaceValueCountBitField_WhenHands_ShouldReturnCorrectBitfield()
         {
-            Assert.Equal(0b000000010001000100010001000000000000000000000000000000000000, EvaluationHelper.GetFaceValueCountBitField(handWithStraightFromNinetoK));
-            Assert.Equal(0b000000110000000000000111000000000000000000000000000000000000, EvaluationHelper.GetFaceValueCountBitField(handWithFullHouse3Nine2K));
+            Assert.Equal(0b000000010001000100010001000000000000000000000000000000000000, EvaluationHelper.GetFaceValueCountBitField(_handWithStraightFromNineToK));
+            Assert.Equal(0b000000110000000000000111000000000000000000000000000000000000, EvaluationHelper.GetFaceValueCountBitField(_handWithFullHouse3Nine2K));
         }
 
         [Theory]
@@ -61,14 +55,14 @@ namespace PokerParty_SharedDLL.Tests
             int card5Value, string card5Suit,
             HandType expectedHandType)
         {
-            Card[] hand = new Card[]
-            {
+            Card[] hand =
+            [
                 new Card(card1Value, card1Suit),
                 new Card(card2Value, card2Suit),
                 new Card(card3Value, card3Suit),
                 new Card(card4Value, card4Suit),
                 new Card(card5Value, card5Suit)
-            };
+            ];
 
             long mod15Res = EvaluationHelper.GetFaceValueCountBitField(hand) % 15;
             HandType handType = EvaluationHelper.GetHandTypeByCountOfFaceValues(mod15Res);
@@ -90,14 +84,14 @@ namespace PokerParty_SharedDLL.Tests
             int card5Value, string card5Suit,
             HandType expectedHandType)
         {
-            Card[] hand = new Card[]
-            {
+            Card[] hand =
+            [
                 new Card(card1Value, card1Suit),
                 new Card(card2Value, card2Suit),
                 new Card(card3Value, card3Suit),
                 new Card(card4Value, card4Suit),
                 new Card(card5Value, card5Suit)
-            };
+            ];
 
             int faceValueBitField = EvaluationHelper.GetFaceValueBitField(hand);
             Assert.Equal(EvaluationHelper.CheckForStraight(faceValueBitField), expectedHandType);
@@ -120,14 +114,14 @@ namespace PokerParty_SharedDLL.Tests
             int card5Value, string card5Suit,
             HandType expectedHandType)
         {
-            Card[] hand = new Card[]
-            {
+            Card[] hand =
+            [
                 new Card(card1Value, card1Suit),
                 new Card(card2Value, card2Suit),
                 new Card(card3Value, card3Suit),
                 new Card(card4Value, card4Suit),
                 new Card(card5Value, card5Suit)
-            };
+            ];
 
             Assert.Equal(EvaluationHelper.CheckForFlushes(hand), expectedHandType);
         }

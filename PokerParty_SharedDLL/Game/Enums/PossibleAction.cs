@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PokerParty_SharedDLL
+﻿namespace PokerParty_SharedDLL
 {
     public enum PossibleAction
     {
-        SMALL_BLIND_BET, //kötelező tét
-        BIG_BLIND_BET, //kötelező tét
-        FOLD, //bedobás
-        CHECK, //passzolás
-        BET, //nyitás
-        CALL, //tartás
-        RAISE, //emelés
-        ALL_IN //all in
+        SmallBlindBet, //kötelező tét
+        BigBlindBet, //kötelező tét
+        Fold, //bedobás
+        Check, //passzolás
+        Bet, //nyitás
+        Call, //tartás
+        Raise, //emelés
+        AllIn //all in
     }
 }
