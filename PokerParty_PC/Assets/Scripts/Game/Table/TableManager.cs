@@ -160,14 +160,16 @@ public class TableManager : MonoBehaviour
             winnerCard.RefreshMoney(playerSeats.Find(p => p.turnInfo.player.Equals(winner.Player)).turnInfo.money);
         }
         moneyInPot = 0;
+        
+        SendRefreshedMoneyMessages();
     }
 
     public void StartNewGame()
     {
         ClearTable();
         ReshufleDeck();
-        RemovePlayersWith0Money();
         ResetAndRotatePlayers();
+        RemovePlayersWith0Money();
     }
 
     private void ClearTable()
@@ -283,6 +285,17 @@ public class TableManager : MonoBehaviour
         {
             player.OutOfGame();
             playerSeats.Remove(player);
+        }
+    }
+
+    public void SendRefreshedMoneyMessages()
+    {
+        foreach (TablePlayerCard player in playerSeats)
+        {
+            RefreshedMoneyMessage refreshedMoneyMessage = new RefreshedMoneyMessage();
+            refreshedMoneyMessage.newMoney = player.turnInfo.money;
+            ConnectionManager.Instance.SendMessageToConnection(
+                ConnectionManager.Instance.Connections[player.indexInConnectionsArray], refreshedMoneyMessage);
         }
     }
 

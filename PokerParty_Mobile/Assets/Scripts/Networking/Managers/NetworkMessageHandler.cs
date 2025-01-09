@@ -40,6 +40,10 @@ public static class NetworkMessageHandler
                 CommunityCardsChanged communityCardsChanged = FromStringToJson<CommunityCardsChanged>(data);
                 CardsGUI.Instance.SetBestHandText(communityCardsChanged);
                 break;
+            case NetworkMessageType.RefreshedMoneyMessage:
+                RefreshedMoneyMessage refreshedMoneyMessage = FromStringToJson<RefreshedMoneyMessage>(data);
+                GameManager.Instance.UpdateMoney(refreshedMoneyMessage.newMoney);
+                break;
             case NetworkMessageType.GameOverMessage:
                 GameOverMessage gameOverMessage = FromStringToJson<GameOverMessage>(data);
                 GameManager.Instance.GameOver();

@@ -9,6 +9,7 @@
         TurnDoneMessage,
         PlayerNameAlreadyInUseMessage,
         LoadedToGameMessage,
+        RefreshedMoneyMessage,
         GameStartedMessage,
         YourTurnMessage,
         NotYourTurnMessage,
