@@ -66,8 +66,8 @@ public class TableManager : MonoBehaviour
         }
     }
 
-    public int PlayersInGameCount => playerSeats
-        .FindAll(player => player.IsStillInGame).Count;
+    public int playersInGameCount => playerSeats
+        .FindAll(player => player.isStillInGame).Count;
 
     private void AssignRolesAndShuffleTheOrderOfPlayers()
     {
@@ -85,13 +85,13 @@ public class TableManager : MonoBehaviour
 
     public void DealCardsToPlayers()
     {
-        for (int i = 0; i < playerSeats.Count; i++)
+        foreach (TablePlayerCard player in playerSeats)
         {
             Card[] cards = TexasHoldEm.DealCardsToPlayer(deck);
             DealCardsMessage dealCardsMessage = new DealCardsMessage();
-            playerSeats[i].turnInfo.cards = cards;
+            player.turnInfo.cards = cards;
             dealCardsMessage.cards = cards;
-            int indexInConnections = playerSeats[i].indexInConnectionsArray;
+            int indexInConnections = player.indexInConnectionsArray;
             ConnectionManager.Instance.SendMessageToConnection(ConnectionManager.Instance.Connections[indexInConnections], dealCardsMessage);
         }
     }
@@ -166,6 +166,7 @@ public class TableManager : MonoBehaviour
     {
         ClearTable();
         ReshufleDeck();
+        RemovePlayersWith0Money();
         ResetAndRotatePlayers();
     }
 
@@ -257,7 +258,7 @@ public class TableManager : MonoBehaviour
         int index = startIndex % playerSeats.Count;
         TablePlayerCard player = playerSeats[index];
 
-        if (!player.IsStillInGame)
+        if (!player.isStillInGame)
         {
             player = TurnManager.Instance.GetNextPlayerStillInGame(index);
             index = playerSeats.IndexOf(player);
@@ -273,8 +274,24 @@ public class TableManager : MonoBehaviour
         playerCard.turnInfo.money = 0;
     }
 
-    public void SendGameOverMessages()
+    private void RemovePlayersWith0Money()
     {
-        List<TablePlayerCard> playersThatAreOut = playerSeats.Select(p => p).Where(p => !p.IsStillInGame).ToList();
+        List<TablePlayerCard> playersThatAreOut = playerSeats.Select(p => p).Where(p => !p.isStillInGame).ToList();
+        SendGameOverMessages(playersThatAreOut);
+        
+        foreach (TablePlayerCard player in playersThatAreOut)
+        {
+            player.OutOfGame();
+            playerSeats.Remove(player);
+        }
+    }
+
+    public void SendGameOverMessages(List<TablePlayerCard> players)
+    {
+        foreach (TablePlayerCard player in players)
+        {
+            ConnectionManager.Instance.SendMessageToConnection(
+                ConnectionManager.Instance.Connections[player.indexInConnectionsArray], new GameOverMessage());   
+        }
     }
 }

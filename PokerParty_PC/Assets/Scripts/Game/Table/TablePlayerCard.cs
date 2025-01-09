@@ -28,13 +28,7 @@ public class TablePlayerCard : MonoBehaviour
 
     [HideInInspector] public bool isTurn;
 
-    [HideInInspector] public bool IsStillInGame
-    {
-        get
-        {
-            return turnInfo.money > 0 && !turnInfo.folded && !turnInfo.wentAllIn;
-        }
-    }
+    [HideInInspector] public bool isStillInGame => turnInfo.money > 0 && !turnInfo.folded && !turnInfo.wentAllIn;
 
     public void LoadData()
     {
@@ -68,10 +62,18 @@ public class TablePlayerCard : MonoBehaviour
         RefreshTurnIcon();
     }
 
-    public void Disconnected()
+    public void OutOfGame()
     {
         Reset();
         gameObject.SetActive(false);
+    }
+    
+    public void Disconnected()
+    {
+        OutOfGame();
+        TurnDoneMessage turnDoneMessage = new TurnDoneMessage();
+        turnDoneMessage.action = PossibleAction.FOLD;
+        TurnManager.Instance.HandleTurnDone(turnDoneMessage);
     }
 
     public void SetRoleIcons()
@@ -81,13 +83,10 @@ public class TablePlayerCard : MonoBehaviour
         bigBlindIcon.SetActive(isBigBlind);
     }
 
-    public void RefreshTurnIcon()
+    private void RefreshTurnIcon()
     {
         turnIcon.SetActive(isTurn);
-        if (isTurn)
-            playerNameText.text = $"<b>{turnInfo.player.PlayerName}</b>";
-        else
-            playerNameText.text = turnInfo.player.PlayerName;
+        playerNameText.text = isTurn ? $"<b>{turnInfo.player.PlayerName}</b>" : turnInfo.player.PlayerName;
     }
 
     public void RefreshMoney(int money)
