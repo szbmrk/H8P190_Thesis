@@ -89,7 +89,7 @@ public class TableManager : MonoBehaviour
             Card[] cards = TexasHoldEm.DealCardsToPlayer(deck);
             DealCardsMessage dealCardsMessage = new DealCardsMessage();
             player.TurnInfo.Cards = cards;
-            dealCardsMessage.cards = cards;
+            dealCardsMessage.Cards = cards;
             int indexInConnections = player.indexInConnectionsArray;
             ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], dealCardsMessage);
         }
@@ -113,7 +113,7 @@ public class TableManager : MonoBehaviour
             flippedCommunityCards[i] = tableCards[i].card;
             tableCards[i].Flip();
         }
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
@@ -125,7 +125,7 @@ public class TableManager : MonoBehaviour
         flippedCommunityCards[1] = tableCards[1].card;
         flippedCommunityCards[2] = tableCards[2].card;
         flippedCommunityCards[3] = tableCards[3].card;
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
@@ -138,14 +138,14 @@ public class TableManager : MonoBehaviour
         flippedCommunityCards[2] = tableCards[2].card;
         flippedCommunityCards[3] = tableCards[3].card;
         flippedCommunityCards[4] = tableCards[4].card;
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { communityCards = flippedCommunityCards };
+        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
     public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        playerSeats.Find(p => p.TurnInfo.Player.Equals(turnDoneMessage.player)).RefreshMoney(turnDoneMessage.newMoney);
-        playerSeats.Find(p => p.TurnInfo.Player.Equals(turnDoneMessage.player)).TurnDone();
+        playerSeats.Find(p => p.TurnInfo.Player.Equals(turnDoneMessage.Player)).RefreshMoney(turnDoneMessage.NewMoney);
+        playerSeats.Find(p => p.TurnInfo.Player.Equals(turnDoneMessage.Player)).TurnDone();
         TurnManager.instance.HandleTurnDone(turnDoneMessage);
     }
 
@@ -293,7 +293,7 @@ public class TableManager : MonoBehaviour
         {
             RefreshedMoneyMessage refreshedMoneyMessage = new RefreshedMoneyMessage
             {
-                newMoney = player.TurnInfo.Money
+                NewMoney = player.TurnInfo.Money
             };
             ConnectionManager.instance.SendMessageToConnection(
                 ConnectionManager.instance.Connections[player.indexInConnectionsArray], refreshedMoneyMessage);

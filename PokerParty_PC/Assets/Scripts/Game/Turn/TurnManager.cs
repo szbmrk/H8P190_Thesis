@@ -80,9 +80,9 @@ public class TurnManager : MonoBehaviour
         PossibleAction[] possibleActions = null;
 
         if (currentPlayerInTurn.TurnInfo.Money < MatchManager.instance.smallBlindBet)
-            possibleActions = new PossibleAction[] { PossibleAction.ALL_IN };
+            possibleActions = new PossibleAction[] { PossibleAction.AllIn };
         else
-            possibleActions = new PossibleAction[] { PossibleAction.SMALL_BLIND_BET };
+            possibleActions = new PossibleAction[] { PossibleAction.SmallBlindBet };
 
         SendTurnMessage(possibleActions, MatchManager.instance.smallBlindBet);
     }
@@ -95,9 +95,9 @@ public class TurnManager : MonoBehaviour
         PossibleAction[] possibleActions = null;
 
         if (currentPlayerInTurn.TurnInfo.Money < MatchManager.instance.bigBlindBet)
-            possibleActions = new PossibleAction[] { PossibleAction.ALL_IN };
+            possibleActions = new PossibleAction[] { PossibleAction.AllIn };
         else
-            possibleActions = new PossibleAction[] { PossibleAction.BIG_BLIND_BET };
+            possibleActions = new PossibleAction[] { PossibleAction.BigBlindBet };
 
         SendTurnMessage(possibleActions, MatchManager.instance.bigBlindBet);
     }
@@ -114,21 +114,21 @@ public class TurnManager : MonoBehaviour
     private PossibleAction[] DeterminePossibleActionsForCurrentPlayer()
     {
         if (currentPlayerInTurn.TurnInfo.Money < moneyNeededToCall)
-            return new PossibleAction[] { PossibleAction.ALL_IN, PossibleAction.FOLD };
+            return new PossibleAction[] { PossibleAction.AllIn, PossibleAction.Fold };
 
         if (currentPlayerInTurn.TurnInfo.Money == moneyNeededToCall)
-            return new PossibleAction[] { PossibleAction.CALL, PossibleAction.FOLD };
+            return new PossibleAction[] { PossibleAction.Call, PossibleAction.Fold };
 
         if (moneyNeededToCall != 0)
-            return new PossibleAction[] { PossibleAction.CALL, PossibleAction.RAISE, PossibleAction.FOLD };
+            return new PossibleAction[] { PossibleAction.Call, PossibleAction.Raise, PossibleAction.Fold };
         
         if (turnState == TurnState.PreFlop)
-            return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE, PossibleAction.FOLD };
+            return new PossibleAction[] { PossibleAction.Check, PossibleAction.Raise, PossibleAction.Fold };
             
         if (!hasAnyoneBetted)
-            return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.BET, PossibleAction.FOLD };
+            return new PossibleAction[] { PossibleAction.Check, PossibleAction.Bet, PossibleAction.Fold };
             
-        return new PossibleAction[] { PossibleAction.CHECK, PossibleAction.RAISE, PossibleAction.FOLD };
+        return new PossibleAction[] { PossibleAction.Check, PossibleAction.Raise, PossibleAction.Fold };
 
     }
 
@@ -138,15 +138,15 @@ public class TurnManager : MonoBehaviour
         
         YourTurnMessage yourTurnMessage = new YourTurnMessage
         {
-            possibleActions = possibleActions,
-            moneyNeededToCall = moneyNeededToCall
+            PossibleActions = possibleActions,
+            MoneyNeededToCall = moneyNeededToCall
         };
         int indexInConnections = currentPlayerInTurn.indexInConnectionsArray;
         ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], yourTurnMessage);
 
         NotYourTurnMessage notYourTurnMessage = new NotYourTurnMessage
         {
-            playerInTurn = currentPlayerInTurn.TurnInfo.Player.PlayerName
+            PlayerInTurn = currentPlayerInTurn.TurnInfo.Player.PlayerName
         };
 
         foreach (TablePlayerCard player in playerSeats)
@@ -161,7 +161,7 @@ public class TurnManager : MonoBehaviour
 
     public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        TableManager.instance.moneyInPot += turnDoneMessage.actionAmount;
+        TableManager.instance.moneyInPot += turnDoneMessage.ActionAmount;
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
         UpdateCurrentPlayersTurnInfo(turnDoneMessage);
 
@@ -292,22 +292,22 @@ public class TurnManager : MonoBehaviour
 
     private void UpdateCurrentPlayersTurnInfo(TurnDoneMessage turnDoneMessage)
     {
-        switch (turnDoneMessage.action)
+        switch (turnDoneMessage.Action)
         {
-            case PossibleAction.FOLD:
+            case PossibleAction.Fold:
                 currentPlayerInTurn.TurnInfo.Folded = true;
                 currentPlayerInTurn.OutOfTurn();
                 return;
-            case PossibleAction.BET:
+            case PossibleAction.Bet:
                 hasAnyoneBetted = true;
                 break;
-            case PossibleAction.RAISE:
+            case PossibleAction.Raise:
                 lastPlayerWhoRaised = currentPlayerInTurn;
                 break;
         }
         
-        currentPlayerInTurn.TurnInfo.MoneyPutInPot += turnDoneMessage.actionAmount;
-        currentPlayerInTurn.TurnInfo.Money -= turnDoneMessage.actionAmount;
+        currentPlayerInTurn.TurnInfo.MoneyPutInPot += turnDoneMessage.ActionAmount;
+        currentPlayerInTurn.TurnInfo.Money -= turnDoneMessage.ActionAmount;
 
         if (currentPlayerInTurn.TurnInfo.Money == 0)
         {

@@ -67,7 +67,7 @@ public class TablePlayerCard : MonoBehaviour
     {
         OutOfGame();
         TurnDoneMessage turnDoneMessage = new TurnDoneMessage();
-        turnDoneMessage.action = PossibleAction.FOLD;
+        turnDoneMessage.Action = PossibleAction.Fold;
         TurnManager.instance.HandleTurnDone(turnDoneMessage);
     }
 

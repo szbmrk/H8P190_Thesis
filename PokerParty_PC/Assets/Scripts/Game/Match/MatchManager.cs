@@ -26,12 +26,12 @@ public class MatchManager : MonoBehaviour
         {
             GameInfoMessage gameInfoMessage = new GameInfoMessage
             {
-                startingMoney = Settings.startingMoney,
-                smallBlindAmount = smallBlindBet,
-                bigBlindAmount = bigBlindBet,
-                isDealer = playerSeat.isDealer,
-                isSmallBlind = playerSeat.isSmallBlind,
-                isBigBlind = playerSeat.isBigBlind
+                StartingMoney = Settings.startingMoney,
+                SmallBlindAmount = smallBlindBet,
+                BigBlindAmount = bigBlindBet,
+                IsDealer = playerSeat.isDealer,
+                IsSmallBlind = playerSeat.isSmallBlind,
+                IsBigBlind = playerSeat.isBigBlind
             };
 
             int indexInConnections = playerSeat.indexInConnectionsArray;

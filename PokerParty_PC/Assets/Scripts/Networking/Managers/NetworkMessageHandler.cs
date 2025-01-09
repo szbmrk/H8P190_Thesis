@@ -11,17 +11,17 @@ public static class NetworkMessageHandler
                 ConnectionMessage connectionData = FromStringToJson<ConnectionMessage>(data);
                 if (LobbyManager.instance != null)
                 {
-                    if (!LobbyManager.instance.CheckIfPlayerNameIsAlreadyInUse(connectionData.player, indexOfConnection))
-                        LobbyManager.instance.AddPlayer(connectionData.player, indexOfConnection);
+                    if (!LobbyManager.instance.CheckIfPlayerNameIsAlreadyInUse(connectionData.Player, indexOfConnection))
+                        LobbyManager.instance.AddPlayer(connectionData.Player, indexOfConnection);
                 }
                 break;
 
             case NetworkMessageType.DisconnectMessage:
                 DisconnectMessage disconnectMessage = FromStringToJson<DisconnectMessage>(data);
                 if (TableManager.instance != null)
-                    TableManager.instance.PlayerDisconnected(disconnectMessage.player);
+                    TableManager.instance.PlayerDisconnected(disconnectMessage.Player);
                 if (LobbyManager.instance != null)
-                    LobbyManager.instance.RemovePlayer(disconnectMessage.player);
+                    LobbyManager.instance.RemovePlayer(disconnectMessage.Player);
                 if (ConnectionManager.instance != null)
                     ConnectionManager.instance.DisconnectPlayer(indexOfConnection);
                 break;
@@ -41,7 +41,7 @@ public static class NetworkMessageHandler
             case NetworkMessageType.LoadedToGameMessage:
                 LoadedToGameMessage loadedToGameMessage = FromStringToJson<LoadedToGameMessage>(data);
                 if (TableManager.instance != null)
-                    TableManager.instance.PlayerLoaded(loadedToGameMessage.player, indexOfConnection);
+                    TableManager.instance.PlayerLoaded(loadedToGameMessage.Player, indexOfConnection);
                 break;
             case NetworkMessageType.TurnDoneMessage:
                 TurnDoneMessage turnDoneMessage = FromStringToJson<TurnDoneMessage>(data);

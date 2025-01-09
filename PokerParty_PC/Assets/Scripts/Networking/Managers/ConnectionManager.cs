@@ -155,15 +155,15 @@ public class ConnectionManager : MonoBehaviour
         }
     }
 
-    public void SendMessageToAllConnections(ANetworkMessagePC message)
+    public void SendMessageToAllConnections(ANetworkMessagePc message)
     {
-        for (int i = 0; i < Connections.Length; i++)
+        foreach (NetworkConnection connection in Connections)
         {
-            SendMessageToConnection(Connections[i], message);
+            SendMessageToConnection(connection, message);
         }
     }
 
-    public void SendMessageToConnection(NetworkConnection connection, ANetworkMessagePC message)
+    public void SendMessageToConnection(NetworkConnection connection, ANetworkMessagePc message)
     {
         string messageInString = JsonUtility.ToJson(message);
 
