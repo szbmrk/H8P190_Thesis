@@ -113,7 +113,7 @@ public class TableManager : MonoBehaviour
             flippedCommunityCards[i] = tableCards[i].card;
             tableCards[i].Flip();
         }
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { CommunityCards = flippedCommunityCards };
+        CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
@@ -125,7 +125,7 @@ public class TableManager : MonoBehaviour
         flippedCommunityCards[1] = tableCards[1].card;
         flippedCommunityCards[2] = tableCards[2].card;
         flippedCommunityCards[3] = tableCards[3].card;
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { CommunityCards = flippedCommunityCards };
+        CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
@@ -138,7 +138,7 @@ public class TableManager : MonoBehaviour
         flippedCommunityCards[2] = tableCards[2].card;
         flippedCommunityCards[3] = tableCards[3].card;
         flippedCommunityCards[4] = tableCards[4].card;
-        CommunityCardsChanged communityCardsChanged = new CommunityCardsChanged() { CommunityCards = flippedCommunityCards };
+        CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
     }
 
