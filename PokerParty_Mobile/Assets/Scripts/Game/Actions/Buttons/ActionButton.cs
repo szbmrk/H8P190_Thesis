@@ -1,9 +1,4 @@
 ﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +6,10 @@ using UnityEngine.UI;
 public class ActionButton : MonoBehaviour
 {
     [HideInInspector]
-    public int amount = 0;
+    public int amount;
     public PossibleAction action;
 
-    Button button;
+    private Button button;
     public TextMeshProUGUI buttonText;
     private void Awake()
     {
@@ -34,16 +29,16 @@ public class ActionButton : MonoBehaviour
 
     private void UpdateMoney()
     {
-        GameManager.Instance.UpdateMoney(GameManager.Instance.money - amount);
+        GameManager.instance.UpdateMoney(GameManager.instance.money - amount);
     }
 
-    public TurnDoneMessage MessageToSend()
+    private TurnDoneMessage MessageToSend()
     {
         TurnDoneMessage turnDoneMessage = new TurnDoneMessage()
         {
             actionAmount = amount,
             action = action,
-            newMoney = GameManager.Instance.money,
+            newMoney = GameManager.instance.money,
         };
 
         return turnDoneMessage;
@@ -54,17 +49,21 @@ public class ActionButton : MonoBehaviour
         switch (action)
         {
             case PossibleAction.SMALL_BLIND_BET:
-                amount = Settings.SmallBLindAmount;
+                amount = Settings.smallBLindAmount;
                 break;
             case PossibleAction.BIG_BLIND_BET:
-                amount = Settings.BigBLindAmount;
+                amount = Settings.bigBLindAmount;
                 break;
             case PossibleAction.CALL:
-                amount = Settings.MoneyNeededToCall;
+                amount = Settings.moneyNeededToCall;
                 break;
             case PossibleAction.ALL_IN:
-                amount = GameManager.Instance.money;
+                amount = GameManager.instance.money;
                 break;
+            case PossibleAction.FOLD:
+            case PossibleAction.CHECK:
+            case PossibleAction.BET:
+            case PossibleAction.RAISE:
             default:
                 break;
         }

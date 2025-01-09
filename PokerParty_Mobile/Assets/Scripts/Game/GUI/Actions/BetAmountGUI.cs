@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using PokerParty_SharedDLL;
@@ -49,10 +44,7 @@ public class BetAmountGUI : MonoBehaviour
 
     private void Update()
     {
-        if (slider.value == minValue)
-            minus.interactable = false;
-        else
-            minus.interactable = true;
+        minus.interactable = slider.value != minValue;
 
         if (slider.value == maxValue)
         {
@@ -71,25 +63,29 @@ public class BetAmountGUI : MonoBehaviour
     private void Plus()
     {
         int current = (int)slider.value;
-        if (current < maxValue)
-        {
-            current += (int)(maxValue * 0.1f);
-            if (current > maxValue)
-                current = maxValue;
-            SetSliderValue(current);
-        }
+        
+        if (current >= maxValue) return;
+        
+        current += (int)(maxValue * 0.1f);
+        
+        if (current > maxValue)
+            current = maxValue;
+        
+        SetSliderValue(current);
     }
 
     private void Minus()
     {
         int current = (int)slider.value;
-        if (current > minValue)
-        {
-            current -= (int)(maxValue * 0.1f);
-            if (current < minValue)
-                current = minValue;
-            SetSliderValue(current);
-        }
+        
+        if (current <= minValue) return;
+        
+        current -= (int)(maxValue * 0.1f);
+        
+        if (current < minValue)
+            current = minValue;
+        
+        SetSliderValue(current);
     }
 
     private void SetSliderValue(int value)
@@ -108,10 +104,7 @@ public class BetAmountGUI : MonoBehaviour
                 SetSliderValue(result);
             else
             {
-                if (result < minValue)
-                    SetSliderValue(minValue);
-                else
-                    SetSliderValue(maxValue);
+                SetSliderValue(result < minValue ? minValue : maxValue);
             }
         }
         else

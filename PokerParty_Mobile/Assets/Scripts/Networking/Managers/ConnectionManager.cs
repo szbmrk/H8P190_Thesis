@@ -1,31 +1,27 @@
 using UnityEngine;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Networking.Transport.Relay;
 using Unity.Networking.Transport;
 using Unity.Services.Relay.Models;
 using Unity.Collections;
-using System.Threading.Tasks;
 using System.Collections;
 using System;
-using UnityEngine.SceneManagement;
 using PokerParty_SharedDLL;
 
 public class ConnectionManager : MonoBehaviour
 {
-    public static ConnectionManager Instance;
+    public static ConnectionManager instance;
 
-    public NetworkDriver networkDriver;
+    public NetworkDriver NetworkDriver;
     private NetworkConnection connection;
 
     private string joinCode;
 
     private async void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         { 
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
@@ -40,17 +36,17 @@ public class ConnectionManager : MonoBehaviour
         }
     }
 
-    void UpdatePlayer()
+    private void UpdatePlayer()
     {
-        if (!networkDriver.IsCreated || !networkDriver.Bound)
+        if (!NetworkDriver.IsCreated || !NetworkDriver.Bound)
         {
             return;
         }
 
-        networkDriver.ScheduleUpdate().Complete();
+        NetworkDriver.ScheduleUpdate().Complete();
 
         NetworkEvent.Type eventType;
-        while ((eventType = connection.PopEvent(networkDriver, out var stream)) != NetworkEvent.Type.Empty)
+        while ((eventType = connection.PopEvent(NetworkDriver, out var stream)) != NetworkEvent.Type.Empty)
         {
             switch (eventType)
             {
@@ -68,21 +64,21 @@ public class ConnectionManager : MonoBehaviour
                 case NetworkEvent.Type.Connect:
                     Debug.Log("Player connected to the Host");
                     MessageSender.SendMessageToHost(new ConnectionMessage());
-                    NetworkingGUI.Instance.ShowJoinedPanel(true);
+                    NetworkingGUI.instance.ShowJoinedPanel(true);
                     break;
 
                 case NetworkEvent.Type.Disconnect:
                     connection = default(NetworkConnection);
-                    if (NetworkingGUI.Instance != null)
+                    if (NetworkingGUI.instance != null)
                     {
-                        NetworkingGUI.Instance.ShowJoinedPanel(false);
-                        NetworkingGUI.Instance.ResetReadyButton();
-                        PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
+                        NetworkingGUI.instance.ShowJoinedPanel(false);
+                        NetworkingGUI.instance.ResetReadyButton();
+                        PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
                     }
 
-                    if (GameOverGUI.Instance != null)
+                    if (GameOverGUI.instance != null)
                     {
-                        GameOverGUI.Instance.ShowGameOverPanel();
+                        GameOverGUI.instance.ShowGameOverPanel();
                     }
 
                     StartCoroutine(DisposeNetworkDriver());
@@ -108,18 +104,18 @@ public class ConnectionManager : MonoBehaviour
             var settings = new NetworkSettings();
             settings.WithRelayParameters(ref relayServerData);
 
-            if (networkDriver.IsCreated)
+            if (NetworkDriver.IsCreated)
             {
-                networkDriver.Dispose();
+                NetworkDriver.Dispose();
             }
 
-            networkDriver = NetworkDriver.Create(settings);
+            NetworkDriver = NetworkDriver.Create(settings);
 
-            BindToHost(networkDriver);
+            BindToHost(NetworkDriver);
         }
         catch (Exception e)
         {
-            NetworkingGUI.Instance.ShowJoinError(e.Message);
+            NetworkingGUI.instance.ShowJoinError(e.Message);
         }
     }
 
@@ -133,7 +129,7 @@ public class ConnectionManager : MonoBehaviour
         Debug.Log("Player client bound to Relay server");
 
         connection = networkDriver.Connect();
-        MessageSender.Initalize(networkDriver, connection);
+        MessageSender.Initialize(networkDriver, connection);
 
         Debug.Log("Joined Relay with Join Code: " + joinCode);
     }
@@ -149,9 +145,9 @@ public class ConnectionManager : MonoBehaviour
     public IEnumerator DisposeNetworkDriver()
     {
         yield return new WaitForSeconds(1f);
-        if (networkDriver.IsCreated)
+        if (NetworkDriver.IsCreated)
         {
-            networkDriver.Dispose();
+            NetworkDriver.Dispose();
         }
     }
 }

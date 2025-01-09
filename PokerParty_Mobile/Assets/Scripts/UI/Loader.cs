@@ -2,14 +2,14 @@
 
 public class Loader : MonoBehaviour
 {
-    public static Loader Instance;
+    public static Loader instance;
 
     [SerializeField]
     private GameObject loader;
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     public void StartLoading()

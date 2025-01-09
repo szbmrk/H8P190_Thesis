@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class GameOverGUI : MonoBehaviour
 {
-    public static GameOverGUI Instance;
+    public static GameOverGUI instance;
 
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private Button backToMainBtn;
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
         backToMainBtn.onClick.AddListener(() => StartCoroutine(OnBackToMainBtnClick()));
     }
 
@@ -21,15 +21,15 @@ public class GameOverGUI : MonoBehaviour
         if (gameOverPanel.activeInHierarchy)
             return;
 
-        GameGUI.Instance.inGamePanel.SetActive(false);
+        GameGUI.instance.inGamePanel.SetActive(false);
         gameOverPanel.SetActive(true);
     }
 
     private IEnumerator OnBackToMainBtnClick()
     {
-        Loader.Instance.StartLoading();
-        yield return ConnectionManager.Instance.DisposeNetworkDriver();
-        Destroy(ConnectionManager.Instance.gameObject);
+        Loader.instance.StartLoading();
+        yield return ConnectionManager.instance.DisposeNetworkDriver();
+        Destroy(ConnectionManager.instance.gameObject);
         SceneManager.LoadScene("Lobby");
     }
 }

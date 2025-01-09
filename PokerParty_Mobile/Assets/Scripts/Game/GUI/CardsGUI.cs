@@ -1,16 +1,11 @@
 ﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CardsGUI : MonoBehaviour
 {
-    public static CardsGUI Instance;
+    public static CardsGUI instance;
 
     [SerializeField] private Image card1;
     [SerializeField] private Image card2;
@@ -24,8 +19,8 @@ public class CardsGUI : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     public void NewRoundStarted()
@@ -49,8 +44,8 @@ public class CardsGUI : MonoBehaviour
             bestHandText.gameObject.SetActive(true);
 
         Card[] cards = new Card[2 + communityCardsChanged.communityCards.Length];
-        cards[0] = GameManager.Instance.cards[0];
-        cards[1] = GameManager.Instance.cards[1];
+        cards[0] = GameManager.instance.cards[0];
+        cards[1] = GameManager.instance.cards[1];
         for (int i = 0; i < communityCardsChanged.communityCards.Length; i++)
         {
             cards[i + 2] = communityCardsChanged.communityCards[i];

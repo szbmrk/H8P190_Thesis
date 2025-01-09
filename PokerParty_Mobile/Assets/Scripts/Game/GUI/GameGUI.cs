@@ -1,15 +1,9 @@
-﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class GameGUI : MonoBehaviour
 {
-    public static GameGUI Instance;
+    public static GameGUI instance;
 
     public TextMeshProUGUI moneyText;
     public GameObject waitingFor;
@@ -18,8 +12,8 @@ public class GameGUI : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     public void WaitingFor(string playerName)
@@ -35,12 +29,12 @@ public class GameGUI : MonoBehaviour
 
     public void StartGame()
     {
-        Loader.Instance.StopLoading();
+        Loader.instance.StopLoading();
         inGamePanel.SetActive(true);
     }
 
     public void UpdateMoney()
     {
-        moneyText.text = $"{GameManager.Instance.money} $";
+        moneyText.text = $"{GameManager.instance.money} $";
     }
 }

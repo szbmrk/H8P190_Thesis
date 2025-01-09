@@ -29,8 +29,6 @@ public class Popup : MonoBehaviour
             case PopupType.BasicPopup:
                 popupText.color = Color.white;
                 break;
-            default:
-                break;
         }
 
         popupText.text = text;

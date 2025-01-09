@@ -3,12 +3,12 @@ using Unity.Collections;
 using Unity.Networking.Transport;
 using UnityEngine;
 
-public class MessageSender
+public static class MessageSender
 {
     private static NetworkDriver networkDriver;
     private static NetworkConnection connection;
 
-    public static void Initalize(NetworkDriver networkDriver, NetworkConnection connection)
+    public static void Initialize(NetworkDriver networkDriver, NetworkConnection connection)
     {
         MessageSender.networkDriver = networkDriver;
         MessageSender.connection = connection;
@@ -16,7 +16,7 @@ public class MessageSender
 
     public static void SendMessageToHost(ANetworkMessageMobile message)
     {
-        message.player = PlayerManager.LoggedInPlayer;
+        message.player = PlayerManager.loggedInPlayer;
 
         Debug.Log(message.player.PlayerName);
         if (!connection.IsCreated)
@@ -27,12 +27,11 @@ public class MessageSender
 
         string messageInString = JsonUtility.ToJson(message);
 
-        if (networkDriver.BeginSend(connection, out DataStreamWriter writer) == 0)
-        {
-            writer.WriteUInt((uint)message.Type);
-            writer.WriteFixedString512(messageInString);
-            networkDriver.EndSend(writer);
-            Debug.Log($"Message sent: {messageInString}");
-        }
+        if (networkDriver.BeginSend(connection, out DataStreamWriter writer) != 0) return;
+        
+        writer.WriteUInt((uint)message.Type);
+        writer.WriteFixedString512(messageInString);
+        networkDriver.EndSend(writer);
+        Debug.Log($"Message sent: {messageInString}");
     }
 }

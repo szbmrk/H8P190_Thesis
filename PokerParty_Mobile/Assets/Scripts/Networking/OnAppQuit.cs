@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class OnAppQuit : MonoBehaviour
 {
-    public static bool ReadyToQuit;
+    private static bool readyToQuit;
 
-    private static OnAppQuit Instance;
+    private static OnAppQuit instance;
 
     [RuntimeInitializeOnLoadMethod]
     static void RunOnStart()
@@ -15,29 +15,29 @@ public class OnAppQuit : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
-    public static bool WantsToQuit()
+    private static bool WantsToQuit()
     {
-        if (Instance == null || ConnectionManager.Instance == null || !ConnectionManager.Instance.networkDriver.IsCreated)
+        if (instance == null || ConnectionManager.instance == null || !ConnectionManager.instance.NetworkDriver.IsCreated)
             return true;
 
-        Instance.StartCoroutine(Instance.StartQuiting());
+        instance.StartCoroutine(instance.StartQuiting());
 
-        return ReadyToQuit;
+        return readyToQuit;
     }
 
     IEnumerator StartQuiting()
     {
-        if (ConnectionManager.Instance != null)
+        if (ConnectionManager.instance != null)
         {
-            ConnectionManager.Instance.DisconnectFromHost();
-            ConnectionManager.Instance.StopAllCoroutines();
-            yield return ConnectionManager.Instance.DisposeNetworkDriver();
+            ConnectionManager.instance.DisconnectFromHost();
+            ConnectionManager.instance.StopAllCoroutines();
+            yield return ConnectionManager.instance.DisposeNetworkDriver();
         }
 
-        ReadyToQuit = true;
+        readyToQuit = true;
         Debug.Log("Client app stopped");
         Application.Quit();
     }

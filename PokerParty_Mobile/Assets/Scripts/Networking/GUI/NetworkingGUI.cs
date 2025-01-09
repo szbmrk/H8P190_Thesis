@@ -1,19 +1,18 @@
 ﻿using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NetworkingGUI : MonoBehaviour
 {
-    public static NetworkingGUI Instance;
+    public static NetworkingGUI instance;
 
     public Button joinBtn;
     [SerializeField] private Button sendMsgBtn;
     [SerializeField] private Button disconnectBtn;
     [SerializeField] private Button readyBtn;
 
-    private bool isReady = false;
+    private bool isReady;
 
     [SerializeField] private GameObject notJoinedPanel;
     [SerializeField] private GameObject joinedPanel;
@@ -24,8 +23,8 @@ public class NetworkingGUI : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
 
         joinBtn.onClick.AddListener(JoinRelay);
         disconnectBtn.onClick.AddListener(DisconnectFromHost);
@@ -46,7 +45,7 @@ public class NetworkingGUI : MonoBehaviour
             disconnectBtn.interactable = false;
         }
 
-        Loader.Instance.StopLoading();
+        Loader.instance.StopLoading();
         messageInput.text = string.Empty;
         joinedPanel.SetActive(value);
         notJoinedPanel.SetActive(!value);
@@ -56,13 +55,13 @@ public class NetworkingGUI : MonoBehaviour
     {
         if (string.IsNullOrEmpty(messageInput.text))
         {
-            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Cannot send empty message");
+            PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "Cannot send empty message");
             return;
         }
 
         if (messageInput.text.Length > 500)
         {
-            PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, "Cannot send more than 500 characters at once");
+            PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "Cannot send more than 500 characters at once");
             return;
         }
 
@@ -73,7 +72,7 @@ public class NetworkingGUI : MonoBehaviour
 
     private void JoinRelay()
     {
-        Loader.Instance.StartLoading();
+        Loader.instance.StartLoading();
         joinBtn.interactable = false;
         
         if (string.IsNullOrEmpty(playerNameInputField.text))
@@ -82,25 +81,25 @@ public class NetworkingGUI : MonoBehaviour
             return;
         }
         
-        PlayerManager.LoggedInPlayer = new Player(playerNameInputField.text);
-        ConnectionManager.Instance.JoinRelay(joinCodeInputField.text);
+        PlayerManager.loggedInPlayer = new Player(playerNameInputField.text);
+        ConnectionManager.instance.JoinRelay(joinCodeInputField.text);
         playerNameInputField.text = string.Empty;
         joinCodeInputField.text = string.Empty;
     }
 
     public void ShowJoinError(string error)
     {
-        Loader.Instance.StopLoading();
+        Loader.instance.StopLoading();
         joinBtn.interactable = true;
-        PopupManager.Instance.ShowPopup(PopupType.ErrorPopup, error);
+        PopupManager.instance.ShowPopup(PopupType.ErrorPopup, error);
     }
 
     private void DisconnectFromHost()
     {
-        Loader.Instance.StartLoading();
+        Loader.instance.StartLoading();
         joinBtn.interactable = true;
         disconnectBtn.interactable = false;
-        ConnectionManager.Instance.DisconnectFromHost();
+        ConnectionManager.instance.DisconnectFromHost();
     }
 
     private void Ready()

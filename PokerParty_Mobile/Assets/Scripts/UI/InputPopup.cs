@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class InputPopup : Popup
@@ -13,7 +9,7 @@ public class InputPopup : Popup
     [SerializeField] private Button closeBtn;
     public TMP_InputField inputField;
 
-    Func<Task<bool>> methodToCall;
+    private Func<Task<bool>> methodToCall;
 
     protected override void Awake()
     {
@@ -31,12 +27,11 @@ public class InputPopup : Popup
 
     private async void OnClickSubmit()
     {
-        if (methodToCall != null) 
+        if (methodToCall == null) return;
+        
+        if (await methodToCall.Invoke())
         {
-            if (await methodToCall.Invoke())
-            {
-                ClosePopup();
-            }
+            ClosePopup();
         }
     }
 

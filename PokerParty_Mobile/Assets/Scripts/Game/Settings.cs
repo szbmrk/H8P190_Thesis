@@ -1,27 +1,22 @@
 ﻿using PokerParty_SharedDLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public static class Settings
 {
-    public static bool IsDealer;
-    public static bool IsSmallBlind;
-    public static bool IsBigBlind;
+    public static bool isDealer;
+    public static bool isSmallBlind;
+    public static bool isBigBlind;
     
-    public static int SmallBLindAmount;
-    public static int BigBLindAmount;
+    public static int smallBLindAmount;
+    public static int bigBLindAmount;
 
-    public static int MoneyNeededToCall;
+    public static int moneyNeededToCall;
 
     public static void SetSettings(GameInfoMessage gameInfo)
     {
-        IsDealer = gameInfo.isDealer;
-        IsSmallBlind = gameInfo.isSmallBlind;
-        IsBigBlind = gameInfo.isBigBlind;
-        SmallBLindAmount = gameInfo.smallBlindAmount;
-        BigBLindAmount = gameInfo.bigBlindAmount;
+        isDealer = gameInfo.isDealer;
+        isSmallBlind = gameInfo.isSmallBlind;
+        isBigBlind = gameInfo.isBigBlind;
+        smallBLindAmount = gameInfo.smallBlindAmount;
+        bigBLindAmount = gameInfo.bigBlindAmount;
     }
 }
