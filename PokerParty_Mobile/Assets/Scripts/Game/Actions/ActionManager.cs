@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class ActionManager : MonoBehaviour
 {
-    public static ActionManager Instance;
+    public static ActionManager instance;
 
     public Transform parentForActions;
 
@@ -25,51 +25,51 @@ public class ActionManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     private void EnableAction(PossibleAction action)
     {
         switch (action)
         {
-            case PossibleAction.SMALL_BLIND_BET:
+            case PossibleAction.SmallBlindBet:
                 GameObject smallBlind = Instantiate(smallBlindPrefab, parentForActions);
                 smallBlind.GetComponent<ActionButton>().amount = Settings.smallBLindAmount;
                 smallBlind.GetComponent<ActionButton>().buttonText.text = $"Place Small Blind Bet ({Settings.smallBLindAmount} $)";
                 currentActions.Add(smallBlind);
                 break;
-            case PossibleAction.BIG_BLIND_BET:
+            case PossibleAction.BigBlindBet:
                 GameObject bigBlind = Instantiate(bigBlindPrefab, parentForActions);
                 bigBlind.GetComponent<ActionButton>().amount = Settings.bigBLindAmount;
                 bigBlind.GetComponent<ActionButton>().buttonText.text = $"Place Big Blind Bet ({Settings.bigBLindAmount} $)";
                 currentActions.Add(bigBlind);
                 break;
-            case PossibleAction.CALL:
+            case PossibleAction.Call:
                 GameObject call = Instantiate(callPrefab, parentForActions);
                 call.GetComponent<ActionButton>().amount = Settings.moneyNeededToCall;
                 call.GetComponent<ActionButton>().buttonText.text = $"Call ({Settings.moneyNeededToCall} $)";
                 currentActions.Add(call);
                 break;
-            case PossibleAction.CHECK:
+            case PossibleAction.Check:
                 GameObject check = Instantiate(checkPrefab, parentForActions);
                 currentActions.Add(check);
                 break;
-            case PossibleAction.ALL_IN:
+            case PossibleAction.AllIn:
                 GameObject allIn = Instantiate(allInPrefab, parentForActions);
                 allIn.GetComponent<ActionButton>().amount = GameManager.instance.money;
                 currentActions.Add(allIn);
                 break;
-            case PossibleAction.FOLD:
+            case PossibleAction.Fold:
                 GameObject fold = Instantiate(foldPrefab, parentForActions);
                 currentActions.Add(fold);
                 break;
-            case PossibleAction.BET:
+            case PossibleAction.Bet:
                 GameObject bet = Instantiate(betPrefab, parentForActions);
                 bet.GetComponent<BetAmountGUI>().Initialize(1, GameManager.instance.money);
                 currentActions.Add(bet);
                 break;
-            case PossibleAction.RAISE:
+            case PossibleAction.Raise:
                 GameObject raise = Instantiate(raisePrefab, parentForActions);
                 raise.GetComponent<BetAmountGUI>().Initialize(Settings.moneyNeededToCall + 1, GameManager.instance.money);
                 currentActions.Add(raise);

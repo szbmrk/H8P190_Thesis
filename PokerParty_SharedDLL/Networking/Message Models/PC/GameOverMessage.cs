@@ -9,6 +9,7 @@ namespace PokerParty_SharedDLL
     [Serializable]
     public class GameOverMessage : ANetworkMessagePc
     {
+        public int Place;
         public override NetworkMessageType Type => NetworkMessageType.GameOverMessage;
     }
 }

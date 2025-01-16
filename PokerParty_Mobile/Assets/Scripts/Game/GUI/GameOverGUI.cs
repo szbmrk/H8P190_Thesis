@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class GameOverGUI : MonoBehaviour
 
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private Button backToMainBtn;
+    [SerializeField] private TextMeshProUGUI placeText;
 
     private void Awake()
     {
@@ -16,8 +18,16 @@ public class GameOverGUI : MonoBehaviour
         backToMainBtn.onClick.AddListener(() => StartCoroutine(OnBackToMainBtnClick()));
     }
 
-    public void ShowGameOverPanel()
+    public void ShowGameOverPanel(int place)
     {
+        placeText.text = place switch
+        {
+            1 => "1st Place",
+            2 => "2nd Place",
+            3 => "3rd Place",
+            _ => place + "th Place"
+        };
+
         if (gameOverPanel.activeInHierarchy)
             return;
 
@@ -27,9 +37,6 @@ public class GameOverGUI : MonoBehaviour
 
     private IEnumerator OnBackToMainBtnClick()
     {
-        Loader.instance.StartLoading();
-        yield return ConnectionManager.instance.DisposeNetworkDriver();
-        Destroy(ConnectionManager.instance.gameObject);
-        SceneManager.LoadScene("Lobby");
+        yield return GameManager.instance.GoBackToMainMenu();
     }
 }

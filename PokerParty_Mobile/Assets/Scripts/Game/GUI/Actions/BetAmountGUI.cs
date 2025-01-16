@@ -50,7 +50,7 @@ public class BetAmountGUI : MonoBehaviour
         {
             plus.interactable = false;
             submitBtnText.text = "All in";
-            submitBtn.action = PossibleAction.ALL_IN;
+            submitBtn.action = PossibleAction.AllIn;
         }
         else
         {

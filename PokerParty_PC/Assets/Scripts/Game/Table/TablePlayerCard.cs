@@ -48,12 +48,6 @@ public class TablePlayerCard : MonoBehaviour
         moneyPutInText.text = "Put in: 0 $";
         outOfTurn.SetActive(false);
 
-        if (TurnInfo.Money <= 0 && gameObject.activeInHierarchy)
-        {
-            OutOfTurn();
-            GameManager.instance.SendGameOverMessageToPlayer(indexInConnectionsArray);
-        }
-
         RefreshTurnIcon();
     }
 
@@ -66,8 +60,10 @@ public class TablePlayerCard : MonoBehaviour
     public void Disconnected()
     {
         OutOfGame();
-        TurnDoneMessage turnDoneMessage = new TurnDoneMessage();
-        turnDoneMessage.Action = PossibleAction.Fold;
+        TurnDoneMessage turnDoneMessage = new TurnDoneMessage
+        {
+            Action = PossibleAction.Fold
+        };
         TurnManager.instance.HandleTurnDone(turnDoneMessage);
     }
 

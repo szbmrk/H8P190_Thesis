@@ -13,10 +13,10 @@ public static class Settings
 
     public static void SetSettings(GameInfoMessage gameInfo)
     {
-        isDealer = gameInfo.isDealer;
-        isSmallBlind = gameInfo.isSmallBlind;
-        isBigBlind = gameInfo.isBigBlind;
-        smallBLindAmount = gameInfo.smallBlindAmount;
-        bigBLindAmount = gameInfo.bigBlindAmount;
+        isDealer = gameInfo.IsDealer;
+        isSmallBlind = gameInfo.IsSmallBlind;
+        isBigBlind = gameInfo.IsBigBlind;
+        smallBLindAmount = gameInfo.SmallBlindAmount;
+        bigBLindAmount = gameInfo.BigBlindAmount;
     }
 }

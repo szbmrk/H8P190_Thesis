@@ -275,7 +275,7 @@ public class TableManager : MonoBehaviour
         playerCard.TurnInfo.Money = 0;
     }
 
-    private void RemovePlayersWith0Money()
+    public void RemovePlayersWith0Money()
     {
         List<TablePlayerCard> playersThatAreOut = playerSeats.Select(p => p).Where(p => !p.isStillInGame).ToList();
         SendGameOverMessages(playersThatAreOut);
@@ -304,8 +304,13 @@ public class TableManager : MonoBehaviour
     {
         foreach (TablePlayerCard player in players)
         {
+            GameOverMessage gameOverMessage = new GameOverMessage
+            {
+                Place = playerSeats.Count - players.Count + 1
+            };
+
             ConnectionManager.instance.SendMessageToConnection(
-                ConnectionManager.instance.Connections[player.indexInConnectionsArray], new GameOverMessage());   
+                ConnectionManager.instance.Connections[player.indexInConnectionsArray], gameOverMessage);   
         }
     }
 }

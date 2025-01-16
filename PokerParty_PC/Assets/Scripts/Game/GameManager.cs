@@ -19,16 +19,14 @@ public class GameManager : MonoBehaviour
         waitingFor.text = $"Waiting for {playerName} ...";
     }
 
-    public void SendGameOverMessageToPlayer(int indexInConnectionsArray)
+    public void GameOver(TablePlayerCard winner)
     {
+        TableManager.instance.RemovePlayersWith0Money();
+        
         GameOverMessage gameOverMessage = new GameOverMessage();
-        ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnectionsArray], gameOverMessage);
-    }
-
-    public void GameOver(string winnerName)
-    {
-        GameOverMessage gameOverMessage = new GameOverMessage();
-        ConnectionManager.instance.SendMessageToAllConnections(gameOverMessage);
-        GameOverGUI.instance.Open(winnerName);
+        gameOverMessage.Place = 1;
+        ConnectionManager.instance.SendMessageToConnection(
+            ConnectionManager.instance.Connections[winner.indexInConnectionsArray], gameOverMessage);
+        GameOverGUI.instance.Open(winner.TurnInfo.Player.PlayerName);
     }
 }

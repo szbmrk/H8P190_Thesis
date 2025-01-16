@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using PokerParty_SharedDLL;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,13 +30,13 @@ public class GameManager : MonoBehaviour
     public void StartTurn(YourTurnMessage yourTurnMessage)
     {
         GameGUI.instance.StartTurn();
-        Settings.moneyNeededToCall = yourTurnMessage.moneyNeededToCall;
-        ActionManager.Instance.EnableActions(yourTurnMessage.possibleActions);
+        Settings.moneyNeededToCall = yourTurnMessage.MoneyNeededToCall;
+        ActionManager.instance.EnableActions(yourTurnMessage.PossibleActions);
     }
 
     public void SetGameInfo(GameInfoMessage gameInfo)
     {
-        UpdateMoney(gameInfo.startingMoney);
+        UpdateMoney(gameInfo.StartingMoney);
         Settings.SetSettings(gameInfo);
         GameGUI.instance.StartGame();
     }
@@ -47,13 +49,21 @@ public class GameManager : MonoBehaviour
 
     public void SetCards(DealCardsMessage dealCards)
     {
-        cards = dealCards.cards;
+        cards = dealCards.Cards;
         CardsGUI.instance.SetCards(cards);
     }
 
-    public void GameOver()
+    public void GameOver(GameOverMessage gameOverMessage)
     {
-        ActionManager.Instance.DisableActions();
-        GameOverGUI.instance.ShowGameOverPanel();
+        ActionManager.instance.DisableActions();
+        GameOverGUI.instance.ShowGameOverPanel(gameOverMessage.Place);
+    }
+
+    public IEnumerator GoBackToMainMenu()
+    {
+        Loader.instance.StartLoading();
+        yield return ConnectionManager.instance.DisposeNetworkDriver();
+        Destroy(ConnectionManager.instance.gameObject);
+        SceneManager.LoadScene("Lobby");
     }
 }

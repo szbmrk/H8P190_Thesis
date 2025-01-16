@@ -76,9 +76,9 @@ public class ConnectionManager : MonoBehaviour
                         PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
                     }
 
-                    if (GameOverGUI.instance != null)
+                    if (GameManager.instance != null)
                     {
-                        GameOverGUI.instance.ShowGameOverPanel();
+                        GameManager.instance.StartCoroutine(GameManager.instance.GoBackToMainMenu());
                     }
 
                     StartCoroutine(DisposeNetworkDriver());

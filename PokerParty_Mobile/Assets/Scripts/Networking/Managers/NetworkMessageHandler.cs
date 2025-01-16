@@ -30,23 +30,23 @@ public static class NetworkMessageHandler
                 break;
             case NetworkMessageType.NotYourTurnMessage:
                 NotYourTurnMessage notYourTurnMessage = FromStringToJson<NotYourTurnMessage>(data);
-                GameManager.instance.WaitingFor(notYourTurnMessage.playerInTurn);
+                GameManager.instance.WaitingFor(notYourTurnMessage.PlayerInTurn);
                 break;
             case NetworkMessageType.NewTurnStartedMessage:
                 //NewTurnStartedMessage newTurnStartedMessage = FromStringToJson<NewTurnStartedMessage>(data);
                 CardsGUI.instance.NewRoundStarted();
                 break;
             case NetworkMessageType.CommunityCardsChangedMessage:
-                CommunityCardsChanged communityCardsChanged = FromStringToJson<CommunityCardsChanged>(data);
+                CommunityCardsChangedMessage communityCardsChanged = FromStringToJson<CommunityCardsChangedMessage>(data);
                 CardsGUI.instance.SetBestHandText(communityCardsChanged);
                 break;
             case NetworkMessageType.RefreshedMoneyMessage:
                 RefreshedMoneyMessage refreshedMoneyMessage = FromStringToJson<RefreshedMoneyMessage>(data);
-                GameManager.instance.UpdateMoney(refreshedMoneyMessage.newMoney);
+                GameManager.instance.UpdateMoney(refreshedMoneyMessage.NewMoney);
                 break;
             case NetworkMessageType.GameOverMessage:
-                //GameOverMessage gameOverMessage = FromStringToJson<GameOverMessage>(data);
-                GameManager.instance.GameOver();
+                GameOverMessage gameOverMessage = FromStringToJson<GameOverMessage>(data);
+                GameManager.instance.GameOver(gameOverMessage);
                 break;
         }
     }

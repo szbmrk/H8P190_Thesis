@@ -16,9 +16,8 @@ public static class MessageSender
 
     public static void SendMessageToHost(ANetworkMessageMobile message)
     {
-        message.player = PlayerManager.loggedInPlayer;
+        message.Player = PlayerManager.loggedInPlayer;
 
-        Debug.Log(message.player.PlayerName);
         if (!connection.IsCreated)
         {
             Debug.LogError("Player isn't connected. No Host client to send message to.");

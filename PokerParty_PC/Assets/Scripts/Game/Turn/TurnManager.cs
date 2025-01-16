@@ -161,6 +161,9 @@ public class TurnManager : MonoBehaviour
 
     public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
     {
+        if (!turnDoneMessage.Player.Equals(currentPlayerInTurn.TurnInfo.Player))
+            return;
+        
         TableManager.instance.moneyInPot += turnDoneMessage.ActionAmount;
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
         UpdateCurrentPlayersTurnInfo(turnDoneMessage);
@@ -282,7 +285,7 @@ public class TurnManager : MonoBehaviour
         yield return MatchManager.instance.ShowDown();
         if (CheckIfGameIsOver())
         {
-            GameManager.instance.GameOver(GetLastPlayerInGame().TurnInfo.Player.PlayerName);
+            GameManager.instance.GameOver(GetLastPlayerInGame());
             yield break;
         }
 

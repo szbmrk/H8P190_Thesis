@@ -65,7 +65,7 @@ public class NetworkingGUI : MonoBehaviour
             return;
         }
 
-        ChatMessage chatMessage = new ChatMessage() { message = messageInput.text };
+        ChatMessage chatMessage = new ChatMessage() { Message = messageInput.text };
         MessageSender.SendMessageToHost(chatMessage);
         messageInput.text = string.Empty;
     }
@@ -117,7 +117,7 @@ public class NetworkingGUI : MonoBehaviour
             disconnectBtn.interactable = false;
         }
 
-        ReadyMessage message = new ReadyMessage() { isReady = isReady };
+        ReadyMessage message = new ReadyMessage() { IsReady = isReady };
         MessageSender.SendMessageToHost(message);
     }
 

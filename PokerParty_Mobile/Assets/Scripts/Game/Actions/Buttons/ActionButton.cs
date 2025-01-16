@@ -24,7 +24,7 @@ public class ActionButton : MonoBehaviour
         SetAmount();
         UpdateMoney();
         MessageSender.SendMessageToHost(MessageToSend());
-        ActionManager.Instance.DisableActions();
+        ActionManager.instance.DisableActions();
     }
 
     private void UpdateMoney()
@@ -36,9 +36,9 @@ public class ActionButton : MonoBehaviour
     {
         TurnDoneMessage turnDoneMessage = new TurnDoneMessage()
         {
-            actionAmount = amount,
-            action = action,
-            newMoney = GameManager.instance.money,
+            ActionAmount = amount,
+            Action = action,
+            NewMoney = GameManager.instance.money,
         };
 
         return turnDoneMessage;
@@ -48,22 +48,22 @@ public class ActionButton : MonoBehaviour
     {
         switch (action)
         {
-            case PossibleAction.SMALL_BLIND_BET:
+            case PossibleAction.SmallBlindBet:
                 amount = Settings.smallBLindAmount;
                 break;
-            case PossibleAction.BIG_BLIND_BET:
+            case PossibleAction.BigBlindBet:
                 amount = Settings.bigBLindAmount;
                 break;
-            case PossibleAction.CALL:
+            case PossibleAction.Call:
                 amount = Settings.moneyNeededToCall;
                 break;
-            case PossibleAction.ALL_IN:
+            case PossibleAction.AllIn:
                 amount = GameManager.instance.money;
                 break;
-            case PossibleAction.FOLD:
-            case PossibleAction.CHECK:
-            case PossibleAction.BET:
-            case PossibleAction.RAISE:
+            case PossibleAction.Fold:
+            case PossibleAction.Check:
+            case PossibleAction.Bet:
+            case PossibleAction.Raise:
             default:
                 break;
         }

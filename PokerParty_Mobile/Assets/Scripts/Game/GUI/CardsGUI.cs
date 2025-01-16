@@ -38,17 +38,17 @@ public class CardsGUI : MonoBehaviour
         cardsHolder.SetActive(true);
     }
 
-    public void SetBestHandText(CommunityCardsChanged communityCardsChanged)
+    public void SetBestHandText(CommunityCardsChangedMessage communityCardsChangedMessage)
     {
         if (!bestHandText.gameObject.activeInHierarchy)
             bestHandText.gameObject.SetActive(true);
 
-        Card[] cards = new Card[2 + communityCardsChanged.communityCards.Length];
+        Card[] cards = new Card[2 + communityCardsChangedMessage.CommunityCards.Length];
         cards[0] = GameManager.instance.cards[0];
         cards[1] = GameManager.instance.cards[1];
-        for (int i = 0; i < communityCardsChanged.communityCards.Length; i++)
+        for (int i = 0; i < communityCardsChangedMessage.CommunityCards.Length; i++)
         {
-            cards[i + 2] = communityCardsChanged.communityCards[i];
+            cards[i + 2] = communityCardsChangedMessage.CommunityCards[i];
         }
 
         Card[][] allPossibleHands = TexasHoldEm.GetAllPossibleHands(cards);
