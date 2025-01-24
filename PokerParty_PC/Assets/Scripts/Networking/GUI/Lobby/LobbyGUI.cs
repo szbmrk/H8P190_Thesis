@@ -21,7 +21,6 @@ public class LobbyGUI : MonoBehaviour
     [SerializeField] private TMP_Dropdown startingMoneyDropdown;
 
     private int numOfPlayers;
-    private int startingMoney = 1000;
 
     private void Start()
     {
@@ -35,7 +34,7 @@ public class LobbyGUI : MonoBehaviour
 
     private void StartGame()
     {
-        Settings.startingMoney = startingMoney;
+        Settings.startingMoney = LobbySettings.startingMoney;
         Settings.playerCount = numOfPlayers;
         ConnectionManager.instance.SendMessageToAllConnections(new GameStartedMessage());
         SceneManager.LoadScene("Game");
@@ -98,7 +97,7 @@ public class LobbyGUI : MonoBehaviour
 
     public void RefreshPlayerCount()
     {
-        if (numOfPlayers >= 4 && LobbyManager.instance.AreAllPlayersReady())
+        if (numOfPlayers >= LobbySettings.MinimumPlayers && LobbyManager.instance.AreAllPlayersReady())
         {
             startGameBtn.interactable = true;
             minimumPlayersText.SetActive(false);
@@ -109,13 +108,13 @@ public class LobbyGUI : MonoBehaviour
             minimumPlayersText.SetActive(true);
         }
 
-        playerCount.text = numOfPlayers.ToString() + "/8";
+        playerCount.text = numOfPlayers.ToString() + "/" + LobbySettings.MaximumPlayers;
     }
 
     private void HandleStartingMoneyDropdownValueChanged(int index)
     {
         int newStartingMoney = int.Parse(startingMoneyDropdown.options[index].text.Split(' ')[0]);
-        startingMoney = newStartingMoney;
+        LobbySettings.startingMoney = newStartingMoney;
     }
 
     public void ShowPanel()
