@@ -72,9 +72,18 @@ public class TableManager : MonoBehaviour
     {
         playerSeats = playerSeats.OrderBy(_ => Random.Range(0, 100)).ToList();
 
-        playerSeats[0].isDealer = true;
-        playerSeats[1].isSmallBlind = true;
-        playerSeats[2].isBigBlind = true;
+        if (playerSeats.Count > 2) 
+        {
+            playerSeats[0].isDealer = true;
+            playerSeats[1].isSmallBlind = true;
+            playerSeats[2].isBigBlind = true;
+        }
+        else
+        {
+            playerSeats[0].isDealer = true;
+            playerSeats[0].isSmallBlind = true;
+            playerSeats[1].isSmallBlind = true;
+        }
 
         for (int i = 0; i < playerSeats.Count; i++)
         {
