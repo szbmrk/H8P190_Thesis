@@ -283,13 +283,14 @@ public class TurnManager : MonoBehaviour
     private IEnumerator ShowDown()
     {
         yield return MatchManager.instance.ShowDown();
+        TableManager.instance.StartNewGame();
+
         if (CheckIfGameIsOver())
         {
             GameManager.instance.GameOver(GetLastPlayerInGame());
             yield break;
+            
         }
-
-        TableManager.instance.StartNewGame();
         StartFirstTurn();
     }
 
