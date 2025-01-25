@@ -632,6 +632,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createGameBtn: {fileID: 1555844636}
+  quitGameBtn: {fileID: 1979937407}
+  settingsBtn: {fileID: 40807108}
 --- !u!1 &1555844634
 GameObject:
   m_ObjectHideFlags: 0
