@@ -100,7 +100,7 @@ public class ConnectionManager : MonoBehaviour
 
             JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(this.joinCode);
 
-            RelayServerData relayServerData = new RelayServerData(allocation, "udp");
+            RelayServerData relayServerData = allocation.ToRelayServerData("udp");
             var settings = new NetworkSettings();
             settings.WithRelayParameters(ref relayServerData);
 
