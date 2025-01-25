@@ -33,7 +33,7 @@ public class ConnectionManager : MonoBehaviour
         UpdateHost();
     }
 
-    void UpdateHost()
+    private void UpdateHost()
     {
         if (!NetworkDriver.IsCreated || !NetworkDriver.Bound )
         {
@@ -99,7 +99,7 @@ public class ConnectionManager : MonoBehaviour
 
     private void BindTheHost(Allocation allocation, int maxConnections)
     {
-        RelayServerData relayServerData = new RelayServerData(allocation, "udp");
+        RelayServerData relayServerData = allocation.ToRelayServerData("udp");
 
         var settings = new NetworkSettings();
         settings.WithRelayParameters(ref relayServerData);
