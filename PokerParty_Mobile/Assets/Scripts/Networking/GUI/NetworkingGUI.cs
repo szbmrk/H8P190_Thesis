@@ -83,7 +83,6 @@ public class NetworkingGUI : MonoBehaviour
         
         PlayerManager.loggedInPlayer = new Player(playerNameInputField.text);
         ConnectionManager.instance.JoinRelay(joinCodeInputField.text);
-        playerNameInputField.text = string.Empty;
         joinCodeInputField.text = string.Empty;
     }
 

@@ -66,7 +66,7 @@ public class BetAmountGUI : MonoBehaviour
         
         if (current >= maxValue) return;
         
-        current += (int)(maxValue * 0.1f);
+        current += (int)(maxValue * 0.01f);
         
         if (current > maxValue)
             current = maxValue;
@@ -80,7 +80,7 @@ public class BetAmountGUI : MonoBehaviour
         
         if (current <= minValue) return;
         
-        current -= (int)(maxValue * 0.1f);
+        current -= (int)(maxValue * 0.01f);
         
         if (current < minValue)
             current = minValue;
