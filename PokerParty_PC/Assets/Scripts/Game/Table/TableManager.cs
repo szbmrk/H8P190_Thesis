@@ -265,14 +265,14 @@ public class TableManager : MonoBehaviour
 
     private int GetNextValidPlayerIndex(int startIndex)
     {
+        startIndex++;
         int index = startIndex % playerSeats.Count;
         TablePlayerCard player = playerSeats[index];
 
-        if (!player.isStillInGame)
-        {
-            player = TurnManager.instance.GetNextPlayerStillInGame(index);
-            index = playerSeats.IndexOf(player);
-        }
+        if (player.isStillInGame) return index;
+        
+        player = TurnManager.instance.GetNextPlayerStillInGame(index);
+        index = playerSeats.IndexOf(player);
 
         return index;
     }

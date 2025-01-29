@@ -13,6 +13,8 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private GameObject bigBlindIcon;
     [SerializeField] private GameObject turnIcon;
     [SerializeField] private GameObject outOfTurn;
+    [SerializeField] private GameObject foldedTxt;
+    [SerializeField] private GameObject allInTxt;
 
     [HideInInspector] public PlayerTurnInfo TurnInfo;
     [HideInInspector] public int indexInConnectionsArray;
@@ -47,8 +49,25 @@ public class TablePlayerCard : MonoBehaviour
         TurnInfo.WentAllIn = false;
         moneyPutInText.text = "Put in: 0 $";
         outOfTurn.SetActive(false);
+        foldedTxt.SetActive(false);
+        allInTxt.SetActive(false);
 
         RefreshTurnIcon();
+    }
+    
+    public void Fold()
+    {
+        outOfTurn.SetActive(true);
+        TurnInfo.Folded = true;
+        foldedTxt.SetActive(true);
+        TurnDone();
+    }
+    
+    public void AllIn()
+    {
+        outOfTurn.SetActive(true);
+        TurnInfo.WentAllIn = true;
+        allInTxt.SetActive(true);
     }
 
     public void OutOfGame()

@@ -527,7 +527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -32}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &662247789
@@ -641,8 +641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -0.000026703}
-  m_SizeDelta: {x: 651.903, y: 349.3499}
+  m_AnchoredPosition: {x: -0.00059128, y: -0.0010033}
+  m_SizeDelta: {x: 493.77, y: 99.998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &677353670
 MonoBehaviour:
@@ -691,12 +691,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
+  m_fontSize: 30
   m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 35
+  m_fontSizeMax: 30
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -776,8 +776,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 394}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -1.4916, y: 394}
+  m_SizeDelta: {x: 493.7737, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &765419985
 GameObject:
@@ -1327,8 +1327,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 465}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -1.4902, y: 465}
+  m_SizeDelta: {x: 493.78, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910866831
 MonoBehaviour:
@@ -2754,7 +2754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000095367, y: 352}
+  m_AnchoredPosition: {x: -0.00000095367, y: 293}
   m_SizeDelta: {x: 452.4463, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1953137242
@@ -2786,7 +2786,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4294167660
   m_fontColor: {r: 0.42331788, g: 0.8015988, b: 0.9547169, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

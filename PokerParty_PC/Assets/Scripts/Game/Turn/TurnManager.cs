@@ -205,8 +205,6 @@ public class TurnManager : MonoBehaviour
     {
         if (TableManager.instance.playersInGameCount == 1)
         {
-            highestBet = 0;
-
             StartCoroutine(ShowDown());
             return true;
         }
@@ -282,6 +280,7 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator ShowDown()
     {
+        highestBet = 0;
         yield return MatchManager.instance.ShowDown();
         TableManager.instance.StartNewGame();
 
@@ -299,8 +298,7 @@ public class TurnManager : MonoBehaviour
         switch (turnDoneMessage.Action)
         {
             case PossibleAction.Fold:
-                currentPlayerInTurn.TurnInfo.Folded = true;
-                currentPlayerInTurn.OutOfTurn();
+                currentPlayerInTurn.Fold();
                 return;
             case PossibleAction.Bet:
                 hasAnyoneBetted = true;
@@ -315,8 +313,7 @@ public class TurnManager : MonoBehaviour
 
         if (currentPlayerInTurn.TurnInfo.Money == 0)
         {
-            currentPlayerInTurn.TurnInfo.WentAllIn = true;
-            currentPlayerInTurn.OutOfTurn();
+            currentPlayerInTurn.AllIn();
         }
         
         currentPlayerInTurn.RefreshMoneyPutIn(currentPlayerInTurn.TurnInfo.MoneyPutInPot);
