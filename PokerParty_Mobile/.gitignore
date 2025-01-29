@@ -64,6 +64,7 @@ sysinfo.txt
 *.app
 *.vsconfig
 *.keystore
+.utmp/
 
 # Crashlytics generated file
 crashlytics-build.properties
