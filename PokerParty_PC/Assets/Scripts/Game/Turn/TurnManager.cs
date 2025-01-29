@@ -59,6 +59,20 @@ public class TurnManager : MonoBehaviour
         return !nextPlayer.isStillInGame ? GetNextPlayerStillInGame(nextPlayerIndex) : nextPlayer;
     }
 
+    private TablePlayerCard GetPreviousPlayerStillInGame(int currentIndex)
+    {
+        int previousPlayerIndex;
+        
+        if (currentIndex == 0)
+            previousPlayerIndex = TableManager.instance.playerSeats.Count - 1;
+        else
+            previousPlayerIndex = currentIndex - 1;
+        
+        TablePlayerCard previousPlayer = TableManager.instance.playerSeats[previousPlayerIndex];
+        
+        return !previousPlayer.isStillInGame ? GetPreviousPlayerStillInGame(previousPlayerIndex) : previousPlayer;
+    }
+
     private int playersNeedToCallCount => TableManager.instance.playerSeats
         .FindAll(player => player.TurnInfo.MoneyPutInPot < highestBet && player.isStillInGame).Count;
 
@@ -141,6 +155,7 @@ public class TurnManager : MonoBehaviour
             PossibleActions = possibleActions,
             MoneyNeededToCall = moneyNeededToCall
         };
+        
         int indexInConnections = currentPlayerInTurn.indexInConnectionsArray;
         ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], yourTurnMessage);
 
@@ -151,11 +166,10 @@ public class TurnManager : MonoBehaviour
 
         foreach (TablePlayerCard player in playerSeats)
         {
-            if (!player.Equals(currentPlayerInTurn))
-            {
-                indexInConnections = player.indexInConnectionsArray;
-                ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], notYourTurnMessage);
-            }
+            if (player.Equals(currentPlayerInTurn)) continue;
+            
+            indexInConnections = player.indexInConnectionsArray;
+            ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], notYourTurnMessage);
         }
     }
 
@@ -198,12 +212,17 @@ public class TurnManager : MonoBehaviour
         if (lastPlayerWhoRaised != null && currentPlayerInTurn.Equals(lastPlayerWhoRaised))
             return true;
 
+        if (lastPlayerWhoRaised == null && lastPlayerWhoRaised.TurnInfo.WentAllIn)
+        {
+            return currentPlayerInTurn.Equals(GetPreviousPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(lastPlayerWhoRaised)));
+        }
+        
         return lastPlayerWhoRaised == null && currentPlayerInTurn.Equals(lastPlayerInTurnIfNoOneRaised);
     }
 
     private bool CheckIfTurnIsOver()
     {
-        if (TableManager.instance.playersInGameCount == 1)
+        if (playersNeedToCallCount == 0 && TableManager.instance.playersInGameCount == 1)
         {
             StartCoroutine(ShowDown());
             return true;
@@ -252,20 +271,14 @@ public class TurnManager : MonoBehaviour
         if (playersStillInGameCount == 2)
         {
             TablePlayerCard bigBlind = TableManager.instance.playerSeats.Find(p => p.isBigBlind);
-            if (bigBlind.isStillInGame)
-                currentPlayerInTurn = bigBlind;
-            else
-                currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
+            currentPlayerInTurn = bigBlind.isStillInGame ? bigBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
 
             return;
         }
 
         // több játékos esetén a kisvak kezd
         TablePlayerCard smallBlind = TableManager.instance.playerSeats.Find(p => p.isSmallBlind);
-        if (smallBlind.isStillInGame)
-            currentPlayerInTurn = smallBlind;
-        else
-            currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(smallBlind));
+        currentPlayerInTurn = smallBlind.isStillInGame ? smallBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(smallBlind));
     }
 
     private TablePlayerCard GetLastPlayerInGame()
@@ -316,6 +329,9 @@ public class TurnManager : MonoBehaviour
             currentPlayerInTurn.AllIn();
             return;
         }
+        
+        if (currentPlayerInTurn.TurnInfo.MoneyPutInPot > highestBet)
+            lastPlayerWhoRaised = currentPlayerInTurn;
                 
         currentPlayerInTurn.SetLastActionText($"{turnDoneMessage.Action} {turnDoneMessage.ActionAmount} $");
     }
