@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using PokerParty_SharedDLL;
 using System.Linq;
@@ -56,13 +57,12 @@ public class TableManager : MonoBehaviour
 
         playerSeats.Add(newPlayer);
 
-        if (playersToConnect == 0)
-        {
-            AssignRolesAndShuffleTheOrderOfPlayers();
-            MatchManager.instance.SendGameInfoToPlayers();
-            TurnManager.instance.StartFirstTurn();
-            Loader.instance.StopLoading();
-        }
+        if (playersToConnect != 0) return;
+        
+        AssignRolesAndShuffleTheOrderOfPlayers();
+        MatchManager.instance.SendGameInfoToPlayers();
+        TurnManager.instance.StartFirstTurn();
+        Loader.instance.StopLoading();
     }
 
     public int playersInGameCount => playerSeats
@@ -149,6 +149,24 @@ public class TableManager : MonoBehaviour
         flippedCommunityCards[4] = tableCards[4].card;
         CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
+    }
+
+    public IEnumerator FlipRemainingCards()
+    {
+        if (flippedCommunityCards.Length == 5)
+            yield break;
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (flippedCommunityCards.Length == 4)
+        {
+            DealRiver();
+            yield break;
+        }
+        
+        DealTurn();
+        yield return new WaitForSeconds(0.5f);
+        DealRiver();
     }
 
     public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)

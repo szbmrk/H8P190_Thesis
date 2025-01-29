@@ -13,9 +13,9 @@ public static class EvaluationHelper
             cards[0] = playerCard.TurnInfo.Cards[0];
             cards[1] = playerCard.TurnInfo.Cards[1];
 
-            for (int i = 0; i < TableManager.instance.flippedCommunityCards.Length; i++)
+            for (int i = 0; i < TableManager.instance.tableCards.Count; i++)
             {
-                cards[i + 2] = TableManager.instance.flippedCommunityCards[i];
+                cards[i + 2] = TableManager.instance.tableCards[i].card;
             }
 
             Card[] hand = TexasHoldEm.GetBestHandOfPlayer(TexasHoldEm.GetAllPossibleHands(cards));

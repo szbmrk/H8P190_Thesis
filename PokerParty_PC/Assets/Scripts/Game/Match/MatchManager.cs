@@ -41,6 +41,8 @@ public class MatchManager : MonoBehaviour
 
     public IEnumerator ShowDown()
     {
+        yield return TableManager.instance.FlipRemainingCards();
+        
         TablePlayerCard[] playersStillInGame = TableManager.instance.playerSeats.FindAll(p => !p.TurnInfo.Folded).ToArray();
         PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playersStillInGame);
         TableManager.instance.GivePotToWinners(winners);
