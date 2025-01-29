@@ -47,7 +47,7 @@ public class MatchManager : MonoBehaviour
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
 
         if (winners.Length == 1)
-            yield return TableGUI.instance.showTurnWinner(winners[0].Player.PlayerName);
+            yield return TableGUI.instance.showTurnWinner(winners[0].Player.PlayerName, TexasHoldEm.EvaluateHand(winners[0].Hand));
         else
         {
             string winnerText = "";
@@ -58,7 +58,7 @@ public class MatchManager : MonoBehaviour
                 else
                     winnerText += winners[i].Player.PlayerName + ", ";
             }
-            yield return TableGUI.instance.showTurnWinner(winnerText);
+            yield return TableGUI.instance.showTurnWinner(winnerText, TexasHoldEm.EvaluateHand(winners[0].Hand));
         }
 
         turnCount++;

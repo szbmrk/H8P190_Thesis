@@ -8,7 +8,7 @@ public static class EvaluationHelper
         List<PlayerHandInfo> playerHandInfos = new List<PlayerHandInfo>();
         foreach (TablePlayerCard playerCard in playerCards)
         {
-            Card[] cards = new Card[2 + TableManager.instance.flippedCommunityCards.Length];
+            Card[] cards = new Card[7];
 
             cards[0] = playerCard.TurnInfo.Cards[0];
             cards[1] = playerCard.TurnInfo.Cards[1];
@@ -18,7 +18,9 @@ public static class EvaluationHelper
                 cards[i + 2] = TableManager.instance.flippedCommunityCards[i];
             }
 
-            PlayerHandInfo playerHandInfo = new PlayerHandInfo(playerCard.TurnInfo.Player, cards);
+            Card[] hand = TexasHoldEm.GetBestHandOfPlayer(TexasHoldEm.GetAllPossibleHands(cards));
+            
+            PlayerHandInfo playerHandInfo = new PlayerHandInfo(playerCard.TurnInfo.Player, hand);
             playerHandInfos.Add(playerHandInfo);
         }
 

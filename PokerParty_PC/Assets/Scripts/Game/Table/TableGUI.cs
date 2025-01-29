@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class TableGUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI moneyInPotText;
     [SerializeField] private TextMeshProUGUI turnWinnerText;
+    [SerializeField] private TextMeshProUGUI winnerHandText;
 
     private void Awake()
     {
@@ -35,10 +37,11 @@ public class TableGUI : MonoBehaviour
         moneyInPotText.text = $"Pot: {potMoney} $";
     }
 
-    public IEnumerator showTurnWinner(string winnerName)
+    public IEnumerator showTurnWinner(string winnerName, HandType handType)
     {
         GameManager.instance.waitingFor.gameObject.SetActive(false);
         turnWinnerText.text = $"Turn winner: {winnerName}";
+        winnerHandText.text = $"{handType}";
         turnWinnerText.transform.parent.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
         turnWinnerText.transform.parent.gameObject.SetActive(false);

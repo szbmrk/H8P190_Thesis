@@ -82,12 +82,11 @@ namespace PokerParty_SharedDLL
                 HandType currentHandType = EvaluateHand(currentHand);
                 int currentBreakTieScore = EvaluationHelper.CalculateBreakTieScore(currentHand);
 
-                if (currentHandType >= bestHandType && currentBreakTieScore > bestBreakTieScore)
-                {
-                    bestHand = currentHand;
-                    bestBreakTieScore = currentBreakTieScore;
-                    bestHandType = currentHandType;
-                }
+                if (currentHandType < bestHandType || currentBreakTieScore <= bestBreakTieScore) continue;
+                
+                bestHand = currentHand;
+                bestBreakTieScore = currentBreakTieScore;
+                bestHandType = currentHandType;
             }
 
             return bestHand;
