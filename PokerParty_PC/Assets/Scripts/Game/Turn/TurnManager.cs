@@ -212,10 +212,8 @@ public class TurnManager : MonoBehaviour
         if (lastPlayerWhoRaised != null && currentPlayerInTurn.Equals(lastPlayerWhoRaised))
             return true;
 
-        if (lastPlayerWhoRaised == null && lastPlayerWhoRaised.TurnInfo.WentAllIn)
-        {
+        if (lastPlayerWhoRaised != null && lastPlayerWhoRaised.TurnInfo.WentAllIn)
             return currentPlayerInTurn.Equals(GetPreviousPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(lastPlayerWhoRaised)));
-        }
         
         return lastPlayerWhoRaised == null && currentPlayerInTurn.Equals(lastPlayerInTurnIfNoOneRaised);
     }
@@ -315,6 +313,7 @@ public class TurnManager : MonoBehaviour
                 return;
             case PossibleAction.Bet:
                 hasAnyoneBetted = true;
+                lastPlayerWhoRaised = currentPlayerInTurn;
                 break;
             case PossibleAction.Raise:
                 lastPlayerWhoRaised = currentPlayerInTurn;
@@ -327,12 +326,17 @@ public class TurnManager : MonoBehaviour
         if (currentPlayerInTurn.TurnInfo.Money == 0)
         {
             currentPlayerInTurn.AllIn();
+            
+            if (currentPlayerInTurn.TurnInfo.MoneyPutInPot > highestBet)
+                lastPlayerWhoRaised = currentPlayerInTurn;
+            
             return;
         }
         
-        if (currentPlayerInTurn.TurnInfo.MoneyPutInPot > highestBet)
-            lastPlayerWhoRaised = currentPlayerInTurn;
                 
         currentPlayerInTurn.SetLastActionText($"{turnDoneMessage.Action} {turnDoneMessage.ActionAmount} $");
+        
+        if (turnDoneMessage.Action == PossibleAction.Check)
+            currentPlayerInTurn.SetLastActionText($"CHECK");
     }
 }
