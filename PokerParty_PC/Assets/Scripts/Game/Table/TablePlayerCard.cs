@@ -2,6 +2,7 @@
 using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TablePlayerCard : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private GameObject outOfTurn;
     [SerializeField] private GameObject foldedTxt;
     [SerializeField] private GameObject allInTxt;
+
+    [SerializeField] private GameObject handGameObject;
+    [SerializeField] private Image card1;
+    [SerializeField] private Image card2;
+    [SerializeField] private TextMeshProUGUI handTypeText;
 
     [HideInInspector] public PlayerTurnInfo TurnInfo;
     [HideInInspector] public int indexInConnectionsArray;
@@ -123,9 +129,30 @@ public class TablePlayerCard : MonoBehaviour
         RefreshTurnIcon();
     }
 
-    public void OutOfTurn()
+    public void ShowHand()
     {
-        outOfTurn.SetActive(true);
+        card1.sprite = CardHelper.GetSpriteByFileName(TurnInfo.Cards[0].GetFileNameForSprite());
+        card2.sprite = CardHelper.GetSpriteByFileName(TurnInfo.Cards[1].GetFileNameForSprite());
+
+        Card[] allCards = new Card[7];
+        for (int i = 0; i < 5; i++)
+        {
+            allCards[i] = TableManager.instance.tableCards[i].card;
+        }
+        allCards[5] = TurnInfo.Cards[0];
+        allCards[6] = TurnInfo.Cards[1];
+
+        Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(TexasHoldEm.GetAllPossibleHands(allCards));
+        HandType bestHandType = TexasHoldEm.EvaluateHand(bestHand);
+        
+        handTypeText.text = bestHandType.ToString();
+        
+        handGameObject.SetActive(true);
+    }
+    
+    public void ResetHand()
+    {
+        handGameObject.SetActive(false);
     }
 
     public override bool Equals(object other)

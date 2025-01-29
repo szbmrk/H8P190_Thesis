@@ -41,9 +41,21 @@ public class TableGUI : MonoBehaviour
     {
         GameManager.instance.waitingFor.gameObject.SetActive(false);
         turnWinnerText.text = $"Turn winner: {winnerName}";
-        winnerHandText.text = $"{handType}";
+        winnerHandText.text = handType.ToString();
         turnWinnerText.transform.parent.gameObject.SetActive(true);
+
+        foreach (TablePlayerCard player in TableManager.instance.playerSeats)
+        {
+            player.ShowHand();
+        }
+        
         yield return new WaitForSeconds(5f);
+        
+        foreach (TablePlayerCard player in TableManager.instance.playerSeats)
+        {
+            player.ResetHand();
+        }
+        
         turnWinnerText.transform.parent.gameObject.SetActive(false);
     }
 }
