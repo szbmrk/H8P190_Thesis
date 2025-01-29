@@ -18,6 +18,7 @@ public class LobbyManager : MonoBehaviour
     public IEnumerator DeleteLobby()
     {
         ConnectionManager.instance.DisconnectAllPlayers();
+        PlayerColorManager.ResetColors();
         yield return ConnectionManager.instance.DisposeDriverAndConnections();
         Destroy(ConnectionManager.instance.gameObject);
         Debug.Log("Lobby deleted");
@@ -25,14 +26,11 @@ public class LobbyManager : MonoBehaviour
 
     public bool CheckIfPlayerNameIsAlreadyInUse(Player player, int indexInConnectionsArray)
     {
-        if (joinedPlayers.Any(p => p.assignedPlayer.PlayerName == player.PlayerName))
-        {
-            ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnectionsArray], new PlayerNameAlreadyInUseMessage());
-            ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
-            return true;
-        }
+        if (!joinedPlayers.Any(p => p.assignedPlayer.PlayerName == player.PlayerName)) return false;
+        ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnectionsArray], new PlayerNameAlreadyInUseMessage());
+        ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
+        return true;
 
-        return false;
     }
     
     public void AddPlayer(Player player, int indexInConnectionsArray)

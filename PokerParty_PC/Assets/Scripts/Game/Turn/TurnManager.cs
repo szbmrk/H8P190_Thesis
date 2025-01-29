@@ -314,8 +314,9 @@ public class TurnManager : MonoBehaviour
         if (currentPlayerInTurn.TurnInfo.Money == 0)
         {
             currentPlayerInTurn.AllIn();
+            return;
         }
-        
-        currentPlayerInTurn.RefreshMoneyPutIn(currentPlayerInTurn.TurnInfo.MoneyPutInPot);
+                
+        currentPlayerInTurn.SetLastActionText($"{turnDoneMessage.Action} {turnDoneMessage.ActionAmount} $");
     }
 }

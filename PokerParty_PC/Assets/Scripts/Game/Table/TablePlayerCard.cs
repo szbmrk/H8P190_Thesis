@@ -1,4 +1,5 @@
-﻿using PokerParty_SharedDLL;
+﻿using System;
+using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class TablePlayerCard : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI moneyText;
-    [SerializeField] private TextMeshProUGUI moneyPutInText;
+    [SerializeField] private TextMeshProUGUI lastActionText;
 
     [SerializeField] private GameObject dealerIcon;
     [SerializeField] private GameObject smallBlindIcon;
@@ -47,7 +48,7 @@ public class TablePlayerCard : MonoBehaviour
         TurnInfo.Cards = new Card[2];
         TurnInfo.Folded = false;
         TurnInfo.WentAllIn = false;
-        moneyPutInText.text = "Put in: 0 $";
+        lastActionText.text = string.Empty;
         outOfTurn.SetActive(false);
         foldedTxt.SetActive(false);
         allInTxt.SetActive(false);
@@ -103,10 +104,10 @@ public class TablePlayerCard : MonoBehaviour
     {
         moneyText.text = $"{money} $";
     }
-
-    public void RefreshMoneyPutIn(int money)
+    
+    public void SetLastActionText(string text)
     {
-        moneyPutInText.text = $"Put in: {money} $";
+        lastActionText.text = text;
     }
 
     public void StartTurn()

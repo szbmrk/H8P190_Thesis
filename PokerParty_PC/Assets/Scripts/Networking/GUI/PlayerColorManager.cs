@@ -36,7 +36,7 @@ public static class PlayerColorManager
         while (true)
         {
             System.Random rnd = new System.Random();
-            int randomIndex = rnd.Next(1, 8);
+            int randomIndex = rnd.Next(1, ColorForPlayers.Count);
 
             if (ColorForPlayers[randomIndex].PlayerName == string.Empty)
             {
