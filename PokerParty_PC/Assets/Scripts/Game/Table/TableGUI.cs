@@ -37,7 +37,7 @@ public class TableGUI : MonoBehaviour
         moneyInPotText.text = $"Pot: {potMoney} $";
     }
 
-    public IEnumerator showTurnWinner(string winnerName, HandType handType)
+    public IEnumerator ShowTurnWinner(string winnerName, HandType handType)
     {
         GameManager.instance.waitingFor.gameObject.SetActive(false);
         turnWinnerText.text = $"Turn winner: {winnerName}";
@@ -49,7 +49,7 @@ public class TableGUI : MonoBehaviour
             player.ShowHand();
         }
         
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(15f);
         
         foreach (TablePlayerCard player in TableManager.instance.playerSeats)
         {

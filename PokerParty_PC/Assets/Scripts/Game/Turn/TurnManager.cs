@@ -213,7 +213,8 @@ public class TurnManager : MonoBehaviour
             return true;
 
         if (lastPlayerWhoRaised != null && lastPlayerWhoRaised.TurnInfo.WentAllIn)
-            return currentPlayerInTurn.Equals(GetPreviousPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(lastPlayerWhoRaised)));
+            return currentPlayerInTurn.Equals(GetPreviousPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(lastPlayerWhoRaised)))
+                || currentPlayerInTurn.Equals(TableManager.instance.playerSeats[TableManager.instance.playerSeats.IndexOf(lastPlayerWhoRaised) - 1]);
         
         return lastPlayerWhoRaised == null && currentPlayerInTurn.Equals(lastPlayerInTurnIfNoOneRaised);
     }
