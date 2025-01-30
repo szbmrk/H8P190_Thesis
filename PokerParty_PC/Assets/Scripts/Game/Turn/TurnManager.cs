@@ -221,7 +221,8 @@ public class TurnManager : MonoBehaviour
 
     private bool CheckIfTurnIsOver()
     {
-        if (playersNeedToCallCount == 0 && TableManager.instance.playersInGameCount == 1)
+        
+        if ((playersNeedToCallCount == 0 && TableManager.instance.playersInGameCount == 1) || playersStillInGameCount == 0)
         {
             StartCoroutine(ShowDown());
             return true;
