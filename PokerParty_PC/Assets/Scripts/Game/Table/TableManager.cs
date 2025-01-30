@@ -260,11 +260,11 @@ public class TableManager : MonoBehaviour
         TablePlayerCard newDealer = playerSeats[lastDealerIndex];
         newDealer.isDealer = true;
 
-        lastSmallBlindIndex = GetNextValidPlayerIndex(lastDealerIndex + 1);
+        lastSmallBlindIndex = GetNextValidPlayerIndex(lastDealerIndex);
         TablePlayerCard newSmallBlind = playerSeats[lastSmallBlindIndex];
         newSmallBlind.isSmallBlind = true;
 
-        lastBigBlindIndex = GetNextValidPlayerIndex(lastSmallBlindIndex + 1);
+        lastBigBlindIndex = GetNextValidPlayerIndex(lastSmallBlindIndex);
         TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
         newBigBlind.isBigBlind = true;
     }
@@ -276,7 +276,7 @@ public class TableManager : MonoBehaviour
         newDealerAndSmallBlind.isDealer = true;
         newDealerAndSmallBlind.isSmallBlind = true;
 
-        lastBigBlindIndex = GetNextValidPlayerIndex(lastDealerIndex + 1);
+        lastBigBlindIndex = GetNextValidPlayerIndex(lastDealerIndex);
         TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
         newBigBlind.isBigBlind = true;
     }
