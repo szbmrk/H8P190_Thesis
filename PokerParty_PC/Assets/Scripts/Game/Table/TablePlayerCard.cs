@@ -90,6 +90,7 @@ public class TablePlayerCard : MonoBehaviour
         {
             Action = PossibleAction.Fold
         };
+        
         TurnManager.instance.HandleTurnDone(turnDoneMessage);
     }
 

@@ -40,6 +40,11 @@ public class LobbyManager : MonoBehaviour
         joinedPlayers.Add(newPlayer);
     }
 
+    public Player GetPlayerByIndexInConnectionsArray(int indexInConnectionsArray)
+    {
+        return joinedPlayers.Find(p => p.indexInConnectionsArray == indexInConnectionsArray).assignedPlayer;
+    }
+    
     public void RemovePlayer(Player player)
     {
         LobbyGUI.instance.RemovePlayerFromDisplay(player);

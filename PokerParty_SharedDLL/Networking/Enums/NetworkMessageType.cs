@@ -3,7 +3,6 @@
     public enum NetworkMessageType
     {
         ChatMessage,
-        DisconnectMessage,
         ConnectionMessage,
         ReadyMessage,
         TurnDoneMessage,

@@ -300,11 +300,17 @@ public class TableManager : MonoBehaviour
         return index;
     }
 
+    public Player GetPLayerByIndexInConnetionsArray(int indexInConnectionsArray)
+    {
+        return playerSeats.Find(p => p.indexInConnectionsArray == indexInConnectionsArray).TurnInfo.Player;
+    }
+    
     public void PlayerDisconnected(Player player)
     {
         TablePlayerCard playerCard = playerSeats.Find(p => p.TurnInfo.Player.Equals(player));
         playerCard.Disconnected();
         playerCard.TurnInfo.Money = 0;
+        playerSeats.Remove(playerCard);
     }
 
     public void RemovePlayersWith0Money()
