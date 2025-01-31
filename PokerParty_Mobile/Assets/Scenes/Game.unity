@@ -2908,7 +2908,7 @@ MonoBehaviour:
   betPrefab: {fileID: 6667396046511829136, guid: 835dc3404dc95f943acf27ed2dad5904, type: 3}
   smallBlindPrefab: {fileID: 5377704945624201226, guid: 3d6ddc3782721b042969f03b4975a67e, type: 3}
   bigBlindPrefab: {fileID: 3629201783999753017, guid: 111e494178df0b745a0a499a2eeb1430, type: 3}
-  notYourTurnText: {fileID: 0}
+  notYourTurnText: {fileID: 1104179126}
 --- !u!1 &1953137240
 GameObject:
   m_ObjectHideFlags: 0

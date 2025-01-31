@@ -37,19 +37,36 @@ public class TableGUI : MonoBehaviour
         moneyInPotText.text = $"Pot: {potMoney} $";
     }
 
-    public IEnumerator ShowTurnWinner(string winnerName, HandType handType)
+    public IEnumerator ShowTurnWinner(string winnerName, HandType handType, TablePlayerCard[] playerSeats)
     {
         GameManager.instance.waitingFor.gameObject.SetActive(false);
         turnWinnerText.text = $"Turn winner: {winnerName}";
         winnerHandText.text = handType.ToString();
         turnWinnerText.transform.parent.gameObject.SetActive(true);
 
+        List<TablePlayerCard> toDelete = new List<TablePlayerCard>(); 
+        
+        foreach (TablePlayerCard playerCard in playerSeats)
+        {
+            TablePlayerCard newPlayerCard = Instantiate(playerCard, playerCard.transform.position, Quaternion.identity, playerCard.transform.parent);
+            newPlayerCard.transform.SetParent(turnWinnerText.transform.parent);
+            newPlayerCard.transform.SetAsLastSibling();
+            newPlayerCard.transform.localScale = Vector3.one;
+            
+            toDelete.Add(newPlayerCard);
+        }
+        
         foreach (TablePlayerCard player in TableManager.instance.playerSeats)
         {
             player.ShowHand();
         }
         
         yield return new WaitForSeconds(15f);
+
+        foreach (TablePlayerCard playerCard in toDelete)
+        {
+            Destroy(playerCard.gameObject);
+        }
         
         foreach (TablePlayerCard player in TableManager.instance.playerSeats)
         {

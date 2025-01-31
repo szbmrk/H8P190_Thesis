@@ -45,10 +45,17 @@ public class MatchManager : MonoBehaviour
         
         TablePlayerCard[] playersStillInGame = TableManager.instance.playerSeats.FindAll(p => !p.TurnInfo.Folded).ToArray();
         PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playersStillInGame);
+        
+        TablePlayerCard[] winnerPlayerSeats = new TablePlayerCard[winners.Length];
+        for (int i = 0; i < winners.Length; i++)
+        {
+            winnerPlayerSeats[i] = TableManager.instance.playerSeats.Find(p => p.TurnInfo.Player.Equals(winners[i].Player));
+        }
+        
         TableManager.instance.GivePotToWinners(winners);
 
         if (winners.Length == 1)
-            yield return TableGUI.instance.ShowTurnWinner(winners[0].Player.PlayerName, winners[0].Type);
+            yield return TableGUI.instance.ShowTurnWinner(winners[0].Player.PlayerName, winners[0].Type, winnerPlayerSeats);
         else
         {
             string winnerText = "";
@@ -59,7 +66,7 @@ public class MatchManager : MonoBehaviour
                 else
                     winnerText += winners[i].Player.PlayerName + ", ";
             }
-            yield return TableGUI.instance.ShowTurnWinner(winnerText, winners[0].Type);
+            yield return TableGUI.instance.ShowTurnWinner(winnerText, winners[0].Type, winnerPlayerSeats);
         }
 
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
