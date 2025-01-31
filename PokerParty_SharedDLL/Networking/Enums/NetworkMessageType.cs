@@ -4,6 +4,8 @@
     {
         ChatMessage,
         ConnectionMessage,
+        GamePausedMessage,
+        GameUnpausedMessage,
         ReadyMessage,
         TurnDoneMessage,
         PlayerNameAlreadyInUseMessage,
