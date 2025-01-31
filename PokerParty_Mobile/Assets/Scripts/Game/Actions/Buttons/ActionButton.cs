@@ -11,6 +11,7 @@ public class ActionButton : MonoBehaviour
 
     private Button button;
     public TextMeshProUGUI buttonText;
+    
     private void Awake()
     {
         button = GetComponent<Button>();

@@ -193,8 +193,8 @@ public class ConnectionManager : MonoBehaviour
 
     private IEnumerator DisposeDriver()
     {
-        yield return new WaitForSeconds(1f);
         if (!NetworkDriver.IsCreated) yield break;
+        yield return new WaitForSeconds(1f);
         
         Debug.Log("Host disposed");
         NetworkDriver.Dispose();
@@ -202,8 +202,8 @@ public class ConnectionManager : MonoBehaviour
 
     private IEnumerator DisposeConnections()
     {
-        yield return new WaitForSeconds(1f);
         if (!Connections.IsCreated) yield break;
+        yield return new WaitForSeconds(1f);
         
         Debug.Log("Connections disposed");
         Connections.Dispose();

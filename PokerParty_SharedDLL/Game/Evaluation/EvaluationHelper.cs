@@ -140,7 +140,7 @@ namespace PokerParty_SharedDLL
                 {
                     var playersWithTie = group.ToArray();
 
-                    var sortedTiePlayers = EvaluationHelper.ResolveTies(playersWithTie);
+                    var sortedTiePlayers = ResolveTies(playersWithTie);
 
                     orderedPlayers.AddRange(sortedTiePlayers);
                 }

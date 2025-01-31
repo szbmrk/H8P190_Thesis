@@ -99,6 +99,8 @@ public class NetworkingGUI : MonoBehaviour
         joinBtn.interactable = true;
         disconnectBtn.interactable = false;
         ConnectionManager.instance.DisconnectFromHost();
+        ShowJoinedPanel(false);
+        ResetReadyButton();
     }
 
     private void Ready()

@@ -67,11 +67,9 @@ public class LobbyGUI : MonoBehaviour
         return playerCard;
     }
 
-    public void RemovePlayerFromDisplay(Player player)
+    public void RemovePlayerFromDisplay(LobbyPlayerCard playerCard)
     {
         if (numOfPlayers == 0) return;
-
-        LobbyPlayerCard playerCard = LobbyManager.instance.GetPlayerCardForPlayer(player);
 
         if (!playerCard) return;
 

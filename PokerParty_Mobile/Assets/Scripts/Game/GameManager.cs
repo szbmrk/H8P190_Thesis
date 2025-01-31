@@ -22,14 +22,8 @@ public class GameManager : MonoBehaviour
         MessageSender.SendMessageToHost(new LoadedToGameMessage());
     }
 
-    public void WaitingFor(string playerName)
-    {
-        GameGUI.instance.WaitingFor(playerName);
-    }
-
     public void StartTurn(YourTurnMessage yourTurnMessage)
     {
-        GameGUI.instance.StartTurn();
         Settings.moneyNeededToCall = yourTurnMessage.MoneyNeededToCall;
         ActionManager.instance.EnableActions(yourTurnMessage.PossibleActions);
     }

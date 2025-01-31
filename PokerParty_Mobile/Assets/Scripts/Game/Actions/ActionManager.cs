@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class ActionManager : MonoBehaviour
@@ -21,6 +22,8 @@ public class ActionManager : MonoBehaviour
     public GameObject smallBlindPrefab;
     public GameObject bigBlindPrefab;
 
+    public TextMeshProUGUI notYourTurnText;
+
     List<GameObject> currentActions = new List<GameObject>();
 
     private void Awake()
@@ -31,6 +34,7 @@ public class ActionManager : MonoBehaviour
 
     private void EnableAction(PossibleAction action)
     {
+        notYourTurnText.gameObject.SetActive(false);
         switch (action)
         {
             case PossibleAction.SmallBlindBet:
@@ -90,5 +94,6 @@ public class ActionManager : MonoBehaviour
     public void DisableActions()
     {
         currentActions.ForEach(x => Destroy(x));
+        notYourTurnText.gameObject.SetActive(true);
     }
 }

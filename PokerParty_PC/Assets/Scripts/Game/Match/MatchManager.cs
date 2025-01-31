@@ -46,10 +46,9 @@ public class MatchManager : MonoBehaviour
         TablePlayerCard[] playersStillInGame = TableManager.instance.playerSeats.FindAll(p => !p.TurnInfo.Folded).ToArray();
         PlayerHandInfo[] winners = EvaluationHelper.DetermineWinners(playersStillInGame);
         TableManager.instance.GivePotToWinners(winners);
-        TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
 
         if (winners.Length == 1)
-            yield return TableGUI.instance.ShowTurnWinner(winners[0].Player.PlayerName, TexasHoldEm.EvaluateHand(winners[0].Hand));
+            yield return TableGUI.instance.ShowTurnWinner(winners[0].Player.PlayerName, winners[0].Type);
         else
         {
             string winnerText = "";
@@ -60,9 +59,10 @@ public class MatchManager : MonoBehaviour
                 else
                     winnerText += winners[i].Player.PlayerName + ", ";
             }
-            yield return TableGUI.instance.ShowTurnWinner(winnerText, TexasHoldEm.EvaluateHand(winners[0].Hand));
+            yield return TableGUI.instance.ShowTurnWinner(winnerText, winners[0].Type);
         }
 
+        TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
         turnCount++;
     }
 }

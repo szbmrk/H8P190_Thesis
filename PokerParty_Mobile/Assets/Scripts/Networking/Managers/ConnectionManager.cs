@@ -68,7 +68,7 @@ public class ConnectionManager : MonoBehaviour
                     break;
 
                 case NetworkEvent.Type.Disconnect:
-                    connection = default(NetworkConnection);
+                    Debug.Log("Player disconnected from the Host");
                     if (NetworkingGUI.instance != null)
                     {
                         NetworkingGUI.instance.ShowJoinedPanel(false);
@@ -80,7 +80,7 @@ public class ConnectionManager : MonoBehaviour
                     {
                         GameManager.instance.StartCoroutine(GameManager.instance.GoBackToMainMenu());
                     }
-
+                    connection = default(NetworkConnection);
                     StartCoroutine(DisposeNetworkDriver());
                     break;
             }
@@ -144,7 +144,7 @@ public class ConnectionManager : MonoBehaviour
 
     public IEnumerator DisposeNetworkDriver()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         if (NetworkDriver.IsCreated)
         {
             NetworkDriver.Dispose();
