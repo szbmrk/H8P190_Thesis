@@ -8,7 +8,7 @@ public class OnAppQuit : MonoBehaviour
     private static OnAppQuit instance;
 
     [RuntimeInitializeOnLoadMethod]
-    static void RunOnStart()
+    private static void RunOnStart()
     {
         Application.wantsToQuit += WantsToQuit;
     }
@@ -28,7 +28,7 @@ public class OnAppQuit : MonoBehaviour
         return readyToQuit;
     }
 
-    IEnumerator StartQuiting()
+    private IEnumerator StartQuiting()
     {
         if (ConnectionManager.instance != null)
         {

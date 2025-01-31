@@ -14,7 +14,7 @@ public class ConnectionManager : MonoBehaviour
     public static ConnectionManager instance;
 
     public NetworkDriver NetworkDriver;
-    public NativeList<NetworkConnection> Connections;
+    public NativeArray<NetworkConnection> Connections;
 
     private async void Start()
     {
@@ -46,7 +46,7 @@ public class ConnectionManager : MonoBehaviour
         while ((incomingConnection = NetworkDriver.Accept()) != default(NetworkConnection))
         {
             Debug.Log("Accepted an incoming connection.");
-            Connections.Add(incomingConnection);
+            AddToConnections(incomingConnection);
         }
 
         // Process events from all connections.
@@ -83,6 +83,17 @@ public class ConnectionManager : MonoBehaviour
                         break;
                 }
             }
+        }
+    }
+    
+    private void AddToConnections(NetworkConnection connection)
+    {
+        for (int i = 0; i < Connections.Length; i++)
+        {
+            if (Connections[i].IsCreated) continue;
+            
+            Connections[i] = connection;
+            return;
         }
     }
 
@@ -158,7 +169,6 @@ public class ConnectionManager : MonoBehaviour
         Debug.Log("Player disconnected from host");
         NetworkDriver.Disconnect(Connections[index]);
         Connections[index] = default(NetworkConnection);
-        Connections.RemoveAt(index);
     }
 
     public void SendMessageToAllConnections(ANetworkMessagePc message)

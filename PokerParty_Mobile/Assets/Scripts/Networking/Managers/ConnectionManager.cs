@@ -136,10 +136,10 @@ public class ConnectionManager : MonoBehaviour
 
     public void DisconnectFromHost()
     {
-        if (connection.IsCreated)
-        {
-            MessageSender.SendMessageToHost(new DisconnectMessage());
-        }
+        if (!connection.IsCreated) return;
+        
+        NetworkDriver.Disconnect(connection);
+        connection = default(NetworkConnection);
     }
 
     public IEnumerator DisposeNetworkDriver()
