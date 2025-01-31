@@ -48,6 +48,12 @@ public static class NetworkMessageHandler
                 GameOverMessage gameOverMessage = FromStringToJson<GameOverMessage>(data);
                 GameManager.instance.GameOver(gameOverMessage);
                 break;
+            case NetworkMessageType.GamePausedMessage:
+                PauseMenu.instance.Pause();
+                break;
+            case NetworkMessageType.GameUnpausedMessage:
+                PauseMenu.instance.Resume();
+                break;
         }
     }
 
