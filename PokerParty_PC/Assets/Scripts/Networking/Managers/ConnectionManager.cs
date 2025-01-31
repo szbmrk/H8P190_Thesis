@@ -145,7 +145,7 @@ public class ConnectionManager : MonoBehaviour
         if (Connections.IsCreated)
             Connections.Dispose();
 
-        Connections = new NativeList<NetworkConnection>(maxConnections, Allocator.Persistent);
+        Connections = new NativeArray<NetworkConnection>(maxConnections, Allocator.Persistent);
     }
 
     public void DisconnectAllPlayers()
