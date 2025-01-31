@@ -2202,6 +2202,7 @@ GameObject:
   - component: {fileID: 1717908025}
   - component: {fileID: 1717908026}
   - component: {fileID: 1717908027}
+  - component: {fileID: 1717908028}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2373,6 +2374,19 @@ MonoBehaviour:
   gameOverPanel: {fileID: 818378607}
   backToMainBtn: {fileID: 765419987}
   placeText: {fileID: 283261125}
+--- !u!114 &1717908028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717908018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4d737dd2444cdda2adbdb80c623e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 19400698}
 --- !u!1 &1772437904
 GameObject:
   m_ObjectHideFlags: 0

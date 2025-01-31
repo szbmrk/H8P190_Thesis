@@ -63,6 +63,11 @@ public class LobbyManager : MonoBehaviour
         return joinedPlayers.Find(p => p.assignedPlayer.Equals(player));
     }
 
+    public int PlayersReadyCount()
+    {
+        return joinedPlayers.Count(player => player.isReady);
+    }
+    
     public bool AreAllPlayersReady()
     {
         return joinedPlayers.All(player => player.isReady);

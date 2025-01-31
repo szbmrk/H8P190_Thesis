@@ -175,6 +175,9 @@ public class TurnManager : MonoBehaviour
 
     public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
     {
+        if (turnDoneMessage == null)
+            return;
+        
         if (!turnDoneMessage.Player.Equals(currentPlayerInTurn.TurnInfo.Player))
             return;
 

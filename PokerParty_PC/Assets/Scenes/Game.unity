@@ -3165,11 +3165,11 @@ RectTransform:
   - {fileID: 1846417130}
   - {fileID: 1773682816}
   - {fileID: 1217529782}
-  - {fileID: 860313363}
   - {fileID: 346525292}
   - {fileID: 662119860}
   - {fileID: 1757722811}
   - {fileID: 308069858}
+  - {fileID: 860313363}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3221,6 +3221,12 @@ MonoBehaviour:
   endGameBtn: {fileID: 815236526}
   pausePanel: {fileID: 308069857}
   isPaused: 0
+  turnDoneMessageReceivedDuringPause:
+    Player:
+      PlayerName: 
+    ActionAmount: 0
+    Action: 0
+    NewMoney: 0
 --- !u!1 &1846417129
 GameObject:
   m_ObjectHideFlags: 0

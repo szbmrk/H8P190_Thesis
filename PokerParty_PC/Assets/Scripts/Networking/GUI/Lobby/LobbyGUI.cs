@@ -12,7 +12,7 @@ public class LobbyGUI : MonoBehaviour
 
     [SerializeField] private Button deleteLobbyBtn;
     [SerializeField] private Button startGameBtn;
-    [SerializeField] private GameObject minimumPlayersText;
+    [SerializeField] private GameObject conditionToStartText;
 
     [SerializeField] private TextMeshProUGUI playerCount;
     [SerializeField] private GameObject lobbyPanel;
@@ -100,12 +100,17 @@ public class LobbyGUI : MonoBehaviour
         if (numOfPlayers >= LobbySettings.MinimumPlayers && LobbyManager.instance.AreAllPlayersReady())
         {
             startGameBtn.interactable = true;
-            minimumPlayersText.SetActive(false);
+            conditionToStartText.SetActive(false);
         }
         else
         {
             startGameBtn.interactable = false;
-            minimumPlayersText.SetActive(true);
+            
+            conditionToStartText.GetComponent<TextMeshProUGUI>().text = numOfPlayers < LobbySettings.MinimumPlayers ?
+                $"Minimum players: {LobbySettings.MinimumPlayers}" :
+                $"All players must be ready: {LobbyManager.instance.PlayersReadyCount()}/{numOfPlayers}";
+            
+            conditionToStartText.SetActive(true);
         }
 
         playerCount.text = numOfPlayers.ToString() + "/" + LobbySettings.MaximumPlayers;
