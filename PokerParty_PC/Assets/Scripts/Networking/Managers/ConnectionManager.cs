@@ -52,7 +52,7 @@ public class ConnectionManager : MonoBehaviour
         // Process events from all connections.
         for (int i = 0; i < Connections.Length; i++)
         {
-            Assert.IsTrue(Connections[i].IsCreated);
+            if (!Connections[i].IsCreated) continue;
 
             NetworkEvent.Type eventType;
             while ((eventType = NetworkDriver.PopEventForConnection(Connections[i], out var stream)) != NetworkEvent.Type.Empty)
