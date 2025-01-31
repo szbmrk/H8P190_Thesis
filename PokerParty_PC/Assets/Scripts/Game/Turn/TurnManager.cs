@@ -177,6 +177,12 @@ public class TurnManager : MonoBehaviour
     {
         if (!turnDoneMessage.Player.Equals(currentPlayerInTurn.TurnInfo.Player))
             return;
+
+        if (PauseMenu.instance.isPaused)
+        {
+            PauseMenu.instance.turnDoneMessageReceivedDuringPause = turnDoneMessage;
+            return;
+        }
         
         TableManager.instance.moneyInPot += turnDoneMessage.ActionAmount;
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
