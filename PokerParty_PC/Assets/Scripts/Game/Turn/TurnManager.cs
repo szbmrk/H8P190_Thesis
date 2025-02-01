@@ -345,7 +345,7 @@ public class TurnManager : MonoBehaviour
         }
         
                 
-        currentPlayerInTurn.SetLastActionText($"{turnDoneMessage.Action} {turnDoneMessage.ActionAmount} $");
+        currentPlayerInTurn.SetLastActionText($"{turnDoneMessage.Action} {turnDoneMessage.ActionAmount}$");
         
         if (turnDoneMessage.Action == PossibleAction.Check)
             currentPlayerInTurn.SetLastActionText($"CHECK");

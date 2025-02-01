@@ -22,6 +22,6 @@ public class GameGUI : MonoBehaviour
 
     public void UpdateMoney()
     {
-        moneyText.text = $"{GameManager.instance.money} $";
+        moneyText.text = $"{GameManager.instance.money}$";
     }
 }

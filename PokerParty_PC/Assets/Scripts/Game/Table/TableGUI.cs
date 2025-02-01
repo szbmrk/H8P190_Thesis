@@ -34,7 +34,7 @@ public class TableGUI : MonoBehaviour
 
     public void RefreshMoneyInPotText(int potMoney)
     {
-        moneyInPotText.text = $"Pot: {potMoney} $";
+        moneyInPotText.text = $"Pot: {potMoney}$";
     }
 
     public IEnumerator ShowTurnWinner(string winnerName, HandType handType, TablePlayerCard[] playerSeats)

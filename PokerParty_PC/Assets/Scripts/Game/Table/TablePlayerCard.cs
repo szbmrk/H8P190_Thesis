@@ -109,7 +109,7 @@ public class TablePlayerCard : MonoBehaviour
 
     public void RefreshMoney(int money)
     {
-        moneyText.text = $"{money} $";
+        moneyText.text = $"{money}$";
     }
     
     public void SetLastActionText(string text)

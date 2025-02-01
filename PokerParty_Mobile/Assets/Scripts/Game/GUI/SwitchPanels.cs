@@ -25,7 +25,7 @@ public class SwitchPanels : MonoBehaviour
 
     private void SwitchToCards()
     {
-        switchText.text = "Close cards";
+        switchText.text = "Show actions";
         actionsPanel.SetActive(false);
         cardsPanel.SetActive(true);
     }

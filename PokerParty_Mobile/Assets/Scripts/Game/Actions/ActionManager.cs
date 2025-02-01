@@ -40,19 +40,19 @@ public class ActionManager : MonoBehaviour
             case PossibleAction.SmallBlindBet:
                 GameObject smallBlind = Instantiate(smallBlindPrefab, parentForActions);
                 smallBlind.GetComponent<ActionButton>().amount = Settings.smallBLindAmount;
-                smallBlind.GetComponent<ActionButton>().buttonText.text = $"Place Small Blind Bet ({Settings.smallBLindAmount} $)";
+                smallBlind.GetComponent<ActionButton>().buttonText.text = $"Small Blind Bet {Settings.smallBLindAmount}$";
                 currentActions.Add(smallBlind);
                 break;
             case PossibleAction.BigBlindBet:
                 GameObject bigBlind = Instantiate(bigBlindPrefab, parentForActions);
                 bigBlind.GetComponent<ActionButton>().amount = Settings.bigBLindAmount;
-                bigBlind.GetComponent<ActionButton>().buttonText.text = $"Place Big Blind Bet ({Settings.bigBLindAmount} $)";
+                bigBlind.GetComponent<ActionButton>().buttonText.text = $"Big Blind Bet {Settings.bigBLindAmount}$";
                 currentActions.Add(bigBlind);
                 break;
             case PossibleAction.Call:
                 GameObject call = Instantiate(callPrefab, parentForActions);
                 call.GetComponent<ActionButton>().amount = Settings.moneyNeededToCall;
-                call.GetComponent<ActionButton>().buttonText.text = $"Call ({Settings.moneyNeededToCall} $)";
+                call.GetComponent<ActionButton>().buttonText.text = $"Call {Settings.moneyNeededToCall}$";
                 currentActions.Add(call);
                 break;
             case PossibleAction.Check:

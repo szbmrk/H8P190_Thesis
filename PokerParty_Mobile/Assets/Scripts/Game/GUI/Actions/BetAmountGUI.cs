@@ -55,7 +55,7 @@ public class BetAmountGUI : MonoBehaviour
         else
         {
             plus.interactable = true;
-            submitBtnText.text = $"{submitText} ({slider.value} $)";
+            submitBtnText.text = $"{submitText} {slider.value}$";
             submitBtn.action = originalAction;
         }
     }
@@ -92,7 +92,7 @@ public class BetAmountGUI : MonoBehaviour
     {
         slider.value = value;
         moneyInput.text = value.ToString() + " $";
-        submitBtnText.text = $"{submitText} ({value} $)";
+        submitBtnText.text = $"{submitText} {value}$";
         submitBtn.amount = value;
     }
 
@@ -108,7 +108,7 @@ public class BetAmountGUI : MonoBehaviour
             }
         }
         else
-            moneyInput.text = slider.value.ToString() + " $";
+            moneyInput.text = slider.value.ToString() + "$";
     }
 
 }

@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 109f8246372419242924654fcd745e79
+guid: cf4bd71f54d966c4fa7003a507b334bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3125352793299520440
-    second: IMG_0827_0
+      213: 5219267505827384625
+    second: Eredeti_0
+  - first:
+      213: -8418394990179580692
+    second: Eredeti_1
+  - first:
+      213: -5744147510854522598
+    second: Eredeti_2
+  - first:
+      213: -744892812108507338
+    second: Eredeti_3
+  - first:
+      213: 6079791951920054271
+    second: Eredeti_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_0827_0
+      name: Eredeti_0
       rect:
         serializedVersion: 2
-        x: 366
-        y: 26
-        width: 1365
-        height: 1969
+        x: 299
+        y: 15
+        width: 1425
+        height: 1973
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +140,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8bb84628ecb7f5b20800000000000000
-      internalID: 3125352793299520440
+      spriteID: 13d8498c4209e6840800000000000000
+      internalID: 5219267505827384625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eredeti_1
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 1694
+        width: 19
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce40b67eb5adb2b80800000000000000
+      internalID: -8418394990179580692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eredeti_2
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 1009
+        width: 19
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a19621ec540b840b0800000000000000
+      internalID: -5744147510854522598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eredeti_3
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 957
+        width: 19
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 637d78a1feb99a5f0800000000000000
+      internalID: -744892812108507338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eredeti_4
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 272
+        width: 19
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff39727192cf5450800000000000000
+      internalID: 6079791951920054271
       vertices: []
       indices: 
       edges: []
@@ -147,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Eredeti_0: 5219267505827384625
+      Eredeti_1: -8418394990179580692
+      Eredeti_2: -5744147510854522598
+      Eredeti_3: -744892812108507338
+      Eredeti_4: 6079791951920054271
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
