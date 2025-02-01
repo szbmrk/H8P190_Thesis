@@ -32,7 +32,7 @@ namespace PokerParty_SharedDLL.Tests
 
             Assert.Equal(expectedHandType, TexasHoldEm.EvaluateHand(hand));
         }
-        
+
         [Fact]
         public void GetBestHand_When_ShouldReturnCorrectBestHand()
         {
@@ -44,7 +44,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(5, "Hearts"),
                 new Card(6, "Spades")
             ];
-            
+
             Card[] bestHand =
             [
                 new Card(10, "Hearts"),
@@ -53,7 +53,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(13, "Hearts"),
                 new Card(14, "Hearts")
             ];
-            
+
             Card[][] hands = new Card[][]
             {
                 badHand,
@@ -62,7 +62,7 @@ namespace PokerParty_SharedDLL.Tests
 
             Assert.Equal(bestHand, TexasHoldEm.GetBestHandOfPlayer(hands));
         }
-        
+
         [Fact]
         public void GetAllPossibleHands_When_ShouldReturnCorrectPossibleHands()
         {
@@ -75,7 +75,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(6, "Spades"),
                 new Card(7, "Diamonds"),
             ];
-            
+
             Card[] hand1 =
             [
                 new Card(2, "Hearts"),
@@ -84,7 +84,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(5, "Hearts"),
                 new Card(6, "Spades")
             ];
-            
+
             Card[] hand2 =
             [
                 new Card(2, "Hearts"),
@@ -93,7 +93,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(5, "Hearts"),
                 new Card(7, "Diamonds")
             ];
-            
+
             Card[] hand3 =
             [
                 new Card(2, "Hearts"),
@@ -102,7 +102,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(6, "Spades"),
                 new Card(7, "Diamonds")
             ];
-            
+
             Card[] hand4 =
             [
                 new Card(2, "Hearts"),
@@ -111,7 +111,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(6, "Spades"),
                 new Card(7, "Diamonds")
             ];
-            
+
             Card[] hand5 =
             [
                 new Card(2, "Hearts"),
@@ -120,7 +120,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(6, "Spades"),
                 new Card(7, "Diamonds")
             ];
-            
+
             Card[] hand6 =
             [
                 new Card(3, "Clubs"),
@@ -129,7 +129,7 @@ namespace PokerParty_SharedDLL.Tests
                 new Card(6, "Spades"),
                 new Card(7, "Diamonds")
             ];
-            
+
             Card[][] manualPossibleHands = new Card[][]
             {
                 hand1,
@@ -139,10 +139,39 @@ namespace PokerParty_SharedDLL.Tests
                 hand5,
                 hand6
             };
-            
+
             Card[][] possibleHands = TexasHoldEm.GetAllPossibleHands(cards);
-            
+
             Assert.Equal(manualPossibleHands, possibleHands);
         }
+
+        [Fact]
+        public void GetBestHandFromGetAllPossibleHands_When_ShouldReturnCorrectBestHand()
+        {
+            Card[] cards =
+            [
+                new Card(2, "Hearts"),
+                new Card(2, "Hearts"),
+                new Card(3, "Clubs"),
+                new Card(4, "Hearts"),
+                new Card(5, "Hearts"),
+                new Card(6, "Spades"),
+                new Card(7, "Diamonds"),
+            ];
+
+            Card[][] possibleHand = TexasHoldEm.GetAllPossibleHands(cards);
+
+            Card[] bestHand =
+            [
+                new Card(3, "Clubs"),
+                new Card(4, "Hearts"),
+                new Card(5, "Hearts"),
+                new Card(6, "Spades"),
+                new Card(7, "Diamonds")
+            ];
+            
+            Assert.Equal(bestHand, TexasHoldEm.GetBestHandOfPlayer(possibleHand));
+        }
+    
     }
 }

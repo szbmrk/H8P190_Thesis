@@ -143,7 +143,8 @@ public class TablePlayerCard : MonoBehaviour
         allCards[5] = TurnInfo.Cards[0];
         allCards[6] = TurnInfo.Cards[1];
 
-        Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(TexasHoldEm.GetAllPossibleHands(allCards));
+        Card[][] possibleHands = TexasHoldEm.GetAllPossibleHands(allCards);
+        Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(possibleHands);
         HandType bestHandType = TexasHoldEm.EvaluateHand(bestHand);
         
         handTypeText.text = bestHandType.ToString();
