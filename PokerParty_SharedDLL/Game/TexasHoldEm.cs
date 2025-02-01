@@ -36,34 +36,35 @@ namespace PokerParty_SharedDLL
         public static Card[][] GetAllPossibleHands(Card[] cards)
         {
             if (cards.Length == 5)
+            {
                 return new Card[][] { cards };
+            }
 
             List<Card[]> possibleHands = new List<Card[]>();
-
             int handSize = 5;
-            int[] indices = new int[handSize];
+            int n = cards.Length;
 
-            for (int i = 0; i < handSize; i++)
-                indices[i] = i;
-
-            while (true)
+            for (int i = 0; i < n; i++)
             {
-                Card[] hand = new Card[handSize];
-                for (int i = 0; i < handSize; i++)
-                    hand[i] = cards[indices[i]];
-
-                possibleHands.Add(hand);
-
-                int k = handSize - 1;
-                while (k >= 0 && indices[k] == cards.Length - handSize + k)
-                    k--;
-
-                if (k < 0)
-                    break;
-
-                indices[k]++;
-                for (int j = k + 1; j < handSize; j++)
-                    indices[j] = indices[j - 1] + 1;
+                for (int j = i + 1; j < n; j++)
+                {
+                    for (int k = j + 1; k < n; k++)
+                    {
+                        for (int l = k + 1; l < n; l++)
+                        {
+                            for (int m = l + 1; m < n; m++)
+                            {
+                                Card[] hand = new Card[handSize];
+                                hand[0] = cards[i];
+                                hand[1] = cards[j];
+                                hand[2] = cards[k];
+                                hand[3] = cards[l];
+                                hand[4] = cards[m];
+                                possibleHands.Add(hand);
+                            }
+                        }
+                    }
+                }
             }
 
             return possibleHands.ToArray();
@@ -81,12 +82,13 @@ namespace PokerParty_SharedDLL
                 Array.Copy(hand, currentHand, 5);
                 HandType currentHandType = EvaluateHand(currentHand);
                 int currentBreakTieScore = EvaluationHelper.CalculateBreakTieScore(currentHand);
-
-                if (currentHandType < bestHandType || currentBreakTieScore <= bestBreakTieScore) continue;
                 
-                bestHand = currentHand;
-                bestBreakTieScore = currentBreakTieScore;
-                bestHandType = currentHandType;
+                if (currentHandType > bestHandType || (currentHandType == bestHandType && currentBreakTieScore > bestBreakTieScore))
+                {
+                    bestHandType = currentHandType;
+                    bestBreakTieScore = currentBreakTieScore;
+                    Array.Copy(currentHand, bestHand, 5);
+                }
             }
 
             return bestHand;

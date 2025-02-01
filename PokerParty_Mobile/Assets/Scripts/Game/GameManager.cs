@@ -58,6 +58,15 @@ public class GameManager : MonoBehaviour
         Loader.instance.StartLoading();
         yield return ConnectionManager.instance.DisposeNetworkDriver();
         Destroy(ConnectionManager.instance.gameObject);
+        SceneManager.sceneLoaded += OnLobbySceneLoaded;
         SceneManager.LoadScene("Lobby");
+    }
+    
+    private void OnLobbySceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != "Lobby") return;
+        
+        PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "Disconnected from the game");
+        SceneManager.sceneLoaded -= OnLobbySceneLoaded;
     }
 }

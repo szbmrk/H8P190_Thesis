@@ -108,13 +108,14 @@ public class TableManager : MonoBehaviour
         Logger.LogToFile("Cards dealt to players");
     }
 
-    public void DealCardsToTable()
+    public IEnumerator DealCardsToTable()
     {
         for (int i = 0; i < 5; i++)
         {
             tableCards.Add(Instantiate(tableCardPrefab, parentForCards).GetComponent<TableCard>());
             tableCards[i].card = deck.Draw();
             TableGUI.instance.DisplayCard(tableCards[i], i);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

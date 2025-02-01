@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
@@ -135,15 +136,17 @@ public class TablePlayerCard : MonoBehaviour
         card1.sprite = CardHelper.GetSpriteByFileName(TurnInfo.Cards[0].GetFileNameForSprite());
         card2.sprite = CardHelper.GetSpriteByFileName(TurnInfo.Cards[1].GetFileNameForSprite());
 
-        Card[] allCards = new Card[7];
-        for (int i = 0; i < 5; i++)
+        List<Card> allCards = new List<Card>();
+        allCards.Add(TurnInfo.Cards[0]);
+        allCards.Add(TurnInfo.Cards[1]);
+        foreach (TableCard tableCard in TableManager.instance.tableCards)
         {
-            allCards[i] = TableManager.instance.tableCards[i].card;
+            Card card = new Card(tableCard.card.Value, tableCard.card.Suit);
+            allCards.Add(card);
         }
-        allCards[5] = TurnInfo.Cards[0];
-        allCards[6] = TurnInfo.Cards[1];
 
-        Card[][] possibleHands = TexasHoldEm.GetAllPossibleHands(allCards);
+        Card[][] possibleHands = TexasHoldEm.GetAllPossibleHands(allCards.ToArray());
+        
         Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(possibleHands);
         HandType bestHandType = TexasHoldEm.EvaluateHand(bestHand);
         

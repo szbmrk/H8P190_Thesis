@@ -179,7 +179,7 @@ public class TurnManager : MonoBehaviour
 
     public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
     {
-        if (turnDoneMessage == null)
+        if (turnDoneMessage == null || turnDoneMessage.Player == null || currentPlayerInTurn == null)
             return;
         
         if (!turnDoneMessage.Player.Equals(currentPlayerInTurn.TurnInfo.Player))
@@ -212,14 +212,19 @@ public class TurnManager : MonoBehaviour
                 return;
             case TurnState.BigBlindTurn:
                 TableManager.instance.DealCardsToPlayers();
-                TableManager.instance.DealCardsToTable();
-                turnState = TurnState.PreFlop;
-                StartTurn();
+                StartCoroutine(HandleDealCardsToTableTransition());
                 return;
             default:
                 StartTurn();
                 break;
         }
+    }
+    
+    private IEnumerator HandleDealCardsToTableTransition()
+    {
+        yield return TableManager.instance.StartCoroutine(TableManager.instance.DealCardsToTable());
+        turnState = TurnState.PreFlop;
+        StartTurn();
     }
 
     private bool CheckIfCurrentPlayerIsLastPlayerInTurn()
@@ -250,9 +255,7 @@ public class TurnManager : MonoBehaviour
         {
             case TurnState.PreFlop:
                 turnState = TurnState.Flop;
-                TableManager.instance.StartCoroutine(TableManager.instance.DealFlop());
-                SetStartingPlayer();
-                StartTurn();
+                StartCoroutine(HandleFlopTransition());
                 break;
             case TurnState.Flop:
                 turnState = TurnState.Turn;
@@ -272,6 +275,13 @@ public class TurnManager : MonoBehaviour
         }
         return true;
 
+    }
+    
+    private IEnumerator HandleFlopTransition()
+    {
+        yield return TableManager.instance.StartCoroutine(TableManager.instance.DealFlop());
+        SetStartingPlayer();
+        StartTurn();
     }
 
     private void SetStartingPlayer()

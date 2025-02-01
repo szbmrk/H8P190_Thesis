@@ -1,4 +1,5 @@
-﻿using PokerParty_SharedDLL;
+﻿using System.Collections.Generic;
+using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,19 +43,20 @@ public class CardsGUI : MonoBehaviour
     {
         if (!bestHandText.gameObject.activeInHierarchy)
             bestHandText.gameObject.SetActive(true);
-
-        Card[] cards = new Card[2 + communityCardsChangedMessage.CommunityCards.Length];
-        cards[0] = GameManager.instance.cards[0];
-        cards[1] = GameManager.instance.cards[1];
-        for (int i = 0; i < communityCardsChangedMessage.CommunityCards.Length; i++)
+        
+        List<Card> allCards = new List<Card>();
+        allCards.Add(GameManager.instance.cards[0]);
+        allCards.Add(GameManager.instance.cards[1]);
+        foreach (Card card in communityCardsChangedMessage.CommunityCards)
         {
-            cards[i + 2] = communityCardsChangedMessage.CommunityCards[i];
+            allCards.Add(card);
         }
-
-        Card[][] allPossibleHands = TexasHoldEm.GetAllPossibleHands(cards);
+        
+        Card[][] allPossibleHands = TexasHoldEm.GetAllPossibleHands(allCards.ToArray());
+        
         Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(allPossibleHands);
         HandType bestHandType = TexasHoldEm.EvaluateHand(bestHand);
-
+        
         bestHandText.text = bestHandType.ToString();
     }
 
