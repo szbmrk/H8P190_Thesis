@@ -44,16 +44,13 @@ public class TableGUI : MonoBehaviour
         winnerHandText.text = handType.ToString();
         turnWinnerText.transform.parent.gameObject.SetActive(true);
 
-        List<TablePlayerCard> toDelete = new List<TablePlayerCard>(); 
+        Transform originalParentOfPlayerCards = playerSeats[0].transform.parent;
         
         foreach (TablePlayerCard playerCard in playerSeats)
         {
-            TablePlayerCard newPlayerCard = Instantiate(playerCard, playerCard.transform.position, Quaternion.identity, playerCard.transform.parent);
-            newPlayerCard.transform.SetParent(turnWinnerText.transform.parent);
-            newPlayerCard.transform.SetAsLastSibling();
-            newPlayerCard.transform.localScale = Vector3.one;
-            
-            toDelete.Add(newPlayerCard);
+            playerCard.transform.SetParent(turnWinnerText.transform.parent);
+            playerCard.transform.SetAsLastSibling();
+            playerCard.transform.localScale = Vector3.one;
         }
         
         foreach (TablePlayerCard player in TableManager.instance.playerSeats)
@@ -63,9 +60,10 @@ public class TableGUI : MonoBehaviour
         
         yield return new WaitForSeconds(15f);
 
-        foreach (TablePlayerCard playerCard in toDelete)
+        foreach (TablePlayerCard playerCard in playerSeats)
         {
-            Destroy(playerCard.gameObject);
+            playerCard.transform.SetParent(originalParentOfPlayerCards);
+            playerCard.transform.localScale = Vector3.one;
         }
         
         foreach (TablePlayerCard player in TableManager.instance.playerSeats)

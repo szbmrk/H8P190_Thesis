@@ -156,6 +156,12 @@ public class TableManager : MonoBehaviour
         if (flippedCommunityCards.Length == 5)
             yield break;
 
+        if (flippedCommunityCards.Length == 0)
+        {
+            DealFlop();
+            yield return new WaitForSeconds(0.5f);
+        }
+        
         yield return new WaitForSeconds(0.5f);
 
         if (flippedCommunityCards.Length == 4)
