@@ -38,6 +38,7 @@ public class LobbyManager : MonoBehaviour
         LobbyPlayerCard newPlayer = LobbyGUI.instance.DisplayNewPlayer(player);
         newPlayer.indexInConnectionsArray = indexInConnectionsArray;
         joinedPlayers.Add(newPlayer);
+        LobbyGUI.instance.RefreshPlayerCount();
     }
 
     public Player GetPlayerByIndexInConnectionsArray(int indexInConnectionsArray)
@@ -50,6 +51,7 @@ public class LobbyManager : MonoBehaviour
         LobbyPlayerCard playerCard = GetPlayerCardForPlayer(player);
         joinedPlayers.Remove(playerCard);
         LobbyGUI.instance.RemovePlayerFromDisplay(playerCard);
+        LobbyGUI.instance.RefreshPlayerCount();
     }
 
     public void ModifyPlayerReady(ReadyMessage readyMessage)
@@ -58,7 +60,7 @@ public class LobbyManager : MonoBehaviour
         LobbyGUI.instance.RefreshPlayerCount();
     }
 
-    public LobbyPlayerCard GetPlayerCardForPlayer(Player player)
+    private LobbyPlayerCard GetPlayerCardForPlayer(Player player)
     {
         return joinedPlayers.Find(p => p.assignedPlayer.Equals(player));
     }
