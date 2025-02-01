@@ -37,6 +37,8 @@ public class MatchManager : MonoBehaviour
             int indexInConnections = playerSeat.indexInConnectionsArray;
             ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], gameInfoMessage);
         }
+        
+        Logger.LogToFile("Game info sent to players");
     }
 
     public IEnumerator ShowDown()

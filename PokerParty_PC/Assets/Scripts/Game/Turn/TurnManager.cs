@@ -99,6 +99,7 @@ public class TurnManager : MonoBehaviour
             possibleActions = new PossibleAction[] { PossibleAction.SmallBlindBet };
 
         SendTurnMessage(possibleActions, MatchManager.instance.smallBlindBet);
+        Logger.LogToFile("First turn started");
     }
 
     private void StartSecondTurn()
@@ -114,6 +115,7 @@ public class TurnManager : MonoBehaviour
             possibleActions = new PossibleAction[] { PossibleAction.BigBlindBet };
 
         SendTurnMessage(possibleActions, MatchManager.instance.bigBlindBet);
+        Logger.LogToFile("Second turn started");
     }
 
     private void StartTurn()
@@ -123,6 +125,7 @@ public class TurnManager : MonoBehaviour
         PossibleAction[] possibleActions = DeterminePossibleActionsForCurrentPlayer();
         
         SendTurnMessage(possibleActions, moneyNeededToCall);
+        Logger.LogToFile("Turn started");
     }
 
     private PossibleAction[] DeterminePossibleActionsForCurrentPlayer()
@@ -158,6 +161,7 @@ public class TurnManager : MonoBehaviour
         
         int indexInConnections = currentPlayerInTurn.indexInConnectionsArray;
         ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], yourTurnMessage);
+        Logger.LogToFile($"Sent turn message to {currentPlayerInTurn.TurnInfo.Player.PlayerName}");
 
         NotYourTurnMessage notYourTurnMessage = new NotYourTurnMessage
         {
@@ -186,6 +190,8 @@ public class TurnManager : MonoBehaviour
             PauseMenu.instance.turnDoneMessageReceivedDuringPause = turnDoneMessage;
             return;
         }
+        
+        Logger.LogToFile($"{turnDoneMessage.Player.PlayerName} {turnDoneMessage.Action} {turnDoneMessage.ActionAmount}$");
         
         TableManager.instance.moneyInPot += turnDoneMessage.ActionAmount;
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
@@ -230,48 +236,42 @@ public class TurnManager : MonoBehaviour
 
     private bool CheckIfTurnIsOver()
     {
-        
         if ((playersNeedToCallCount == 0 && TableManager.instance.playersInGameCount == 1) || playersStillInGameCount == 0)
         {
             StartCoroutine(ShowDown());
             return true;
         }
 
-        if (playersNeedToCallCount == 0 && CheckIfCurrentPlayerIsLastPlayerInTurn())
-        {
-            lastPlayerWhoRaised = null;
-            hasAnyoneBetted = false;
+        if (playersNeedToCallCount != 0 || !CheckIfCurrentPlayerIsLastPlayerInTurn()) return false;
+        lastPlayerWhoRaised = null;
+        hasAnyoneBetted = false;
 
-            if (turnState == TurnState.PreFlop)
-            {
+        switch (turnState)
+        {
+            case TurnState.PreFlop:
                 turnState = TurnState.Flop;
-                TableManager.instance.DealFlop();
+                TableManager.instance.StartCoroutine(TableManager.instance.DealFlop());
                 SetStartingPlayer();
                 StartTurn();
-            }
-            else if (turnState == TurnState.Flop)
-            {
+                break;
+            case TurnState.Flop:
                 turnState = TurnState.Turn;
                 TableManager.instance.DealTurn();
                 SetStartingPlayer();
                 StartTurn();
-            }
-            else if (turnState == TurnState.Turn)
-            {
+                break;
+            case TurnState.Turn:
                 turnState = TurnState.River;
                 TableManager.instance.DealRiver();
                 SetStartingPlayer();
                 StartTurn();
-            }
-            else if (turnState == TurnState.River)
-            {
+                break;
+            case TurnState.River:
                 StartCoroutine(ShowDown());
                 return true;
-            }
-            return true;
         }
+        return true;
 
-        return false;
     }
 
     private void SetStartingPlayer()
@@ -302,6 +302,8 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator ShowDown()
     {
+        Logger.LogToFile("Showdown started");
+        
         highestBet = 0;
         yield return MatchManager.instance.ShowDown();
         TableManager.instance.StartNewGame();

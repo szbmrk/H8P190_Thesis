@@ -21,12 +21,13 @@ public class LobbyManager : MonoBehaviour
         PlayerColorManager.ResetColors();
         yield return ConnectionManager.instance.DisposeDriverAndConnections();
         Destroy(ConnectionManager.instance.gameObject);
-        Debug.Log("Lobby deleted");
+        Logger.LogToFile("Lobby deleted");
     }
 
     public bool CheckIfPlayerNameIsAlreadyInUse(Player player, int indexInConnectionsArray)
     {
-        if (!joinedPlayers.Any(p => p.assignedPlayer.PlayerName == player.PlayerName)) return false;
+        if (joinedPlayers.All(p => p.assignedPlayer.PlayerName != player.PlayerName)) return false;
+        
         ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnectionsArray], new PlayerNameAlreadyInUseMessage());
         ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
         return true;
@@ -38,6 +39,7 @@ public class LobbyManager : MonoBehaviour
         LobbyPlayerCard newPlayer = LobbyGUI.instance.DisplayNewPlayer(player);
         newPlayer.indexInConnectionsArray = indexInConnectionsArray;
         joinedPlayers.Add(newPlayer);
+        Logger.LogToFile($"Player {player.PlayerName} joined the lobby");
         LobbyGUI.instance.RefreshPlayerCount();
     }
 
@@ -51,6 +53,7 @@ public class LobbyManager : MonoBehaviour
         LobbyPlayerCard playerCard = GetPlayerCardForPlayer(player);
         joinedPlayers.Remove(playerCard);
         LobbyGUI.instance.RemovePlayerFromDisplay(playerCard);
+        Logger.LogToFile($"Player {player.PlayerName} left the lobby");
         LobbyGUI.instance.RefreshPlayerCount();
     }
 
