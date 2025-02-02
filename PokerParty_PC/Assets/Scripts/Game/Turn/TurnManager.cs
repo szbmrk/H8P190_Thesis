@@ -36,7 +36,7 @@ public class TurnManager : MonoBehaviour
             }
 
             TablePlayerCard dealer = TableManager.instance.playerSeats.Find(p => p.isDealer);
-            return dealer.isStillInGame ? dealer : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(dealer));
+            return dealer != null && dealer.isStillInGame ? dealer : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(dealer));
         }
     }
 
@@ -290,14 +290,14 @@ public class TurnManager : MonoBehaviour
         if (playersStillInGameCount == 2)
         {
             TablePlayerCard bigBlind = TableManager.instance.playerSeats.Find(p => p.isBigBlind);
-            currentPlayerInTurn = bigBlind.isStillInGame ? bigBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
+            currentPlayerInTurn = bigBlind != null &&bigBlind.isStillInGame ? bigBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
 
             return;
         }
 
         // több játékos esetén a kisvak kezd
         TablePlayerCard smallBlind = TableManager.instance.playerSeats.Find(p => p.isSmallBlind);
-        currentPlayerInTurn = smallBlind.isStillInGame ? smallBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(smallBlind));
+        currentPlayerInTurn = smallBlind != null && smallBlind.isStillInGame ? smallBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(smallBlind));
     }
 
     private TablePlayerCard GetLastPlayerInGame()
