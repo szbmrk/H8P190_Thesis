@@ -332,9 +332,17 @@ public class TableManager : MonoBehaviour
     public void PlayerDisconnected(Player player)
     {
         TablePlayerCard playerCard = playerSeats.Find(p => p.TurnInfo.Player.Equals(player));
+        bool wasCurrentlyInTurn = playerCard.TurnInfo.Player.Equals(TurnManager.instance.currentPlayerInTurn.TurnInfo.Player);
         playerCard.Disconnected();
         playerCard.TurnInfo.Money = 0;
         playerSeats.Remove(playerCard);
+        
+        if (wasCurrentlyInTurn) return;
+        
+        if (playerSeats.Count == 1)
+        {
+            GameManager.instance.GameOver(playerSeats[0]);
+        }
     }
 
     public void RemovePlayersWith0Money()

@@ -166,11 +166,18 @@ public class TablePlayerCard : MonoBehaviour
             }
         }
         
+        debugString += $"\nHand eval of possiblehands:";
+        foreach (Card[] possibleHand in possibleHands)
+        {
+            HandType handType = TexasHoldEm.EvaluateHand(possibleHand);
+            debugString += $" {handType}";
+        }
         
         Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(possibleHands);
         HandType bestHandType = TexasHoldEm.EvaluateHand(bestHand);
         
         handTypeText.text = bestHandType.ToString();
+        
         
         debugString += "\nBest hand:";
         foreach (Card card in bestHand)

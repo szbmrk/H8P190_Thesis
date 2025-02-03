@@ -19,7 +19,7 @@ public class TurnManager : MonoBehaviour
     public static TurnManager instance;
 
     private TurnState turnState = TurnState.SmallBlindTurn;
-    private TablePlayerCard currentPlayerInTurn;
+    public TablePlayerCard currentPlayerInTurn;
     private TablePlayerCard lastPlayerWhoRaised;
 
     private bool hasAnyoneBetted;
