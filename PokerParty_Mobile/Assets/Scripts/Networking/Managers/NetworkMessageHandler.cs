@@ -13,6 +13,11 @@ public static class NetworkMessageHandler
                 NetworkingGUI.instance.ResetReadyButton();
                 PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "Player with this name is already in the game");
                 break;
+            case NetworkMessageType.GameAlreadyStartedMessage:
+                NetworkingGUI.instance.ShowJoinedPanel(false);
+                NetworkingGUI.instance.ResetReadyButton();
+                PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "Game already started");
+                break;
             case NetworkMessageType.GameStartedMessage:
                 SceneManager.LoadScene("Game");
                 break;

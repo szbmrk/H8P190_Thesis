@@ -10,9 +10,12 @@ public static class NetworkMessageHandler
             case NetworkMessageType.ConnectionMessage:
                 ConnectionMessage connectionData = FromStringToJson<ConnectionMessage>(data);
                 if (LobbyManager.instance != null)
-                {
                     if (!LobbyManager.instance.CheckIfPlayerNameIsAlreadyInUse(connectionData.Player, indexOfConnection))
                         LobbyManager.instance.AddPlayer(connectionData.Player, indexOfConnection);
+                if (GameManager.instance != null)
+                {
+                    ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexOfConnection], new GameAlreadyStartedMessage());
+                    ConnectionManager.instance.DisconnectPlayer(indexOfConnection);
                 }
                 break;
 
