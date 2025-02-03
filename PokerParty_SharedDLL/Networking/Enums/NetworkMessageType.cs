@@ -9,6 +9,7 @@
         ReadyMessage,
         TurnDoneMessage,
         PlayerNameAlreadyInUseMessage,
+        GameAlreadyStartedMessage,
         LoadedToGameMessage,
         RefreshedMoneyMessage,
         GameStartedMessage,
