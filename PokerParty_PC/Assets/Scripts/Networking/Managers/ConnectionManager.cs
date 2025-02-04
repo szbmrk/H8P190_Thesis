@@ -63,7 +63,7 @@ public class ConnectionManager : MonoBehaviour
                         Logger.LogToFile("Client disconnected from host");
                         
                         if (TableManager.instance != null)
-                            TableManager.instance.PlayerDisconnected(TableManager.instance.GetPLayerByIndexInConnetionsArray(i));
+                            TableManager.instance.PlayerDisconnected(TableManager.instance.GetPLayerByIndexInConnectionsArray(i));
                         if (LobbyManager.instance != null)
                             LobbyManager.instance.RemovePlayer(LobbyManager.instance.GetPlayerByIndexInConnectionsArray(i));
                         

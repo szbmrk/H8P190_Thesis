@@ -84,7 +84,7 @@ public class TableManager : MonoBehaviour
         {
             playerSeats[0].isDealer = true;
             playerSeats[0].isSmallBlind = true;
-            playerSeats[1].isSmallBlind = true;
+            playerSeats[1].isBigBlind = true;
         }
 
         for (int i = 0; i < playerSeats.Count; i++)
@@ -324,7 +324,7 @@ public class TableManager : MonoBehaviour
         return index;
     }
 
-    public Player GetPLayerByIndexInConnetionsArray(int indexInConnectionsArray)
+    public Player GetPLayerByIndexInConnectionsArray(int indexInConnectionsArray)
     {
         return playerSeats.Find(p => p.indexInConnectionsArray == indexInConnectionsArray).TurnInfo.Player;
     }

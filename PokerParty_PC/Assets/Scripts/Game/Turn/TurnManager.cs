@@ -32,7 +32,7 @@ public class TurnManager : MonoBehaviour
             if (turnState == TurnState.PreFlop)
             {
                 TablePlayerCard bigBlind = TableManager.instance.playerSeats.Find(p => p.isBigBlind);
-                return bigBlind.isStillInGame ? bigBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
+                return bigBlind != null &&bigBlind.isStillInGame ? bigBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
             }
 
             TablePlayerCard dealer = TableManager.instance.playerSeats.Find(p => p.isDealer);

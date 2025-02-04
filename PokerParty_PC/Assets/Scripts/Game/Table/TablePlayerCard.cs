@@ -144,51 +144,13 @@ public class TablePlayerCard : MonoBehaviour
             Card card = new Card(tableCard.card.Value, tableCard.card.Suit);
             allCards.Add(card);
         }
-
-        string debugString = $"{TurnInfo.Player.PlayerName}:";
-
-        debugString += "card:";
-        foreach (Card card in allCards)
-        {
-            debugString += $" {card}";
-        }
         
         Card[][] possibleHands = TexasHoldEm.GetAllPossibleHands(allCards.ToArray());
-        
-        debugString += $"\n{possibleHands.Length} possible hands";
-        
-        foreach (Card[] possibleHand in possibleHands)
-        {
-            debugString += "\n";
-            foreach (Card card in possibleHand)
-            {
-                debugString += $" {card}";
-            }
-        }
-        
-        debugString += $"\nHand eval of possiblehands:";
-        foreach (Card[] possibleHand in possibleHands)
-        {
-            HandType handType = TexasHoldEm.EvaluateHand(possibleHand);
-            debugString += $" {handType}";
-        }
         
         Card[] bestHand = TexasHoldEm.GetBestHandOfPlayer(possibleHands);
         HandType bestHandType = TexasHoldEm.EvaluateHand(bestHand);
         
         handTypeText.text = bestHandType.ToString();
-        
-        
-        debugString += "\nBest hand:";
-        foreach (Card card in bestHand)
-        {
-            debugString += $" {card}";
-        }
-        
-        debugString += "\nBest hand type:";
-        debugString += bestHandType;
-        
-        Debug.Log(debugString);
         
         handGameObject.SetActive(true);
     }
