@@ -77,7 +77,7 @@ public class NetworkingGUI : MonoBehaviour
         
         if (string.IsNullOrEmpty(playerNameInputField.text))
         {
-            ShowJoinError("Player name is empty!");
+            ShowJoinError("Player name is empty");
             return;
         }
         
