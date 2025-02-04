@@ -261,7 +261,7 @@ public class TableManager : MonoBehaviour
     
     private void RotatePlayers()
     {
-        if (playerSeats.Count >= 3)
+        if (playerSeats.Count > 2)
         {
             RotateMultiplePlayers();
         }
