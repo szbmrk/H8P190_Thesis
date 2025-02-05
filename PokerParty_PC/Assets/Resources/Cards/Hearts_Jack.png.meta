@@ -5,18 +5,6 @@ TextureImporter:
   - first:
       213: 7604836335208246163
     second: Hearts_Jack_0
-  - first:
-      213: -8289814850617638898
-    second: Hearts_Jack_1
-  - first:
-      213: -3390300989276723628
-    second: Hearts_Jack_2
-  - first:
-      213: 3306707456573749814
-    second: Hearts_Jack_3
-  - first:
-      213: -8449987280170925491
-    second: Hearts_Jack_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,10 +116,10 @@ TextureImporter:
       name: Hearts_Jack_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 17
+        y: 1
+        width: 87
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,94 +130,6 @@ TextureImporter:
       bones: []
       spriteID: 39b221fca5ec98960800000000000000
       internalID: 7604836335208246163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_Jack_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e008d2f8059a4fc80800000000000000
-      internalID: -8289814850617638898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_Jack_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 456618c763b33f0d0800000000000000
-      internalID: -3390300989276723628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_Jack_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63ab63d79e8c3ed20800000000000000
-      internalID: 3306707456573749814
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_Jack_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d42c7d0b65d9bba80800000000000000
-      internalID: -8449987280170925491
       vertices: []
       indices: 
       edges: []
@@ -249,10 +149,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Hearts_Jack_0: 7604836335208246163
-      Hearts_Jack_1: -8289814850617638898
-      Hearts_Jack_2: -3390300989276723628
-      Hearts_Jack_3: 3306707456573749814
-      Hearts_Jack_4: -8449987280170925491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

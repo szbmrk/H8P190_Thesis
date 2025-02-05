@@ -5,18 +5,6 @@ TextureImporter:
   - first:
       213: -3340271525982710737
     second: Clubs_5_0
-  - first:
-      213: 3464286076911385868
-    second: Clubs_5_1
-  - first:
-      213: 4262365886118036220
-    second: Clubs_5_2
-  - first:
-      213: -8774576022710892739
-    second: Clubs_5_3
-  - first:
-      213: 3817088194024018631
-    second: Clubs_5_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,10 +116,10 @@ TextureImporter:
       name: Clubs_5_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 17
+        y: 1
+        width: 87
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,94 +130,6 @@ TextureImporter:
       bones: []
       spriteID: f24d270aeb8f4a1d0800000000000000
       internalID: -3340271525982710737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clubs_5_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c0d72a615dd931030800000000000000
-      internalID: 3464286076911385868
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clubs_5_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cf20fc0c037f62b30800000000000000
-      internalID: 4262365886118036220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clubs_5_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d3748a7d8917a3680800000000000000
-      internalID: -8774576022710892739
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clubs_5_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7c293291d7509f430800000000000000
-      internalID: 3817088194024018631
       vertices: []
       indices: 
       edges: []
@@ -249,10 +149,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Clubs_5_0: -3340271525982710737
-      Clubs_5_1: 3464286076911385868
-      Clubs_5_2: 4262365886118036220
-      Clubs_5_3: -8774576022710892739
-      Clubs_5_4: 3817088194024018631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

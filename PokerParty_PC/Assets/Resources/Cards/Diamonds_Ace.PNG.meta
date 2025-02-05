@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 31ac1f2330b763d459c4f355c711b6d7
+guid: 1e33501e2bfb49746bd3bcf93d2581fa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2213436023481170302
-    second: hatlap 1_0
-  - first:
-      213: -8607266062579857240
-    second: hatlap 1_1
-  - first:
-      213: 8583795290897297119
-    second: hatlap 1_2
-  - first:
-      213: 5055046142516581318
-    second: hatlap 1_3
-  - first:
-      213: 8684592897387081595
-    second: hatlap 1_4
+      213: 523379832197558806
+    second: Diamond_Ace_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hatlap 1_0
+      name: Diamond_Ace_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 17
+        y: 1
+        width: 87
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e79f5a80654b7be10800000000000000
-      internalID: 2213436023481170302
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hatlap 1_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8a807ac8e19dc8880800000000000000
-      internalID: -8607266062579857240
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hatlap 1_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fdeaa929654cf1770800000000000000
-      internalID: 8583795290897297119
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hatlap 1_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6c3d8ef0fa1272640800000000000000
-      internalID: 5055046142516581318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hatlap 1_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b7f23ab2a3fd58870800000000000000
-      internalID: 8684592897387081595
+      spriteID: 6123db43f2b634700800000000000000
+      internalID: 523379832197558806
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      hatlap 1_0: 2213436023481170302
-      hatlap 1_1: -8607266062579857240
-      hatlap 1_2: 8583795290897297119
-      hatlap 1_3: 5055046142516581318
-      hatlap 1_4: 8684592897387081595
+      Diamond_Ace_0: 523379832197558806
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

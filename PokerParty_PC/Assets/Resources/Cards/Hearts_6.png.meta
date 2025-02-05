@@ -5,18 +5,6 @@ TextureImporter:
   - first:
       213: 8783009871052863094
     second: Hearts_6_0
-  - first:
-      213: -6142717578755483014
-    second: Hearts_6_1
-  - first:
-      213: -7185754004716292835
-    second: Hearts_6_2
-  - first:
-      213: 2192029376673436924
-    second: Hearts_6_3
-  - first:
-      213: -8963250849784313799
-    second: Hearts_6_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,10 +116,10 @@ TextureImporter:
       name: Hearts_6_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 17
+        y: 1
+        width: 87
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,94 +130,6 @@ TextureImporter:
       bones: []
       spriteID: 676fade71f483e970800000000000000
       internalID: 8783009871052863094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_6_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a7a5bba58eea0caa0800000000000000
-      internalID: -6142717578755483014
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_6_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d157b81fdc2174c90800000000000000
-      internalID: -7185754004716292835
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_6_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cf457ddaa17ab6e10800000000000000
-      internalID: 2192029376673436924
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_6_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 93843e967d22c9380800000000000000
-      internalID: -8963250849784313799
       vertices: []
       indices: 
       edges: []
@@ -249,10 +149,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Hearts_6_0: 8783009871052863094
-      Hearts_6_1: -6142717578755483014
-      Hearts_6_2: -7185754004716292835
-      Hearts_6_3: 2192029376673436924
-      Hearts_6_4: -8963250849784313799
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

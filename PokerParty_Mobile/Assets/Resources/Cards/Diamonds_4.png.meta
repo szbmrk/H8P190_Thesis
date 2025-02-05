@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: a7c8e70c3fa5d3a45abd4265e67e3f55
+guid: 19aaf237fba713b44bff8cb0661f0edd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6006757307814528399
-    second: Diamonds_4_0
-  - first:
-      213: -8376685939058105052
-    second: Diamonds_4_1
-  - first:
-      213: -2839829403416488129
-    second: Diamonds_4_2
-  - first:
-      213: -718019156485446685
-    second: Diamonds_4_3
-  - first:
-      213: 627712060839118437
-    second: Diamonds_4_4
+      213: 7505625715651415544
+    second: Diamond_4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Diamonds_4_0
+      name: Diamond_4_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 17
+        y: 1
+        width: 87
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17abbbfbd06b3aca0800000000000000
-      internalID: -6006757307814528399
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_4_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 425ae6f158800cb80800000000000000
-      internalID: -8376685939058105052
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_4_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f3796a22436e698d0800000000000000
-      internalID: -2839829403416488129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_4_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e362c3a1651906f0800000000000000
-      internalID: -718019156485446685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_4_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5664b872bc416b800800000000000000
-      internalID: 627712060839118437
+      spriteID: 8fd807662d6592860800000000000000
+      internalID: 7505625715651415544
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Diamonds_4_0: -6006757307814528399
-      Diamonds_4_1: -8376685939058105052
-      Diamonds_4_2: -2839829403416488129
-      Diamonds_4_3: -718019156485446685
-      Diamonds_4_4: 627712060839118437
+      Diamond_4_0: 7505625715651415544
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

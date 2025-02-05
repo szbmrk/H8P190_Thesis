@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 847ff138cf319884ca71f3623084a709
+guid: a571c878b21ec1e4ea56cafc7a9f9cac
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8078170909470651266
-    second: Hearts_A_0
-  - first:
-      213: 847733333865322736
-    second: Hearts_A_1
-  - first:
-      213: -2982836724783501895
-    second: Hearts_A_2
-  - first:
-      213: 7227463744873554078
-    second: Hearts_A_3
-  - first:
-      213: -4000788043248891915
-    second: Hearts_A_4
+      213: 3642765721967686396
+    second: IMG_0981_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hearts_A_0
+      name: IMG_0981_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 31
+        y: 28
+        width: 64
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e7c8b1a9b5294ef80800000000000000
-      internalID: -8078170909470651266
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_A_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0f8dc45c9f0c3cb00800000000000000
-      internalID: 847733333865322736
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_A_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9bd2a447dc5da96d0800000000000000
-      internalID: -2982836724783501895
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_A_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e90e334bbfb1d4460800000000000000
-      internalID: 7227463744873554078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hearts_A_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5f70584c8785a78c0800000000000000
-      internalID: -4000788043248891915
+      spriteID: cf27ad9bf14bd8230800000000000000
+      internalID: 3642765721967686396
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hearts_A_0: -8078170909470651266
-      Hearts_A_1: 847733333865322736
-      Hearts_A_2: -2982836724783501895
-      Hearts_A_3: 7227463744873554078
-      Hearts_A_4: -4000788043248891915
+      IMG_0981_0: 3642765721967686396
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

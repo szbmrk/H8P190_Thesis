@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 6fa2d5c9958729a47bc6cefa630d6f10
+guid: 4dde09bdcf594704ab21b628a2b48939
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7129377589721339942
-    second: Spades_6_0
-  - first:
-      213: -5322025549468426586
-    second: Spades_6_1
-  - first:
-      213: 5773413224720345661
-    second: Spades_6_2
-  - first:
-      213: 694677262088408460
-    second: Spades_6_3
-  - first:
-      213: -1285113127468055889
-    second: Spades_6_4
+      213: -808210620668892242
+    second: IMG_0984_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spades_6_0
+      name: IMG_0984_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 17
+        y: 1
+        width: 87
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 62898f01523a0f260800000000000000
-      internalID: 7129377589721339942
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_6_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6ae9166c5fd5426b0800000000000000
-      internalID: -5322025549468426586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_6_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d3aaff03db84f1050800000000000000
-      internalID: 5773413224720345661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_6_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c8d02501a4df3a900800000000000000
-      internalID: 694677262088408460
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_6_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fa2431d5b6c5a2ee0800000000000000
-      internalID: -1285113127468055889
+      spriteID: eab255bf8b8a8c4f0800000000000000
+      internalID: -808210620668892242
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Spades_6_0: 7129377589721339942
-      Spades_6_1: -5322025549468426586
-      Spades_6_2: 5773413224720345661
-      Spades_6_3: 694677262088408460
-      Spades_6_4: -1285113127468055889
+      IMG_0984_0: -808210620668892242
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

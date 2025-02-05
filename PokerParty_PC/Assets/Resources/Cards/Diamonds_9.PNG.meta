@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: fff05ea5f884dd547875172f6a56083e
+guid: 6e9f7c094bfd1c043b4e9131ed436ac1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5259420481798544477
-    second: Diamonds_ 9_0
-  - first:
-      213: -8829496710485239111
-    second: Diamonds_ 9_1
-  - first:
-      213: 9106987131667590323
-    second: Diamonds_ 9_2
-  - first:
-      213: -6845497718303629590
-    second: Diamonds_ 9_3
-  - first:
-      213: -4139796295606593041
-    second: Diamonds_ 9_4
+      213: -1898604836131489069
+    second: Diamond_9_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Diamonds_ 9_0
+      name: Diamond_9_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 17
+        y: 1
+        width: 87
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a3ebf9ffe8c207b0800000000000000
-      internalID: -5259420481798544477
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_ 9_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9ba1c02c583577580800000000000000
-      internalID: -8829496710485239111
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_ 9_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3bca91d9b84826e70800000000000000
-      internalID: 9106987131667590323
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_ 9_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aeed3cd1818eff0a0800000000000000
-      internalID: -6845497718303629590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_ 9_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fe914e5e33d7c86c0800000000000000
-      internalID: -4139796295606593041
+      spriteID: 3da3b85f5fcc6a5e0800000000000000
+      internalID: -1898604836131489069
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Diamonds_ 9_0: -5259420481798544477
-      Diamonds_ 9_1: -8829496710485239111
-      Diamonds_ 9_2: 9106987131667590323
-      Diamonds_ 9_3: -6845497718303629590
-      Diamonds_ 9_4: -4139796295606593041
+      Diamond_9_0: -1898604836131489069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

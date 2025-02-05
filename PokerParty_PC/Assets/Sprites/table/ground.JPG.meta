@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 6ad1cf869afa3494a96160b332932af6
+guid: e1f95ad9a79cf9c4ebf107a5c650f3be
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8987406167147769714
-    second: Spades_A_0
-  - first:
-      213: -5067679783889821854
-    second: Spades_A_1
-  - first:
-      213: -2667533028150353632
-    second: Spades_A_2
-  - first:
-      213: -3258771098226701034
-    second: Spades_A_3
-  - first:
-      213: -2251410982390307382
-    second: Spades_A_4
+      213: 3188904154254521443
+    second: IMG_0983_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spades_A_0
+      name: IMG_0983_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 0
+        y: 0
+        width: 200
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e80900355b1564380800000000000000
-      internalID: -8987406167147769714
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_A_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 26f91d5161cfba9b0800000000000000
-      internalID: -5067679783889821854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_A_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 021e97618d40bfad0800000000000000
-      internalID: -2667533028150353632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_A_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 61d43eda3f486c2d0800000000000000
-      internalID: -3258771098226701034
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spades_A_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ac56637d3a161c0e0800000000000000
-      internalID: -2251410982390307382
+      spriteID: 364bb19ce63414c20800000000000000
+      internalID: 3188904154254521443
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Spades_A_0: -8987406167147769714
-      Spades_A_1: -5067679783889821854
-      Spades_A_2: -2667533028150353632
-      Spades_A_3: -3258771098226701034
-      Spades_A_4: -2251410982390307382
+      IMG_0983_0: 3188904154254521443
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

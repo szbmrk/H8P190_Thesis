@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 1dd3d7a3a1412bb45bae8a88cefbf92e
+guid: 0b2a942ddd64ddc4bbde512ca460c4a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4360592511200492178
-    second: Diamonds_A_0
-  - first:
-      213: -5912855474241412782
-    second: Diamonds_A_1
-  - first:
-      213: 2183383527103052423
-    second: Diamonds_A_2
-  - first:
-      213: 4310462758634392289
-    second: Diamonds_A_3
-  - first:
-      213: -4241937405116157767
-    second: Diamonds_A_4
+      213: 6044187119960125635
+    second: IMG_0982_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Diamonds_A_0
+      name: IMG_0982_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 13
-        width: 1421
-        height: 1968
+        x: 31
+        y: 28
+        width: 64
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e658aa7e6301c73c0800000000000000
-      internalID: -4360592511200492178
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_A_1
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1688
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 251ed99164151fda0800000000000000
-      internalID: -5912855474241412782
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_A_2
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 1004
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 78aba65ffbfec4e10800000000000000
-      internalID: 2183383527103052423
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_A_3
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 953
-        width: 20
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1ea04f98a07d1db30800000000000000
-      internalID: 4310462758634392289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamonds_A_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 269
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9b0fb90a76c9125c0800000000000000
-      internalID: -4241937405116157767
+      spriteID: 3c0f631892441e350800000000000000
+      internalID: 6044187119960125635
       vertices: []
       indices: 
       edges: []
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Diamonds_A_0: -4360592511200492178
-      Diamonds_A_1: -5912855474241412782
-      Diamonds_A_2: 2183383527103052423
-      Diamonds_A_3: 4310462758634392289
-      Diamonds_A_4: -4241937405116157767
+      IMG_0982_0: 6044187119960125635
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
