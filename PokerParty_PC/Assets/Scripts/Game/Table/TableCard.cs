@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Collections;
 using UnityEngine;
 using PokerParty_SharedDLL;
 
@@ -6,9 +8,28 @@ public class TableCard : MonoBehaviour
 {
     public Card card;
 
-    public void Flip()
+    private Vector3 originalScale;
+    
+    private void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = GetSpriteByFileName(card.GetFileNameForSprite());
+        originalScale = transform.localScale;
+    }
+
+    public IEnumerator Flip()
+    {
+        const float flipDuration = 0.25f;
+        
+        LeanTween.scaleX(gameObject, 0f, flipDuration / 2)
+            .setEase(LeanTweenType.easeInOutQuad);
+
+        yield return new WaitForSeconds(flipDuration / 2);
+
+        GetComponent<SpriteRenderer>().sprite = GetSpriteByFileName(card.GetFileNameForSprite());;
+
+        LeanTween.scaleX(gameObject, originalScale.x, flipDuration / 2)
+            .setEase(LeanTweenType.easeInOutQuad);
+
+        yield return new WaitForSeconds(flipDuration / 2);
     }
 
     private Sprite GetSpriteByFileName(string fileName)

@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TableGUI : MonoBehaviour
 {
     public static TableGUI instance;
     public List<Transform> seatPositions = new List<Transform>();
     public List<Transform> cardPositions = new List<Transform>();
+    public Transform drawingDeckPosition;
 
     [SerializeField] private TextMeshProUGUI moneyInPotText;
     [SerializeField] private TextMeshProUGUI turnWinnerText;
     [SerializeField] private TextMeshProUGUI winnerHandText;
+    
+    public float cardSpeed = 3.5f;
+    public LeanTweenType cardEase = LeanTweenType.easeOutQuad;
 
     private void Awake()
     {
@@ -26,10 +31,21 @@ public class TableGUI : MonoBehaviour
         card.LoadData();
     }
 
-    public void DisplayCard(TableCard card, int i)
+    public IEnumerator DisplayCard(TableCard card, int i)
     {
-        card.transform.position = cardPositions[i].position;
+        Transform startPos = drawingDeckPosition;
+        Transform goalPos = cardPositions[i];
+        
+        card.transform.position = startPos.position;
+        card.GetComponent<SpriteRenderer>().sortingOrder = 3;
         card.gameObject.SetActive(true);
+        
+        float distance = Vector3.Distance(startPos.position, goalPos.position);
+        float duration = distance / cardSpeed;
+
+        LeanTween.move(card.gameObject, goalPos.position, duration).setEase(cardEase);
+
+        yield return new WaitForSeconds(duration);
     }
 
     public void RefreshMoneyInPotText(int potMoney)

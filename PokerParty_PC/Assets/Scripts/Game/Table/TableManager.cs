@@ -34,7 +34,6 @@ public class TableManager : MonoBehaviour
 
     private void Start()
     {
-        Loader.instance.StartLoading();
         CreateDeck();
     }
 
@@ -114,8 +113,9 @@ public class TableManager : MonoBehaviour
         {
             tableCards.Add(Instantiate(tableCardPrefab, parentForCards).GetComponent<TableCard>());
             tableCards[i].card = deck.Draw();
-            TableGUI.instance.DisplayCard(tableCards[i], i);
-            yield return new WaitForSeconds(0.5f);
+            yield return TableGUI.instance.DisplayCard(tableCards[i], i);
+            if (i > 2)
+                yield return new WaitForSeconds(0.25f);
         }
     }
 
@@ -125,8 +125,8 @@ public class TableManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             flippedCommunityCards[i] = tableCards[i].card;
-            tableCards[i].Flip();
-            yield return new WaitForSeconds(0.5f);
+            yield return tableCards[i].Flip();
+            yield return new WaitForSeconds(0.25f);
         }
         CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
@@ -134,10 +134,10 @@ public class TableManager : MonoBehaviour
         Logger.LogToFile("Flop dealt");
     }
 
-    public void DealTurn()
+    public IEnumerator DealTurn()
     {
         flippedCommunityCards = new Card[4];
-        tableCards[3].Flip();
+        yield return tableCards[3].Flip();
         flippedCommunityCards[0] = tableCards[0].card;
         flippedCommunityCards[1] = tableCards[1].card;
         flippedCommunityCards[2] = tableCards[2].card;
@@ -148,10 +148,10 @@ public class TableManager : MonoBehaviour
         Logger.LogToFile("Turn dealt");
     }
 
-    public void DealRiver()
+    public IEnumerator DealRiver()
     {
-        tableCards[4].Flip();
         flippedCommunityCards = new Card[5];
+        yield return tableCards[3].Flip();
         flippedCommunityCards[0] = tableCards[0].card;
         flippedCommunityCards[1] = tableCards[1].card;
         flippedCommunityCards[2] = tableCards[2].card;
@@ -168,22 +168,20 @@ public class TableManager : MonoBehaviour
         if (flippedCommunityCards.Length == 5)
             yield break;
 
+        if (flippedCommunityCards.Length == 4)
+        {
+            yield return DealRiver();
+            yield break;
+        }
+        
         if (flippedCommunityCards.Length == 0)
         {
             yield return DealFlop();
         }
         
-        yield return new WaitForSeconds(0.5f);
-
-        if (flippedCommunityCards.Length == 4)
-        {
-            DealRiver();
-            yield break;
-        }
-        
-        DealTurn();
-        yield return new WaitForSeconds(0.5f);
-        DealRiver();
+        yield return DealTurn();
+        yield return new WaitForSeconds(0.25f);
+        yield return DealRiver();
     }
 
     public void PlayerTurnDone(TurnDoneMessage turnDoneMessage)
@@ -217,7 +215,7 @@ public class TableManager : MonoBehaviour
         RemovePlayersWith0Money();
     }
 
-    private void ClearTable()
+    public void ClearTable()
     {
         Logger.LogToFile("Clearing table");
         foreach (TableCard card in tableCards)

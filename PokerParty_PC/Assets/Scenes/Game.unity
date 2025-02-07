@@ -409,7 +409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4364
+      value: 0.423
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1408,7 +1408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4214
+      value: 0.40800002
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1994,6 +1994,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694217877}
   m_CullTransparentMesh: 1
+--- !u!1 &703887796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703887797}
+  m_Layer: 0
+  m_Name: DrawingDeckPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703887797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703887796}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.41300002, y: -0.0041, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.115}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1066574472}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &752011650
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,9 +2203,12 @@ MonoBehaviour:
   - {fileID: 1925177227}
   - {fileID: 1068665820}
   - {fileID: 1764118541}
+  drawingDeckPosition: {fileID: 703887797}
   moneyInPotText: {fileID: 346525293}
   turnWinnerText: {fileID: 1803227558}
   winnerHandText: {fileID: 694217879}
+  cardSpeed: 1
+  cardEase: 13
 --- !u!1 &773101450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,6 +3228,7 @@ Transform:
   - {fileID: 1925177227}
   - {fileID: 1068665820}
   - {fileID: 1764118541}
+  - {fileID: 703887797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068665819
@@ -3302,7 +3337,7 @@ Transform:
   m_GameObject: {fileID: 1126697222}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0134, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3516,7 +3551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4164
+      value: 0.403
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3640,7 +3675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4264
+      value: 0.41300002
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4222,7 +4257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4314
+      value: 0.418
       objectReference: {fileID: 0}
     - target: {fileID: 561010835304748631, guid: b3f433fd0c0013d41bacc6f2ba737769, type: 3}
       propertyPath: m_LocalPosition.y

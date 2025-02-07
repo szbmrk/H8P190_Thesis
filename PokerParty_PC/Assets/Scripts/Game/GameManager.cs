@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using PokerParty_SharedDLL;
@@ -13,10 +14,20 @@ public class GameManager : MonoBehaviour
             instance = this;
     }
 
+    private void Start()
+    {
+        Loader.instance.StartLoading();
+    }
+
     public void SetWaitingFor(string playerName)
     {
         waitingFor.gameObject.SetActive(true);
         waitingFor.text = $"Waiting for {playerName} ...";
+    }
+    
+    public void HideWaitingFor()
+    {
+        waitingFor.gameObject.SetActive(false);
     }
 
     public void GameOver(TablePlayerCard winner)

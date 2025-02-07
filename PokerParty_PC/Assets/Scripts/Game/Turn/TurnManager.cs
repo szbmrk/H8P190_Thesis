@@ -265,15 +265,11 @@ public class TurnManager : MonoBehaviour
                 break;
             case TurnState.Flop:
                 turnState = TurnState.Turn;
-                TableManager.instance.DealTurn();
-                SetStartingPlayer();
-                StartTurn();
+                StartCoroutine(HandleTurnTransition());
                 break;
             case TurnState.Turn:
                 turnState = TurnState.River;
-                TableManager.instance.DealRiver();
-                SetStartingPlayer();
-                StartTurn();
+                StartCoroutine(HandleRiverTransition());
                 break;
             case TurnState.River:
                 StartCoroutine(ShowDown());
@@ -285,7 +281,24 @@ public class TurnManager : MonoBehaviour
     
     private IEnumerator HandleFlopTransition()
     {
+        GameManager.instance.HideWaitingFor();
         yield return TableManager.instance.StartCoroutine(TableManager.instance.DealFlop());
+        SetStartingPlayer();
+        StartTurn();
+    }
+    
+    private IEnumerator HandleTurnTransition()
+    {
+        GameManager.instance.HideWaitingFor();
+        yield return TableManager.instance.StartCoroutine(TableManager.instance.DealTurn());
+        SetStartingPlayer();
+        StartTurn();
+    }
+    
+    private IEnumerator HandleRiverTransition()
+    {
+        GameManager.instance.HideWaitingFor();
+        yield return TableManager.instance.StartCoroutine(TableManager.instance.DealRiver());
         SetStartingPlayer();
         StartTurn();
     }
