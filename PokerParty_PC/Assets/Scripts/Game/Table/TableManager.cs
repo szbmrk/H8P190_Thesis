@@ -151,7 +151,7 @@ public class TableManager : MonoBehaviour
     public IEnumerator DealRiver()
     {
         flippedCommunityCards = new Card[5];
-        yield return tableCards[3].Flip();
+        yield return tableCards[4].Flip();
         flippedCommunityCards[0] = tableCards[0].card;
         flippedCommunityCards[1] = tableCards[1].card;
         flippedCommunityCards[2] = tableCards[2].card;
