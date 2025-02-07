@@ -18,6 +18,7 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private GameObject outOfTurn;
     [SerializeField] private GameObject foldedTxt;
     [SerializeField] private GameObject allInTxt;
+    [SerializeField] private GameObject allInBorder;
 
     [SerializeField] private GameObject handGameObject;
     [SerializeField] private Image card1;
@@ -59,12 +60,17 @@ public class TablePlayerCard : MonoBehaviour
         outOfTurn.SetActive(false);
         foldedTxt.SetActive(false);
         allInTxt.SetActive(false);
+        allInBorder.SetActive(false);
+        moneyText.gameObject.SetActive(true);
+        lastActionText.gameObject.SetActive(true);
 
         RefreshTurnIcon();
     }
     
     public void Fold()
     {
+        moneyText.gameObject.SetActive(false);
+        lastActionText.gameObject.SetActive(false);
         outOfTurn.SetActive(true);
         TurnInfo.Folded = true;
         foldedTxt.SetActive(true);
@@ -73,9 +79,12 @@ public class TablePlayerCard : MonoBehaviour
     
     public void AllIn()
     {
+        moneyText.gameObject.SetActive(false);
+        lastActionText.gameObject.SetActive(false);
         outOfTurn.SetActive(true);
         TurnInfo.WentAllIn = true;
         allInTxt.SetActive(true);
+        allInBorder.SetActive(true);
     }
 
     public void OutOfGame()
