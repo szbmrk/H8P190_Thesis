@@ -10,7 +10,7 @@ public class ActionButton : MonoBehaviour
     public PossibleAction action;
 
     private Button button;
-    public TextMeshProUGUI buttonText;
+    [HideInInspector] public TextMeshProUGUI buttonText;
     
     private void Awake()
     {

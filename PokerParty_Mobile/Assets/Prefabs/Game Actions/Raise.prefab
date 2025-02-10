@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 0
-  action: 4
+  action: 6
   buttonText: {fileID: 0}
 --- !u!1 &1011082793305373507
 GameObject:
