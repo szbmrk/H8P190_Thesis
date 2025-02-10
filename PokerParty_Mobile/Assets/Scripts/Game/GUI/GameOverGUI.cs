@@ -22,10 +22,10 @@ public class GameOverGUI : MonoBehaviour
     {
         placeText.text = place switch
         {
-            1 => "1st Place",
-            2 => "2nd Place",
-            3 => "3rd Place",
-            _ => place + "th Place"
+            1 => "1st",
+            2 => "2nd",
+            3 => "3rd",
+            _ => place + "th"
         };
 
         if (gameOverPanel.activeInHierarchy)
