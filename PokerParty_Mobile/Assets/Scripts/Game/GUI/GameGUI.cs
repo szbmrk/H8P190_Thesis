@@ -35,6 +35,6 @@ public class GameGUI : MonoBehaviour
 
     private IEnumerator OnDisconnectBtnClick()
     {
-        yield return GameManager.instance.DisconnectFromGame();
+        yield return GameManager.instance.GoBackToMainMenu();
     }
 }
