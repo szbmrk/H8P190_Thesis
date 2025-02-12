@@ -115,7 +115,7 @@ public class LobbyGUI : MonoBehaviour
 
     private void HandleStartingMoneyDropdownValueChanged(int index)
     {
-        int newStartingMoney = int.Parse(startingMoneyDropdown.options[index].text.Split(' ')[0]);
+        int newStartingMoney = int.Parse(startingMoneyDropdown.options[index].text.Replace('$', ' '));
         LobbySettings.startingMoney = newStartingMoney;
     }
 
