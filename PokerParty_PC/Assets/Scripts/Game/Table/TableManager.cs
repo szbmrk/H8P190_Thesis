@@ -324,7 +324,7 @@ public class TableManager : MonoBehaviour
 
     public Player GetPLayerByIndexInConnectionsArray(int indexInConnectionsArray)
     {
-        return playerSeats.Find(p => p.indexInConnectionsArray == indexInConnectionsArray).TurnInfo.Player;
+        return playerSeats.Find(p => p != null && p.indexInConnectionsArray == indexInConnectionsArray).TurnInfo.Player;
     }
     
     public void PlayerDisconnected(Player player)
