@@ -302,19 +302,14 @@ public class TurnManager : MonoBehaviour
 
     private void SetStartingPlayer()
     {
-        // két játokos esetén a nagyvak kezd
         if (playersStillInGameCount == 2)
         {
             TablePlayerCard bigBlind = TableManager.instance.playerSeats.Find(p => p.isBigBlind);
             currentPlayerInTurn = bigBlind != null && bigBlind.isStillInGame ? bigBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(bigBlind));
-
-            if (currentPlayerInTurn.Equals(lastPlayerInTurnIfNoOneRaised))
-                currentPlayerInTurn = GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(currentPlayerInTurn));
             
             return;
         }
 
-        // több játékos esetén a kisvak kezd
         TablePlayerCard smallBlind = TableManager.instance.playerSeats.Find(p => p.isSmallBlind);
         currentPlayerInTurn = smallBlind != null && smallBlind.isStillInGame ? smallBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(smallBlind));
         
