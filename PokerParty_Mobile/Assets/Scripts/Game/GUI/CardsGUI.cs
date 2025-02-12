@@ -14,6 +14,7 @@ public class CardsGUI : MonoBehaviour
     
     [SerializeField] private GameObject cardsHolder;
     [SerializeField] private GameObject noCardsInHandText;
+    public GameObject yourTurnText;
     
     [SerializeField] private TextMeshProUGUI bestHandText;
     

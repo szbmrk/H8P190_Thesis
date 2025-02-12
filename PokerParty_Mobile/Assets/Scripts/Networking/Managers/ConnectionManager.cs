@@ -78,8 +78,9 @@ public class ConnectionManager : MonoBehaviour
 
                     if (GameManager.instance != null)
                     {
-                        GameManager.instance.StartCoroutine(GameManager.instance.GoBackToMainMenu());
+                        GameManager.instance.StartCoroutine(GameManager.instance.DisconnectFromGame());
                     }
+                    
                     connection = default(NetworkConnection);
                     StartCoroutine(DisposeNetworkDriver());
                     break;

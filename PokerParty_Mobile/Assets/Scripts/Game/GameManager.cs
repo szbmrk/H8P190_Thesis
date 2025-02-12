@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         Settings.moneyNeededToCall = yourTurnMessage.MoneyNeededToCall;
         ActionManager.instance.EnableActions(yourTurnMessage.PossibleActions);
+        CardsGUI.instance.yourTurnText.SetActive(true);
+        Handheld.Vibrate();
     }
 
     public void SetGameInfo(GameInfoMessage gameInfo)
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
         GameOverGUI.instance.ShowGameOverPanel(gameOverMessage.Place);
     }
 
-    public IEnumerator GoBackToMainMenu()
+    public IEnumerator DisconnectFromGame()
     {
         Loader.instance.StartLoading();
         yield return ConnectionManager.instance.DisposeNetworkDriver();
@@ -62,11 +64,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Lobby");
     }
     
+    public IEnumerator GoBackToMainMenu()
+    {
+        Loader.instance.StartLoading();
+        yield return ConnectionManager.instance.DisposeNetworkDriver();
+        Destroy(ConnectionManager.instance.gameObject);
+        SceneManager.LoadScene("Lobby");
+    }
+    
     private void OnLobbySceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name != "Lobby") return;
         
-        PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "Disconnected from the game");
+        PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "You got disconnected from the game");
         SceneManager.sceneLoaded -= OnLobbySceneLoaded;
     }
 }

@@ -26,6 +26,7 @@ public class ActionButton : MonoBehaviour
         UpdateMoney();
         MessageSender.SendMessageToHost(MessageToSend());
         ActionManager.instance.DisableActions();
+        CardsGUI.instance.yourTurnText.SetActive(false);
     }
 
     private void UpdateMoney()

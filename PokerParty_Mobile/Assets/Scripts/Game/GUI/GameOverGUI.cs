@@ -34,7 +34,7 @@ public class GameOverGUI : MonoBehaviour
         GameGUI.instance.inGamePanel.SetActive(false);
         gameOverPanel.SetActive(true);
     }
-
+    
     private IEnumerator OnBackToMainBtnClick()
     {
         yield return GameManager.instance.GoBackToMainMenu();
