@@ -24,7 +24,7 @@ public class TableCard : MonoBehaviour
 
         yield return new WaitForSeconds(flipDuration / 2);
 
-        GetComponent<SpriteRenderer>().sprite = GetSpriteByFileName(card.GetFileNameForSprite());;
+        GetComponent<SpriteRenderer>().sprite = GetSpriteByFileName(card.GetFileNameForSprite());
 
         LeanTween.scaleX(gameObject, originalScale.x, flipDuration / 2)
             .setEase(LeanTweenType.easeInOutQuad);
