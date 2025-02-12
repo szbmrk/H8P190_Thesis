@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         cards = dealCards.Cards;
         CardsGUI.instance.SetCards(cards);
+        Handheld.Vibrate();
     }
 
     public void GameOver(GameOverMessage gameOverMessage)
