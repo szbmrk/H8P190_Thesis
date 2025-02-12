@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using PokerParty_SharedDLL;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 public class TableManager : MonoBehaviour
 {
@@ -137,11 +139,11 @@ public class TableManager : MonoBehaviour
     public IEnumerator DealTurn()
     {
         flippedCommunityCards = new Card[4];
-        yield return tableCards[3].Flip();
         flippedCommunityCards[0] = tableCards[0].card;
         flippedCommunityCards[1] = tableCards[1].card;
         flippedCommunityCards[2] = tableCards[2].card;
         flippedCommunityCards[3] = tableCards[3].card;
+        yield return tableCards[3].Flip();
         CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
         
@@ -151,12 +153,12 @@ public class TableManager : MonoBehaviour
     public IEnumerator DealRiver()
     {
         flippedCommunityCards = new Card[5];
-        yield return tableCards[4].Flip();
         flippedCommunityCards[0] = tableCards[0].card;
         flippedCommunityCards[1] = tableCards[1].card;
         flippedCommunityCards[2] = tableCards[2].card;
         flippedCommunityCards[3] = tableCards[3].card;
         flippedCommunityCards[4] = tableCards[4].card;
+        yield return tableCards[4].Flip();
         CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
         
@@ -215,7 +217,7 @@ public class TableManager : MonoBehaviour
         RemovePlayersWith0Money();
     }
 
-    public void ClearTable()
+    private void ClearTable()
     {
         Logger.LogToFile("Clearing table");
         foreach (TableCard card in tableCards)
@@ -223,6 +225,7 @@ public class TableManager : MonoBehaviour
             Destroy(card.gameObject);
         }
         tableCards.Clear();
+        flippedCommunityCards = Array.Empty<Card>();
     }
 
     private void ResetAndRotatePlayers()
