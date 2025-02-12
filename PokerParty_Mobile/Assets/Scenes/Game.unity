@@ -1006,6 +1006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyText: {fileID: 910866831}
   inGamePanel: {fileID: 96055664}
+  disconnectBtn: {fileID: 1166948732}
 --- !u!1 &818378607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2698,7 +2699,7 @@ MonoBehaviour:
   card2: {fileID: 882695204}
   cardsHolder: {fileID: 533576173}
   noCardsInHandText: {fileID: 1772437904}
-  yourTurnText: {fileID: 0}
+  yourTurnText: {fileID: 1494184561}
   bestHandText: {fileID: 1953137242}
 --- !u!114 &1717908026
 MonoBehaviour:
