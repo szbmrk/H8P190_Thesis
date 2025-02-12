@@ -136,11 +136,8 @@ public class TurnManager : MonoBehaviour
 
     private PossibleAction[] DeterminePossibleActionsForCurrentPlayer()
     {
-        if (currentPlayerInTurn.TurnInfo.Money < moneyNeededToCall)
+        if (currentPlayerInTurn.TurnInfo.Money <= moneyNeededToCall)
             return new PossibleAction[] { PossibleAction.AllIn, PossibleAction.Fold };
-
-        if (currentPlayerInTurn.TurnInfo.Money == moneyNeededToCall)
-            return new PossibleAction[] { PossibleAction.Call, PossibleAction.Fold };
 
         if (moneyNeededToCall != 0)
             return new PossibleAction[] { PossibleAction.Call, PossibleAction.Raise, PossibleAction.Fold };

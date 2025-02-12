@@ -278,32 +278,32 @@ public class TableManager : MonoBehaviour
 
     private void RotateMultiplePlayers()
     {
-        lastDealerIndex = GetNextValidPlayerIndex(lastDealerIndex);
+        lastDealerIndex = GetNextPlayerStillInGameIndex(lastDealerIndex);
         TablePlayerCard newDealer = playerSeats[lastDealerIndex];
         newDealer.isDealer = true;
 
-        lastSmallBlindIndex = GetNextValidPlayerIndex(lastDealerIndex);
+        lastSmallBlindIndex = GetNextPlayerStillInGameIndex(lastDealerIndex);
         TablePlayerCard newSmallBlind = playerSeats[lastSmallBlindIndex];
         newSmallBlind.isSmallBlind = true;
 
-        lastBigBlindIndex = GetNextValidPlayerIndex(lastSmallBlindIndex);
+        lastBigBlindIndex = GetNextPlayerStillInGameIndex(lastSmallBlindIndex);
         TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
         newBigBlind.isBigBlind = true;
     }
 
     private void RotateFewerPlayers()
     {
-        lastDealerIndex = GetNextValidPlayerIndex(lastDealerIndex);
+        lastDealerIndex = GetNextPlayerStillInGameIndex(lastDealerIndex);
         TablePlayerCard newDealerAndSmallBlind = playerSeats[lastDealerIndex];
         newDealerAndSmallBlind.isDealer = true;
         newDealerAndSmallBlind.isSmallBlind = true;
 
-        lastBigBlindIndex = GetNextValidPlayerIndex(lastDealerIndex);
+        lastBigBlindIndex = GetNextPlayerStillInGameIndex(lastDealerIndex);
         TablePlayerCard newBigBlind = playerSeats[lastBigBlindIndex];
         newBigBlind.isBigBlind = true;
     }
 
-    private int GetNextValidPlayerIndex(int startIndex)
+    private int GetNextPlayerStillInGameIndex(int startIndex)
     {
         startIndex++;
         
