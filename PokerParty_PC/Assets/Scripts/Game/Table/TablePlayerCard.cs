@@ -104,7 +104,7 @@ public class TablePlayerCard : MonoBehaviour
             Action = PossibleAction.Fold
         };
         
-        TurnManager.instance.HandleTurnDone(turnDoneMessage);
+        TurnManager.instance.HandleTurnDone(turnDoneMessage, true);
     }
 
     public void SetRoleIcons()

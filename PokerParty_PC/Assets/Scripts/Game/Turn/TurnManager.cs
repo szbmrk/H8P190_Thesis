@@ -180,12 +180,12 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    public void HandleTurnDone(TurnDoneMessage turnDoneMessage)
+    public void HandleTurnDone(TurnDoneMessage turnDoneMessage, bool disconnected = false)
     {
-        if (turnDoneMessage == null || turnDoneMessage.Player == null || currentPlayerInTurn == null)
+        if (!disconnected && (turnDoneMessage == null || turnDoneMessage.Player == null || currentPlayerInTurn == null))
             return;
-        
-        if (!turnDoneMessage.Player.Equals(currentPlayerInTurn.TurnInfo.Player))
+
+        if (!disconnected && !turnDoneMessage.Player.Equals(currentPlayerInTurn.TurnInfo.Player))
             return;
 
         if (PauseMenu.instance.isPaused)
@@ -194,11 +194,14 @@ public class TurnManager : MonoBehaviour
             return;
         }
         
-        Logger.LogToFile($"{turnDoneMessage.Player.PlayerName} {turnDoneMessage.Action} {turnDoneMessage.ActionAmount}$");
+        if (!disconnected)
+            Logger.LogToFile($"{turnDoneMessage.Player.PlayerName} {turnDoneMessage.Action} {turnDoneMessage.ActionAmount}$");
         
         TableManager.instance.moneyInPot += turnDoneMessage.ActionAmount;
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
-        UpdateCurrentPlayersTurnInfo(turnDoneMessage);
+        
+        if (!disconnected)
+            UpdateCurrentPlayersTurnInfo(turnDoneMessage);
 
         if (highestBet < currentPlayerInTurn.TurnInfo.MoneyPutInPot)
             highestBet = currentPlayerInTurn.TurnInfo.MoneyPutInPot;

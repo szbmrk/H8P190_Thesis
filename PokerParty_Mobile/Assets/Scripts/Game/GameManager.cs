@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator DisconnectFromGame()
     {
         Loader.instance.StartLoading();
+        ConnectionManager.instance.DisconnectFromHost();
         yield return ConnectionManager.instance.DisposeNetworkDriver();
         Destroy(ConnectionManager.instance.gameObject);
         SceneManager.sceneLoaded += OnLobbySceneLoaded;
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator GoBackToMainMenu()
     {
         Loader.instance.StartLoading();
+        ConnectionManager.instance.DisconnectFromHost();
         yield return ConnectionManager.instance.DisposeNetworkDriver();
         Destroy(ConnectionManager.instance.gameObject);
         SceneManager.LoadScene("Lobby");
