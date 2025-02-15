@@ -8,14 +8,19 @@ public static class Logger
 
     public static void LogToFile(string message)
     {
+        string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}: {message}";
+
+#if UNITY_EDITOR
+        Debug.Log(logEntry);
+#else
         try
         {
-            string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}: {message}";
             File.AppendAllText(LOGFilePath, logEntry + Environment.NewLine);
         }
         catch (Exception ex)
         {
             Debug.LogError($"Failed to write log: {ex.Message}");
         }
+#endif
     }
 }
