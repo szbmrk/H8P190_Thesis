@@ -65,6 +65,7 @@ public class ConnectionManager : MonoBehaviour
                     Debug.Log("Player connected to the Host");
                     MessageSender.SendMessageToHost(new ConnectionMessage());
                     NetworkingGUI.instance.ShowJoinedPanel(true);
+                    PlayerPrefs.SetString("playerName", PlayerManager.loggedInPlayer.PlayerName);
                     break;
 
                 case NetworkEvent.Type.Disconnect:

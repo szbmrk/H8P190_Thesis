@@ -1,4 +1,5 @@
-﻿using PokerParty_SharedDLL;
+﻿using System;
+using PokerParty_SharedDLL;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +31,11 @@ public class NetworkingGUI : MonoBehaviour
         disconnectBtn.onClick.AddListener(DisconnectFromHost);
         sendMsgBtn.onClick.AddListener(SendChatMessageToHost);
         readyBtn.onClick.AddListener(Ready);
+    }
+
+    private void Start()
+    {
+        playerNameInputField.text = PlayerPrefs.GetString("playerName", string.Empty);
     }
 
     public void ShowJoinedPanel(bool value)
