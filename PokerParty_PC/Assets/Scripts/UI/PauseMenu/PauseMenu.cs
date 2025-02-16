@@ -44,6 +44,7 @@ public class PauseMenu : MonoBehaviour
     
     private void Pause()
     {
+        Loader.instance.StopLoading();
         Time.timeScale = 0;
         isPaused = true;
         pausePanel.SetActive(true);
