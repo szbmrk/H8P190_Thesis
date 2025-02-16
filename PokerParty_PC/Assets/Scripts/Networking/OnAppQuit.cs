@@ -3,34 +3,34 @@ using UnityEngine;
 
 public class OnAppQuit : MonoBehaviour 
 {
-    private static bool readyToQuit;
-
-    private static OnAppQuit instance; 
-
+    private static OnAppQuit _instance;
+    private static bool _readyToQuit;
 
     [RuntimeInitializeOnLoadMethod]
     private static void RunOnStart()
     {
         Application.wantsToQuit += WantsToQuit;
+        Application.quitting += () => _instance.StartCoroutine(_instance.StartQuiting());
     }
 
     private void Awake()
     {
-        instance = this;
+        _instance = this;
     }
 
     private static bool WantsToQuit()
     {
-        if (instance == null || ConnectionManager.instance == null || !ConnectionManager.instance.NetworkDriver.IsCreated)
+        if (_instance == null || ConnectionManager.instance == null || !ConnectionManager.instance.NetworkDriver.IsCreated)
             return true;
 
-        instance.StartCoroutine(instance.StartQuiting());
+        _instance.StartCoroutine(_instance.StartQuiting());
 
-        return readyToQuit;
+        return _readyToQuit;
     }
 
     private IEnumerator StartQuiting()
     {
+        Logger.LogToFile("Started quiting");
         if (ConnectionManager.instance != null)
             ConnectionManager.instance.StopAllCoroutines();
 
@@ -39,14 +39,14 @@ public class OnAppQuit : MonoBehaviour
 
         if (LobbyGUI.instance != null)
             yield return LobbyGUI.instance.DeleteLobby();
-        else
+        else if (ConnectionManager.instance != null)
         {
             ConnectionManager.instance.DisconnectAllPlayers();
             yield return ConnectionManager.instance.DisposeDriverAndConnections();
         }
 
-        readyToQuit = true;
-        Debug.Log("Server app stopped");
+        _readyToQuit = true;
+        Logger.LogToFile("Server app stopped");
         Application.Quit();
     }
 }
