@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class OnAppQuit : MonoBehaviour
 {
-    private static bool readyToQuit;
-
     private static OnAppQuit instance;
+    private static bool readyToQuit;
 
     [RuntimeInitializeOnLoadMethod]
     private static void RunOnStart()
     {
         Application.wantsToQuit += WantsToQuit;
+        Application.quitting += () => instance.StartCoroutine(instance.StartQuiting());
     }
 
     private void Awake()
@@ -30,6 +30,7 @@ public class OnAppQuit : MonoBehaviour
 
     private IEnumerator StartQuiting()
     {
+        Debug.Log("Started quiting");
         if (ConnectionManager.instance != null)
         {
             ConnectionManager.instance.DisconnectFromHost();
