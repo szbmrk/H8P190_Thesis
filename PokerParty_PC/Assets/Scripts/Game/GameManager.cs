@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using PokerParty_SharedDLL;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -39,5 +42,14 @@ public class GameManager : MonoBehaviour
         ConnectionManager.instance.SendMessageToConnection(
             ConnectionManager.instance.Connections[winner.indexInConnectionsArray], gameOverMessage);
         GameOverGUI.instance.Open(winner.TurnInfo.Player.PlayerName);
+    }
+
+    public IEnumerator DisconnectPlayersAndLoadMainMenu()
+    {
+        Loader.instance.StartLoading();
+        ConnectionManager.instance.DisconnectAllPlayers();
+        yield return ConnectionManager.instance.DisposeDriverAndConnections();
+        Destroy(ConnectionManager.instance.gameObject);
+        SceneManager.LoadScene("MainMenu");
     }
 }

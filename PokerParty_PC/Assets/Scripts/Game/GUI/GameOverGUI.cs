@@ -29,12 +29,8 @@ public class GameOverGUI : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    private IEnumerator OnBackToMainBtnClick()
+    public IEnumerator OnBackToMainBtnClick()
     {
-        Loader.instance.StartLoading();
-        ConnectionManager.instance.DisconnectAllPlayers();
-        yield return ConnectionManager.instance.DisposeDriverAndConnections();
-        Destroy(ConnectionManager.instance.gameObject);
-        SceneManager.LoadScene("MainMenu");
+        yield return GameManager.instance.DisconnectPlayersAndLoadMainMenu();
     }
 }

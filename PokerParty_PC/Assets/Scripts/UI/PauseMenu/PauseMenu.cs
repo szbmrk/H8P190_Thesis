@@ -61,11 +61,8 @@ public class PauseMenu : MonoBehaviour
     
     private IEnumerator EndGame()
     {
-        Loader.instance.StartLoading();
-        ConnectionManager.instance.DisconnectAllPlayers();
-        yield return ConnectionManager.instance.DisposeDriverAndConnections();
-        Destroy(ConnectionManager.instance.gameObject);
-        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1;
+        yield return GameManager.instance.DisconnectPlayersAndLoadMainMenu();
     }
 
 }

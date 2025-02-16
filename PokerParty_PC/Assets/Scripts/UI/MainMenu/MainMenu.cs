@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         createGameBtn.onClick.AddListener(CreateGame);
         quitGameBtn.onClick.AddListener(QuitGame);
         settingsBtn.onClick.AddListener(OpenSettings);
