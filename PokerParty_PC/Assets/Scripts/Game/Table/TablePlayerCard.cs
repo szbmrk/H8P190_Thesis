@@ -101,10 +101,11 @@ public class TablePlayerCard : MonoBehaviour
         OutOfGame();
         TurnDoneMessage turnDoneMessage = new TurnDoneMessage
         {
-            Action = PossibleAction.Fold
+            Action = PossibleAction.Fold,
+            Player = TurnInfo.Player
         };
         
-        TurnManager.instance.HandleTurnDone(turnDoneMessage, true);
+        TurnManager.instance.HandleTurnDone(turnDoneMessage);
     }
 
     public void SetRoleIcons()
