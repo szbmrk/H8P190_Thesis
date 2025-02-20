@@ -19,12 +19,13 @@ public static class PlayerColorManager
         new ColorForPlayer(new Color(0.729f, 1.0f, 0.961f)),
         new ColorForPlayer(new Color(1.0f, 0.973f, 0.729f)),
         new ColorForPlayer(new Color(0.749f, 0.729f, 1.0f)),
-        new ColorForPlayer(new Color(1.0f, 0.365f, 0.475f)),
-        new ColorForPlayer(new Color(0.412f, 0.463f, 1.0f)),
-        new ColorForPlayer(new Color(0.749f, 1.0f, 0.412f)),
-        new ColorForPlayer(new Color(0.984f, 0.506f, 1.0f)),
+        new ColorForPlayer(new Color(1.0f, 0.6f, 0.2f)),
+        new ColorForPlayer(new Color(0.412f, 0.341f, 1.0f)),
+        new ColorForPlayer(new Color(0.749f, 0.412f, 1.0f)),
         new ColorForPlayer(new Color(0.812f, 0.553f, 0.38f)),
+        new ColorForPlayer(new Color(0.38f, 0.553f, 0.812f))
     };
+
 
     public static Color GetColor(string playerName)
     {
