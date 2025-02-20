@@ -16,8 +16,8 @@ public class TableGUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI turnWinnerText;
     [SerializeField] private TextMeshProUGUI winnerHandText;
     
-    public float cardSpeed = 3.5f;
-    public LeanTweenType cardEase = LeanTweenType.easeOutQuad;
+    public float cardSpeed = 1f;
+    public LeanTweenType cardEase = LeanTweenType.easeInOutQuint;
 
     private void Awake()
     {
