@@ -41,6 +41,7 @@ public class TablePlayerCard : MonoBehaviour
     {
         playerNameText.color = PlayerColorManager.GetColor(TurnInfo.Player.PlayerName);
         playerNameText.text = TurnInfo.Player.PlayerName;
+        turnIcon.GetComponent<Image>().color = PlayerColorManager.GetColor(TurnInfo.Player.PlayerName);
 
         SetRoleIcons();
         RefreshMoney(Settings.startingMoney);
