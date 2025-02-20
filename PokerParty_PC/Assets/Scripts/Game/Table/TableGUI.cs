@@ -16,8 +16,11 @@ public class TableGUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI turnWinnerText;
     [SerializeField] private TextMeshProUGUI winnerHandText;
     
-    public float cardSpeed = 1f;
-    public LeanTweenType cardEase = LeanTweenType.easeInOutQuint;
+    public float cardDealingSpeed = 1f;
+    public LeanTweenType cardDealingEase = LeanTweenType.easeInOutQuint;
+    
+    public float cardDisappearingSpeed = 0.025f;
+    public LeanTweenType cardDisappearingEase = LeanTweenType.easeInQuad;
 
     private void Awake()
     {
@@ -41,11 +44,41 @@ public class TableGUI : MonoBehaviour
         card.gameObject.SetActive(true);
         
         float distance = Vector3.Distance(startPos.position, goalPos.position);
-        float duration = distance / cardSpeed;
+        float duration = distance / cardDealingSpeed;
 
-        LeanTween.move(card.gameObject, goalPos.position, duration).setEase(cardEase);
+        LeanTween.move(card.gameObject, goalPos.position, duration).setEase(cardDealingEase);
 
         yield return new WaitForSeconds(duration);
+    }
+
+    public IEnumerator Deal2CardsToPlayer(TablePlayerCard playerCard, TableCard tableCard1, TableCard tableCard2)
+    {
+        tableCard1.gameObject.SetActive(false);
+        tableCard2.gameObject.SetActive(false);
+        StartCoroutine(DealCardToPlayer(playerCard, tableCard1));
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(DealCardToPlayer(playerCard, tableCard2));
+        yield return new WaitForSeconds(0.75f);
+    }
+    
+    private IEnumerator DealCardToPlayer(TablePlayerCard playerCard, TableCard tableCard)
+    {
+        Transform startPos = drawingDeckPosition;
+
+        Vector3 goalPos = UIHelper.GetUIWorldPosition(playerCard.GetComponent<RectTransform>().position);
+        goalPos.z = tableCard.transform.position.z;
+
+        tableCard.transform.position = startPos.position;
+        tableCard.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        tableCard.gameObject.SetActive(true);
+
+        LeanTween.move(tableCard.gameObject, goalPos, cardDealingSpeed).setEase(cardDealingEase);
+        
+        yield return new WaitForSeconds(cardDealingSpeed * 0.75f);
+        
+        LeanTween.scale(tableCard.gameObject, Vector3.zero, cardDisappearingSpeed).setEase(cardDisappearingEase);
+        yield return new WaitForSeconds(cardDisappearingSpeed);
+        Destroy(tableCard);
     }
 
     public void RefreshMoneyInPotText(int potMoney)

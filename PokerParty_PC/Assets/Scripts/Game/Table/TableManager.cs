@@ -94,7 +94,7 @@ public class TableManager : MonoBehaviour
         }
     }
 
-    public void DealCardsToPlayers()
+    public IEnumerator DealCardsToPlayers()
     {
         foreach (TablePlayerCard player in playerSeats)
         {
@@ -103,8 +103,13 @@ public class TableManager : MonoBehaviour
             player.TurnInfo.Cards = cards;
             dealCardsMessage.Cards = cards;
             int indexInConnections = player.indexInConnectionsArray;
+            TableCard tableCard1 = Instantiate(tableCardPrefab, parentForCards).GetComponent<TableCard>();
+            TableCard tableCard2 = Instantiate(tableCardPrefab, parentForCards).GetComponent<TableCard>();
+            yield return TableGUI.instance.Deal2CardsToPlayer(player, tableCard1, tableCard2);
             ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], dealCardsMessage);
         }
+
+        yield return new WaitForSeconds(0.5f);
         
         Logger.LogToFile("Cards dealt to players");
     }

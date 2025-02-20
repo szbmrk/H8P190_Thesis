@@ -2215,8 +2215,10 @@ MonoBehaviour:
   moneyInPotText: {fileID: 346525293}
   turnWinnerText: {fileID: 1803227558}
   winnerHandText: {fileID: 694217879}
-  cardSpeed: 1
-  cardEase: 13
+  cardDealingSpeed: 1
+  cardDealingEase: 13
+  cardDisappearingSpeed: 0.5
+  cardDisappearingEase: 11
 --- !u!1 &773101450
 GameObject:
   m_ObjectHideFlags: 0

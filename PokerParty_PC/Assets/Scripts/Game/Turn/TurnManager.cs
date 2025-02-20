@@ -215,19 +215,19 @@ public class TurnManager : MonoBehaviour
                 StartSecondTurn();
                 return;
             case TurnState.BigBlindTurn:
-                TableManager.instance.DealCardsToPlayers();
-                StartCoroutine(HandleDealCardsToTableTransition());
+                StartCoroutine(HandleBigBlindTurnDone());
                 return;
             default:
                 StartTurn();
                 break;
         }
     }
-    
-    private IEnumerator HandleDealCardsToTableTransition()
+
+    private IEnumerator HandleBigBlindTurnDone()
     {
-        yield return TableManager.instance.StartCoroutine(TableManager.instance.DealCardsToTable());
+        yield return TableManager.instance.DealCardsToTable();
         turnState = TurnState.PreFlop;
+        yield return TableManager.instance.DealCardsToPlayers();
         StartTurn();
     }
 
