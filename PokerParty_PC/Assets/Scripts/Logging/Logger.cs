@@ -6,7 +6,7 @@ public static class Logger
 {
     private static readonly string LOGFilePath = Path.Combine(Application.persistentDataPath, "game_log.txt");
 
-    public static void LogToFile(string message)
+    public static void Log(string message)
     {
         string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}: {message}";
 

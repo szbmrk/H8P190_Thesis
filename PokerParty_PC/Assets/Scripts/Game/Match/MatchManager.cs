@@ -38,7 +38,7 @@ public class MatchManager : MonoBehaviour
             ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], gameInfoMessage);
         }
         
-        Logger.LogToFile("Game info sent to players");
+        Logger.Log("Game info sent to players");
     }
 
     public IEnumerator ShowDown()

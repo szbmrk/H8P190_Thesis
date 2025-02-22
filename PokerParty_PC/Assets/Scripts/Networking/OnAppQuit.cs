@@ -30,7 +30,7 @@ public class OnAppQuit : MonoBehaviour
 
     private IEnumerator StartQuiting()
     {
-        Logger.LogToFile("Started quiting");
+        Logger.Log("Started quiting");
         if (ConnectionManager.instance != null)
             ConnectionManager.instance.StopAllCoroutines();
 
@@ -46,7 +46,7 @@ public class OnAppQuit : MonoBehaviour
         }
 
         _readyToQuit = true;
-        Logger.LogToFile("Server app stopped");
+        Logger.Log("Server app stopped");
         Application.Quit();
     }
 }

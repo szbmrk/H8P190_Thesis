@@ -65,7 +65,7 @@ public class TableManager : MonoBehaviour
         TurnManager.instance.StartFirstTurn();
         Loader.instance.StopLoading();
         
-        Logger.LogToFile("All players loaded");
+        Logger.Log("All players loaded");
     }
 
     public int playersInGameCount => playerSeats
@@ -111,7 +111,7 @@ public class TableManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         
-        Logger.LogToFile("Cards dealt to players");
+        Logger.Log("Cards dealt to players");
     }
 
     public IEnumerator DealCardsToTable()
@@ -138,7 +138,7 @@ public class TableManager : MonoBehaviour
         CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
         
-        Logger.LogToFile("Flop dealt");
+        Logger.Log("Flop dealt");
     }
 
     public IEnumerator DealTurn()
@@ -152,7 +152,7 @@ public class TableManager : MonoBehaviour
         CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
         
-        Logger.LogToFile("Turn dealt");
+        Logger.Log("Turn dealt");
     }
 
     public IEnumerator DealRiver()
@@ -167,7 +167,7 @@ public class TableManager : MonoBehaviour
         CommunityCardsChangedMessage communityCardsChanged = new CommunityCardsChangedMessage() { CommunityCards = flippedCommunityCards };
         ConnectionManager.instance.SendMessageToAllConnections(communityCardsChanged);
         
-        Logger.LogToFile("River dealt");
+        Logger.Log("River dealt");
     }
 
     public IEnumerator FlipRemainingCards()
@@ -211,7 +211,7 @@ public class TableManager : MonoBehaviour
         
         SendRefreshedMoneyMessages();
         
-        Logger.LogToFile("Pot given to winners");
+        Logger.Log("Pot given to winners");
     }
 
     public void StartNewGame()
@@ -224,7 +224,7 @@ public class TableManager : MonoBehaviour
 
     private void ClearTable()
     {
-        Logger.LogToFile("Clearing table");
+        Logger.Log("Clearing table");
         foreach (TableCard card in tableCards)
         {
             Destroy(card.gameObject);
@@ -242,7 +242,7 @@ public class TableManager : MonoBehaviour
 
     private void ResetPlayers()
     {
-        Logger.LogToFile("Resetting players");
+        Logger.Log("Resetting players");
         lastDealerIndex = playerSeats.IndexOf(playerSeats.Find(p => p.isDealer));
         lastBigBlindIndex = playerSeats.IndexOf(playerSeats.Find(p => p.isBigBlind));
         lastSmallBlindIndex = playerSeats.IndexOf(playerSeats.Find(p => p.isSmallBlind));
@@ -262,7 +262,7 @@ public class TableManager : MonoBehaviour
     {
         deck = new Deck();
         deck.Shuffle();
-        Logger.LogToFile("Deck reshuffled");
+        Logger.Log("Deck reshuffled");
     }
     
     private void RotatePlayers()
@@ -281,7 +281,7 @@ public class TableManager : MonoBehaviour
             playerCard.SetRoleIcons();
         }
         
-        Logger.LogToFile("Players rotated");
+        Logger.Log("Players rotated");
     }
 
     private void RotateMultiplePlayers()
@@ -358,10 +358,10 @@ public class TableManager : MonoBehaviour
         
         foreach (TablePlayerCard player in playersThatAreOut)
         {
-            Logger.LogToFile($"{player.TurnInfo.Player.PlayerName} is out of money");
+            Logger.Log($"{player.TurnInfo.Player.PlayerName} is out of money");
             player.OutOfGame();
             playerSeats.Remove(player);
-            Logger.LogToFile($"{player.TurnInfo.Player.PlayerName} removed from the game");
+            Logger.Log($"{player.TurnInfo.Player.PlayerName} removed from the game");
         }
     }
 

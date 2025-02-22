@@ -105,7 +105,7 @@ public class TurnManager : MonoBehaviour
             possibleActions = new PossibleAction[] { PossibleAction.SmallBlindBet };
 
         SendTurnMessage(possibleActions, MatchManager.instance.smallBlindBet);
-        Logger.LogToFile("First turn started");
+        Logger.Log("First turn started");
     }
 
     private void StartSecondTurn()
@@ -121,7 +121,7 @@ public class TurnManager : MonoBehaviour
             possibleActions = new PossibleAction[] { PossibleAction.BigBlindBet };
 
         SendTurnMessage(possibleActions, MatchManager.instance.bigBlindBet);
-        Logger.LogToFile("Second turn started");
+        Logger.Log("Second turn started");
     }
 
     private void StartTurn()
@@ -131,7 +131,7 @@ public class TurnManager : MonoBehaviour
         PossibleAction[] possibleActions = DeterminePossibleActionsForCurrentPlayer();
         
         SendTurnMessage(possibleActions, moneyNeededToCall);
-        Logger.LogToFile("Turn started");
+        Logger.Log("Turn started");
     }
 
     private PossibleAction[] DeterminePossibleActionsForCurrentPlayer()
@@ -164,7 +164,7 @@ public class TurnManager : MonoBehaviour
         
         int indexInConnections = currentPlayerInTurn.indexInConnectionsArray;
         ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnections], yourTurnMessage);
-        Logger.LogToFile($"Sent turn message to {currentPlayerInTurn.TurnInfo.Player.PlayerName}");
+        Logger.Log($"Sent turn message to {currentPlayerInTurn.TurnInfo.Player.PlayerName}");
 
         NotYourTurnMessage notYourTurnMessage = new NotYourTurnMessage
         {
@@ -194,7 +194,7 @@ public class TurnManager : MonoBehaviour
             return;
         }
         
-        Logger.LogToFile($"{turnDoneMessage.Player.PlayerName} {turnDoneMessage.Action} {turnDoneMessage.ActionAmount}$");
+        Logger.Log($"{turnDoneMessage.Player.PlayerName} {turnDoneMessage.Action} {turnDoneMessage.ActionAmount}$");
         
         TableManager.instance.moneyInPot += turnDoneMessage.ActionAmount;
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
@@ -330,7 +330,7 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator ShowDown()
     {
-        Logger.LogToFile("Showdown started");
+        Logger.Log("Showdown started");
         
         highestBet = 0;
         yield return MatchManager.instance.ShowDown();

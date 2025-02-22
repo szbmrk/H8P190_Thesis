@@ -37,7 +37,7 @@ public class LobbyGUI : MonoBehaviour
         Settings.startingMoney = LobbySettings.startingMoney;
         Settings.playerCount = numOfPlayers;
         ConnectionManager.instance.SendMessageToAllConnections(new GameStartedMessage());
-        Logger.LogToFile("Game started");
+        Logger.Log("Game started");
         SceneManager.LoadScene("Game");
     }
 

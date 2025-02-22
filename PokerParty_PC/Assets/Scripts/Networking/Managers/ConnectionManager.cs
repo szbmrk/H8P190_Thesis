@@ -45,7 +45,7 @@ public class ConnectionManager : MonoBehaviour
         NetworkConnection incomingConnection;
         while ((incomingConnection = NetworkDriver.Accept()) != default(NetworkConnection))
         {
-            Logger.LogToFile("Client connected to host");
+            Logger.Log("Client connected to host");
             AddToConnections(incomingConnection);
         }
 
@@ -60,7 +60,7 @@ public class ConnectionManager : MonoBehaviour
                 switch (eventType)
                 {
                     case NetworkEvent.Type.Disconnect:
-                        Logger.LogToFile("Client disconnected from host");
+                        Logger.Log("Client disconnected from host");
                         
                         if (TableManager.instance != null)
                             TableManager.instance.PlayerDisconnected(TableManager.instance.GetPLayerByIndexInConnectionsArray(i));
@@ -76,7 +76,7 @@ public class ConnectionManager : MonoBehaviour
                         FixedString512Bytes msg = stream.ReadFixedString512();
                         string data = msg.ToString();
 
-                        Logger.LogToFile($"Data received: type = {type}, data = {data}");
+                        Logger.Log($"Data received: type = {type}, data = {data}");
 
                         NetworkMessageHandler.ProcessMessage(type, data, i);
                         break;
@@ -111,7 +111,7 @@ public class ConnectionManager : MonoBehaviour
             LobbyGUI.instance.ShowPanel();
             Loader.instance.StopLoading();
             
-            Logger.LogToFile($"Lobby created with join code: {joinCode}");
+            Logger.Log($"Lobby created with join code: {joinCode}");
         }
         catch (Exception e)
         {
@@ -141,7 +141,7 @@ public class ConnectionManager : MonoBehaviour
             throw new Exception("Host client failed to listen");
         }
         
-        Logger.LogToFile("Host client bound to Relay server");
+        Logger.Log("Host client bound to Relay server");
 
         if (Connections.IsCreated)
             Connections.Dispose();
@@ -167,7 +167,7 @@ public class ConnectionManager : MonoBehaviour
     {
         if (!Connections[index].IsCreated) return;
         
-        Logger.LogToFile("Player disconnected from host");
+        Logger.Log("Player disconnected from host");
         NetworkDriver.Disconnect(Connections[index]);
         Connections[index] = default(NetworkConnection);
     }
@@ -189,7 +189,7 @@ public class ConnectionManager : MonoBehaviour
         writer.WriteUInt((uint)message.Type);
         writer.WriteFixedString512(messageInString);
         NetworkDriver.EndSend(writer);
-        Logger.LogToFile($"Message sent: {messageInString}");
+        Logger.Log($"Message sent: {messageInString}");
     }
 
     private IEnumerator DisposeDriver()
@@ -197,7 +197,7 @@ public class ConnectionManager : MonoBehaviour
         if (!NetworkDriver.IsCreated) yield break;
         yield return new WaitForSeconds(1f);
         
-        Logger.LogToFile("Host disposed");
+        Logger.Log("Host disposed");
         NetworkDriver.Dispose();
     }
 
@@ -206,7 +206,7 @@ public class ConnectionManager : MonoBehaviour
         if (!Connections.IsCreated) yield break;
         yield return new WaitForSeconds(1f);
 
-        Logger.LogToFile("Connections disposed");
+        Logger.Log("Connections disposed");
         Connections.Dispose();
     }
 
