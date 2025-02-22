@@ -56,20 +56,20 @@ public class ConnectionManager : MonoBehaviour
                     FixedString512Bytes msg = stream.ReadFixedString512();
                     string data = msg.ToString();
 
-                    Debug.Log($"Data received: {data}");
+                    Logger.Log($"Data received: {data}");
 
                     NetworkMessageHandler.ProcessMessage(type, data);
                     break;
 
                 case NetworkEvent.Type.Connect:
-                    Debug.Log("Player connected to the Host");
+                    Logger.Log("Player connected to the Host");
                     MessageSender.SendMessageToHost(new ConnectionMessage());
                     NetworkingGUI.instance.ShowJoinedPanel(true);
                     PlayerPrefs.SetString("playerName", PlayerManager.loggedInPlayer.PlayerName);
                     break;
 
                 case NetworkEvent.Type.Disconnect:
-                    Debug.Log("Player disconnected from the Host");
+                    Logger.Log("Player disconnected from the Host");
                     if (NetworkingGUI.instance != null)
                     {
                         NetworkingGUI.instance.ShowJoinedPanel(false);
@@ -128,12 +128,12 @@ public class ConnectionManager : MonoBehaviour
             throw new NetworkBindingException("Failed to bind to any IP");
         }
 
-        Debug.Log("Player client bound to Relay server");
+        Logger.Log("Player client bound to Relay server");
 
         connection = networkDriver.Connect();
         MessageSender.Initialize(networkDriver, connection);
 
-        Debug.Log("Joined Relay with Join Code: " + joinCode);
+        Logger.Log("Joined Relay with Join Code: " + joinCode);
     }
 
     public void DisconnectFromHost()

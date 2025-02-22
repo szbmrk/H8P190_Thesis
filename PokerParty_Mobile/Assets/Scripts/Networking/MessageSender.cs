@@ -20,7 +20,7 @@ public static class MessageSender
 
         if (!connection.IsCreated)
         {
-            Debug.LogError("Player isn't connected. No Host client to send message to.");
+            Logger.Log("Player isn't connected. No Host client to send message to.");
             return;
         }
 
@@ -31,6 +31,6 @@ public static class MessageSender
         writer.WriteUInt((uint)message.Type);
         writer.WriteFixedString512(messageInString);
         networkDriver.EndSend(writer);
-        Debug.Log($"Message sent: {messageInString}");
+        Logger.Log($"Message sent: {messageInString}");
     }
 }

@@ -23,9 +23,8 @@ public static class AuthAndServicesManager
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            Debug.Log("Sign in anonymously succeeded!");
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
-
+            Logger.Log("Sign in anonymously succeeded!");
+            Logger.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
         }
         catch (AuthenticationException ex)
         {
