@@ -1,7 +1,9 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using PokerParty_SharedDLL;
+using UnityEngine.EventSystems;
 
 public class BetAmountGUI : MonoBehaviour
 {
@@ -16,8 +18,14 @@ public class BetAmountGUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI submitBtnText;
     [SerializeField] private string submitText;
 
-    [HideInInspector] public int minValue;
-    [HideInInspector] public int maxValue;
+    public int minValue;
+    public int maxValue;
+
+    private bool isPlusHeld = false;
+    private bool isMinusHeld = false;
+    private float holdTimer = 0f;
+    [SerializeField] private float initialDelay = 0.3f;
+    [SerializeField] private float changeInterval = 0.1f;
 
     private PossibleAction originalAction;
 
@@ -29,8 +37,6 @@ public class BetAmountGUI : MonoBehaviour
 
     private void Start()
     {
-        plus.onClick.AddListener(Plus);
-        minus.onClick.AddListener(Minus);
         _25.onClick.AddListener(() => SetSliderValue(minValue + (maxValue - minValue) / 4));
         _50.onClick.AddListener(() => SetSliderValue(minValue + (maxValue - minValue) / 2));
         _75.onClick.AddListener(() => SetSliderValue(minValue + (maxValue - minValue) * 3 / 4));
@@ -58,37 +64,120 @@ public class BetAmountGUI : MonoBehaviour
             submitBtnText.text = $"{submitText} {slider.value}$";
             submitBtn.action = originalAction;
         }
+
+        if (isPlusHeld || isMinusHeld)
+        {
+            holdTimer += Time.deltaTime;
+            if (holdTimer >= (holdTimer == 0 ? initialDelay : changeInterval))
+            {
+                if (isPlusHeld) Plus();
+                if (isMinusHeld) Minus();
+                holdTimer = 0f;
+            }
+        }
     }
 
     private void Plus()
     {
         int current = (int)slider.value;
-        
+
         if (current >= maxValue) return;
-        
-        int add = (int)(maxValue * 0.01f);
-        
-        current += add == 0 ? 1 : add;
-        
-        if (current > maxValue)
-            current = maxValue;
-        
-        SetSliderValue(current);
+
+        int nextValue = GetNextStep(current);
+
+        nextValue = RoundToNearestMultipleOf5Or10(nextValue);
+
+        if (nextValue > maxValue)
+            nextValue = maxValue;
+
+        SetSliderValue(nextValue);
     }
 
     private void Minus()
     {
         int current = (int)slider.value;
-        
+
         if (current <= minValue) return;
+
+        int prevValue = GetPreviousStep(current);
+
+        prevValue = RoundToNearestMultipleOf5Or10(prevValue);
+
+        if (prevValue < minValue)
+            prevValue = minValue;
+
+        SetSliderValue(prevValue);
+    }
+
+    private int GetNextStep(int current)
+    {
+        int range = maxValue - minValue;
+        int stepSize = range / 20;
+
+        stepSize = stepSize switch
+        {
+            < 1 => 1,
+            < 2 => 2,
+            < 5 => 5,
+            _ => (stepSize / 5) * 5
+        };
+
+        int nextValue = current + stepSize;
+
+        return nextValue;
+    }
+
+    private int GetPreviousStep(int current)
+    {
+        int range = maxValue - minValue;
+        int stepSize = range / 20;
+
+        stepSize = stepSize switch
+        {
+            < 1 => 1,
+            < 2 => 2,
+            < 5 => 5,
+            _ => (stepSize / 5) * 5
+        };
+
+        int prevValue = current - stepSize;
+
+        return prevValue;
+    }
+
+    private int RoundToNearestMultipleOf5Or10(int value)
+    {
+        if (maxValue - minValue < 99)
+            return value;
         
-        int sub = (int)(maxValue * 0.01f);
-        current -= sub == 0 ? 1 : sub;
-        
-        if (current < minValue)
-            current = minValue;
-        
-        SetSliderValue(current);
+        return maxValue - minValue < 249 ? (int)(Math.Round(value / 5.0) * 5) : (int)(Math.Round(value / 10.0) * 10);
+    }
+
+    public void OnPlusHeldDown()
+    {
+        isPlusHeld = true;
+        Plus();
+        holdTimer = initialDelay;
+    }
+
+    public void OnMinusHeldDown()
+    {
+        isMinusHeld = true;
+        Minus();
+        holdTimer = initialDelay;
+    }
+
+
+    public void OnPlusHeldUp()
+    {
+        isPlusHeld = false;
+        holdTimer = 0f;
+    }
+
+    public void OnMinusHeldUp()
+    {
+        isMinusHeld = false;
+        holdTimer = 0f;
     }
 
     private void SetSliderValue(int value)
