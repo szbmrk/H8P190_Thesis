@@ -13,6 +13,7 @@ public class TablePlayerCard : MonoBehaviour
 
     [SerializeField] private GameObject dealerIcon;
     [SerializeField] private GameObject smallBlindIcon;
+    [SerializeField] private GameObject smallBlindIconWithDealer;
     [SerializeField] private GameObject bigBlindIcon;
     [SerializeField] private GameObject turnIcon;
     [SerializeField] private GameObject outOfTurn;
@@ -114,6 +115,17 @@ public class TablePlayerCard : MonoBehaviour
         dealerIcon.SetActive(isDealer);
         smallBlindIcon.SetActive(isSmallBlind);
         bigBlindIcon.SetActive(isBigBlind);
+        
+        if (isDealer && isSmallBlind)
+        {
+            dealerIcon.SetActive(false);
+            smallBlindIcon.SetActive(false);
+            smallBlindIconWithDealer.SetActive(true);
+        }
+        else
+        {
+            smallBlindIconWithDealer.SetActive(false);
+        }
     }
 
     private void RefreshTurnIcon()
