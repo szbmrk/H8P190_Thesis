@@ -225,10 +225,12 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator HandleBigBlindTurnDone()
     {
+        TableManager.instance.DisableKickButtons();
         yield return TableManager.instance.DealCardsToTable();
         turnState = TurnState.PreFlop;
         yield return TableManager.instance.DealCardsToPlayers();
         StartTurn();
+        TableManager.instance.EnableKickButtons();
     }
 
     private bool CheckIfCurrentPlayerIsLastPlayerInTurn()

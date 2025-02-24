@@ -43,6 +43,7 @@ public class MatchManager : MonoBehaviour
 
     public IEnumerator ShowDown()
     {
+        TableManager.instance.DisableKickButtons();
         yield return TableManager.instance.FlipRemainingCards();
         
         TablePlayerCard[] playersStillInGame = TableManager.instance.playerSeats.FindAll(p => !p.TurnInfo.Folded).ToArray();
@@ -72,6 +73,7 @@ public class MatchManager : MonoBehaviour
         }
 
         TableGUI.instance.RefreshMoneyInPotText(TableManager.instance.moneyInPot);
+        TableManager.instance.EnableKickButtons();
         turnCount++;
     }
 }

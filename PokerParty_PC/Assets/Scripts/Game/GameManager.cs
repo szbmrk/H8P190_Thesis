@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(TablePlayerCard winner)
     {
+        TableManager.instance.DisableKickButtons();
         TableManager.instance.RemovePlayersWith0Money();
         
         GameOverMessage gameOverMessage = new GameOverMessage();

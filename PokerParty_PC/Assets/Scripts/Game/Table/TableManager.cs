@@ -391,4 +391,20 @@ public class TableManager : MonoBehaviour
                 ConnectionManager.instance.Connections[player.indexInConnectionsArray], gameOverMessage);   
         }
     }
+    
+    public void DisableKickButtons()
+    {
+        foreach (TablePlayerCard player in playerSeats)
+        {
+            player.DisableKickBtn();
+        }
+    }
+    
+    public void EnableKickButtons()
+    {
+        foreach (TablePlayerCard player in playerSeats)
+        {
+            player.EnableKickBtn();
+        }
+    }
 }

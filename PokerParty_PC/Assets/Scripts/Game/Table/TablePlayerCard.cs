@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using PokerParty_SharedDLL;
 using TMPro;
@@ -22,6 +23,8 @@ public class TablePlayerCard : MonoBehaviour
     [SerializeField] private GameObject allInTxt;
     [SerializeField] private GameObject allInBorder;
 
+    [SerializeField] private Button kickBtn;
+
     [SerializeField] private GameObject handGameObject;
     [SerializeField] private Image card1;
     [SerializeField] private Image card2;
@@ -37,6 +40,11 @@ public class TablePlayerCard : MonoBehaviour
     [HideInInspector] public bool isTurn;
 
     public bool isStillInGame => TurnInfo.Money > 0 && !TurnInfo.Folded && !TurnInfo.WentAllIn;
+
+    private void Start()
+    {
+        kickBtn.onClick.AddListener(OnKickBtnClick);
+    }
 
     public void LoadData()
     {
@@ -184,6 +192,22 @@ public class TablePlayerCard : MonoBehaviour
     public void ResetHand()
     {
         handGameObject.SetActive(false);
+    }
+    
+    public void DisableKickBtn()
+    {
+        kickBtn.gameObject.SetActive(false);
+    }
+    
+    public void EnableKickBtn()
+    {
+        kickBtn.gameObject.SetActive(true);
+    }
+
+    private void OnKickBtnClick()
+    {
+        TableManager.instance.PlayerDisconnected(TableManager.instance.GetPLayerByIndexInConnectionsArray(indexInConnectionsArray));
+        ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
     }
 
     public override bool Equals(object other)
