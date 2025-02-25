@@ -121,34 +121,19 @@ namespace PokerParty_EvalTest
     {
         static void Main(string[] args)
         {
-            int playerCount = 1;
-            List<PlayerHandInfo> playerHandInfos = new List<PlayerHandInfo>();
-
-            foreach (Card[] hand in PokerHands.Hands)
+            Card[] cards = new[]
             {
-                Player player = new Player();
-                player.playerName = "Player " + playerCount++;
-                PlayerHandInfo playerHandInfo = new PlayerHandInfo(player, hand);
-                playerHandInfos.Add(playerHandInfo);
-            }
+                new Card(9, "Hearts"),
+                new Card(10, "Hearts"),
+                new Card(11, "Hearts"),
+                new Card(12, "Hearts"),
+                new Card(13, "Hearts")
+            };
 
-            PlayerHandInfo[] order = TexasHoldEm.DetermineOrder(playerHandInfos.ToArray());
-
-            Console.WriteLine("Order of players:");
-            foreach (PlayerHandInfo handInfo in order)
-            {
-                Console.WriteLine(handInfo.Player.playerName + " - " + handInfo.Type + " - Break Tie score: " + handInfo.BreakTieScore);
-            }
-
-            PlayerHandInfo[] winners = TexasHoldEm.DetermineWinners(order);
-
-            Console.WriteLine("\nWinner(s):");
-            foreach (PlayerHandInfo handInfo in winners)
-            {
-                Console.WriteLine(handInfo.Player.playerName + " - " + handInfo.Type + " - Break Tie score: " + handInfo.BreakTieScore);
-            }
-
-            Console.ReadKey();
+            Console.WriteLine();
+            EvaluationDisplayHelper.DisplayBitFieldFaceValues(cards);
+            Console.WriteLine();
+            EvaluationDisplayHelper.DisplayBitFieldCounts(cards);
         }
     }
 }

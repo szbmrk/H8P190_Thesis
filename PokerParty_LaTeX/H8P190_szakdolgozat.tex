@@ -54,11 +54,6 @@ PC unity, Mobile unity, SharedDLL
 
 \chapter{Saját szoftver megvalósítása}
 
-\section{Többjátékos kapcsolat megvalósítása}
-
-\subsection{Kapcsolat kezelése a PC oldalon}
-\subsection{Kapcsolat kezelése a Mobile oldalon}
-
 \section{Texas Hold'Em}
 
 \subsection{Bevezetés}
@@ -91,7 +86,7 @@ Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig mé
 			\item Dobás -- eldobja a lapjait, ezzel kiszáll a játékból.
 		\end{itemize}
 		\item A licitálás az óramutató járásával megegyező irányban halad tovább.
-		\end{itemize}
+	\end{itemize}
 	\item \emph{Flop (második licitkör)}
 	\begin{itemize}
 		\item Az osztó egy lapot félretesz égető lapként, majd három közös lapot felfordítva az asztal közepére helyez.
@@ -175,7 +170,7 @@ Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erőss�
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=12cm]{poker_hands}
+	\includegraphics[width=14cm]{poker_hands}
 	\caption{Lehetséges pókerkezek}
 	\label{fig-pokerhands}
 \end{figure}
@@ -186,21 +181,70 @@ A legelterjedtebb kézkiértékelő algoritmusok azon alapulnak, hogy a kezek é
 
 \subsubsection{Az algoritmus}
 
-Minden kártyáról tároljuk a számozását és a színét. Az input 5 darab ilyen kártyából fog állni.
+Minden kártyáról tároljuk a rangját és a színét. Az input 5 darab ilyen kártyából fog állni.
 
 \begin{enumerate}
-	\item 2 különböző bit mező létrehozása a kártyák alapján
+	\item 2 különböző bitmező létrehozása a kártyák alapján
 	\begin{itemize}
-		\item első mező
-		\item második mező
+		\item Az első mező a kártyák rangjának előfordulásáról tartalmaz 15~biten információt. Az egyes biteken azt fogjuk jelölni, hogy az adott rangból van-e az 5 adott kártya között (1 ha van, 0 ha nincs). \Aref{fig-bitfieldvalues1} ábrán és \aref{fig-bitfieldvalues2} ábrán látható 1-1 példa az elő állított bitmezőről.
+		
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=10cm]{BitFieldValues1}
+			\caption{Kártyák: [9, 10, J, Q, K]}
+			\label{fig-bitfieldvalues1}
+		\end{figure}
+		
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=10cm]{BitFieldValues2}
+			\caption{Kártyák: [9, 9, 9, K, K]}
+			\label{fig-bitfieldvalues2}
+		\end{figure}
+		
+		\item A második mező a rangok előfordulásának számáról tárol információt 60~biten. Minden ranghoz rendelünk 4 bitet, ahol annyit jelölünk 1-el, amennyi darabunk van az adott rangból. \Aref{fig-bitfieldcounts1} ábrán és \aref{fig-bitfieldcounts2} ábrán látható 1-1 példa az elő állított bitmezőről.
+		
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=16cm]{BitFieldCounts1}
+			\caption{Kártyák: [9, 10, J, Q, K]}
+			\label{fig-bitfieldcounts1}
+		\end{figure}
+		
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=16cm]{BitFieldCounts2}
+			\caption{Kártyák: [9, 9, 9, K, K]}
+			\label{fig-bitfieldcounts2}
+		\end{figure}
+		
 	\end{itemize}
-	\item kéz értékelés a második bit mező segítségével
+	\item kéz értékelés a második bitmező segítségével
+	\begin{itemize}
+		\item A második bitmező 15-el való maradékos osztásának segítségével kitudunk értékelni 6 különböző pókerkezet. Először átszámoljuk a második bitmezőt 10-es számrendszerbe, majd utána végezzük el a 15-el való maradékos osztást. Pár példa erre:
+		\begin{itemize}
+			\item Póker (four of a kind): [9, 9, 9, 9, K]
+			kártyákhoz tartozó második bináris mező 10-es számrendszerbe átszámolva: 4504630419521536. Ez az érték maradékosan osztva 15-el egyenlő lesz 1-el. Minden lehetséges ilyen pókerkézhez tartozó érték 1-et fog visszaadni erre az osztásra.
+			\item Full (full  house): Mindig 10-et fog visszaadni az osztás eredményeképpen.
+			\item Drill (three of a kind): Mindig 9-et fog visszaadni az osztás eredményeképpen.
+			\item Két pár (two pairs): Mindig 7-et fog visszaadni az osztás eredményeképpen.
+			\item Egy pár (one pair): Mindig 6-ot fog visszaadni az osztás eredményeképpen.
+			\item Magas lap (high card): Mindig 5-öt fog visszaadni az osztás eredményeképpen.
+		\end{itemize}
+		
+		A varázslat az, hogy mind a hat pókerkéz a fenti módszerrel történő számolás mindig ugyanazt az eredményt adja, függetlenül attól, hogy mi a tényleges öt lap. Amit a maradékos osztás 15-el csinál, az egyenértékű az egyes 4 bites kártyák értékének összegzésével. Tehát a [2, 2, 2, 3, 3] kártyák esetében ez pl. 0111 + 0011 amit binárisan összeadva, majd átszámolva 10-et kapunk. És ez mind a 6 pókerkéznél így fog működni.
+		
+	\end{itemize}
 	\item sorok ellenőrzése
 	\item flush ellenőrzése
 	\item döntetlenek eldöntése
 \end{enumerate}
 
+\section{Többjátékos kapcsolat megvalósítása}
 
+\subsection{Unity Relay}
+\subsection{Kapcsolat kezelése a PC oldalon}
+\subsection{Kapcsolat kezelése a Mobile oldalon}
 
 \section{Játékmenet megvalósítása}
 
