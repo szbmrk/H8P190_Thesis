@@ -35,8 +35,6 @@
 \subsection{Godot}
 \subsection{Unity}
 
-Itt kéne majd unity specifikus modulok is / külön fejezetbe.
-
 \section{Többjátékos technológia a játékfejlesztésben}
 
 \subsection{Korai megoldások}
@@ -44,6 +42,17 @@ Helyi többjátékos mód
 \subsection{Kliens-Szerver}
 \subsection{Dedikált szerver}
 \subsection{Peer-to-Peer (P2P)}
+
+\chapter{Unity}
+
+\section{Többjátékos technológiák a Unity-ben}
+
+\subsection{Relay}
+\subsection{Technológia1}
+\subsection{Technológia2}
+
+\section{Modul1}
+\section{Modul2}
 
 \chapter{Rendszerterv}
 Azok az elemek, amiket tanultatok RFT-n, azok kerülnek ide
@@ -188,37 +197,53 @@ Minden kártyáról tároljuk a rangját és a színét. Az input 5 darab ilyen 
 \begin{enumerate}
 	\item 2 különböző bitmező létrehozása a kártyák alapján
 	\begin{itemize}
-		\item Az első mező a kártyák rangjának előfordulásáról tartalmaz 15~biten információt. Az egyes biteken azt fogjuk jelölni, hogy az adott rangból van-e az 5 adott kártya között (1 ha van, 0 ha nincs). \Aref{fig-bitfieldvalues1} ábrán és \aref{fig-bitfieldvalues2} ábrán látható 1-1 példa az elő állított bitmezőről.
+		\item Az első mező a kártyák rangjának előfordulásáról tartalmaz 15~biten információt. Az egyes biteken azt fogjuk jelölni, hogy az adott rangból van-e az 5 adott kártya között (1 ha van, 0 ha nincs). \Aref{tab-bitfieldvalues1} táblázatban és \aref{tab-bitfieldvalues2} táblázatban látható 1-1 példa az elő állított bitmezőről.
 		
-		\begin{figure}[ht!]
+		\begin{table}[ht!]
 			\centering
-			\includegraphics[width=10cm]{BitFieldValues1}
-			\caption{Kártyák: [9, 10, J, Q, K]}
-			\label{fig-bitfieldvalues1}
-		\end{figure}
+			\footnotesize
+			\begin{tabular}{*{15}{c}}
+				0 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+				A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+			\end{tabular}
+			\caption{[9, 10, J, Q, K] kártyákhoz tartozó első bitmező}
+			\label{tab-bitfieldvalues1}
+		\end{table}
 		
-		\begin{figure}[ht!]
+		\begin{table}[ht!]
 			\centering
-			\includegraphics[width=10cm]{BitFieldValues2}
-			\caption{Kártyák: [9, 9, 9, K, K]}
-			\label{fig-bitfieldvalues2}
-		\end{figure}
+			\footnotesize
+			\begin{tabular}{*{15}{c}}
+				0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+				A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+			\end{tabular}
+			\caption{[9, 9, 9, K, K] kártyákhoz tartozó első bitmező}
+			\label{tab-bitfieldvalues2}
+		\end{table}
 		
-		\item A második mező a rangok előfordulásának számáról tárol információt 60~biten. Minden ranghoz rendelünk 4 bitet, ahol annyit jelölünk 1-el, amennyi darabunk van az adott rangból. \Aref{fig-bitfieldcounts1} ábrán és \aref{fig-bitfieldcounts2} ábrán látható 1-1 példa az elő állított bitmezőről.
+		\item A második mező a rangok előfordulásának számáról tárol információt 60~biten. Minden ranghoz rendelünk 4 bitet, ahol annyit jelölünk 1-el, amennyi darabunk van az adott rangból. \Aref{tab-bitfieldcounts1} táblázatban és \aref{tab-bitfieldcounts2} táblázatban látható 1-1 példa az elő állított bitmezőről.
 		
-		\begin{figure}[ht!]
+		\begin{table}[ht!]
 			\centering
-			\includegraphics[width=16cm]{BitFieldCounts1}
-			\caption{Kártyák: [9, 10, J, Q, K]}
-			\label{fig-bitfieldcounts1}
-		\end{figure}
+			\footnotesize
+			\begin{tabular}{*{15}{r}}
+				0000 & 0001 & 0001 & 0001 & 0001 & 0001 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000\\
+				A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+			\end{tabular}
+			\caption{[9, 10, J, Q, K] kártyákhoz tartozó második bitmező}
+			\label{tab-bitfieldcounts1}
+		\end{table}
 		
-		\begin{figure}[ht!]
+		\begin{table}[ht!]
 			\centering
-			\includegraphics[width=16cm]{BitFieldCounts2}
-			\caption{Kártyák: [9, 9, 9, K, K]}
-			\label{fig-bitfieldcounts2}
-		\end{figure}
+			\footnotesize
+			\begin{tabular}{*{15}{r}}
+				0000 & 0011 & 0000 & 0000 & 0000 & 0111 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000\\
+				A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+			\end{tabular}
+			\caption{[9, 9, 9, K, K] kártyákhoz tartozó második bitmező}
+			\label{tab-bitfieldcounts2}
+		\end{table}
 		
 	\end{itemize}
 	\item kéz értékelés a második bitmező segítségével
@@ -244,7 +269,6 @@ Minden kártyáról tároljuk a rangját és a színét. Az input 5 darab ilyen 
 
 \section{Többjátékos kapcsolat megvalósítása}
 
-\subsection{Unity Relay}
 \subsection{Kapcsolat kezelése a PC oldalon}
 \subsection{Kapcsolat kezelése a Mobile oldalon}
 
