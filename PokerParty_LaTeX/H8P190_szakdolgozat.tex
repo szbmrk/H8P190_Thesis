@@ -14,7 +14,7 @@
 \begin{document}
 
 \institute{Matematikai és Informatikai Intézet}
-\title{PokerParty}
+\title{Játékfejlesztés Unity keretrendszerben}
 \author{Szabó Márk\\programtervező informatikus Bsc.}
 \supervisor{Troll Ede\\tanársegéd}
 \city{Eger}
@@ -29,8 +29,7 @@
 \chapter{Technológiai áttekintés}
 
 \section{Enginek}
-Általános leírás és összehasonlítás az API alapú fejlesztéssel
-
+Általános leírás és összehasonlítás az API alapú fejlesztéssel (OpenGL, Vulkan)
 \subsection{Unreal}
 \subsection{Godot}
 \subsection{Unity}
@@ -192,9 +191,10 @@ A legelterjedtebb kézkiértékelő algoritmusok azon alapulnak, hogy a kezek é
 
 \subsubsection{Az algoritmus}
 
-Minden kártyáról tároljuk a rangját és a színét. Az input 5 darab ilyen kártyából fog állni.
+Az alábbi lépéseket kell végrehajtanunk a kézkiértékeléshez:
 
 \begin{enumerate}
+	\item Minden kártyáról el kell tárolnunk a rangját és a színét. Az inputunk 5 darab ilyen kártyából fog állni.
 	\item 2 különböző bitmező létrehozása a kártyák alapján
 	\begin{itemize}
 		\item Az első mező a kártyák rangjának előfordulásáról tartalmaz 15~biten információt. Az egyes biteken azt fogjuk jelölni, hogy az adott rangból van-e az 5 adott kártya között (1 ha van, 0 ha nincs). \Aref{tab-bitfieldvalues1} táblázatban és \aref{tab-bitfieldvalues2} táblázatban látható 1-1 példa az elő állított bitmezőről.
@@ -260,11 +260,38 @@ Minden kártyáról tároljuk a rangját és a színét. Az input 5 darab ilyen 
 		\end{itemize}
 		
 		A varázslat az, hogy mind a hat pókerkéz a fenti módszerrel történő számolás mindig ugyanazt az eredményt adja, függetlenül attól, hogy mi a tényleges öt lap. Amit a maradékos osztás 15-el csinál, az egyenértékű az egyes 4 bites kártyák értékének összegzésével. Tehát a [2, 2, 2, 3, 3] kártyák esetében ez pl. 0111 + 0011 amit binárisan összeadva, majd átszámolva 10-et kapunk. És ez mind a 6 pókerkéznél így fog működni.
-		
 	\end{itemize}
 	\item sorok ellenőrzése
+	\begin{itemize}
+		\item A \emph{sorok} ellenőrzéséhez az első bitmezőt fogjuk felhasználni. Az első bitmezőn bitenkénti ÉS műveletet alkalmazunk önmagának negatívjával. Ennek eredményeképpen megkapjuk az LSB-t, ami a bináris szám ábrázolásának legjobb oldali bitjére utal. Majd ezután, ha elosztjuk az eredeti bitmezőt az LSB-vel, akkor megtudjuk állapítani, hogy a pókerkéz \emph{sor}-t tartalmaz-e. Ha az osztás eredménye pontosan egyenlő 11111-el, azaz decimálisan 31-el, akkor \emph{sorunk} van, ellenkező esetben pedig nincs \emph{sorunk}. Ez a módszer minden \emph{sorra} működni fog, kivéve az \emph{ász-alacsony sorra}, amit egy külön ellenőrzéssel megtudunk állapítani. Ha az első bitmezőnk pontosan egyenlő az alábbi bitmezővel: 100000000111100, akkor \emph{ász-alacsony sorunk} van.
+	\end{itemize}
 	\item flush ellenőrzése
+	\begin{itemize}
+		\item A \emph{flush} ellenőrzésénél nincs szükségünk bit matematikára, szimplán csak azt kell megnéznünk, hogy a kapott 5 input kártya közül, mindnek megegyezik a színe. Ha mindegyik ugyanolyan színű, akkor a pókerkéz \emph{flush}, ellenkező esetben pedig nem. Ha \emph{flush} kezünk van és az előző ellenőrzés szerint \emph{sorunk} is van, akkor \emph{straight flush} kezünk van. Az első bitmező segítségével pedig tudjuk ellenőrzini a \emph{royal flush}-t is. Hasonló módon mint az \emph{ász-alacsony sornál} itt is az első bitmezőt kell ellenőriznünk. Ha az első bitmezőnk pontosan egyenlő az alábbi bitmezővel: 111110000000000, akkor \emph{royal flush} pókerkezünk van.
+	\end{itemize}
 	\item döntetlenek eldöntése
+	\begin{itemize}
+		\item Abban az esetben, ha két pókerkéz azonos típusú, a döntetleneket úgy döntjük el, hogy az 5 kártyát először az előfordulás sorrendje, majd a rangja szerint rendezzük, és bitek eltolásával összehasonlítható pontszámot hozunk létre az alábbiak szerint:
+		\begin{itemize}
+			\item Az első kártya értékét kettes számrendszerben eltoljuk balra 16-al
+			\item A második kártya értékét kettes számrendszerben eltoljuk balra 12-vel
+			\item A harmadik kártya értékét kettes számrendszerben eltoljuk balra 8-cel
+			\item A negyedik kártya értékét kettes számrendszerben eltoljuk balra 4-el
+			\item Az ötödik kártya értékét nem toljuk el
+		\end{itemize}  
+		Ezután kombináljuk mind az öt létrejött számot bitenkénti VAGY művelettel és ennek az eredménye lesz a döntetleneket eldöntő pontszáma a pókerkéznek, ahol minél magasabb ez a pontszám, annál jobb kezünk van.
+	\end{itemize}
+	
+\end{enumerate}
+
+A teljes algoritmus tehát röviden így működik:
+
+\begin{enumerate}
+	\item Eltároljuk az 5 kártyánkról a szükséges szín és rang adatokat.
+	\item A második bitmezőn maradékos osztást használva ellenőrizzük, hogy póker, full, drill, két pár, egy pár vagy magas lap pókerkezünk van-e.
+	\item Az első bitmező LSB-vel történő osztásával ellenőrizzük a sorokat, majd elvégezzük az ász-alacsony sorok extra ellenőrzését.
+	\item Ellenőrizzük, hogy van-e öt azonos színű lap a flush-höz, beleértve a royal flush extra ellenőrzését is.
+	\item A döntetleneket felbontjuk a pókerkezekhez kiszámolt bizonyos pontszámok összehasonlításával.
 \end{enumerate}
 
 \section{Többjátékos kapcsolat megvalósítása}
