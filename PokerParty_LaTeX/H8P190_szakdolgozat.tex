@@ -28,21 +28,67 @@
 
 \chapter{Technológiai áttekintés}
 
+Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is, amely során különféle API-k – például grafikai vagy multimédiakezelő API-k – segítségével történik a fejlesztés. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, így ki tudtam használni az általa kínált lehetőségeket és eszközöket.
+
 \section{Enginek}
-Általános leírás és összehasonlítás az API alapú fejlesztéssel (OpenGL, Vulkan)
+
+A játékmotorok olyan fejlesztői környezetek, amelyek célja, hogy egyszerűsítsék és felgyorsítsák a játékok fejlesztésének folyamatát. Egy tipikus játékmotor különböző komponenseket és funkciókat szolgáltat a fejlesztőnek, mint például: grafikai renderelést, fizikai szimulációt, animációkezelést, hangkezelést. A játékmotorok használata megkönnyíti a fejlesztők dolgát, viszont nem ad annyi rugalmasságot, mint az API alapú fejlesztés. \cite{WikipediaGameEngine}
+
 \subsection{Unreal}
+
+Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat pl. karakter mozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki. \cite{WikipedaiUnreal}
+
 \subsection{Godot}
+
+A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív scriptnyelve a GDScript (Pythonhoz hasonló nyelv). \cite{GitHubGodot}
+
 \subsection{Unity}
+
+A Unity az egyik legismertebb és legelterjedtebb játékmotor a piacon, amely támogatja a mobil, asztali, konzolos, valamint webes játékok fejlesztését 2D és 3D játékokhoz egyaránt. Jelentős előnye a könnyen tanulható felhasználói felület és a jól dokumentáltság. Elsősorban a C\# nyelvet használja scriptelésre, de támogatja a vizuális programozást is. A játékmotorhoz tartozik több különböző előfizetési szint is, de van ingyenesen használható verziója is.  Mivel a C\# közel áll hozzám, tapasztalatom is van már ezzel a játékmotorral és maga a játékmotor adottságai pont megfeleltek a szakdolgozatom követelményeihez, ezért erre a játékmotorra esett a választásom. Erről a játékmotorról \aref{ch-unity}. fejezetben bővebben írok. \cite{WikipediaUnity}
 
 \section{Többjátékos technológia a játékfejlesztésben}
 
+A mai megjelenő játékok nagy része már tartalmaz valamiféle többjátékos módot. Ez a játékfejlesztés elején még csak helyi megoldásokat jelentett, de ma már hatalmas online terekben játszódó játékokról is beszélhetünk.
+
 \subsection{Korai megoldások}
-Helyi többjátékos mód
+
+Többjátékossal játszható játék először, stratégia kör alapú játékokban jelent meg, de ez még nem egyidejű játékot jelentett. Ezek után egyidejű többjátékos játék lehetősége először egy 2 játékossal egyszerre egy helyen játszható játékkal jött létre, ez a játék volt a jól ismert Pong. A Pong után kezdtek egyre jobban elterjedni a helyi többjátékos játékok, ahol az egymás elleni játék helyett, egymással együtt működve is tudtunk játszani. Egy népszerű módszer a helyi többjátékos játékok megvalósításánál az osztott képernyő, ahol általában el van választva a kijelző több egyenlő részre, ahol 1-1 részt 1-1 játékos kezelhet. A 2000-es évek elején pedig már megjelent az online többjátékos játékok lehetősége is, ahol már nem volt szükség egy térben tartózkodni a többi játékossal. \cite{MediumMultiplayer}
+
 \subsection{Kliens-Szerver}
-\subsection{Dedikált szerver}
+
+A Kliens-Szerver architektúra az egyik legtöbbet használt módszer az online többjátékos játékok megvalósításához. Az architektúrában 2 szerep van:
+
+\begin{itemize}
+	\item Szerver:
+	\begin{itemize}
+		\item Felelős a játék logikájának feldolgozásáért, az interakciók kezelésért, az erőforrások kezeléséért és a kliensek közötti információk szinkronizálásáért.
+		\item A szerver lehet egyetlen gépen elhelyezett (dedikált szerver) vagy a játékosok egyik gépén futó (hosztolt szerver).
+		\item A szervernek egyszerre több kliens kéréseit kell kezelnie, ami azt jelenti, hogy skálázhatónak és hatékonynak kell lennie.
+	\end{itemize}
+	\item Kliens:
+	\begin{itemize}
+		\item A játékos játékpéldánya. Bemeneti parancsokat küld a szervernek, és frissítéseket kap a játék állapotáról.
+		\item Felelősek a játékvilág rendereléséért és a helyi interakciók kezeléséért.
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=10cm]{ClientServer}
+	\caption{Kliens-Szerver architektúra}
+	\label{fig-clientserver}
+\end{figure}
+
+A kliens és a szerver megbízható hálózati protokoll (pl. TCP vagy UDP) segítségével kommunikál, és olyan csomagokat küld, amelyek a játékosok interakcióiról, játékeseményekről és állapotfrissítésekről tartalmaznak információkat. 
+ 
+Végső sorban szerver ellenőriz minden interakciót és csak ő tud dönteni a változásokról. Ez azért jó, mert így a csalásokkal szemben is védekezik a játék. 
+
+Mivel mindig várni kell a szerver által küldött információra egy interakció esetén, így késleltetés léphet fel, főleg lassabb internet kapcsolat esetén. Erre egy módszer amit alkalmazni szoktak a klienseknél az úgynevezett predikció, ahol a helyi interakció alapján a kliens megpróbálja kitalálni mi fog ténylegesen történni. \cite{MediumClientServer}
+
 \subsection{Peer-to-Peer (P2P)}
 
 \chapter{Unity}
+\label{ch-unity}
 
 \section{Többjátékos technológiák a Unity-ben}
 
@@ -74,13 +120,13 @@ A \emph{Texas~Hold’Em} a közösségi pókerjátékok legnépszerűbb formája
 
 \subsection{Szabályok ismertetése}
 
-A házi vagy baráti társaságokban játszott póker esetében a szabályok gyakran eltérhetnek, mivel a játékosok igyekeznek a saját ízlésük szerint alakítani azokat, hogy még élvezetesebb legyen a játék. Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazott szabályrendszere kerül bemutatásra. Ami közös az összes variációban, hogy a játékot 52~lapos francia kártyával játsszák dzsókerek nélkül.
+Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazott szabályrendszere kerül bemutatásra. Ami közös az összes variációban, hogy a játékot 52~lapos francia kártyával játsszák dzsókerek nélkül.
 
-\subsubsection{A játék menete \cite{WikipediaTexasholdem}}
+\subsubsection{Játék menete}
 
 A játék során három fontos szerep forog körbe a játékosok között, amit ,,gombokkal'' jelölünk. Ezek a szerepek az osztó, kis vak és nagy vak. Az osztótól balra ülő játékos lesz a kis vak, a kis vaktól balra ülő pedig a nagy vak. Az osztót pedig több különböző módon választhatjuk meg a játék elején.  
 
-Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig még osztás előtt kötelesek betenni a vak téteket, ahol a kis vak tét általában a nagy vak tét fele.
+Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig még osztás előtt kötelesek betenni a vak téteket, ahol a kis vak tét általában a nagy vak tét fele. \cite{WikipediaTexasholdem}
 
 \begin{enumerate}
 	\item \emph{Osztás}
@@ -131,9 +177,9 @@ Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig mé
 	\end{itemize}
 \end{enumerate}
 
-\subsubsection{A pókerkezek \cite[9.~oldal]{Szurdi}}
+\subsubsection{Pókerkezek}
 
-Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erősségük szerint rendeztem el, a legerősebbtől a leggyengébbig. A lista tetején található kéz a pókerben elérhető legmagasabb értékű kombináció, és innen lefelé haladva egyre gyengébb kezek következnek. Az alábbi sorrendet megtekinthetjük \aref{fig-pokerhands}.~ábrán is. 
+Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erősségük szerint rendeztem el, a legerősebbtől a leggyengébbig. A lista tetején található kéz a pókerben elérhető legmagasabb értékű kombináció, és innen lefelé haladva egyre gyengébb kezek következnek. Az alábbi sorrendet megtekinthetjük \aref{fig-pokerhands}.~ábrán is. \cite[9.~oldal]{Szurdi}
 
 \begin{enumerate}
 	\item \emph{Royal flös (royal flush)}
@@ -189,7 +235,7 @@ Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erőss�
 
 A legelterjedtebb kézkiértékelő algoritmusok azon alapulnak, hogy a kezek értékeit egy előre kiszámított kéz értékeket tároló táblából keressük ki. Ez az egyik leggyorsabb módszer, viszont a módszer egy nagy hátránya a nagy méretű tábla tárolása, amely tárhely igényes. A játékomban egy bit matematikán alapuló algoritmust használtam, aminek alapjait \acite{HandEvaluation} blog adta. Ez a módszer lassabb, mint a táblás, viszont a tárhely igényes probléma itt megszűnik.
 
-\subsubsection{Az algoritmus}
+\subsubsection{Algoritmus}
 
 Az alábbi lépéseket kell végrehajtanunk a kézkiértékeléshez:
 
@@ -316,12 +362,26 @@ A teljes algoritmus tehát röviden így működik:
 
 \begin{thebibliography}{2}
 	\addcontentsline{toc}{chapter}{\bibname}
+	\bibitem{WikipediaGameEngine}
+	\textsc{Wikipedia}: \emph{Game engine}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Game_engine} [Letöltve: 2025-02-28]
+	\bibitem{WikipedaiUnreal}
+	\textsc{Wikipedia}: \emph{Unreal Engine}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unreal_Engine} [Letöltve: 2025-02-28]
+	\bibitem{WikipediaUnity}
+	\textsc{Wikipedia}: \emph{Unity (game engine)}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unity_(game_engine)} [Letöltve: 2025-02-28]
+	\bibitem{GitHubGodot}
+	\textsc{GitHub}: \emph{Godot}: \url{https://github.com/godotengine/godot)} [Letöltve: 2025-02-28]
+	\bibitem{MediumMultiplayer}
+	\textsc{Jamal Aladdin}: \emph{The Evolution of Multiplayer Gaming: A Journey Through Time}, Jamal Aladdin blogja, elérhető:
+	\url{https://medium.com/@Jamal_Aladdin/the-evolution-of-multiplayer-gaming-a-journey-through-time-e34ef59294c2} [Letöltve: 2025-02-28]
+	\bibitem{MediumClientServer}
+	\textsc{Lem Apperson}: \emph{Beginning Game Development: Client-Server Architecture}, Lem Apperson blogja, elérhető:
+	\url{https://medium.com/@lemapp09/beginning-game-development-client-server-architecture-1b7676d80dea} [Letöltve: 2025-02-28]
 	\bibitem{WikipediaPoker}
 	\textsc{Wikipedia}: \emph{Póker}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/P%C3%B3ker} [Letöltve: 2024-11-12]
 	\bibitem{WikipediaTexasholdem}
 	\textsc{Wikipedia}: \emph{Texas Hold'Em}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/Texas_Hold%E2%80%99Em} [Letöltve: 2024-11-13]
 	\bibitem{HandEvaluation}
-	\textsc{Jonathan Hsiao}: \emph{Evaluating Poker Hands with Bit Math}, Jonathan Hsiao blogja, elérhető:: \url{https://jonathanhsiao.com/blog/evaluating-poker-hands-with-bit-math} [Letöltve: 2025-02-25]
+	\textsc{Jonathan Hsiao}: \emph{Evaluating Poker Hands with Bit Math}, Jonathan Hsiao blogja, elérhető: \url{https://jonathanhsiao.com/blog/evaluating-poker-hands-with-bit-math} [Letöltve: 2025-02-25]
 	\bibitem{Szurdi}
 	\textsc{Szurdi András}: \emph{Pókerkönyv. Kezdőknek és haladóknak}, Ciceró, Budapest, 1995.
 	\bibitem{Varga}
