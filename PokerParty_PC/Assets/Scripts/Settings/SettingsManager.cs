@@ -19,9 +19,6 @@ public class SettingsManager : MonoBehaviour
     [HideInInspector] public int screenModeIndex;
     public Toggle screenModeToggle;
 
-    [HideInInspector] public int languageModeIndex;
-    public TMP_Dropdown languageDropDown;
-    
     public Language[] languages = { Language.English, Language.Hungarian };
 
     [HideInInspector] public float sfxVolumeValue = 1;
@@ -108,7 +105,6 @@ public class SettingsManager : MonoBehaviour
         qualityIndex = qualityDropDown.value;
         resolutionIndex = resolutionDropDown.value;
         screenModeIndex = screenModeToggle.isOn ? 1 : 0;
-        languageModeIndex = languageDropDown.value;
         sfxVolumeValue = sfxVolumeSlider.value;
         musicVolumeValue = musicVolumeSlider.value;
         
@@ -118,7 +114,7 @@ public class SettingsManager : MonoBehaviour
 
     private void SaveSettings()
     {
-        SaveSystem.SaveSettings(qualityIndex, resolutionIndex, screenModeIndex, languageModeIndex, sfxVolumeValue, musicVolumeValue);
+        SaveSystem.SaveSettings(qualityIndex, resolutionIndex, screenModeIndex, sfxVolumeValue, musicVolumeValue);
     }
 
     private void LoadSettings()
@@ -132,7 +128,6 @@ public class SettingsManager : MonoBehaviour
         sfxVolumeValue = settingsData.sfxVolumeValue;
         musicVolumeValue = settingsData.musicVolumeValue;
         screenModeIndex = settingsData.screenModeIndex;
-        languageModeIndex = settingsData.languageModeIndex;
         
         QualitySettings.SetQualityLevel(qualityIndex);
         
@@ -154,8 +149,6 @@ public class SettingsManager : MonoBehaviour
         screenModeToggle.isOn = settingsData.screenModeIndex != 0;
         sfxVolumeSlider.value = settingsData.sfxVolumeValue;
         musicVolumeSlider.value = settingsData.musicVolumeValue;
-        languageDropDown.value = settingsData.languageModeIndex;
-        languageDropDown.RefreshShownValue();
         qualityDropDown.RefreshShownValue();
         resolutionDropDown.RefreshShownValue();
     }
