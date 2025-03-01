@@ -4,10 +4,11 @@ using System.IO;
 using System.Collections.Generic;
 using TMPro;
 using System.Linq;
+using UnityEngine.Serialization;
 
-public class SaveManager : MonoBehaviour
+public class SettingsManager : MonoBehaviour
 {
-    public static SaveManager instance;
+    public static SettingsManager instance;
     
     [HideInInspector] public int qualityIndex;
     public TMP_Dropdown qualityDropDown;
@@ -21,19 +22,16 @@ public class SaveManager : MonoBehaviour
     [HideInInspector] public int languageModeIndex;
     public TMP_Dropdown languageDropDown;
     
-    public Language[] languages ={ Language.Hungarian, Language.English };
+    public Language[] languages = { Language.English, Language.Hungarian };
 
-    [HideInInspector] public float mainVolumeValue;
-    public Slider mainVolumeSlider;
+    [HideInInspector] public float sfxVolumeValue = 1;
+    public Slider sfxVolumeSlider;
 
-    [HideInInspector] public float musicVolumeValue;
+    [HideInInspector] public float musicVolumeValue = 1;
     public Slider musicVolumeSlider;
 
     private Resolution[] resolutions;
     private RefreshRate maxRefreshRate;
-
-    //public AudioManager audioManager;
-    //public TextManager textManager;
 
     private void Awake()
     {
@@ -100,7 +98,6 @@ public class SaveManager : MonoBehaviour
         }
         
         qualityDropDown.ClearOptions();
-        qualityOptions.Reverse();
         qualityDropDown.AddOptions(qualityOptions);
         qualityDropDown.value = QualitySettings.GetQualityLevel();
         qualityDropDown.RefreshShownValue();
@@ -112,7 +109,7 @@ public class SaveManager : MonoBehaviour
         resolutionIndex = resolutionDropDown.value;
         screenModeIndex = screenModeToggle.isOn ? 1 : 0;
         languageModeIndex = languageDropDown.value;
-        mainVolumeValue = mainVolumeSlider.value;
+        sfxVolumeValue = sfxVolumeSlider.value;
         musicVolumeValue = musicVolumeSlider.value;
         
         SaveSettings();
@@ -121,7 +118,7 @@ public class SaveManager : MonoBehaviour
 
     private void SaveSettings()
     {
-        SaveSystem.SaveSettings(qualityIndex, resolutionIndex, screenModeIndex, languageModeIndex, mainVolumeValue, musicVolumeValue);
+        SaveSystem.SaveSettings(qualityIndex, resolutionIndex, screenModeIndex, languageModeIndex, sfxVolumeValue, musicVolumeValue);
     }
 
     private void LoadSettings()
@@ -132,15 +129,21 @@ public class SaveManager : MonoBehaviour
         
         qualityIndex = settingsData.qualityIndex;
         resolutionIndex = settingsData.resolutionIndex;
-        mainVolumeValue = settingsData.mainVolumeValue;
+        sfxVolumeValue = settingsData.sfxVolumeValue;
         musicVolumeValue = settingsData.musicVolumeValue;
         screenModeIndex = settingsData.screenModeIndex;
         languageModeIndex = settingsData.languageModeIndex;
+        
         QualitySettings.SetQualityLevel(qualityIndex);
+        
         Resolution res = resolutions[resolutionIndex];
-        FullScreenMode mode = screenModeIndex == 0 ? FullScreenMode.Windowed : FullScreenMode.FullScreenWindow; 
+        FullScreenMode mode = screenModeIndex == 0 ? FullScreenMode.Windowed : FullScreenMode.FullScreenWindow;
         Screen.SetResolution(res.width, res.height, mode, maxRefreshRate);
+        
+        AudioManager.instance.SetVolumes(sfxVolumeValue, musicVolumeValue);
+        
         //LocalizationSystem.currentlanguage = languages[settingsData.languageModeIndex];
+        
         LoadSettingStates(settingsData);
     }
 
@@ -149,7 +152,7 @@ public class SaveManager : MonoBehaviour
         qualityDropDown.value = settingsData.qualityIndex;
         resolutionDropDown.value = settingsData.resolutionIndex;
         screenModeToggle.isOn = settingsData.screenModeIndex != 0;
-        mainVolumeSlider.value = settingsData.mainVolumeValue;
+        sfxVolumeSlider.value = settingsData.sfxVolumeValue;
         musicVolumeSlider.value = settingsData.musicVolumeValue;
         languageDropDown.value = settingsData.languageModeIndex;
         languageDropDown.RefreshShownValue();

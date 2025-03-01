@@ -6,14 +6,12 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Button createGameBtn;
     [SerializeField] private Button quitGameBtn;
-    [SerializeField] private Button settingsBtn;
 
     private void Awake()
     {
         Time.timeScale = 1;
         createGameBtn.onClick.AddListener(CreateGame);
         quitGameBtn.onClick.AddListener(QuitGame);
-        settingsBtn.onClick.AddListener(OpenSettings);
     }
 
     private void CreateGame()
@@ -24,10 +22,5 @@ public class MainMenu : MonoBehaviour
     private void QuitGame()
     {
         Application.Quit();
-    }
-
-    private void OpenSettings()
-    {
-        //TODO: Implement settings menu
     }
 }
