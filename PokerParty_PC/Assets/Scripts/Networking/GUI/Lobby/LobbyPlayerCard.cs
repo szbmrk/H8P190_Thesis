@@ -15,11 +15,15 @@ public class LobbyPlayerCard : MonoBehaviour
 
     private void Awake()
     {
-        kickBtn.onClick.AddListener(KickPlayer);
+        if (kickBtn != null)
+            kickBtn.onClick.AddListener(KickPlayer);
     }
 
     public void RefreshData()
     {
+        if (playerNameText == null)
+            return;
+        
         playerNameText.color = PlayerColorManager.GetColor(assignedPlayer.PlayerName);
         playerNameText.text = assignedPlayer.PlayerName;
     }

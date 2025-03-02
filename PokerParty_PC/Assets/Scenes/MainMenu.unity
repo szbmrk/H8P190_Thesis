@@ -172,8 +172,6 @@ MonoBehaviour:
   resolutionDropDown: {fileID: 1345888451}
   screenModeIndex: 0
   screenModeToggle: {fileID: 1400303380}
-  languageModeIndex: 0
-  languageDropDown: {fileID: 0}
   languages: 0100000000000000
   sfxVolumeValue: 0
   sfxVolumeSlider: {fileID: 136421001}
@@ -5963,7 +5961,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1902216780}
   - {fileID: 1540515157}
-  - {fileID: 14822297}
   - {fileID: 48212611}
+  - {fileID: 14822297}
   - {fileID: 1589358203}
   - {fileID: 916193963}

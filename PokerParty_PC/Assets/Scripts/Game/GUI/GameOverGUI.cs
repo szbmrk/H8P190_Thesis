@@ -29,7 +29,7 @@ public class GameOverGUI : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public IEnumerator OnBackToMainBtnClick()
+    private IEnumerator OnBackToMainBtnClick()
     {
         yield return GameManager.instance.DisconnectPlayersAndLoadMainMenu();
     }

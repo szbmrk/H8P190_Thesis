@@ -6,9 +6,9 @@ public class ChatGUI : MonoBehaviour
 {
     public static ChatGUI instance;
 
-    [SerializeField] private Transform parentForChatBoxes;
-    [SerializeField] private GameObject chatBoxPrefab;
-    [SerializeField] private ScrollRect chatScrollRect;
+    [SerializeField] public Transform parentForChatBoxes;
+    [SerializeField] public GameObject chatBoxPrefab;
+    [SerializeField] public ScrollRect chatScrollRect;
 
     private void Awake()
     {

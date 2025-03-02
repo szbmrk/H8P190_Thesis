@@ -30,7 +30,7 @@ public class SettingsManager : MonoBehaviour
     private Resolution[] resolutions;
     private RefreshRate maxRefreshRate;
 
-    private void Awake()
+    private void Start()
     {
         if (instance == null)
             instance = this;
@@ -46,7 +46,7 @@ public class SettingsManager : MonoBehaviour
         LoadSettings();
     }
 
-    private void FillResolutionsDropdown()
+    public void FillResolutionsDropdown()
     {
         resolutionDropDown.ClearOptions();
         
@@ -85,7 +85,7 @@ public class SettingsManager : MonoBehaviour
         resolutionDropDown.RefreshShownValue();
     }
     
-    private void FillQualityDropdown()
+    public void FillQualityDropdown()
     {
         List<string> qualityOptions = new List<string>();
         
@@ -128,18 +128,16 @@ public class SettingsManager : MonoBehaviour
         sfxVolumeValue = settingsData.sfxVolumeValue;
         musicVolumeValue = settingsData.musicVolumeValue;
         screenModeIndex = settingsData.screenModeIndex;
-        
         QualitySettings.SetQualityLevel(qualityIndex);
+        AudioManager.instance.SetVolumes(sfxVolumeValue, musicVolumeValue);
+        
+        LoadSettingStates(settingsData);
+        
+        if (resolutions == null) return;
         
         Resolution res = resolutions[resolutionIndex];
         FullScreenMode mode = screenModeIndex == 0 ? FullScreenMode.Windowed : FullScreenMode.FullScreenWindow;
         Screen.SetResolution(res.width, res.height, mode, maxRefreshRate);
-        
-        AudioManager.instance.SetVolumes(sfxVolumeValue, musicVolumeValue);
-        
-        //LocalizationSystem.currentlanguage = languages[settingsData.languageModeIndex];
-        
-        LoadSettingStates(settingsData);
     }
 
     private void LoadSettingStates(SettingsData settingsData)

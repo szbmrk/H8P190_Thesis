@@ -10,15 +10,15 @@ public class LobbyGUI : MonoBehaviour
     public static LobbyGUI instance;
     public TextMeshProUGUI joinCodeText;
 
-    [SerializeField] private Button deleteLobbyBtn;
-    [SerializeField] private Button startGameBtn;
-    [SerializeField] private GameObject conditionToStartText;
+    [SerializeField] public Button deleteLobbyBtn;
+    [SerializeField] public Button startGameBtn;
+    [SerializeField] public GameObject conditionToStartText;
 
-    [SerializeField] private TextMeshProUGUI playerCount;
-    [SerializeField] private GameObject lobbyPanel;
-    [SerializeField] private LobbyPlayerCard playerCardPrefab;
-    [SerializeField] private Transform parentForPlayerCards;
-    [SerializeField] private TMP_Dropdown startingMoneyDropdown;
+    [SerializeField] public TextMeshProUGUI playerCount;
+    [SerializeField] public GameObject lobbyPanel;
+    [SerializeField] public LobbyPlayerCard playerCardPrefab;
+    [SerializeField] public Transform parentForPlayerCards;
+    [SerializeField] public TMP_Dropdown startingMoneyDropdown;
 
     private int numOfPlayers;
 
@@ -32,7 +32,7 @@ public class LobbyGUI : MonoBehaviour
         startGameBtn.onClick.AddListener(StartGame);
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         Settings.startingMoney = LobbySettings.startingMoney;
         Settings.playerCount = numOfPlayers;

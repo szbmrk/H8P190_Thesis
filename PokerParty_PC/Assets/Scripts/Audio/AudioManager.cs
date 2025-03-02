@@ -5,8 +5,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour 
 {
     public static AudioManager instance;
-    public List<AudioSource> sfxSources;
-    public List<AudioSource> musicSources;
+    public List<AudioSource> sfxSources = new List<AudioSource>();
+    public List<AudioSource> musicSources = new List<AudioSource>();
     
     private void Awake()
     {
