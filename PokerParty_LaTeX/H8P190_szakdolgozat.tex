@@ -74,7 +74,7 @@ A Kliens-Szerver architektúra az egyik legtöbbet használt módszer az online 
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=10cm]{ClientServer}
+	\includegraphics[width=15cm]{ClientServer}
 	\caption{Kliens-Szerver architektúra}
 	\label{fig-clientserver}
 \end{figure}
@@ -87,12 +87,28 @@ Mivel mindig várni kell a szerver által küldött információra egy interakci
 
 \subsection{Peer-to-Peer (P2P)}
 
+A P2P architektúra lényege, hogy a játékosok közvetlen kapcsolatot létesítenek egymással, így nincs szükség központi szerverekre, ellentétben a Kliens-Szerver architektúránál. Ebben a felépítésben, minden játékosnak helyi szinten kezeli a rendszer a játéklogikát.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=10cm]{P2P}
+	\caption{Peer-to-Peer architektúra}
+	\label{fig-p2p}
+\end{figure}
+
+A P2P architektúra előnyei a Kliens-Szerver architektúrával szemben:
+\begin{itemize}
+	\item Mivel a játékosok közvetlen kapcsolatot alakítanak ki egymással, így általában gyorsabb a válaszidő.
+	\item Sokkal költség hatékonyabb megoldás, mivel nem kell egy központi szerver üzemeltetésére költeni.
+\end{itemize}
+
+Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. szekcióban bővebben írok. \cite{WikipediaP2P} \cite{MediumP2P}
+
 \chapter{Unity}
 \label{ch-unity}
 
 \section{Relay}
-\section{Modul1}
-\section{Modul2}
+\label{sec-relay}
 
 \chapter{Rendszerterv}
 Azok az elemek, amiket tanultatok RFT-n, azok kerülnek ide
@@ -219,7 +235,7 @@ Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erőss�
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=14cm]{poker_hands}
+	\includegraphics[width=14cm]{PokerHands}
 	\caption{Lehetséges pókerkezek}
 	\label{fig-pokerhands}
 \end{figure}
@@ -369,6 +385,11 @@ A teljes algoritmus tehát röviden így működik:
 	\bibitem{MediumClientServer}
 	\textsc{Lem Apperson}: \emph{Beginning Game Development: Client-Server Architecture}, Lem Apperson blogja, elérhető:
 	\url{https://medium.com/@lemapp09/beginning-game-development-client-server-architecture-1b7676d80dea} [Letöltve: 2025-02-28]
+	\bibitem{WikipediaP2P}
+	\textsc{Wikipedia}: \emph{Peer-to-peer}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/Peer-to-peer} [Letöltve: 2025-03-02]
+	\bibitem{MediumP2P}
+	\textsc{Tashi Protocol}: \emph{Peer-to-Peer Gaming}, Tashi Protocol blogja, elérhető:
+	\url{https://medium.com/tashi-gg/peer-to-peer-gaming-9991600c6707} [Letöltve: 2025-03-02]
 	\bibitem{WikipediaPoker}
 	\textsc{Wikipedia}: \emph{Póker}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/P%C3%B3ker} [Letöltve: 2024-11-12]
 	\bibitem{WikipediaTexasholdem}
