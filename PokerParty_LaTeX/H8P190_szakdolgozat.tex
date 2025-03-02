@@ -116,6 +116,7 @@ Azok az elemek, amiket tanultatok RFT-n, azok kerülnek ide
 \section{Rendszer célja}
 \section{Követelmények}
 \section{Architekturális terv}
+\label{sec-architecture}
 PC unity, Mobile unity, SharedDLL
 \section{Használt fejlesztői eszközök}
 
@@ -361,10 +362,27 @@ A teljes algoritmus tehát röviden így működik:
 
 \chapter{Tesztelés}
 
-\section{SharedDLL tesztelése}
-\section{PC játék tesztelése}
-\section{Mobile játék tesztelése}
-\section{Általános tesztelés}
+A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat. A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni.
+
+\section{Közös DLL tesztelése}
+
+A közös DLL tesztelése során a már fentebb említett egység teszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egység teszteteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint, ahogy korábban \aref{sec-architecture}. szekcióban említettem a közös DLL projektnek az egyik legfontosabb része a kézkiértékelést kezelő algoritmus. A kézkiértékeléshez írt egység teszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként a teszteknél.
+
+\section{Játékok tesztelése}
+A játékok tesztelésében legnagyobb szerepet a playtest játszott. A playtest kétféleképpen nézett ki:
+
+\begin{itemize}
+	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen.
+	\item Egyedül: Unity editor által adott lehetőségeket kihasználva teszteltem. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiple Instances}-nak köszönhetően egyszerre 2-4 példányban futotta gépemen.
+\end{itemize}
+
+A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésre de játékélménybeli javításába is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, amik a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, ami megkönnyítette a hibák feltárását.
+
+Mindkét játékhoz készítettem a már korábbiakban említett egység teszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egység tesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. \cite{NUnit}
+
+\section{Összefoglalás}
+
+A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy hogy csak idő pazarlás, de mindenképpen megéri időt tölteni vele. A játékfejlesztésben pedig a hibakeresésen kívül másban is fontos szerepet játszik, hiszen akár a játékélmény fejlesztésében is segíthet. Vannak olyan játékok is, ahol a játékmenet kiegyensúlyozásának érdekében is rákényszerülünk a tesztelésre és elhagyhatatlan eleme a fejlesztése folyamatnak.
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
@@ -400,6 +418,9 @@ A teljes algoritmus tehát röviden így működik:
 	\textsc{Szurdi András}: \emph{Pókerkönyv. Kezdőknek és haladóknak}, Ciceró, Budapest, 1995.
 	\bibitem{Varga}
 	\textsc{Varga Ervin}: \emph{Póker alapkönyv}, Vagabund, Kecskemét, 2008.
+	\bibitem{NUnit}
+	\textsc{NUnit}: a unit-testing framework for all .Net languages, elérhető: \url{https://docs.nunit.org/} [Letöltve: 2025-03-02]
+	
 \end{thebibliography}
 
 % Aláírt, szkennelt nyilatkozat beillesztése a szakdolgozat végére
