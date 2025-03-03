@@ -102,10 +102,108 @@ A P2P architektúra előnyei a Kliens-Szerver architektúrával szemben:
 	\item Sokkal költség hatékonyabb megoldás, mivel nem kell egy központi szerver üzemeltetésére költeni.
 \end{itemize}
 
-Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. szekcióban bővebben írok. \cite{WikipediaP2P} \cite{MediumP2P}
+Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity Technologies által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. szekcióban bővebben írok. \cite{WikipediaP2P} \cite{MediumP2P}
 
 \chapter{Unity}
 \label{ch-unity}
+A Unity egy játékmotor, amit aktívan a Unity Technologies fejleszt. A játékmotor segítségével számos platformra fejleszthetünk 2D és 3D játékokat is. Ezek a platformok közé tartoznak a virtuális valóságot szolgáltató platformok is. A megszokott asztali számítógépek mellett, mobil és web támogatást is nyújt a játékmotor. \cite{UnityPlatforms}
+
+\section{Unity6}
+
+Mai legfrissebb verziója a játékmotornak a Unity6, amit 2024 végén adtak ki. A frissítés számos nagy fejlesztéssel állt elő, amik közül nekem az egyik legfontosabb a tesztelés szempontjából, a \emph{Multiplayer play mode} volt. Fontosabb fejlesztések: 
+
+\begin{itemize}
+	\item Renderelés teljesítményének növelése
+	\item Magával ragadóbb vizuális megjelenítés
+	\item Többjátékos játékok fejlesztésének egyszerűsítése
+	\begin{itemize}
+		\item Multiplayer Center: kiválaszthatjuk, hogy milyen igényeink vannak a játékkal kapcsolatban, majd a Unity felsorolja nekünk a megfelelő technológiákat és csomagokat, így nem nekünk kell keresgélnünk és kutatnunk a csomagok után.
+		\item Multiplayer Play Mode: talán ez volt számomra a legfontosabb, hiszen exponenciális mértékben felgyorsította a tesztelés folyamatát. A Multiplay Play Mode lehetővé teszi, hogy egyszerre több példányban is futhasson a játék a gépemen buildelés nélkül.
+	\end{itemize}
+	\item Web alapú fejlesztés teljesítményének növelése
+	\item Gyorsított UI fejlesztés
+\end{itemize}
+
+Ezek mellett még számos fejlesztést és javítást hozott a frissítés. \cite{Unity6Features}
+
+\section{Felépítése}
+
+A játékok Unity-ben különböző jelenetekre (scene) vannak felbontva. A különböző jelenetekkel játékbeli tereket választhatunk el, például 1-1 szintet a játékon belül. A jeleneteken belül a játék fő építő eleme a \emph{GameObject}, amit egy fa hierarchiában tudunk a jelenetekbe pakolni. \cite{UnityScene}
+
+\subsection{GameObject}
+\label{subsec-gameobject}
+
+Unity-ben minden objektum egy GameObject. Ez azt jelenti, hogy mindennek, ami a játékban szerepelhet, GameObject-nek kell lennie. Önmagában egy GameObject nem csinál semmit, ezért tulajdonságokkal kell felruháznunk. A GameObject egy konténer, amihez darabokat adhatunk, amitől hang, effekt, karakter vagy akármi lehet. Ezeket a darabokat komponenseknek nevezzük. \cite{UnityGameObjects}
+
+\subsubsection{Komponensek}
+
+A komponensek lehetnek beépítettek, amivel a Unity szolgál, vagy akár írhatunk saját komponenseket C\# script-ek segítségével. Komponensek segítségével tudjuk életre kelteni a GameObject-eket. A saját script-ek írása lehetővé teszi a GameObject-en szereplő többi komponens módosítását és kezelését is. Komponenseket tudunk törölni és hozzáadni egy objektumhoz, ezeket a műveletek \aref{subsec-editor}. szekcióban említett inspector ablakon keresztül tudjuk kezelni. Ebben a szekcióban bemutatom részletesebben a leggyakrabban használt komponenseket. \cite{UnityComponents}
+
+\paragraph{Transform}
+Az egyik legfontosabb komponens, amivel minden objektumnak rendelkeznie kell. Ezt a komponenst nem is lehet törölni az objektumokról. Információt szolgáltat az objektum: pozíciójáról, méretéről, forgásáról és a hierarchiában lévő tulajdonságairól is. \cite{UnityTransform}
+	
+\paragraph{RigidBody}
+Azok az objektumok amelyeken van ilyen komponens, azok használják a beépített fizikai motort a gravitáció és többi fizikai hatás szimulálásához. A Transform komponens használata helyett, a fizikai motor segítségével módosítható az objektum pozíciója. Különféle fizikai hatásokat szimulálhatunk a komponens segítségével. Számos tulajdonságot is beállíthatunk az objektumnak, mint például a tömegét, a pontosabb szimulációk érdekében. \cite{UnityRigidbody}
+
+\paragraph{Camera}
+A játékos a kamerán keresztül fogja látni a világot. Egy projekt létrehozásakor alapból létrejön egy objektum, amire a Camera komponens már hozzá van adva. A komponensen különféle beállításokat találhatunk a felbontással, effektekkel és hasonlókkal kapcsolatban. \cite{UnityCamera}
+
+\paragraph{Collider}
+Ez a komponens lehetőséget ad két objektum találkozásának vizsgálatára. Ha mozgatni is szeretnénk az objektumokat, akkor RigidBody használatával tudjuk csak megtenni. Több különböző formában tudjuk az objektum köré tenni: \cite{UnityCollider}
+
+\begin{itemize}
+	\item Box (3D)
+	\item Square (2D)
+	\item Sphere (3D)
+	\item Circle (2D)
+	\item Mesh (3D)
+	\item Polygon (2D)
+\end{itemize}
+
+\paragraph{Sprite Renderer}
+Ez a komponens lehetővé teszi a képek megjelenítését 2D illetve 3D projektekben is. Egy sprite-ot kell megadnunk neki, amit különböző képformátumokból a Unity-be importálva tudunk létrehozni. \cite{UnitySpriteRenderer}
+
+\paragraph{Light}
+Ennek a komponensnek a segítségével tudjuk kezelni a fényeket a játékban. 2D és 3D esetén is több különböző light komponenst szolgáltat a Unity. A fényeknek lehetőségünk van állítani a fényét, színét, távolságát és még sok hasonló tulajdonságot. \cite{UnityLight}
+
+\paragraph{Audio Source}
+Ennek a komponensnek egy Audio Clip-et szolgáltatva tudjuk lejátszani az adott hangunkat. Van lehetőségünk a hangerőt és hasonló tulajdonságokat módosítanunk. Használatához szükségünk van egy Audio Listener komponensre is, aminek segítségével akár térben is különbséget tehetünk a hangok között. \cite{UnityAudioSource}
+
+\paragraph{Script}
+Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenetet. Mindegyik script megírása C\#-ban történik. Az olyan script-ek amiket egy objektumhoz akarunk kötni a MonoBehaviour beépített osztályból kell örököltetnünk. Ez az osztály sok különböző metódust és függvényt ad nekik, de ezek közül a 2 legfontosabb a start és az update metódusok.
+
+\begin{itemize}
+	\item Start: a start metódus egyszer fut le, amikor az objektum betölt a játékba.
+	\item Update: az update metódus minden frame-ben lefut, amikor az objektum aktív.
+\end{itemize}
+
+A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. szekcióban említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta. \cite{UnityScripting}
+
+\subsection{Editor}
+\label{subsec-editor}
+Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog történni. A Unity editor több különböző ablakból tevődik össze, amik segítik a fejlesztési folyamatot. Ebben a szekcióban bemutatom részletesebben a legfontosabb ablakokat.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=16cm]{UnityEditor}
+	\caption{Unity editor}
+	\label{fig-unityeditor}
+\end{figure}
+
+\paragraph{Project Window}
+Ebben az ablakban tudjuk kezelni a fájlrendszerét a projektünknek. Itt hozhatunk létre rendszerezés céljából különböző mappákat, és helyezhetjük el a felhasználni kívánt fájlokat is. \cite{UnityProjectWindow}
+
+\paragraph{Scene View}
+Ez az egyik legfontosabb ablak. Itt tudjuk kezelni a jeleneten belüli játék elemeinket. Több különböző módon tudjuk manipulálni az objektumokat, beleértve a pozíciójuk módosítását, és az átméretezésüket is. \cite{UnitySceneView}
+
+\paragraph{Hierarchy Window}
+Ez az ablak tartalmazza a jelenlegi jeleneten belüli összes játék objektumot. Itt tudunk létrehozni új objektumokat, és a faszerű hierarchia nézetben rendezni őket. \cite{UnityHierarchyWindow}
+
+\paragraph{Inspector Window}
+Ha kiválasztunk egy objektumot a hierarchiában, vagy a jelenet nézetben, akkor azt az objektumot ezen az ablakon keresztül tudjuk kezelni. Itt tudunk új komponenseket adni hozzá és a meglévőeket pedig módosítani. Itt tudjuk például a saját kódjainkat is az objektumokra helyezni. \cite{UnityInspectorWindow}
+
+\paragraph{Game View}
+Ezen az ablakon látható a játékban használt kamerák által rögzített renderelt kép, amely a végső játékot mutatja be. \cite{UnityGameView}
 
 \section{Relay}
 \label{sec-relay}
@@ -136,7 +234,7 @@ Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazot
 
 A játék során három fontos szerep forog körbe a játékosok között, amit ,,gombokkal'' jelölünk. Ezek a szerepek az osztó, kis vak és nagy vak. Az osztótól balra ülő játékos lesz a kis vak, a kis vaktól balra ülő pedig a nagy vak. Az osztót pedig több különböző módon választhatjuk meg a játék elején.  
 
-Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig még osztás előtt kötelesek betenni a vak téteket, ahol a kis vak tét általában a nagy vak tét fele. \cite{WikipediaTexasholdem}
+Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig még osztás előtt kötelesek betenni a vak téteket, ahol a kis vak tét általában a nagy vak tét fele. Egy játszma az alábbiak szerint játszódhat le: \cite{WikipediaTexasholdem}
 
 \begin{enumerate}
 	\item \emph{Osztás}
@@ -189,7 +287,7 @@ Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig mé
 
 \subsubsection{Pókerkezek}
 
-Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erősségük szerint rendeztem el, a legerősebbtől a leggyengébbig. A lista tetején található kéz a pókerben elérhető legmagasabb értékű kombináció, és innen lefelé haladva egyre gyengébb kezek következnek. Az alábbi sorrendet megtekinthetjük \aref{fig-pokerhands}.~ábrán is. \cite[9.~oldal]{Szurdi}
+Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erősségük szerint rendeztem el, a legerősebbtől a leggyengébbig. A lista tetején található kéz a pókerben elérhető legmagasabb értékű kombináció, és innen lefelé haladva egyre gyengébb kezek következnek. Az alábbi sorrend megtekinthető \aref{fig-pokerhands}.~ábrán is. \cite[9.~oldal]{Szurdi}
 
 \begin{enumerate}
 	\item \emph{Royal flös (royal flush)}
@@ -373,7 +471,7 @@ A játékok tesztelésében legnagyobb szerepet a playtest játszott. A playtest
 
 \begin{itemize}
 	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen.
-	\item Egyedül: Unity editor által adott lehetőségeket kihasználva teszteltem. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiple Instances}-nak köszönhetően egyszerre 2-4 példányban futotta gépemen.
+	\item Egyedül: Unity editor által adott lehetőségeket kihasználva teszteltem. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiplayer play mode}-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. \cite{UnityMultiplayerPlayMode}
 \end{itemize}
 
 A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésre de játékélménybeli javításába is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, amik a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, ami megkönnyítette a hibák feltárását.
@@ -391,33 +489,122 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 	\addcontentsline{toc}{chapter}{\bibname}
 	\bibitem{WikipediaGameEngine}
 	\textsc{Wikipedia}: \emph{Game engine}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Game_engine} [Letöltve: 2025-02-28]
+	
 	\bibitem{WikipedaiUnreal}
 	\textsc{Wikipedia}: \emph{Unreal Engine}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unreal_Engine} [Letöltve: 2025-02-28]
+	
 	\bibitem{GitHubGodot}
 	\textsc{GitHub}: \emph{Godot}: \url{https://github.com/godotengine/godot)} [Letöltve: 2025-02-28]
+	
 	\bibitem{WikipediaUnity}
 	\textsc{Wikipedia}: \emph{Unity (game engine)}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unity_(game_engine)} [Letöltve: 2025-02-28]
+	
 	\bibitem{MediumMultiplayer}
 	\textsc{Jamal Aladdin}: \emph{The Evolution of Multiplayer Gaming: A Journey Through Time}, Jamal Aladdin blogja, elérhető:
 	\url{https://medium.com/@Jamal_Aladdin/the-evolution-of-multiplayer-gaming-a-journey-through-time-e34ef59294c2} [Letöltve: 2025-02-28]
+	
 	\bibitem{MediumClientServer}
 	\textsc{Lem Apperson}: \emph{Beginning Game Development: Client-Server Architecture}, Lem Apperson blogja, elérhető:
 	\url{https://medium.com/@lemapp09/beginning-game-development-client-server-architecture-1b7676d80dea} [Letöltve: 2025-02-28]
+	
 	\bibitem{WikipediaP2P}
 	\textsc{Wikipedia}: \emph{Peer-to-peer}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/Peer-to-peer} [Letöltve: 2025-03-02]
+	
 	\bibitem{MediumP2P}
 	\textsc{Tashi Protocol}: \emph{Peer-to-Peer Gaming}, Tashi Protocol blogja, elérhető:
 	\url{https://medium.com/tashi-gg/peer-to-peer-gaming-9991600c6707} [Letöltve: 2025-03-02]
+	
+	\bibitem{UnityPlatforms}
+	\textsc{Unity Technologies}: \emph{Platform development}, elérhető:
+	\url{https://docs.unity3d.com/Manual/PlatformSpecific.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{Unity6Features}
+	\textsc{Martin Best}: \emph{Unity 6 is here: See what's new}, elérhető:
+	\url{https://unity.com/blog/unity-6-features-announcement} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityScene}
+	\textsc{Unity Technologies}: \emph{Scenes}, elérhető:
+	\url{https://docs.unity3d.com/560/Documentation/Manual/CreatingScenes.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityGameObjects}
+	\textsc{Unity Technologies}: \emph{GameObjects}, elérhető:
+	\url{https://docs.unity3d.com/560/Documentation/Manual/GameObjects.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityComponents}
+	\textsc{Unity Technologies}: \emph{Using Components}, elérhető:
+	\url{https://docs.unity3d.com/560/Documentation/Manual/UsingComponents.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityTransform}
+	\textsc{Unity Technologies}: \emph{Transform}, elérhető:
+	\url{https://docs.unity3d.com/560/Documentation/Manual/class-Transform.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityRigidbody}
+	\textsc{Unity Technologies}: \emph{RigidBody}, elérhető:
+	\url{https://docs.unity3d.com/Manual/class-Rigidbody.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityCamera}
+	\textsc{Unity Technologies}: \emph{Camera}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Camera.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityCollider}
+	\textsc{Unity Technologies}: \emph{Collider}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Collider.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnitySpriteRenderer}
+	\textsc{Unity Technologies}: \emph{Sprite Renderer}, elérhető:
+	\url{https://docs.unity3d.com/540/Documentation/Manual/class-SpriteRenderer.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityLight}
+	\textsc{Unity Technologies}: \emph{Light}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Light.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityAudioSource}
+	\textsc{Unity Technologies}: \emph{Audio Source}, elérhető:
+	\url{https://docs.unity3d.com/Manual/class-AudioSource.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityScripting}
+	\textsc{Unity Technologies}: \emph{Scripting}, elérhető:
+	\url{https://docs.unity3d.com/Manual/scripting.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityProjectWindow}
+	\textsc{Unity Technologies}: \emph{The Project Window}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/ProjectView.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnitySceneView}
+	\textsc{Unity Technologies}: \emph{The Scene View}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/UsingTheSceneView.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityHierarchyWindow}
+	\textsc{Unity Technologies}: \emph{The Hierarchy Window}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/Hierarchy.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityInspectorWindow}
+	\textsc{Unity Technologies}: \emph{The Inspector Window}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/UsingTheInspector.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityGameView}
+	\textsc{Unity Technologies}: \emph{The Game View}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/GameView.html} [Letöltve: 2025-03-03]
+	
 	\bibitem{WikipediaPoker}
 	\textsc{Wikipedia}: \emph{Póker}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/P%C3%B3ker} [Letöltve: 2024-11-12]
+	
 	\bibitem{WikipediaTexasholdem}
 	\textsc{Wikipedia}: \emph{Texas Hold'Em}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/Texas_Hold%E2%80%99Em} [Letöltve: 2024-11-13]
+	
 	\bibitem{HandEvaluation}
 	\textsc{Jonathan Hsiao}: \emph{Evaluating Poker Hands with Bit Math}, Jonathan Hsiao blogja, elérhető: \url{https://jonathanhsiao.com/blog/evaluating-poker-hands-with-bit-math} [Letöltve: 2025-02-25]
+	
 	\bibitem{Szurdi}
 	\textsc{Szurdi András}: \emph{Pókerkönyv. Kezdőknek és haladóknak}, Ciceró, Budapest, 1995.
+	
 	\bibitem{Varga}
 	\textsc{Varga Ervin}: \emph{Póker alapkönyv}, Vagabund, Kecskemét, 2008.
+	
+	\bibitem{UnityMultiplayerPlayMode}
+	\textsc{Unity Technologies}: \emph{Multiplayer Play Mode}, elérhető:
+	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/com.unity.multiplayer.playmode.html} [Letöltve: 2025-03-03]
+	
 	\bibitem{NUnit}
 	\textsc{NUnit}: a unit-testing framework for all .Net languages, elérhető: \url{https://docs.nunit.org/} [Letöltve: 2025-03-02]
 	
