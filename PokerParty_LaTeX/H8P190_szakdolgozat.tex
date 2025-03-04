@@ -25,6 +25,7 @@
 
 \chapter*{Bevezetés}
 \addcontentsline{toc}{chapter}{Bevezetés}
+Magamról, hogy kezdett el érdekelni az infó, majd hogy jutottam a Játékfejlesztésig.
 
 \chapter{Technológiai áttekintés}
 
@@ -179,6 +180,9 @@ Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenete
 
 A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. szekcióban említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta. \cite{UnityScripting}
 
+\subsection{Prefab}
+\cite{UnityPrefab}
+
 \subsection{Editor}
 \label{subsec-editor}
 Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog történni. A Unity editor több különböző ablakból tevődik össze, amik segítik a fejlesztési folyamatot. Ebben a szekcióban bemutatom részletesebben a legfontosabb ablakokat.
@@ -207,6 +211,34 @@ Ezen az ablakon látható a játékban használt kamerák által rögzített ren
 
 \section{Relay}
 \label{sec-relay}
+A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fejlesszünk drága dedikált szerverek nélkül. A kapcsolódás folyamat hozzáférési kódokon keresztül történik a játékosok között. A Unity Technologies elmondása szerint ezt a szolgáltatást kis méretű casual játékokhoz és kör alapú kártya játékokhoz a legérdemesebb használni. Az alábbiak a fő előnyei ennek a szolgáltatásnak. \cite{UnityRelayService} \cite{UnityRelayDocs}
+
+\begin{itemize}
+	\item Költséghatékony megoldás a játékosok összekapcsolásra: A Peer-to-Peer alapú megoldás lehetővé teszi, hogy a játékosok a saját eszközeiken hosztolják a játékot és így nincs szükség drága szerverekre.
+	\item Automatikus és egyszerű skálázás: a Relay kezeli nekünk a skálázási igényeket, akár 100 játékost is képes összekapcsolni egy játékmenetbe.
+	\item Biztonságos kapcsolat: a Relay kezeli helyettünk a biztonságos kapcsolatot és biztosítja az információk titkosított cseréjét a játékosok között.
+\end{itemize}
+
+Két fő komponensből épül fel a Relay.
+
+\begin{itemize}
+	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön az ügyfelek között. 
+	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk.
+\end{itemize}
+
+\subsection{Relay Server}
+A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken keresztül kommunikálnak egymással. A Relay szerverek továbbítják az üzeneteket a kliensek között kis késleltetésű datagram cserével, ez biztosítja azt, hogy két játékos sose kapcsolódik közvetlen egymáshoz. Ezek a szerverek nyilvános végpontként viselkednek, ami elérhető az összes játékos számára. Ez a megközelítés megoldást ad több különböző felmerülő problémára is mint például a játékosok közötti tűzfalakra. Minden játékos ugyanarra az ip címre tud csatlakozni, amit biztosra vehetnek, hogy a játékmenet során nem fog változni, így a játékosoknak nem kell tudniuk egymás ip címéről, ez is erősíti a biztonságot a rendszerben. \cite{UnityRelayServers}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=10cm]{UnityRelayServers}
+	\caption{Relay szerverek felépítése}
+	\label{fig-unityrelayservers}
+\end{figure}
+
+\subsection{Üzenet küldési protokoll}
+
+\subsubsection{Üzenet típusok}
 
 \chapter{Rendszerterv}
 Azok az elemek, amiket tanultatok RFT-n, azok kerülnek ide
@@ -449,9 +481,16 @@ A teljes algoritmus tehát röviden így működik:
 \end{enumerate}
 
 \section{Többjátékos kapcsolat megvalósítása}
-
+Messagek küldése stringként JSON formában, amiket C\#-ban osztályként kezelek
 \subsection{Kapcsolat kezelése a PC oldalon}
+Joincode létrehzoása majd lobby panelen megmutatása
+lobby, kick
+sendmessage to clients or to client
+
 \subsection{Kapcsolat kezelése a Mobile oldalon}
+Csatlakozás join code alapján
+chat, ready, disconnect
+sendmessage to host
 
 \section{Játékmenet megvalósítása}
 
@@ -566,6 +605,10 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 	\textsc{Unity Technologies}: \emph{Scripting}, elérhető:
 	\url{https://docs.unity3d.com/Manual/scripting.html} [Letöltve: 2025-03-03]
 	
+	\bibitem{UnityPrefab}
+	\textsc{Unity Technologies}: \emph{Prefabs}, elérhető:
+	\url{https://docs.unity3d.com/Manual/Prefabs.html} [Letöltve: 2025-03-03]
+	
 	\bibitem{UnityProjectWindow}
 	\textsc{Unity Technologies}: \emph{The Project Window}, elérhető:
 	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/ProjectView.html} [Letöltve: 2025-03-03]
@@ -585,6 +628,22 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 	\bibitem{UnityGameView}
 	\textsc{Unity Technologies}: \emph{The Game View}, elérhető:
 	\url{https://docs.unity3d.com/6000.0/Documentation/Manual/GameView.html} [Letöltve: 2025-03-03]
+	
+	\bibitem{UnityRelayService}
+	\textsc{Unity Technologies}: \emph{Relay: Free P2P Networking \& Connection Solution}, elérhető:
+	\url{https://unity.com/products/relay} [Letöltve: 2025-03-04]
+	
+	\bibitem{UnityRelayDocs}
+	\textsc{Unity Technologies}: \emph{Unity Relay}, elérhető:
+	\url{https://docs.unity.com/ugs/manual/relay/manual/introduction} [Letöltve: 2025-03-04]
+	
+	\bibitem{UnityRelayServers}
+	\textsc{Unity Technologies}: \emph{Relay Servers}, elérhető:
+	\url{https://docs.unity.com/ugs/en-us/manual/relay/manual/relay-servers} [Letöltve: 2025-03-04]
+	
+	\bibitem{UnityAllocationsService}
+	\textsc{Unity Technologies}: \emph{Allocations Service}, elérhető:
+	\url{https://docs.unity.com/ugs/en-us/manual/relay/manual/allocations-service} [Letöltve: 2025-03-04]
 	
 	\bibitem{WikipediaPoker}
 	\textsc{Wikipedia}: \emph{Póker}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/P%C3%B3ker} [Letöltve: 2024-11-12]
