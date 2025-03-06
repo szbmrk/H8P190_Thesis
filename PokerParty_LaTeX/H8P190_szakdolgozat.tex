@@ -14,7 +14,7 @@
 \begin{document}
 
 \institute{Matematikai és Informatikai Intézet}
-\title{Játékfejlesztés Unity keretrendszerben}
+\title{Többjátékos játékfejlesztés Unity keretrendszerben 2 platform között}
 \author{Szabó Márk\\programtervező informatikus Bsc.}
 \supervisor{Troll Ede\\tanársegéd}
 \city{Eger}
@@ -75,7 +75,7 @@ A Kliens-Szerver architektúra az egyik legtöbbet használt módszer az online 
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=15cm]{ClientServer}
+	\includegraphics[width=10cm]{ClientServer}
 	\caption{Kliens-Szerver architektúra}
 	\label{fig-clientserver}
 \end{figure}
@@ -504,10 +504,6 @@ sendmessage to host
 \chapter{Tesztelés}
 
 A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat. A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni.
-
-\section{XUnit tesztek}
-
-\section{NUnit tesztek}
 
 \section{Közös DLL tesztelése}
 
