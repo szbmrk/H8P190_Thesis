@@ -29,7 +29,7 @@ Magamról, hogy kezdett el érdekelni az infó, majd hogy jutottam a Játékfejl
 
 \chapter{Technológiai áttekintés}
 
-Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is, amely során különféle API-k – például grafikai vagy multimédiakezelő API-k – segítségével történik a fejlesztés. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, így ki tudtam használni az általa kínált lehetőségeket és eszközöket.
+Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is. Az API (alkalmazásprogramozási interfész) segítségével egy program vagy szolgáltatás funkcióit más programok is elérhetik anélkül, hogy a belső működést ismerniük kellene. A játékmotorok használata megkönnyíti a fejlesztés folyamatát, ugyanakkor nem biztosít olyan nagy fokú rugalmasságot, mint az API-alapú fejlesztés. Az API-alapú fejlesztés során függvény könyvtárak segítségével tudjuk felépíteni a játékunkat, ezért az egyes modulok nincsenek a játékmotor keretei köré szorítva, hanem az adott függvények segítségével magunk építhetjük fel ezeket. Ilyen API-k lehetnek például a játékfejlesztés során a grafikai-,multimédia kezelő API-k. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, így ki tudtam használni az általa kínált lehetőségeket és eszközöket.
 
 \section{Enginek}
 
@@ -222,7 +222,7 @@ A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fe
 Két fő komponensből épül fel a Relay.
 
 \begin{itemize}
-	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön az ügyfelek között. 
+	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön a játékosok között. Ennek segítségével a játékomban fix bájton tárolt szöveges adatokat küldök a játékosok között.
 	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk.
 \end{itemize}
 
@@ -236,10 +236,6 @@ A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken ker
 	\label{fig-unityrelayservers}
 \end{figure}
 
-\subsection{Üzenet küldési protokoll}
-
-\subsubsection{Üzenet típusok}
-
 \chapter{Rendszerterv}
 Azok az elemek, amiket tanultatok RFT-n, azok kerülnek ide
 
@@ -248,6 +244,7 @@ Azok az elemek, amiket tanultatok RFT-n, azok kerülnek ide
 \section{Architekturális terv}
 \label{sec-architecture}
 PC unity, Mobile unity, SharedDLL
+
 \section{Használt fejlesztői eszközök}
 
 \chapter{Saját szoftver megvalósítása}
@@ -500,6 +497,10 @@ sendmessage to host
 \chapter{Tesztelés}
 
 A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat. A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni.
+
+\section{XUnit tesztek}
+
+\section{NUnit tesztek}
 
 \section{Közös DLL tesztelése}
 
