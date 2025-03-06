@@ -181,7 +181,13 @@ Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenete
 A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. szekcióban említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta. \cite{UnityScripting}
 
 \subsection{Prefab}
-\cite{UnityPrefab}
+A Unity Prefab rendszere lehetővé teszi egy GameObject el tárolását, minden komponensével, tulajdonságértékével és gyermek GameObjectjével együtt, egy újrafelhasználható objektumként. Ha van egy olyan objektumunk, amit sokszor újra fel szeretnénk használni a jelenteinkben, akkor érdemes Prefab-et használni ezeknek az objektumoknak az eltárolására. Egyes Prefab-ek esetén felülírhatjuk az alap beállításokat, így kis szinten különböző de logikailag összefüggő objektumokat használhatunk. Néhány gyakori példa a Prefab használatra: \cite{UnityPrefab}
+
+\begin{itemize}
+	\item Nem játékos karakterek (NPC-k) - akár egy ellenfél típussal többször is találkozhatunk a játékunk során.
+	\item Lövedékek - például egy ágyú esetén, az ágyú golyó maga lehet egy Prefab, ami minden tüzelés során létrejön.
+	\item Ismétlődő UI elemek - például Játékos kártyák egy lobby panelen.
+\end{itemize}
 
 \subsection{Editor}
 \label{subsec-editor}
@@ -222,7 +228,7 @@ A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fe
 Két fő komponensből épül fel a Relay.
 
 \begin{itemize}
-	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön a játékosok között. Ennek segítségével a játékomban fix bájton tárolt szöveges adatokat küldök a játékosok között.
+	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön a játékosok között. Ennek segítségével a játékomban fix bájton tárolt szöveges adatokat küldök a játékosok között, aminek a pontosabb menetéről a \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok.
 	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk.
 \end{itemize}
 
@@ -478,6 +484,7 @@ A teljes algoritmus tehát röviden így működik:
 \end{enumerate}
 
 \section{Többjátékos kapcsolat megvalósítása}
+\label{sec-tobbjatekoskapcsolat}
 Messagek küldése stringként JSON formában, amiket C\#-ban osztályként kezelek
 \subsection{Kapcsolat kezelése a PC oldalon}
 Joincode létrehzoása majd lobby panelen megmutatása
@@ -517,6 +524,21 @@ A játékok tesztelésében legnagyobb szerepet a playtest játszott. A playtest
 A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésre de játékélménybeli javításába is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, amik a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, ami megkönnyítette a hibák feltárását.
 
 Mindkét játékhoz készítettem a már korábbiakban említett egység teszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egység tesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. \cite{NUnit}
+
+\subsubsection{Teszt jegyzőkönyv}
+
+A playtest-ek során teszt jegyzőkönyvet is vezettem a későbbi áttekintés érdekében. Egy ilyen teszt jegyzőkönyv látható \aref{tab-tesztjegyzokonyv}. táblázatban is.
+
+\begin{table}[ht!]
+	\centering
+	\footnotesize
+	\begin{tabular}{*{15}{r}}
+		0000 & 0001 & 0001 & 0001 & 0001 & 0001 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000\\
+		A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+	\end{tabular}
+	\caption{Példa tesztjegyzőkönyv}
+	\label{tab-tesztjegyzokonyv}
+\end{table}
 
 \section{Összefoglalás}
 
