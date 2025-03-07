@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \PassOptionsToPackage{defaults=hu-min}{magyar.ldf}
 \usepackage[magyar]{babel}
-\usepackage{mathtools,amssymb,amsthm,pdfpages}
+\usepackage{mathtools,amssymb,amsthm,pdfpages,array}
 \footnotestyle{rule=fourth}
 
 \newtheorem{tetel}{Tétel}[chapter]
@@ -10,6 +10,7 @@
 \newtheorem{definicio}[tetel]{Definíció}
 \theoremstyle{remark}
 \newtheorem{megjegyzes}[tetel]{Megjegyzés}
+\setlength{\extrarowheight}{2pt}
 
 \begin{document}
 
@@ -29,7 +30,7 @@ Magamról, hogy kezdett el érdekelni az infó, majd hogy jutottam a Játékfejl
 
 \chapter{Technológiai áttekintés}
 
-Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is. Az API (alkalmazásprogramozási interfész) segítségével egy program vagy szolgáltatás funkcióit más programok is elérhetik anélkül, hogy a belső működést ismerniük kellene. A játékmotorok használata megkönnyíti a fejlesztés folyamatát, ugyanakkor nem biztosít olyan nagy fokú rugalmasságot, mint az API-alapú fejlesztés. Az API-alapú fejlesztés során függvény könyvtárak segítségével tudjuk felépíteni a játékunkat, ezért az egyes modulok nincsenek a játékmotor keretei köré szorítva, hanem az adott függvények segítségével magunk építhetjük fel ezeket. Ilyen API-k lehetnek például a játékfejlesztés során a grafikai-,multimédia kezelő API-k. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, így ki tudtam használni az általa kínált lehetőségeket és eszközöket.
+Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is. Az API (alkalmazásprogramozási interfész) segítségével egy program vagy szolgáltatás funkcióit más programok is elérhetik anélkül, hogy a belső működést ismerniük kellene. A játékmotorok használata megkönnyíti a fejlesztés folyamatát, ugyanakkor nem biztosítanak olyan nagy fokú rugalmasságot, mint az API-alapú fejlesztés. Az API-alapú fejlesztés során függvény könyvtárak segítségével tudjuk felépíteni a játékunkat, ezért az egyes modulok nincsenek a játékmotor keretei köré szorítva, hanem az adott függvények segítségével magunk építhetjük fel ezeket. Ilyen API-k lehetnek például a játékfejlesztés során a grafikai-, multimédia kezelő API-k. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, így ki tudtam használni az általa kínált lehetőségeket és eszközöket.
 
 \section{Enginek}
 
@@ -229,7 +230,7 @@ Két fő komponensből épül fel a Relay.
 
 \begin{itemize}
 	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön a játékosok között. Ennek segítségével a játékomban fix bájton tárolt szöveges adatokat küldök a játékosok között, aminek a pontosabb menetéről a \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok.
-	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk.
+	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk. \cite{UnityAllocationsService}
 \end{itemize}
 
 \subsection{Relay Server}
@@ -245,10 +246,30 @@ A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken ker
 \chapter{Rendszerterv}
 
 \section{Rendszer célja}
-A szakdolgozatom célja egy Texas Hold'Em szabályain alapuló póker játék fejlesztése, ahol egy asztali számítógép és mobiltelefonok között jön létre a kapcsolat a többjátékos játékmenet kezeléséhez. A játék célja, hogy egy hasonló élményt nyújtani, mintha rendes pókert játszanánk élőben. Ezt a célt úgy próbáltam elérni, hogy a mobiltelefonok képzik a játékosok ,,kezeit'' és a számítógép pedig az asztalt, az az a közös teret.
+A szakdolgozatom célja egy Texas Hold'Em szabályain alapuló póker játék fejlesztése, ahol egy asztali számítógép és több mobiltelefon között jön létre a kapcsolat a többjátékos játékmenet megvalósításához. A játék célja, hogy egy hasonló élményt adjon a játékosok számára, mintha rendes pókert játszanánk élőben. Ezt a célt úgy próbáltam elérni, hogy a mobiltelefonok képzik a játékosok ,,kezeit'' és a számítógép pedig az asztalt, az az a közös teret.
+
+\section{Architekturális terv}
+\label{sec-architecture}
+A szakdolgozat 3 különböző projektből fog felépülni: PC játék (Unity), Mobil játék (Unity), Közös DLL (C\# Class Library). Mivel mind a három projekt a C\# programozási nyelvet használja, így egyszerűen lehet kezelni a közös metódusokat, könyvtárakat, funkciókat.
+
+\paragraph{PC játék}
+
+A PC játék fog szolgálni az asztalként, itt lehet létrehozni és kezelni a játszmákat. A játékmenet fontosabb része itt lesznek nyomon követhetők. 
+
+\paragraph{Mobil játék}
+
+A Mobil játék szerepe a PC-s játékkal való kommunikáció megteremtése a játékosok számára. A játékosok itt fognak tudni különféle üzenetek küldésével játszani a játékkal, miközben a játékmenet többi részét majd a PC-n követhetik.
+
+\paragraph{Közös DLL}
+
+A közös DLL szerep azoknak a függvényeknek és metódusoknak összegyűjtése, amit mind a PC illetve a Mobil játék során is használok a kódban. Ennek egyik legfontosabb része a kézkiértékeléshez szükséges algoritmus, amiről bővebben \aref{subsec-kezkiertekeloalgoritmus}. szekcióban írok. A DLL-nek egy másik fontos része a két játék közötti üzenetek egységbe fogása. Az üzenetek küldéséről \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok, de a lényeg, hogy az itt használt osztályokat is a DLL tartalmazza, hiszen mindkét oldal ezeket az osztályokat használja az üzenetek kezelésére.
 
 \section{Követelmények}
+
+Ebben a szekcióban a szakdolgozat sikeres kivitelezéséhez szükséges követelményekről írok részletesen.
+
 \subsection{PC játék}
+
 A PC játék rendelkezik egy főmenüvel, amelyen keresztül kezelhetőek a beállítások, illetve innen indítható új játék. A főmenüből létrehozott új játék során először egy Lobby felület jelenik meg.
 
 \subsubsection{Beállítások}
@@ -273,6 +294,7 @@ A PC játék rendelkezik egy főmenüvel, amelyen keresztül kezelhetőek a beá
 \end{table}
 
 \subsubsection{Lobby}
+
 A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mobiljukról tudnak csatlakozni a játszmához.
 
 \begin{table}[ht!]
@@ -282,7 +304,7 @@ A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mo
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
-		Játékosok megjelenítése & Csatlakozott játékosok listázása (név) & ,,Játékos1'' \\ 
+		Játékosok megjelenítése & Csatlakozott játékosok listázása (név, státusz) & ,,Játékos1 - készen áll'' \\ 
 		\hline
 		Játékos kirúgása & A játékos eltávolítása a lobby-ból (csak a host számára) & ,,Kirúgás'' gomb \\ 
 		\hline
@@ -290,7 +312,7 @@ A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mo
 		\hline
 		Játékosok státuszának jelzése & Jelzés, hogy ki áll készen a játék indítására & Készen áll / Nincs kész \\ 
 		\hline
-		Chat-funkció & Kommunikáció a lobby játékosai között & Chat-ablak \\ 
+		Chat-funkció & Kommunikáció a lobby játékosai között & Chat-ablak,\newline,,Játékos1: üzenet'' \\ 
 		\hline
 		Kezdő pénz beállítása & A host választhat különböző kezdőértékek közül & 100\$, 250\$, 500\$ \\ 
 		\hline
@@ -301,6 +323,7 @@ A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mo
 \end{table}
 
 \subsubsection{Játék}
+
 Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol az asztal látszódik, és a becsatlakozott játékosok körben helyezkednek el az asztal körül. A játék során a következő funkciók jelennek meg és állnak rendelkezésre:
 
 \begin{table}[ht!]
@@ -310,7 +333,7 @@ Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol 
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
-		Játékos megjelenítése & Játékos megjelenítése UI elemek segítségével & Kártya, ahol látszik a játékos neve \\
+		Játékos megjelenítése & Játékos megjelenítése UI elemek segítségével & Kártya, ahol látszik a játékos neve és pénze \\
 		\hline
 		Aktív játékos kijelzése & Világosan látható, hogy ki következik a körben & Játékos1 kártyájának kiemelése \\ 
 		\hline
@@ -337,11 +360,96 @@ Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol 
 
 \subsection{Mobil játék}
 
-\section{Architekturális terv}
-\label{sec-architecture}
-PC unity, Mobile unity, SharedDLL
+A mobil játék kezdőképernyőjén lehetőségünk van egy játékos név és egy hozzáférési kód megadásával csatlakozni egy adott játszmához.
+
+\begin{table}[ht!]
+	\centering
+	\footnotesize
+	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+		\hline
+		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
+		\hline
+		Játékos név megadása & Játékos név megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,Játékos1'' \\ 
+		\hline
+		Hozzáférési kód megadása & Hozzáférési kód megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,ABC123'' \\ 
+		\hline
+		Csatlakozás játékhoz sikeres & A megadott információkkal megpróbál egy játékhoz csatlakozni & ,,Csatlakozás'' gomb \\ 
+		\hline
+		Csatlakozás játékhoz sikertelen & Kijelzi az okát a sikertelen csatlakozásnak & ,,A megadott hozzáférési kóddal játszma nem található'' \\ 
+		\hline
+	\end{tabular}
+	\caption{Kezdőképernyő követelményei}
+\end{table}
+
+\subsubsection{Lobby}
+
+Sikeres csatlakozás után a Lobby felület jelenik meg. A Lobby felületen tudunk üzenetet küldeni a többi játékos számára, kilépni a játszmából és a készenléti állapotot módosítani.
+
+\begin{table}[ht!]
+	\centering
+	\footnotesize
+	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+		\hline
+		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
+		\hline
+		Chat üzenet küldése & Chat üzenet küldés, ami a PC játékon megjelenik, hogy minden játékos lássa & ,,Játékos1: üzenet'' \\ 
+		\hline
+		Készenlét módosítása & Készenlét be és ki kapcsolása & ,,Készen állok'', ,,Nem állok készen'' gombok \\ 
+		\hline
+		Kilépés a játszmából & Kilépés a csatlakozott játszmából & ,,Kilépés'' gomb \\ 
+		\hline
+	\end{tabular}
+	\caption{Lobby felület követelményei}
+\end{table}
+
+\subsubsection{Játék}
+
+Ha az összes játékos készen állt, és a PC-n elindította a hoszt a játszmát, akkor egy új jelenet tölt be, ahol a játszma során tudjuk kezelni az interakcióinkat. Ez a jelenet 2 felületből épül fel: akciók felület, kártyák felület. Az egyik felületen tudja kezelni a játékos a lépéseit a másik felületen pedig megtudja nézni a neki kiosztott kártyákat.
+
+\begin{table}[ht!]
+	\centering
+	\footnotesize
+	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+		\hline
+		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
+		\hline
+		Pénz megjelenítése & A játékos jelenlegi pénze megjelenik a felületen & ,,Pénz: 50\$'' \\ 
+		\hline
+		2 felület közötti váltás & Váltás az akciók és a kártyák felület között & ,,Kártyák megjelenítése'', ,,Akciók megjelnítése'' gombok \\ 
+		\hline
+		Akciók felület (a játékos következik) & Lehetséges akciók megjelenítése & ,,Bedobás'', ,,All In'' gombok, Tét megadására szolgáló csúszka, stb\dots \\ 
+		\hline
+		Akciók felület (nem a játékos következik) & Figyelmeztető üzenet megjelenítése & ,,Nem a te vagy jelenleg a körben'' \\ 
+		\hline
+		Kártyák felület (van kártya a játékos kezében) & Kártyák megjelenítése és a legjobb használható kéz feltüntetése & A 2 kártyáról 1-1 kép, ,,Legjobb kéz: Kettes pár'' felirat \\ 
+		\hline
+		Kártyák felület (nincs kártya a játékos kezében) & Figyelmeztető üzenet megjelenítése & ,,Nincs kártya a kezedben'' \\ 
+		\hline
+		Kilépés a játszmából & Kilépés a csatlakozott játszmából & ,,Kilépés'' gomb \\ 
+		\hline
+	\end{tabular}
+	\caption{Játék jelenet követelményei}
+\end{table}
 
 \section{Használt fejlesztői eszközök}
+
+A fejlesztés folyamatát számos eszköz segítette és gyorsította fel. Ebben a szekcióban ezeket az eszközöket sorolom fel, és ismertetem röviden. A fejlesztésnek nem csak a kódolás a része, így látható lesz, hogy több különböző eszköz, aminek nincs a kódoláshoz köze is segítette a fejlesztést.
+
+\paragraph{Unity}
+
+A Unity az első és talán legfontosabb eszköz, ami az alapját adta a 2 játéknak. Erről a játékmotorról már korábban \aref{ch-unity}. fejezetben írtam.
+
+\paragraph{Rider}
+
+A Rider egy a JetBrains által fejlesztett integrált fejlesztői környezet, aminek segítségével különböző .NET projekteket és játék projekteket tudunk fejleszteni. Egy cross-platform IDE, az az több különböző platformon is elérhető számunkra. A környezet beépített Unity támogatással rendelkezik, és különböző funkciókat szolgáltat a C\# szkriptek írásának megkönnyítésére. \cite{Rider}
+
+\paragraph{Git, GitHub}
+
+A Git egy nyílt forráskódú, verziókezelő rendszer, amely lehetővé teszi a projektek forráskódjának és fájljainak változásainak nyomon követését. A Git segítségével hatékonyan lehet kezelni a változások történetét, különböző verziókat létrehozni, valamint a kollaboráció során fellépő konfliktusokat egyszerűbben megoldani. A GitHub egy online platform, amely a Git verziókezelő rendszerre épül, és számos hasznos szolgáltatást nyújt, mint például távoli tárolók (repository-k) létrehozása. A GitHub lehetővé teszi a kód egyszerű megosztását, és elérését különböző helyekről. \cite{Git} \cite{GitHub}
+
+\paragraph{Trello}
+
+A Trello egy vizuális, online projektmenedzsment eszköz, amely segítségével egyszerűen és átláthatóan kezelhetőek különböző feladatok és munkafolyamatok. A Trello kártyákon alapuló rendszerében egyes feladatokat vagy tennivalókat kártyákként kezelhetünk, amelyeket különböző listákba rendezhetünk, például ,,Teendő'', ,,Folyamatban'', vagy ,,Kész''. Ezáltal könnyen áttekinthető, hogy hol tartunk, és hogy mi van még hátra a projektünkből. \cite{Trello}
 
 \chapter{Saját szoftver megvalósítása}
 
@@ -353,7 +461,7 @@ A \emph{Texas~Hold’Em} a közösségi pókerjátékok legnépszerűbb formája
 
 \subsection{Szabályok ismertetése}
 
-Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazott szabályrendszere kerül bemutatásra. Ami közös az összes variációban, hogy a játékot 52~lapos francia kártyával játsszák dzsókerek nélkül.
+Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazott szabályrendszere kerül bemutatásra. Ami közös az összes variációban, hogy a játékot 52~lapos francia kártyával játsszák dzsókerek nélkül. \cite{WikipediaPoker}
 
 \subsubsection{Játék menete}
 
@@ -465,6 +573,7 @@ Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erőss�
 \end{figure}
 
 \subsection{Használt kézkiértékelő algoritmus}
+\label{subsec-kezkiertekeloalgoritmus}
 
 A legelterjedtebb kézkiértékelő algoritmusok azon alapulnak, hogy a kezek értékeit egy előre kiszámított kéz értékeket tároló táblából keressük ki. Ez az egyik leggyorsabb módszer, viszont a módszer egy nagy hátránya a nagy méretű tábla tárolása, amely tárhely igényes. A játékomban egy bit matematikán alapuló algoritmust használtam, aminek alapjait \acite{HandEvaluation} blog adta. Ez a módszer lassabb, mint a táblás, viszont a tárhely igényes probléma itt megszűnik.
 
@@ -579,13 +688,17 @@ A teljes algoritmus tehát röviden így működik:
 
 \section{Többjátékos kapcsolat megvalósítása}
 \label{sec-tobbjatekoskapcsolat}
+
 Messagek küldése stringként JSON formában, amiket C\#-ban osztályként kezelek
+
 \subsection{Kapcsolat kezelése a PC oldalon}
+
 Joincode létrehzoása majd lobby panelen megmutatása
 lobby, kick
 sendmessage to clients or to client
 
 \subsection{Kapcsolat kezelése a Mobile oldalon}
+
 Csatlakozás join code alapján
 chat, ready, disconnect
 sendmessage to host
@@ -604,6 +717,7 @@ A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a
 A közös DLL tesztelése során a már fentebb említett egység teszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egység teszteteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint, ahogy korábban \aref{sec-architecture}. szekcióban említettem a közös DLL projektnek az egyik legfontosabb része a kézkiértékelést kezelő algoritmus. A kézkiértékeléshez írt egység teszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként a teszteknél.
 
 \section{Játékok tesztelése}
+
 A játékok tesztelésében legnagyobb szerepet a playtest játszott. A playtest kétféleképpen nézett ki:
 
 \begin{itemize}
@@ -653,7 +767,7 @@ A playtest-ek során teszt jegyzőkönyvet is vezettem a későbbi áttekintés 
 
 \section{Összefoglalás}
 
-A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy hogy csak idő pazarlás, de mindenképpen megéri időt tölteni vele. A játékfejlesztésben pedig a hibakeresésen kívül másban is fontos szerepet játszik, hiszen akár a játékélmény fejlesztésében is segíthet. Vannak olyan játékok is, ahol a játékmenet kiegyensúlyozásának érdekében is rákényszerülünk a tesztelésre és elhagyhatatlan eleme a fejlesztése folyamatnak.
+A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy hogy csak idő pazarlás, de mindenképpen megéri időt tölteni vele. A játékfejlesztésben pedig a hibakeresésen kívül másban is fontos szerepet játszik, hiszen akár a játékélmény fejlesztésében is segíthet. Vannak olyan játékok is, ahol a játékmenet kiegyensúlyozásának érdekében is rákényszerülünk a tesztelésre és elhagyhatatlan eleme a fejlesztési folyamatnak.
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
@@ -667,7 +781,7 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 	\textsc{Wikipedia}: \emph{Unreal Engine}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unreal_Engine} [Letöltve: 2025-02-28]
 	
 	\bibitem{GitHubGodot}
-	\textsc{GitHub}: \emph{Godot}: \url{https://github.com/godotengine/godot)} [Letöltve: 2025-02-28]
+	\textsc{GitHub}: \emph{Godot}: \url{https://github.com/godotengine/godot} [Letöltve: 2025-02-28]
 	
 	\bibitem{WikipediaUnity}
 	\textsc{Wikipedia}: \emph{Unity (game engine)}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unity_(game_engine)} [Letöltve: 2025-02-28]
@@ -778,6 +892,22 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 	\bibitem{UnityAllocationsService}
 	\textsc{Unity Technologies}: \emph{Allocations Service}, elérhető:
 	\url{https://docs.unity.com/ugs/en-us/manual/relay/manual/allocations-service} [Letöltve: 2025-03-04]
+	
+	\bibitem{Rider}
+	\textsc{JetBrains}: \emph{Rider}, elérhető:
+	\url{https://www.jetbrains.com/rider/} [Letöltve: 2025-03-07]
+	
+	\bibitem{Git}
+	\textsc{Linus Torvalds, Junio Hamano}: \emph{Git}, elérhető:
+	\url{https://git-scm.com/} [Letöltve: 2025-03-07]
+	
+	\bibitem{GitHub}
+	\textsc{GitHub, Inc.}: \emph{GitHub}, elérhető:
+	\url{https://github.com/} [Letöltve: 2025-03-07]
+	
+	\bibitem{Trello}
+	\textsc{Atlassian}: \emph{Trello}, elérhető:
+	\url{https://trello.com/} [Letöltve: 2025-03-07]
 	
 	\bibitem{WikipediaPoker}
 	\textsc{Wikipedia}: \emph{Póker}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/P%C3%B3ker} [Letöltve: 2024-11-12]
