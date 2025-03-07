@@ -237,7 +237,7 @@ A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken ker
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=10cm]{UnityRelayServers}
+	\includegraphics[width=10cm]{RelayServer}
 	\caption{Relay szerverek felépítése}
 	\label{fig-unityrelayservers}
 \end{figure}
@@ -415,9 +415,11 @@ Az alábbi lépéseket kell végrehajtanunk a kézkiértékeléshez:
 		\begin{table}[ht!]
 			\centering
 			\footnotesize
-			\begin{tabular}{*{15}{r}}
-				0000 & 0001 & 0001 & 0001 & 0001 & 0001 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000\\
-				A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+			\begin{tabular}{*{8}{r}}
+				0000 & 0001 & 0001 & 0001 & 0001 & 0001 & 0000 & 0000 \\
+				A & K & Q & J & T & 9 & 8 & 7 \\
+				0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 \\
+				6 & 5 & 4 & 3 & 2 &   &   &   
 			\end{tabular}
 			\caption{[9, 10, J, Q, K] kártyákhoz tartozó második bitmező}
 			\label{tab-bitfieldcounts1}
@@ -426,9 +428,11 @@ Az alábbi lépéseket kell végrehajtanunk a kézkiértékeléshez:
 		\begin{table}[ht!]
 			\centering
 			\footnotesize
-			\begin{tabular}{*{15}{r}}
-				0000 & 0011 & 0000 & 0000 & 0000 & 0111 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000\\
-				A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+			\begin{tabular}{*{8}{r}}
+				0000 & 0011 & 0000 & 0000 & 0000 & 0111 & 0000 & 0000 \\
+				A & K & Q & J & T & 9 & 8 & 7 \\
+				0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 \\
+				6 & 5 & 4 & 3 & 2 &   &   &   
 			\end{tabular}
 			\caption{[9, 9, 9, K, K] kártyákhoz tartozó második bitmező}
 			\label{tab-bitfieldcounts2}
@@ -523,16 +527,37 @@ Mindkét játékhoz készítettem a már korábbiakban említett egység tesztek
 
 \subsubsection{Teszt jegyzőkönyv}
 
-A playtest-ek során teszt jegyzőkönyvet is vezettem a későbbi áttekintés érdekében. Egy ilyen teszt jegyzőkönyv látható \aref{tab-tesztjegyzokonyv}. táblázatban is.
+A playtest-ek során teszt jegyzőkönyvet is vezettem a későbbi áttekintés érdekében. Egy ilyen teszt jegyzőkönyv látható \aref{tab-tesztjegyzokonyv}. táblázatban is. Ez a tesztjegyzőkönyv a főmenü jelenet lehetséges funkcióit fedi le.
 
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{*{15}{r}}
-		0000 & 0001 & 0001 & 0001 & 0001 & 0001 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000 & 0000\\
-		A & K & Q & J & T & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Időpont} & \textbf{Teszt} & \textbf{Eredmény} & \textbf{Megjegyzés} \\
+		\hline
+		22:01 & Indítás gomb & Sikeres & Betölti a Lobby jelenetet. \\
+        \hline
+		22:03 & Kilépés gomb & Sikeres & Kilép a játékból. \\
+		\hline
+		22:10 & Beállítások gomb & Sikeres & Betölti a beállítások felületet. \\
+		\hline
+		22:12 & Beállítások bezárása gomb & Sikeres & Bezárja a beállítások felületet. \\
+		\hline
+		22:15 & Felbontás módosítása & Sikeres & A felbontásokat helyesen felsorolj. \\
+		\hline
+		22:18 & Minőség módosítása & Sikeres & A minőségeket helyesen felsorolja. \\
+		\hline
+		22:20 & Képernyőmód módosítása & Sikeres & Lehet váltani a teljes és ablakos képernyő között. \\
+		\hline
+		22:23 & SFX hangerő módosítása & Sikeres & Csúszka segítségével lehet módosítani az értékét. \\
+		\hline
+		22:25 & Zene hangerő módosítása & Sikeres & Csúszka segítségével lehet módosítani az értékét. \\
+		\hline
+		22:30 & Beállítások elfogadása & Sikeres & Módosítja a változtatott beállításokat. \\
+		\hline
 	\end{tabular}
-	\caption{Példa tesztjegyzőkönyv}
+	\caption{Példa tesztjegyzőkönyv a főmenüről (2024.12.28)}
 	\label{tab-tesztjegyzokonyv}
 \end{table}
 
