@@ -243,10 +243,100 @@ A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken ker
 \end{figure}
 
 \chapter{Rendszerterv}
-Azok az elemek, amiket tanultatok RFT-n, azok kerülnek ide
 
 \section{Rendszer célja}
+A szakdolgozatom célja egy Texas Hold'Em szabályain alapuló póker játék fejlesztése, ahol egy asztali számítógép és mobiltelefonok között jön létre a kapcsolat a többjátékos játékmenet kezeléséhez. A játék célja, hogy egy hasonló élményt nyújtani, mintha rendes pókert játszanánk élőben. Ezt a célt úgy próbáltam elérni, hogy a mobiltelefonok képzik a játékosok ,,kezeit'' és a számítógép pedig az asztalt, az az a közös teret.
+
 \section{Követelmények}
+\subsection{PC játék}
+A PC játék rendelkezik egy főmenüvel, amelyen keresztül kezelhetőek a beállítások, illetve innen indítható új játék. A főmenüből létrehozott új játék során először egy Lobby felület jelenik meg.
+
+\subsubsection{Beállítások}
+
+\begin{table}[ht!]
+	\centering
+	\footnotesize
+	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+		\hline
+		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
+		\hline
+		Felbontás & A játék képernyőfelbontásának kiválasztása & 1920x1080, 1280x720, stb. \\ 
+		\hline
+		Grafikai minőség & Grafikai részletesség és effektusok beállítása & Alacsony, Közepes, Magas \\ 
+		\hline
+		SFX Hangerő & Játék hangerejének szabályozása & 0–100\% \\ 
+		\hline
+		Zene Hangerő & Játék hangerejének szabályozása & 0–100\% \\ 
+		\hline
+	\end{tabular}
+	\caption{Beállítási felület követelményei}
+\end{table}
+
+\subsubsection{Lobby}
+A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mobiljukról tudnak csatlakozni a játszmához.
+
+\begin{table}[ht!]
+	\centering
+	\footnotesize
+	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+		\hline
+		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
+		\hline
+		Játékosok megjelenítése & Csatlakozott játékosok listázása (név) & ,,Játékos1'' \\ 
+		\hline
+		Játékos kirúgása & A játékos eltávolítása a lobby-ból (csak a host számára) & ,,Kirúgás'' gomb \\ 
+		\hline
+		Hozzáférési kód megjelenítése & Egyedi azonosítókód mutatása, amelyet a játékosok használnak a csatlakozáshoz & ,,ABC123'' \\ 
+		\hline
+		Játékosok státuszának jelzése & Jelzés, hogy ki áll készen a játék indítására & Készen áll / Nincs kész \\ 
+		\hline
+		Chat-funkció & Kommunikáció a lobby játékosai között & Chat-ablak \\ 
+		\hline
+		Kezdő pénz beállítása & A host választhat különböző kezdőértékek közül & 100\$, 250\$, 500\$ \\ 
+		\hline
+		Játékindítás & A host elindíthatja a játékot, ha mindenki készen áll & ,,Indítás'' gomb \\ 
+		\hline
+	\end{tabular}
+	\caption{Lobby felület követelményei}
+\end{table}
+
+\subsubsection{Játék}
+Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol az asztal látszódik, és a becsatlakozott játékosok körben helyezkednek el az asztal körül. A játék során a következő funkciók jelennek meg és állnak rendelkezésre:
+
+\begin{table}[ht!]
+	\centering
+	\footnotesize
+	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+		\hline
+		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
+		\hline
+		Játékos megjelenítése & Játékos megjelenítése UI elemek segítségével & Kártya, ahol látszik a játékos neve \\
+		\hline
+		Aktív játékos kijelzése & Világosan látható, hogy ki következik a körben & Játékos1 kártyájának kiemelése \\ 
+		\hline
+		Legutóbbi esemény & Látszik az adott játékos kártyáján, hogy mit csinált legutóbb & ,,Emelt 50\$-ral'' \\
+		\hline
+		Kártyák osztása az asztalra & Kártyák automatikus kiosztása a megfelelő pillanatban & Kártyák csúsztatása egyesével az asztalra animációval \\ 
+		\hline
+		Kártyák felfordítása & Kártyák automatikus felfordítása a megfelelő pillanatban & Kártyák felfordítása egyesével az asztalon \\ 
+		\hline
+		Kártyák osztása játékosoknak & Kártyák automatikus kiosztása a megfelelő pillanatban & Kártyák csúsztatása egyesével a játékosoknak animációval \\ 
+		\hline
+		Kör végének mutatása & Feljön egy ablak, ahol látszik ki nyerte meg a kört és milyen kézzel & ,,Játékos3 nyert: Royal Flush'' \\
+		\hline
+		Kör végén játékosok kártyáinak mutatása & Minden játékosnak megjelenik milyen kártyák voltak a kezében & ,,Játékos2 nyert: [Szív király, Gyémánt 10]'' \\
+		\hline
+		Játszma végén nyertes mutatása & A játszma végén megjelenik a nyerő játékos neve egy felületen & ,,Játszma vége, Játékos1 nyert'' \\
+		\hline
+		Visszalépés a főmenübe & A játszma végén vissza lehet lépni a főmenübe & ,,Visszalépés a főmenübe'' gomb \\
+		\hline
+	\end{tabular}
+	\caption{Játék felület követelményei}
+\end{table}
+
+
+\subsection{Mobil játék}
+
 \section{Architekturális terv}
 \label{sec-architecture}
 PC unity, Mobile unity, SharedDLL
@@ -536,25 +626,25 @@ A playtest-ek során teszt jegyzőkönyvet is vezettem a későbbi áttekintés 
 		\hline
 		\textbf{Időpont} & \textbf{Teszt} & \textbf{Eredmény} & \textbf{Megjegyzés} \\
 		\hline
-		22:01 & Indítás gomb & Sikeres & Betölti a Lobby jelenetet. \\
+		22:01 & Indítás gomb & Sikeres & Betölti a Lobby jelenetet \\
         \hline
-		22:03 & Kilépés gomb & Sikeres & Kilép a játékból. \\
+		22:03 & Kilépés gomb & Sikeres & Kilép a játékból \\
 		\hline
-		22:10 & Beállítások gomb & Sikeres & Betölti a beállítások felületet. \\
+		22:10 & Beállítások gomb & Sikeres & Betölti a beállítások felületet \\
 		\hline
-		22:12 & Beállítások bezárása gomb & Sikeres & Bezárja a beállítások felületet. \\
+		22:12 & Beállítások bezárása gomb & Sikeres & Bezárja a beállítások felületet \\
 		\hline
-		22:15 & Felbontás módosítása & Sikeres & A felbontásokat helyesen felsorolj. \\
+		22:15 & Felbontás módosítása & Sikeres & A felbontásokat helyesen felsorolj \\
 		\hline
-		22:18 & Minőség módosítása & Sikeres & A minőségeket helyesen felsorolja. \\
+		22:18 & Minőség módosítása & Sikeres & A minőségeket helyesen felsorolja \\
 		\hline
-		22:20 & Képernyőmód módosítása & Sikeres & Lehet váltani a teljes és ablakos képernyő között. \\
+		22:20 & Képernyőmód módosítása & Sikeres & Lehet váltani a teljes és ablakos képernyő között \\
 		\hline
 		22:23 & SFX hangerő módosítása & Sikeres & Csúszka segítségével lehet módosítani az értékét. \\
 		\hline
-		22:25 & Zene hangerő módosítása & Sikeres & Csúszka segítségével lehet módosítani az értékét. \\
+		22:25 & Zene hangerő módosítása & Sikeres & Csúszka segítségével lehet módosítani az értékét \\
 		\hline
-		22:30 & Beállítások elfogadása & Sikeres & Módosítja a változtatott beállításokat. \\
+		22:30 & Beállítások elfogadása & Sikeres & Módosítja a változtatott beállításokat \\
 		\hline
 	\end{tabular}
 	\caption{Példa tesztjegyzőkönyv a főmenüről (2024.12.28)}
