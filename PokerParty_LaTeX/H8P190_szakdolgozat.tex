@@ -523,46 +523,25 @@ Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig mé
 Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erősségük szerint rendeztem el, a legerősebbtől a leggyengébbig. A lista tetején található kéz a pókerben elérhető legmagasabb értékű kombináció, és innen lefelé haladva egyre gyengébb kezek következnek. Az alábbi sorrend megtekinthető \aref{fig-pokerhands}.~ábrán is. \cite[9.~oldal]{Szurdi}
 
 \begin{enumerate}
-	\item \emph{Royal flös (royal flush)}
-	\begin{itemize}
-		\item A legerősebb lapkombináció. Egyszínű 10-es, bubi, dáma, király, ász lapokból áll. Ha két ilyen találkozik, akkor döntetlen\footnote{Osztozás történik a nyeremény között.} van.
-	\end{itemize}
-	\item \emph{Színsor (straight flush)}
-	\begin{itemize}
-		\item Öt egyszínű sorba rendezhető lapból áll. Ha két ilyen találkozik, a legmagasabb lap dönt. Ha egyforma, akkor döntetlen van. 
-	\end{itemize}
-	\item \emph{Póker (four of a kind)}
-	\begin{itemize}
-		\item Négy ugyanolyan számozású vagy jelű lapból és egy akármilyen másik lapból áll. Ha két ilyen találkozik, a magasabb póker nyer.
-	\end{itemize}
-	\item \emph{Full (full house)}
-	\begin{itemize}
-		\item Három ugyanolyan számozású vagy jelű lapból és két másik ugyanolyan számozású vagy jelű lapból áll. Ha két ilyen találkozik, a magasabb drill nyer. Ha egyforma, a magasabb pár nyer.
-	\end{itemize}
-	\item \emph{Szín (flush)}
-	\begin{itemize}
-		\item Öt ugyanolyan színű lapból áll. Ha két ilyen találkozik, a legmagasabb lap dönt. Ha egyforma, a második legmagasabb dönt, és így tovább\dots
-	\end{itemize}
-	\item \emph{Sor (straight)}
-	\begin{itemize}
-		\item Öt sorba rendezhető lapból áll. Ha két ilyen találkozik, a legmagasabb lap dönt. Ha egyforma, a színerősség dönt.
-	\end{itemize}
-	\item \emph{Drill (three of a kind)}
-	\begin{itemize}
-		\item Három ugyanolyan számozású vagy jelű lapból és két akármilyen másik lapból áll. Ha két ilyen találkozik, a magasabb drill nyer. Ha egyforma, a magasabb semleges lap, majd az alacsonyabb dönt.
-	\end{itemize}
-	\item \emph{Két pár (two pairs)}
-	\begin{itemize}
-		\item Kétszer két ugyanolyan számozású vagy jelű lapból áll. Ha két ilyen találkozik, a magasabb pár, majd az alacsonyabb, majd a semleges lap erőssége dönt.
-	\end{itemize}
-	\item \emph{Egy pár (one pair)}
-	\begin{itemize}
-		\item Két ugyanolyan számozású vagy jelű lapból és három akármilyen másik lapból áll. Ha két ilyen találkozik, a magasabb pár nyer. Ha egyforma, a semleges lapok döntenek.
-	\end{itemize}
-	\item \emph{Magas lap (high card)}
-	\begin{itemize}
-		\item Bármilyen lap, abból is a legmagasabb értékkel rendelkező.
-	\end{itemize}
+	\item \emph{Royal flös (royal flush)}: A legerősebb lapkombináció. Egyszínű 10-es, bubi, dáma, király, ász lapokból áll. Ha két ilyen találkozik, akkor döntetlen\footnote{Osztozás történik a nyeremény között.} van.
+	
+	\item \emph{Színsor (straight flush)}: Öt egyszínű sorba rendezhető lapból áll. Ha két ilyen találkozik, a legmagasabb lap dönt. Ha egyforma, akkor döntetlen van. 
+
+	\item \emph{Póker (four of a kind)}: Négy ugyanolyan számozású vagy jelű lapból és egy akármilyen másik lapból áll. Ha két ilyen találkozik, a magasabb póker nyer.
+
+	\item \emph{Full (full house)}: Három ugyanolyan számozású vagy jelű lapból és két másik ugyanolyan számozású vagy jelű lapból áll. Ha két ilyen találkozik, a magasabb drill nyer. Ha egyforma, a magasabb pár nyer.
+
+	\item \emph{Szín (flush)}: Öt ugyanolyan színű lapból áll. Ha két ilyen találkozik, a legmagasabb lap dönt. Ha egyforma, a második legmagasabb dönt, és így tovább\dots
+
+	\item \emph{Sor (straight)}: Öt sorba rendezhető lapból áll. Ha két ilyen találkozik, a legmagasabb lap dönt. Ha egyforma, a színerősség dönt.
+
+	\item \emph{Drill (three of a kind)}: Három ugyanolyan számozású vagy jelű lapból és két akármilyen másik lapból áll. Ha két ilyen találkozik, a magasabb drill nyer. Ha egyforma, a magasabb semleges lap, majd az alacsonyabb dönt.
+
+	\item \emph{Két pár (two pairs)}: Kétszer két ugyanolyan számozású vagy jelű lapból áll. Ha két ilyen találkozik, a magasabb pár, majd az alacsonyabb, majd a semleges lap erőssége dönt.
+
+	\item \emph{Egy pár (one pair)}: Két ugyanolyan számozású vagy jelű lapból és három akármilyen másik lapból áll. Ha két ilyen találkozik, a magasabb pár nyer. Ha egyforma, a semleges lapok döntenek.
+
+	\item \emph{Magas lap (high card)}: Bármilyen lap, abból is a legmagasabb értékkel rendelkező.
 \end{enumerate}
 
 \begin{figure}[ht!]
@@ -731,7 +710,7 @@ Mindkét játékhoz készítettem a már korábbiakban említett egység tesztek
 
 \subsubsection{Teszt jegyzőkönyv}
 
-A playtest-ek során teszt jegyzőkönyvet is vezettem a későbbi áttekintés érdekében. Egy ilyen teszt jegyzőkönyv látható \aref{tab-tesztjegyzokonyv}. táblázatban is. Ez a tesztjegyzőkönyv a főmenü jelenet lehetséges funkcióit fedi le.
+A playtest-ek során teszt jegyzőkönyvet is vezettem. Egy ilyen jegyzőkönyv látható a főmenü jelentről \aref{tab-tesztjegyzokonyv}. táblázatban.
 
 \begin{table}[ht!]
 	\centering
