@@ -17,6 +17,8 @@ public class TableCard : MonoBehaviour
 
     public IEnumerator Flip()
     {
+        AudioManager.instance.cardFlippingSource.Play();
+        
         const float flipDuration = 0.25f;
         
         LeanTween.scaleX(gameObject, 0f, flipDuration / 2)

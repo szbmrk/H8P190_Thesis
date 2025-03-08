@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(TablePlayerCard winner)
     {
+        HideWaitingFor();
+        AudioManager.instance.gameOverSource.Play();
+        
         TableManager.instance.DisableKickButtons();
         TableManager.instance.RemovePlayersWith0Money();
         

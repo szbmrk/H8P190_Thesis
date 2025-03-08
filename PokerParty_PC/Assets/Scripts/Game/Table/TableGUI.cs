@@ -36,6 +36,8 @@ public class TableGUI : MonoBehaviour
 
     public IEnumerator DisplayCard(TableCard card, int i)
     {
+        AudioManager.instance.cardDealingSource.Play();
+        
         Transform startPos = drawingDeckPosition;
         Transform goalPos = cardPositions[i];
         
@@ -45,7 +47,8 @@ public class TableGUI : MonoBehaviour
         
         float distance = Vector3.Distance(startPos.position, goalPos.position);
         float duration = distance / cardDealingSpeed;
-
+        
+        
         LeanTween.move(card.gameObject, goalPos.position, duration).setEase(cardDealingEase);
 
         yield return new WaitForSeconds(duration);
@@ -72,6 +75,8 @@ public class TableGUI : MonoBehaviour
         tableCard.GetComponent<SpriteRenderer>().sortingOrder = 3;
         tableCard.gameObject.SetActive(true);
 
+        AudioManager.instance.cardDealingSource.Play();
+        
         LeanTween.move(tableCard.gameObject, goalPos, cardDealingSpeed).setEase(cardDealingEase);
         
         yield return new WaitForSeconds(cardDealingSpeed * 0.75f);

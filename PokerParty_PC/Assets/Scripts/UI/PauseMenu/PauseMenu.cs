@@ -37,6 +37,7 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
+                AudioManager.instance.PlayMenuClick();
                 Pause();
             }
         }

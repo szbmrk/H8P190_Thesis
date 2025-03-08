@@ -206,6 +206,7 @@ public class TablePlayerCard : MonoBehaviour
 
     private void OnKickBtnClick()
     {
+        AudioManager.instance.menuClickSource.Play();
         TableManager.instance.PlayerDisconnected(TableManager.instance.GetPLayerByIndexInConnectionsArray(indexInConnectionsArray));
         ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
     }

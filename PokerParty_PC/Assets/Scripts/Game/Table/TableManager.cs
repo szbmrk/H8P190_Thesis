@@ -65,6 +65,8 @@ public class TableManager : MonoBehaviour
         TurnManager.instance.StartFirstTurn();
         Loader.instance.StopLoading();
         
+        AudioManager.instance.newRoundStartedSource.Play();
+        
         Logger.Log("All players loaded");
     }
 
@@ -116,6 +118,8 @@ public class TableManager : MonoBehaviour
 
     public IEnumerator DealCardsToTable()
     {
+        GameManager.instance.HideWaitingFor();
+        
         for (int i = 0; i < 5; i++)
         {
             tableCards.Add(Instantiate(tableCardPrefab, parentForCards).GetComponent<TableCard>());

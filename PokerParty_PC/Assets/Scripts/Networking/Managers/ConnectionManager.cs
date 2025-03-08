@@ -112,6 +112,8 @@ public class ConnectionManager : MonoBehaviour
             LobbyGUI.instance.ShowPanel();
             Loader.instance.StopLoading();
             
+            AudioManager.instance.lobbyLoadedSource.Play();
+            
             Logger.Log($"Lobby created with join code: {joinCode}");
         }
         catch (Exception e)

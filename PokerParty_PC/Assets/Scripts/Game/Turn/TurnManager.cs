@@ -42,7 +42,7 @@ public class TurnManager : MonoBehaviour
             }
             
             TablePlayerCard smallBlind = TableManager.instance.playerSeats.Find(p => p.isSmallBlind);
-            return smallBlind != null && smallBlind.isStillInGame ? smallBlind : GetNextPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(smallBlind));
+            return smallBlind != null && smallBlind.isStillInGame ? smallBlind : GetPreviousPlayerStillInGame(TableManager.instance.playerSeats.IndexOf(smallBlind));
         }
     }
 
@@ -336,6 +336,9 @@ public class TurnManager : MonoBehaviour
         
         highestBet = 0;
         yield return MatchManager.instance.ShowDown();
+        
+        AudioManager.instance.newRoundStartedSource.Play();
+        
         TableManager.instance.StartNewGame();
 
         if (CheckIfGameIsOver())
@@ -352,6 +355,7 @@ public class TurnManager : MonoBehaviour
         switch (turnDoneMessage.Action)
         {
             case PossibleAction.Fold:
+                AudioManager.instance.cardFlippingSource.Play();
                 currentPlayerInTurn.Fold();
                 return;
             case PossibleAction.Bet:
@@ -362,6 +366,8 @@ public class TurnManager : MonoBehaviour
                 lastPlayerWhoRaised = currentPlayerInTurn;
                 break;
         }
+        
+        AudioManager.instance.pokerChipSource.Play();
         
         currentPlayerInTurn.TurnInfo.MoneyPutInPot += turnDoneMessage.ActionAmount;
         currentPlayerInTurn.TurnInfo.Money -= turnDoneMessage.ActionAmount;

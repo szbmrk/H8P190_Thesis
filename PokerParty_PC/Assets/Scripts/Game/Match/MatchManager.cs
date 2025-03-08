@@ -56,7 +56,7 @@ public class MatchManager : MonoBehaviour
         }
         
         TableManager.instance.GivePotToWinners(winners);
-
+        
         if (winners.Length == 1)
             yield return TableGUI.instance.ShowTurnWinner(winners[0].Player.PlayerName, winners[0].Type, winnerPlayerSeats);
         else

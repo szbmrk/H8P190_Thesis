@@ -15,6 +15,13 @@ public class AudioManager : MonoBehaviour
     public AudioSource chatMessageSource;
     public AudioSource disconnectedSource;
     public AudioSource playerJoinedSource;
+    public AudioSource lobbyLoadedSource;
+    
+    public AudioSource cardDealingSource;
+    public AudioSource cardFlippingSource;
+    public AudioSource pokerChipSource;
+    public AudioSource newRoundStartedSource;
+    public AudioSource gameOverSource;
     
     private void Awake()
     {
