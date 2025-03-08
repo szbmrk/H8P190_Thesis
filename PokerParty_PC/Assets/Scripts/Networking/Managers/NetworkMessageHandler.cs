@@ -10,13 +10,20 @@ public static class NetworkMessageHandler
             case NetworkMessageType.ConnectionMessage:
                 ConnectionMessage connectionData = FromStringToJson<ConnectionMessage>(data);
                 if (LobbyManager.instance != null)
+                {
+                    if (LobbyManager.instance.CheckIfLobbyIsFull(indexOfConnection))
+                        return;
+                    
                     if (!LobbyManager.instance.CheckIfPlayerNameIsAlreadyInUse(connectionData.Player, indexOfConnection))
                         LobbyManager.instance.AddPlayer(connectionData.Player, indexOfConnection);
+                }
+                
                 if (GameManager.instance != null)
                 {
                     ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexOfConnection], new GameAlreadyStartedMessage());
                     ConnectionManager.instance.DisconnectPlayer(indexOfConnection);
                 }
+                
                 break;
 
             case NetworkMessageType.ChatMessage:
@@ -26,6 +33,7 @@ public static class NetworkMessageHandler
                 break;
 
             case NetworkMessageType.ReadyMessage:
+                AudioManager.instance.readySource.Play();
                 ReadyMessage readyMessage = FromStringToJson<ReadyMessage>(data);
                 if (LobbyManager.instance != null)
                     LobbyManager.instance.ModifyPlayerReady(readyMessage);

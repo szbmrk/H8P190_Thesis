@@ -8,6 +8,7 @@
         GameUnpausedMessage,
         ReadyMessage,
         TurnDoneMessage,
+        LobbyIsFullMessage,
         PlayerNameAlreadyInUseMessage,
         GameAlreadyStartedMessage,
         LoadedToGameMessage,

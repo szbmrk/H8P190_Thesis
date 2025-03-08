@@ -44,6 +44,7 @@ public class LobbyPlayerCard : MonoBehaviour
 
     private void KickPlayer()
     {
+        AudioManager.instance.PlayMenuClick();
         LobbyManager.instance.RemovePlayer(assignedPlayer);
         ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
     }

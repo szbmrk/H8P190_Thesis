@@ -65,6 +65,7 @@
     <Compile Include="Networking\Message Models\PC\GamePausedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameStartedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\GameUnpausedMessage.cs" />
+    <Compile Include="Networking\Message Models\PC\LobbyIsFullMessage.cs" />
     <Compile Include="Networking\Message Models\PC\NewTurnStartedMessage.cs" />
     <Compile Include="Networking\Message Models\PC\NotYourTurnMessage.cs" />
     <Compile Include="Networking\Message Models\PC\PlayerNameAlreadyInUseMessage.cs" />

@@ -18,6 +18,7 @@ public class ChatGUI : MonoBehaviour
 
     public void AddChat(ChatMessage chatMessage)
     {
+        AudioManager.instance.chatMessageSource.Play();
         var chatBox = Instantiate(chatBoxPrefab, parentForChatBoxes);
         chatBox.GetComponent<ChatCard>().SetData(chatMessage);
         chatBox.gameObject.SetActive(true);

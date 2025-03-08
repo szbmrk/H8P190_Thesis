@@ -8,6 +8,11 @@ public static class NetworkMessageHandler
     {
         switch (type)
         {
+            case NetworkMessageType.LobbyIsFullMessage:
+                NetworkingGUI.instance.ShowJoinedPanel(false);
+                NetworkingGUI.instance.ResetReadyButton();
+                PopupManager.instance.ShowPopup(PopupType.ErrorPopup, "Lobby is full");
+                break;
             case NetworkMessageType.PlayerNameAlreadyInUseMessage:
                 NetworkingGUI.instance.ShowJoinedPanel(false);
                 NetworkingGUI.instance.ResetReadyButton();

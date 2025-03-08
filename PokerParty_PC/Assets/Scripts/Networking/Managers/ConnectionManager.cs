@@ -61,6 +61,7 @@ public class ConnectionManager : MonoBehaviour
                 {
                     case NetworkEvent.Type.Disconnect:
                         Logger.Log("Client disconnected from host");
+                        AudioManager.instance.disconnectedSource.Play();
                         
                         if (TableManager.instance != null)
                             TableManager.instance.PlayerDisconnected(TableManager.instance.GetPLayerByIndexInConnectionsArray(i));

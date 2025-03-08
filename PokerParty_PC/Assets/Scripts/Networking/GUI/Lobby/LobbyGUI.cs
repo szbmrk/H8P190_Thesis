@@ -54,6 +54,7 @@ public class LobbyGUI : MonoBehaviour
 
     public LobbyPlayerCard DisplayNewPlayer(Player player)
     {
+        AudioManager.instance.playerJoinedSource.Play();
         Transform playerCardTransform = Instantiate(playerCardPrefab, parentForPlayerCards).transform;
         LobbyPlayerCard playerCard = playerCardTransform.GetComponent<LobbyPlayerCard>();
         playerCard.assignedPlayer = player;

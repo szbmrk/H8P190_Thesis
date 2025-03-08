@@ -21,6 +21,7 @@ public class SettingsGUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && settingsPanel.activeSelf)
         {
+            AudioManager.instance.PlayMenuClick();
             CloseSettings();
         }
     }

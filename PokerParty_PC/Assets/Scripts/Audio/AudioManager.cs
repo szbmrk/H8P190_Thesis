@@ -5,8 +5,16 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour 
 {
     public static AudioManager instance;
+    
     public List<AudioSource> sfxSources = new List<AudioSource>();
     public List<AudioSource> musicSources = new List<AudioSource>();
+    
+    public AudioSource menuClickSource;
+    
+    public AudioSource readySource;
+    public AudioSource chatMessageSource;
+    public AudioSource disconnectedSource;
+    public AudioSource playerJoinedSource;
     
     private void Awake()
     {
@@ -37,4 +45,8 @@ public class AudioManager : MonoBehaviour
         }
     }
     
+    public void PlayMenuClick()
+    {
+        menuClickSource.Play();
+    }
 }

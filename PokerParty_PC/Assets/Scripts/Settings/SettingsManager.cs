@@ -19,8 +19,6 @@ public class SettingsManager : MonoBehaviour
     [HideInInspector] public int screenModeIndex;
     public Toggle screenModeToggle;
 
-    public Language[] languages = { Language.English, Language.Hungarian };
-
     [HideInInspector] public float sfxVolumeValue = 1;
     public Slider sfxVolumeSlider;
 

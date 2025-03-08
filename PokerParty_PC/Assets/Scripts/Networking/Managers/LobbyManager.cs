@@ -24,6 +24,16 @@ public class LobbyManager : MonoBehaviour
         Logger.Log("Lobby deleted");
     }
 
+    public bool CheckIfLobbyIsFull(int indexInConnectionsArray)
+    {
+        if (joinedPlayers.Count < LobbySettings.MaximumPlayers) return false;
+        
+        ConnectionManager.instance.SendMessageToConnection(ConnectionManager.instance.Connections[indexInConnectionsArray], new LobbyIsFullMessage());
+        ConnectionManager.instance.DisconnectPlayer(indexInConnectionsArray);
+        return true;
+
+    }
+    
     public bool CheckIfPlayerNameIsAlreadyInUse(Player player, int indexInConnectionsArray)
     {
         if (joinedPlayers.All(p => p.assignedPlayer.PlayerName != player.PlayerName)) return false;
