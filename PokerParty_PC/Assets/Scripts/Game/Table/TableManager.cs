@@ -343,8 +343,10 @@ public class TableManager : MonoBehaviour
     {
         TablePlayerCard playerCard = playerSeats.Find(p => p.TurnInfo.Player.Equals(player));
         bool wasCurrentlyInTurn = playerCard.TurnInfo.Player.Equals(TurnManager.instance.currentPlayerInTurn.TurnInfo.Player);
+        
         playerCard.Disconnected();
         playerCard.TurnInfo.Money = 0;
+        
         playerSeats.Remove(playerCard);
         
         if (wasCurrentlyInTurn) return;

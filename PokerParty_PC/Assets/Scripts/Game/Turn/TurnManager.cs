@@ -1,4 +1,5 @@
-﻿using PokerParty_SharedDLL;
+﻿using System;
+using PokerParty_SharedDLL;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,10 +74,17 @@ public class TurnManager : MonoBehaviour
             previousPlayerIndex = TableManager.instance.playerSeats.Count - 1;
         else
             previousPlayerIndex = currentIndex - 1;
-        
-        TablePlayerCard previousPlayer = TableManager.instance.playerSeats[previousPlayerIndex];
-        
-        return !previousPlayer.isStillInGame ? GetPreviousPlayerStillInGame(previousPlayerIndex) : previousPlayer;
+
+        try
+        {
+            TablePlayerCard previousPlayer = TableManager.instance.playerSeats[previousPlayerIndex];
+            return !previousPlayer.isStillInGame ? GetPreviousPlayerStillInGame(previousPlayerIndex) : previousPlayer;
+        }
+        catch (ArgumentOutOfRangeException e)
+        {
+            Logger.Log(e.Message);
+            return null;
+        }
     }
 
     private int playersNeedToCallCount => TableManager.instance.playerSeats
@@ -367,7 +375,10 @@ public class TurnManager : MonoBehaviour
                 break;
         }
         
-        AudioManager.instance.pokerChipSource.Play();
+        if (turnDoneMessage.Action == PossibleAction.Check)
+            AudioManager.instance.checkSource.Play();
+        else
+            AudioManager.instance.pokerChipSource.Play();
         
         currentPlayerInTurn.TurnInfo.MoneyPutInPot += turnDoneMessage.ActionAmount;
         currentPlayerInTurn.TurnInfo.Money -= turnDoneMessage.ActionAmount;

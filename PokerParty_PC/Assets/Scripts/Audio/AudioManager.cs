@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource cardDealingSource;
     public AudioSource cardFlippingSource;
     public AudioSource pokerChipSource;
+    public AudioSource checkSource;
     public AudioSource newRoundStartedSource;
     public AudioSource gameOverSource;
     
