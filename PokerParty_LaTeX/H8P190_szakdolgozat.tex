@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \PassOptionsToPackage{defaults=hu-min}{magyar.ldf}
 \usepackage[magyar]{babel}
-\usepackage{mathtools,amssymb,amsthm,pdfpages,array}
+\usepackage{mathtools,amssymb,amsthm,pdfpages,array,listingsutf8}
 \footnotestyle{rule=fourth}
 
 \newtheorem{tetel}{Tétel}[chapter]
@@ -11,6 +11,25 @@
 \theoremstyle{remark}
 \newtheorem{megjegyzes}[tetel]{Megjegyzés}
 \setlength{\extrarowheight}{2pt}
+
+\lstset{
+	inputencoding=utf8/latin2,
+	basicstyle=\footnotesize\ttfamily,
+	columns=fullflexible,
+	numbers=left,
+	breaklines,
+	postbreak=\hbox{$\mathcolor{red}{\hookrightarrow}$\ },
+	xleftmargin=2cm,
+	xrightmargin=2cm,
+	frame=single,
+}
+
+\lstdefinestyle{csharp}{
+	language=[Sharp]C,
+	backgroundcolor=\color{gray!10},
+	keywordstyle=\color{blue},
+	commentstyle=\itshape\color{teal},
+}
 
 \begin{document}
 
@@ -668,7 +687,11 @@ A teljes algoritmus tehát röviden így működik:
 \section{Többjátékos kapcsolat megvalósítása}
 \label{sec-tobbjatekoskapcsolat}
 
-Messagek küldése stringként JSON formában, amiket C\#-ban osztályként kezelek
+A két játék legfontosabb és legbonyolultabb része a zökkenőmentes kapcsolat és kommunikáció megvalósítása volt a két platform és a játékosok között. Korábban említettem \aref{sec-relay}. szekcióban, hogy a háttérben hogyan működik a Unity Technologies által szolgáltatott megoldás, ebben a szekcióban arról írok, hogy én ezt hogyan használtam ki és alkalmaztam a két játékban. A játék során egyetlen módot használtam a kommunikáció megvalósítására, még pedig fix bájton tárolt szöveges adatok küldését a kapcsolatok között, ez azt jelenti hogy a játékosok között bármilyen szöveget tudtam küldeni egy adott tárolható szöveg hosszig. Az üzenet küldéseknek két módja volt: a hoszt játékos (PC) küld üzenetet bármelyik mobilos játékosnak, vagy bármelyik mobilos játékos küld üzenetet a hoszt játékosnak.
+
+Az üzenetek küldéséhez osztályokat használtam amiket a küldés során JSON szöveges formátumba konvertáltam, majd a megérkezett üzeneteket pedig vissza alakítottam osztályokká a könnyebb kezelés végett. Ezzel a megoldással könnyen tudtam kezelni és küldeni is a két platform között az üzeneteket. Az üzenetek megkülönböztetésére üzenet megkülönböztető típusokat hoztam létre. Ezek a típusok \aref{sec-relay}. kódban láthatóak.
+
+\lstinputlisting[style=csharp, caption=Üzenet típusok, label=kod-uzenettipusok]{NetworkMessageType.cs}
 
 \subsection{Kapcsolat kezelése a PC oldalon}
 
