@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \PassOptionsToPackage{defaults=hu-min}{magyar.ldf}
 \usepackage[magyar]{babel}
-\usepackage{mathtools,amssymb,amsthm,pdfpages,array,listingsutf8}
+\usepackage{mathtools,amssymb,amsthm,pdfpages,array,listingsutf8,caption}
 \footnotestyle{rule=fourth}
 
 \newtheorem{tetel}{Tétel}[chapter]
@@ -11,6 +11,8 @@
 \theoremstyle{remark}
 \newtheorem{megjegyzes}[tetel]{Megjegyzés}
 \setlength{\extrarowheight}{2pt}
+
+\renewcommand{\lstlistingname}{kód}
 
 \lstset{
 	inputencoding=utf8/latin2,
@@ -452,7 +454,7 @@ Ha az összes játékos készen állt, és a PC-n elindította a hoszt a játszm
 
 \section{Használt fejlesztői eszközök}
 
-A fejlesztés folyamatát számos eszköz segítette és gyorsította fel. Ebben a szekcióban ezeket az eszközöket sorolom fel, és ismertetem röviden. A fejlesztésnek nem csak a kódolás a része, így látható lesz, hogy több különböző eszköz, aminek nincs a kódoláshoz köze is segítette a fejlesztést.
+A fejlesztés folyamatát számos eszköz segítette és gyorsította fel. Ebben a szekcióban ezeket az eszközöket sorolom fel, és ismertetem röviden. A fejlesztésnek nem csak a kódolás a része, így látható lesz, hogy több különböző eszköz, amiknek nincs közük a kódoláshoz is segítették a fejlesztést.
 
 \paragraph{Unity}
 
@@ -689,17 +691,26 @@ A teljes algoritmus tehát röviden így működik:
 
 A két játék legfontosabb és legbonyolultabb része a zökkenőmentes kapcsolat és kommunikáció megvalósítása volt a két platform és a játékosok között. Korábban említettem \aref{sec-relay}. szekcióban, hogy a háttérben hogyan működik a Unity Technologies által szolgáltatott megoldás, ebben a szekcióban arról írok, hogy én ezt hogyan használtam ki és alkalmaztam a két játékban. A játék során egyetlen módot használtam a kommunikáció megvalósítására, még pedig fix bájton tárolt szöveges adatok küldését a kapcsolatok között, ez azt jelenti hogy a játékosok között bármilyen szöveget tudtam küldeni egy adott tárolható szöveg hosszig. Az üzenet küldéseknek két módja volt: a hoszt játékos (PC) küld üzenetet bármelyik mobilos játékosnak, vagy bármelyik mobilos játékos küld üzenetet a hoszt játékosnak.
 
-Az üzenetek küldéséhez osztályokat használtam amiket a küldés során JSON szöveges formátumba konvertáltam, majd a megérkezett üzeneteket pedig vissza alakítottam osztályokká a könnyebb kezelés végett. Ezzel a megoldással könnyen tudtam kezelni és küldeni is a két platform között az üzeneteket. Az üzenetek megkülönböztetésére üzenet megkülönböztető típusokat hoztam létre. Ezek a típusok \aref{sec-relay}. kódban láthatóak.
+Az üzenetek küldéséhez osztályokat használtam amiket a küldés során JSON szöveges formátumba konvertáltam, majd a megérkezett üzeneteket pedig vissza alakítottam osztályokká a könnyebb kezelés végett. Ezzel a megoldással könnyen tudtam kezelni és küldeni is a két platform között az üzeneteket. Az üzenetek megkülönböztetésére üzenet megkülönböztető típusokat hoztam létre. Ezek a típusok \aref{kod-uzenettipusok}. kódban láthatóak.
 
-\lstinputlisting[style=csharp, caption=Üzenet típusok, label=kod-uzenettipusok]{NetworkMessageType.cs}
+\lstinputlisting[style=csharp,caption=Üzenet típusok,label=kod-uzenettipusok]{NetworkMessageType.cs}
 
 \subsection{Kapcsolat kezelése a PC oldalon}
 
-Joincode létrehzoása majd lobby panelen megmutatása
-lobby, kick
-sendmessage to clients or to client
+A PC oldalon az első lépés a Relay-t kihasználva a megkapott hozzáférési kód megosztása volt a Mobilos játékosokkal, erre a megoldásom \aref{fig-lobby}. ábrán látható. A játszmák elején egy Lobby jelenetet hoztam létre, ahol csatlakozhatnak a játékosok, és itt tudjuk majd őket kezelni a játszma előtt. Ezen a felületen osztom meg a hozzáférési kódot a játékosokkal, és miután sikerül csatlakozniuk jelenítem meg őket. Miután egy játékos felcsatlakozott a kód segítségével egy tömböt használva nyomon követem a csatlakozásokat a későbbi kezelés érdekében. A PC oldalon így egyszerre az összes csatlakozott játékosnak, vagy akár egy kiválasztott indexű játékosnak külön is tudok üzenetet küldeni. A játék során az egyes játékosokat a nevük alapján különböztetem meg. Miután felcsatlakoznak a kóddal automatikusan küldenek egy üzenetet, amiben a játékos nevüket küldik el, így el tudom tárolni melyik csatlakozáshoz melyik név tartozik. Az összes üzenet amit a mobil oldalról kapok tartalmazza a játékos nevüket, így tudom melyik játékossal kell foglalkozni az üzenet kezelésekor. 
 
-\subsection{Kapcsolat kezelése a Mobile oldalon}
+A PC oldalon még lehetőségem van lecsatlakoztatni a mobilos játékosokat is, ezt ,,kirúgás'' gombok használatával hívtam meg. Az üzeneteken kívül még egy dolgot tudok kezelni a PC oldalon, az pedig a mobil oldalról küldött lecsatlakozások. Ezek során kisebb kihívásokat jelentett pl. a játszma közbeni lecsatlakozások, de minden egyes esetet sikerült lekezelnem a zökkenőmentes játékmenet eléréshez.
+
+A póker játszma során minden egyes kör elején küldök tájékoztató üzenetet az összes játékosnak. Az éppen körben lévő játékos mindig megkapja egy üzenetben a lehetséges akcióit, így biztosan csak helyes lépést tud majd tenni.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=16cm]{Lobby}
+	\caption{Lobby jelenet}
+	\label{fig-lobby}
+\end{figure}
+
+\subsection{Kapcsolat kezelése a Mobil oldalon}
 
 Csatlakozás join code alapján
 chat, ready, disconnect
