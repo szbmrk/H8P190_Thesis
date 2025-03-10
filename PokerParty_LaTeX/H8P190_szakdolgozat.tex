@@ -712,9 +712,11 @@ A póker játszma során minden egyes kör elején küldök tájékoztató üzen
 
 \subsection{Kapcsolat kezelése a Mobil oldalon}
 
-Csatlakozás join code alapján
-chat, ready, disconnect
-sendmessage to host
+A mobil oldalon a megosztott hozzáférési kód segítségével tudunk csatlakozni a játszmákhoz. A hozzáférési kód megadása mellett egy játékos nevet is kell választatnunk, aminek segítségével később majd a hoszt tud azonosítani minket. Ez a játékos név a sikeres csatlakozás esetén automatikusan egy üzenet formájában el is küldődik a hosztnak. Amennyiben már van ilyen játékos név vagy esetleg már megtelt az adott Lobby, akkor a hoszt küld erről egy tájékoztató üzenetet és ezt lekezelve egy hibaüzenettel vissza térünk a kezdőképernyőre.
+
+Mobil oldalon 2 opciónk van kommunikálni a PC-vel, az egyik az üzenetek küldése a másik pedig a lecsatlakozási kérelem küldése. Az üzenetek küldésére különböző gombok és szöveges dobozok adnak lehetőséget, pl. egy ,,Készen állok'' gomb, ami a Lobby jelenet során jelzi a PC számára, hogy készen állunk a játszma indítására. A játszma során minden egyes lehetséges akciónak az elvégzésekor küldünk egy üzenetet a hosztnak, ami ezt megfelelően kezeli és elküldi a következő játékosnak az ő lehetséges akcióit.
+
+Ha a hoszt oldalról kapjuk a lecsatlakozási kérelmet, azaz kirúgnak minket egy játszmából, akkor ezt a játék kezeli és egy hibaüzenettel visszatérünk a kezdő képernyőre.
 
 \section{Játékmenet megvalósítása}
 
