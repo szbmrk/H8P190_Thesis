@@ -203,6 +203,8 @@ Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenete
 A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. szekcióban említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta. \cite{UnityScripting}
 
 \subsection{Prefab}
+\label{subsec-prefab}
+
 A Unity Prefab rendszere lehetővé teszi egy GameObject el tárolását, minden komponensével, tulajdonságértékével és gyermek GameObjectjével együtt, egy újrafelhasználható objektumként. Ha van egy olyan objektumunk, amit sokszor újra fel szeretnénk használni a jelenteinkben, akkor érdemes Prefab-et használni ezeknek az objektumoknak az eltárolására. Egyes Prefab-ek esetén felülírhatjuk az alap beállításokat, így kis szinten különböző de logikailag összefüggő objektumokat használhatunk. Néhány gyakori példa a Prefab használatra: \cite{UnityPrefab}
 
 \begin{itemize}
@@ -481,6 +483,7 @@ A póker a világ egyik legismertebb kártyajátéka, amelyben a játékosok cé
 A \emph{Texas~Hold’Em} a közösségi pókerjátékok legnépszerűbb formája, amelyet jellemzően 2 és 10 játékos között játszanak. Ez egy viszonylag zárt struktúrájú játék, ahol a licitálás menete állandó szabályok szerint zajlik.
 
 \subsection{Szabályok ismertetése}
+\label{subsec-pokerszabalyok}
 
 Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazott szabályrendszere kerül bemutatásra. Ami közös az összes variációban, hogy a játékot 52~lapos francia kártyával játsszák dzsókerek nélkül. \cite{WikipediaPoker}
 
@@ -716,12 +719,27 @@ A mobil oldalon a megosztott hozzáférési kód segítségével tudunk csatlako
 
 Mobil oldalon 2 opciónk van kommunikálni a PC-vel, az egyik az üzenetek küldése a másik pedig a lecsatlakozási kérelem küldése. Az üzenetek küldésére különböző gombok és szöveges dobozok adnak lehetőséget, pl. egy ,,Készen állok'' gomb, ami a Lobby jelenet során jelzi a PC számára, hogy készen állunk a játszma indítására. A játszma során minden egyes lehetséges akciónak az elvégzésekor küldünk egy üzenetet a hosztnak, ami ezt megfelelően kezeli és elküldi a következő játékosnak az ő lehetséges akcióit.
 
-Ha a hoszt oldalról kapjuk a lecsatlakozási kérelmet, azaz kirúgnak minket egy játszmából, akkor ezt a játék kezeli és egy hibaüzenettel visszatérünk a kezdő képernyőre.
+Ha a PC oldalról kapunk egy lecsatlakozási kérelmet, azaz kirúgnak minket egy játszmából, akkor ezt a játék kezeli és egy hibaüzenettel visszatérünk a kezdő képernyőre.
 
 \section{Játékmenet megvalósítása}
 
-\subsection{Modul1}
-\subsection{Modul2}
+A játékmenet fejlesztése során próbáltam figyelni a tiszta és könnyen módosítható kódok és projekt létrehozására. A kód megírása során próbáltam kiszedni absztrakciókba az újból megjelenő funkcionalitásokat, így a jövőben könnyen bővíthető és elkülöníthető kódot tudok írni. A játékfejlesztés során egy bevált módszer az úgymond kezelő szkriptek készítése, ahol egy-egy ilyen kezelő felel egy adott funkcionalitásért, pl. az AudioManager szkript felel a hangokért. Ezeknél a kezelőknél az egyke tervezési mintát használtam, mivel ha szükség van kívülről elérni ezeket a kezelőket, azt így könnyen megtudtam tenni, és biztosította, hogy mindig csak egy kezelő példány legyen létrehozva az adott funkciók kezelésére.
+
+\subsection{Prefab-ek használata}
+
+A fejlesztés során a már \aref{subsec-prefab}. szekcióban is említettem hogy a Prefab-ek használata nagyon hasznos tud lenni a többször használatos játék elemek során. A játékban Prefab-et több helyen is használtam, viszont a legfontosabb a játékosokat megjelenítő UI elemek voltak. Ezzel a módszerrel minden játékosnak a megjelenítését egységes módon tudtam kezelni. Ilyen Prefab volt még pl. a hiba üzenetet megjelenítő felugró ablak, a chat üzeneteket megjelenítő chat doboz, a mobilon lévő lehetséges akciókat kezelő gombok és csúszkák és még hasonló UI elemek.
+
+\subsection{Vizuális elemek}
+
+A játék látvány világát leginkább a Unity által szolgáltatott UI elemekből építettem fel. Próbáltam egy pixeles stílust elérni, ezt egy pixeles betűtípus használatával sikerült is egész jól megvalósítanom. A látvány világ kialakításában nagy segítségemre volt a menyasszonyom, Erdész Réka. A játék legfontosabb látványbeli elemei a kártyák és az összes elem aminek a pókerhez van köze Réka által lettek megrajzolva. Ezek az elemek közé tartozik az 52 kártya lap egyedi kinézete, a póker asztal és a póker asztal díszítésére szolgáló póker zsetonok is.
+
+\subsection{Póker játékmenet megvalósítása}
+
+A játékmenet alapját \aref{subsec-pokerszabalyok}. szekcióban leírt szabályok adták. Minden játszma egy frissen kevert 52 lapos paklival kezd, az osztó és a vakok kisorsolásával. A körök logikáját egy szkript kezeli, ahol egy állapotgép alapú megoldás dolgozik. A körök kezdésekor minden játékos megkapja a tájékoztató üzenetet, arról hogy ki következik, a soron lévő játékos pedig a lehetséges akcióit is megkapja. Miután egy játékos elvégezte az akcióját ezt a PC oldalon a kör kezelő szkript dolgozza fel és a kör állapotától függően a következő játékosnak megint az újra meghatározott lehetséges akciókat ki küldi. Ha egy licit körnek vége van, erről mindenki kap tájékoztatást és a szabályok alapján elindul a következő kör, ez addig megy ameddig csak 1 játékos marad bent a játszmában. Egy játékos kiesik ha 0\$-t eléri a pénze, ilyenkor egy lecsatlakozási kérelmet és egy üzenetet kap a játékos az elért helyezéséről, amit a mobilon egyből lekezelve látni is fog.
+
+\subsection{Animációk}
+
+Az animációk segítik a vizuális játékélményt. A játékomban ilyen animációk pl. a kártyák osztása, felfordítása és egyéb a játékmenettel kapcsolatos animációk. Az animációk létrehozásához csak kódolást használtam a LeanTween \cite{UnityLeanTween} ingyenesen elérhető csomag segítségével. A LeanTween lehetőséget ad különböző mozgásokat, méretezéseket és forgásokat implementálni a játékelemek részére. Lehetőségünk van beállítani a cél tulajdonságon kívül az átmenetet, ami lehet pl. lineáris, négyzetes és hasonló átmenetek. Az animációk végén (amikor az elemek elérték a cél tulajdonságot), lehetőségünk van callback metódusok segítségével lekezelni ezt az eseményt.
 
 \chapter{Tesztelés}
 
@@ -938,6 +956,10 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 	
 	\bibitem{Varga}
 	\textsc{Varga Ervin}: \emph{Póker alapkönyv}, Vagabund, Kecskemét, 2008.
+	
+	\bibitem{UnityLeanTween}
+	\textsc{DentedPixel}: \emph{LeanTween}, elérhető:
+	\url{https://dentedpixel.com/LeanTweenDocumentation/classes/LeanTween.html} [Letöltve: 2025-03-11]
 	
 	\bibitem{UnityMultiplayerPlayMode}
 	\textsc{Unity Technologies}: \emph{Multiplayer Play Mode}, elérhető:
