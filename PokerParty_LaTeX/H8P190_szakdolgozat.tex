@@ -735,7 +735,7 @@ A játék látvány világát leginkább a Unity által szolgáltatott UI elemek
 
 \subsection{Póker játékmenet megvalósítása}
 
-A játékmenet alapját \aref{subsec-pokerszabalyok}. szekcióban leírt szabályok adták. Minden játszma egy frissen kevert 52 lapos paklival kezd, az osztó és a vakok kisorsolásával. A körök logikáját egy szkript kezeli, ahol egy állapotgép alapú megoldás dolgozik. A körök kezdésekor minden játékos megkapja a tájékoztató üzenetet, arról hogy ki következik, a soron lévő játékos pedig a lehetséges akcióit is megkapja. Miután egy játékos elvégezte az akcióját ezt a PC oldalon a kör kezelő szkript dolgozza fel és a kör állapotától függően a következő játékosnak megint az újra meghatározott lehetséges akciókat ki küldi. Ha egy licit körnek vége van, erről mindenki kap tájékoztatást és a szabályok alapján elindul a következő kör, ez addig megy ameddig csak 1 játékos marad bent a játszmában. Egy játékos kiesik ha 0\$-t eléri a pénze, ilyenkor egy lecsatlakozási kérelmet és egy üzenetet kap a játékos az elért helyezéséről, amit a mobilon egyből lekezelve látni is fog.
+A játékmenet alapját \aref{subsec-pokerszabalyok}. szekcióban leírt szabályok adták. Minden játszma egy frissen kevert 52 lapos paklival kezd, az osztó és a vakok kisorsolásával. A körök logikáját egy szkript kezeli, ahol egy állapotgép alapú megoldás dolgozik háttérben. A körök kezdésekor minden játékos megkapja a tájékoztató üzenetet, arról hogy ki következik, a soron lévő játékos pedig a lehetséges akcióit is megkapja. Miután egy játékos elvégezte az akcióját ezt a PC oldalon a kör kezelő szkript dolgozza fel és a kör állapotától függően a következő játékosnak megint az újra meghatározott lehetséges akciókat ki küldi. Ha egy licit körnek vége van, erről mindenki kap tájékoztatást és a szabályok alapján elindul a következő kör, ez addig megy ameddig csak 1 játékos marad bent a játszmában. Egy játékos kiesik ha a 0\$-t eléri a pénze, ilyenkor egy lecsatlakozási kérelmet és egy üzenetet kap a játékos az elért helyezéséről, amit a mobilon egyből lekezelve látni is fog.
 
 \subsection{Animációk}
 
@@ -743,7 +743,9 @@ Az animációk segítik a vizuális játékélményt. A játékomban ilyen anim�
 
 \chapter{Tesztelés}
 
-A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat. A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni.
+A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. 
+
+Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat. A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni.
 
 \section{Közös DLL tesztelése}
 
@@ -754,17 +756,17 @@ A közös DLL tesztelése során a már fentebb említett egység teszteket alka
 A játékok tesztelésében legnagyobb szerepet a playtest játszott. A playtest kétféleképpen nézett ki:
 
 \begin{itemize}
-	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen.
+	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen. Ezeknél a teszteknél a hibák feltárása mellet sok visszajelzést kaptam, amik segítettek a játékélmény fejlesztését.
 	\item Egyedül: Unity editor által adott lehetőségeket kihasználva teszteltem. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiplayer play mode}-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. \cite{UnityMultiplayerPlayMode}
 \end{itemize}
 
 A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésre de játékélménybeli javításába is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, amik a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, ami megkönnyítette a hibák feltárását.
 
-Mindkét játékhoz készítettem a már korábbiakban említett egység teszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egység tesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. \cite{NUnit}
+Mindkét játékhoz készítettem a már korábbiakban említett egység teszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egység tesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. A Mock komponensek segítségével a hiányzó függőségeket betudjuk tölteni a tesztelendő osztályban. \cite{NUnit}
 
 \subsubsection{Teszt jegyzőkönyv}
 
-A playtest-ek során teszt jegyzőkönyvet is vezettem. Egy ilyen jegyzőkönyv látható a főmenü jelentről \aref{tab-tesztjegyzokonyv}. táblázatban.
+A playtest-ek során teszt jegyzőkönyvet is vezettem. A jegyzőkönyvek segítettek a hibák dokumentálásában, így később is egységes formában át tudtam nézni az észlelt hibákat. Egy ilyen jegyzőkönyv látható a főmenü jelentről \aref{tab-tesztjegyzokonyv}. táblázatban.
 
 \begin{table}[ht!]
 	\centering
@@ -800,7 +802,7 @@ A playtest-ek során teszt jegyzőkönyvet is vezettem. Egy ilyen jegyzőkönyv 
 
 \section{Összefoglalás}
 
-A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy hogy csak idő pazarlás, de mindenképpen megéri időt tölteni vele. A játékfejlesztésben pedig a hibakeresésen kívül másban is fontos szerepet játszik, hiszen akár a játékélmény fejlesztésében is segíthet. Vannak olyan játékok is, ahol a játékmenet kiegyensúlyozásának érdekében is rákényszerülünk a tesztelésre és elhagyhatatlan eleme a fejlesztési folyamatnak.
+A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy hogy csak idő pazarlás, de mindenképpen megéri időt tölteni vele. A játékfejlesztésben pedig a hibakeresésen kívül másban is fontos szerepet játszik, hiszen akár a játékélmény fejlesztésében is segíthet. Vannak olyan játékok is, ahol a játékmenet kiegyensúlyozásának érdekében is rákényszerülünk a tesztelésre és elhagyhatatlan eleme a fejlesztési folyamatnak. Az én játékom esetében hiba keresésben és játékélménybeli javításban is sokat segítettek a fentebb említett tesztelési módszerek.
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
