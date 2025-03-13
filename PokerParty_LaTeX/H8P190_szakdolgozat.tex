@@ -47,6 +47,7 @@
 
 \chapter*{Bevezetés}
 \addcontentsline{toc}{chapter}{Bevezetés}
+
 Magamról, hogy kezdett el érdekelni az infó, majd hogy jutottam a Játékfejlesztésig.
 
 \chapter{Technológiai áttekintés}
@@ -129,6 +130,7 @@ Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szere
 
 \chapter{Unity}
 \label{ch-unity}
+
 A Unity egy játékmotor, amit aktívan a Unity Technologies fejleszt. A játékmotor segítségével számos platformra fejleszthetünk 2D és 3D játékokat is. Ezek a platformok közé tartoznak a virtuális valóságot szolgáltató platformok is. A megszokott asztali számítógépek mellett, mobil és web támogatást is nyújt a játékmotor. \cite{UnityPlatforms}
 
 \section{Unity6}
@@ -163,15 +165,19 @@ Unity-ben minden objektum egy GameObject. Ez azt jelenti, hogy mindennek, ami a 
 A komponensek lehetnek beépítettek, amivel a Unity szolgál, vagy akár írhatunk saját komponenseket C\# script-ek segítségével. Komponensek segítségével tudjuk életre kelteni a GameObject-eket. A saját script-ek írása lehetővé teszi a GameObject-en szereplő többi komponens módosítását és kezelését is. Komponenseket tudunk törölni és hozzáadni egy objektumhoz, ezeket a műveletek \aref{subsec-editor}. szekcióban említett inspector ablakon keresztül tudjuk kezelni. Ebben a szekcióban bemutatom részletesebben a leggyakrabban használt komponenseket. \cite{UnityComponents}
 
 \paragraph{Transform}
+
 Az egyik legfontosabb komponens, amivel minden objektumnak rendelkeznie kell. Ezt a komponenst nem is lehet törölni az objektumokról. Információt szolgáltat az objektum: pozíciójáról, méretéről, forgásáról és a hierarchiában lévő tulajdonságairól is. \cite{UnityTransform}
 	
 \paragraph{RigidBody}
+
 Azok az objektumok amelyeken van ilyen komponens, azok használják a beépített fizikai motort a gravitáció és többi fizikai hatás szimulálásához. A Transform komponens használata helyett, a fizikai motor segítségével módosítható az objektum pozíciója. Különféle fizikai hatásokat szimulálhatunk a komponens segítségével. Számos tulajdonságot is beállíthatunk az objektumnak, mint például a tömegét, a pontosabb szimulációk érdekében. \cite{UnityRigidbody}
 
 \paragraph{Camera}
+
 A játékos a kamerán keresztül fogja látni a világot. Egy projekt létrehozásakor alapból létrejön egy objektum, amire a Camera komponens már hozzá van adva. A komponensen különféle beállításokat találhatunk a felbontással, effektekkel és hasonlókkal kapcsolatban. \cite{UnityCamera}
 
 \paragraph{Collider}
+
 Ez a komponens lehetőséget ad két objektum találkozásának vizsgálatára. Ha mozgatni is szeretnénk az objektumokat, akkor RigidBody használatával tudjuk csak megtenni. Több különböző formában tudjuk az objektum köré tenni: \cite{UnityCollider}
 
 \begin{itemize}
@@ -184,15 +190,19 @@ Ez a komponens lehetőséget ad két objektum találkozásának vizsgálatára. 
 \end{itemize}
 
 \paragraph{Sprite Renderer}
+
 Ez a komponens lehetővé teszi a képek megjelenítését 2D illetve 3D projektekben is. Egy sprite-ot kell megadnunk neki, amit különböző képformátumokból a Unity-be importálva tudunk létrehozni. \cite{UnitySpriteRenderer}
 
 \paragraph{Light}
+
 Ennek a komponensnek a segítségével tudjuk kezelni a fényeket a játékban. 2D és 3D esetén is több különböző light komponenst szolgáltat a Unity. A fényeknek lehetőségünk van állítani a fényét, színét, távolságát és még sok hasonló tulajdonságot. \cite{UnityLight}
 
 \paragraph{Audio Source}
+
 Ennek a komponensnek egy Audio Clip-et szolgáltatva tudjuk lejátszani az adott hangunkat. Van lehetőségünk a hangerőt és hasonló tulajdonságokat módosítanunk. Használatához szükségünk van egy Audio Listener komponensre is, aminek segítségével akár térben is különbséget tehetünk a hangok között. \cite{UnityAudioSource}
 
 \paragraph{Script}
+
 Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenetet. Mindegyik script megírása C\#-ban történik. Az olyan script-ek amiket egy objektumhoz akarunk kötni a MonoBehaviour beépített osztályból kell örököltetnünk. Ez az osztály sok különböző metódust és függvényt ad, de ezek közül a 2 legfontosabb a start és az update metódusok.
 
 \begin{itemize}
@@ -214,6 +224,7 @@ A Unity Prefab rendszere lehetővé teszi egy GameObject el tárolását, minden
 \end{itemize}
 
 \subsection{Editor}
+
 \label{subsec-editor}
 Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog történni. A Unity editor több különböző ablakból tevődik össze, amik segítik a fejlesztési folyamatot. Ebben a szekcióban bemutatom részletesebben a legfontosabb ablakokat.
 
@@ -225,21 +236,27 @@ Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog
 \end{figure}
 
 \paragraph{Project Window}
+
 Ebben az ablakban tudjuk kezelni a fájlrendszerét a projektünknek. Itt hozhatunk létre rendszerezés céljából különböző mappákat, és helyezhetjük el a felhasználni kívánt fájlokat is. \cite{UnityProjectWindow}
 
 \paragraph{Scene View}
+
 Ez az egyik legfontosabb ablak. Itt tudjuk kezelni a jeleneten belüli játék elemeinket. Több különböző módon tudjuk manipulálni az objektumokat, beleértve a pozíciójuk módosítását, és az átméretezésüket is. \cite{UnitySceneView}
 
 \paragraph{Hierarchy Window}
+
 Ez az ablak tartalmazza a jelenlegi jeleneten belüli összes játék objektumot. Itt tudunk létrehozni új objektumokat, és a faszerű hierarchia nézetben rendezni őket. \cite{UnityHierarchyWindow}
 
 \paragraph{Inspector Window}
+
 Ha kiválasztunk egy objektumot a hierarchiában, vagy a jelenet nézetben, akkor azt az objektumot ezen az ablakon keresztül tudjuk kezelni. Itt tudunk új komponenseket adni hozzá és a meglévőeket pedig módosítani. Itt tudjuk például a saját kódjainkat is az objektumokra helyezni. \cite{UnityInspectorWindow}
 
 \paragraph{Game View}
+
 Ezen az ablakon látható a játékban használt kamerák által rögzített renderelt kép, amely a végső játékot mutatja be. \cite{UnityGameView}
 
 \section{Relay}
+
 \label{sec-relay}
 A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fejlesszünk drága dedikált szerverek nélkül. A kapcsolódás folyamat hozzáférési kódokon keresztül történik a játékosok között. A Unity Technologies elmondása szerint ezt a szolgáltatást kis méretű casual játékokhoz és kör alapú kártya játékokhoz a legérdemesebb használni. Az alábbiak a fő előnyei ennek a szolgáltatásnak. \cite{UnityRelayService} \cite{UnityRelayDocs}
 
@@ -257,6 +274,7 @@ Két fő komponensből épül fel a Relay.
 \end{itemize}
 
 \subsection{Relay Server}
+
 A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken keresztül kommunikálnak egymással. A Relay szerverek továbbítják az üzeneteket a kliensek között kis késleltetésű datagram cserével, ez biztosítja azt, hogy két játékos sose kapcsolódik közvetlen egymáshoz. Ezek a szerverek nyilvános végpontként viselkednek, ami elérhető az összes játékos számára. Ez a megközelítés megoldást ad több különböző felmerülő problémára is mint például a játékosok közötti tűzfalakra. Minden játékos ugyanarra az ip címre tud csatlakozni, amit biztosra vehetnek, hogy a játékmenet során nem fog változni, így a játékosoknak nem kell tudniuk egymás ip címéről, ez is erősíti a biztonságot a rendszerben. \cite{UnityRelayServers}
 
 \begin{figure}[ht!]
@@ -269,10 +287,12 @@ A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken ker
 \chapter{Rendszerterv}
 
 \section{Rendszer célja}
+
 A szakdolgozatom célja egy Texas Hold'Em szabályain alapuló póker játék fejlesztése, ahol egy asztali számítógép és több mobiltelefon között jön létre a kapcsolat a többjátékos játékmenet megvalósításához. A játék célja, hogy egy hasonló élményt adjon a játékosok számára, mintha rendes pókert játszanánk élőben. Ezt a célt úgy próbáltam elérni, hogy a mobiltelefonok képzik a játékosok ,,kezeit'' és a számítógép pedig az asztalt, az az a közös teret.
 
 \section{Architekturális terv}
 \label{sec-architecture}
+
 A szakdolgozat 3 különböző projektből fog felépülni: PC játék (Unity), Mobil játék (Unity), Közös DLL (C\# Class Library). Mivel mind a három projekt a C\# programozási nyelvet használja, így egyszerűen lehet kezelni a közös metódusokat, könyvtárakat, funkciókat.
 
 \paragraph{PC játék}
@@ -379,7 +399,6 @@ Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol 
 	\end{tabular}
 	\caption{Játék jelenet követelményei}
 \end{table}
-
 
 \subsection{Mobil játék}
 
