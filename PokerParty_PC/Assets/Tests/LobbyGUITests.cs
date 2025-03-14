@@ -1,10 +1,8 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 using PokerParty_SharedDLL;
-using UnityEngine.SceneManagement;
+using NUnit.Framework;
 
 public class LobbyGUITests
 {
@@ -19,6 +17,8 @@ public class LobbyGUITests
         LobbyGUI.instance = lobbyGUI;
 
         ConnectionManager.instance = new GameObject().AddComponent<ConnectionManager>();
+        AudioManager.instance = new GameObject().AddComponent<AudioManager>();
+        AudioManager.instance.playerJoinedSource = new GameObject().AddComponent<AudioSource>();
         
         lobbyGUI.joinCodeText = new GameObject().AddComponent<TextMeshProUGUI>();
         lobbyGUI.deleteLobbyBtn = new GameObject().AddComponent<Button>();
@@ -36,7 +36,7 @@ public class LobbyGUITests
         // Arrange
         Player testPlayer = new Player("TestPlayer");
         lobbyGUI.playerCardPrefab = new GameObject().AddComponent<LobbyPlayerCard>();
-        int initialCount = lobbyGUIObject.transform.childCount;
+        int initialCount = LobbyGUI.instance.parentForPlayerCards.transform.childCount;
 
         // Act
         lobbyGUI.DisplayNewPlayer(testPlayer);
