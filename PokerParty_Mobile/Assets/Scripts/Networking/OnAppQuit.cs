@@ -43,4 +43,23 @@ public class OnAppQuit : MonoBehaviour
         Logger.Log("Client app stopped");
         Application.Quit();
     }
+    
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            StartCoroutine(HandlePause());
+        }
+    }
+
+    private IEnumerator HandlePause()
+    {
+        Logger.Log("Application paused");
+        if (ConnectionManager.instance != null && ConnectionManager.instance.NetworkDriver.IsCreated)
+        {
+            ConnectionManager.instance.StopAllCoroutines();
+            ConnectionManager.instance.DisconnectFromHost();
+            yield return ConnectionManager.instance.DisposeNetworkDriver();
+        }
+    }
 }
