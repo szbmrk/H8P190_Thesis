@@ -48,8 +48,32 @@
 \chapter*{Bevezetés}
 \addcontentsline{toc}{chapter}{Bevezetés}
 
-Magamról, hogy kezdett el érdekelni az infó, majd hogy jutottam a Játékfejlesztésig.
+A videojátékok már egészen kis korom óta foglalkoztattak. Emlékszem, amikor először találkoztam velük: apukámat figyeltem, ahogy egy régi autóversenyzős játékkal játszik. Amikor aztán ő maga ültetett le a számítógép elé, hogy én is kipróbáljam, hatalmas izgalom és kíváncsiság töltött el. Akkor még nem sejtettem, hogy ez a terület az életem egyik legmeghatározóbb részévé válik.
 
+Ahogy telt az idő, egyre több játék jelent meg, és apukám mindig valami újat mutatott. Először hihetetlennek tűnt, hogy ugyanazon a számítógépen mennyi különböző játékot lehet játszani, ugyanazokkal az eszközökkel irányítva. Aztán egy LAN partin találkoztam a többjátékos játékok világával először, ahol apukám és barátai egyszerre játszottak ugyanazzal a játékkal, és láthatták egymást a saját játékaikban. Ilyenkor kezdett el igazán érdekelni hogy hogyan is működik mindez a háttérben. 
+
+Középiskolában találkoztam először a programozással, és az első találkozás után már tudtam, hogy ezzel a területtel szeretnék később is foglalkozni. Nemcsak a játékok iránti szeretetem miatt, hanem mert felfedeztem, hogy a programozás lehetőséget ad arra, hogy bele lássak igazán mi folyik a háttérben és a saját ötleteimet is megvalósíthassam. Miután elkezdtem programozni mindig más szemmel játszottam a játékokkal és próbáltam bele látni, hogy a háttérben az adott folyamatokat hogyan valósíthatták meg a fejlesztők.
+
+Rengeteg többjátékos játékot játszottam a barátaimmal, és ez az egyik kedvenc időtöltésemmé vált. Közben pedig mindig is szerettem volna fejleszteni egy saját játékot, amit akár közösen is tudunk játszani. Ennek érdekében szabadidőmben hobbi projektek segítségével próbáltam minél többet tanulni a játékfejlesztésről. Több projektbe is belekezdtem amik nagyon sokat tanítottak a fejlesztési folyamatuk során, de egyiket se tudtam igazán befejezni.
+
+Az egyetem során pedig a hobbi projektek mellett sok új dolgot tanultam, ami tovább segített a játékfejlesztésben. Az egyetemen tanultak által sikerült még jobban belelátnom az informatika és programozás világába és sok más terület is elkezdett érdekelni a játékfejlesztésen kívül, de mindig a játékfejlesztés maradt az első. Rengeteg előző megoldásomat is át gondoltam és a tanultak alapján rájöttem, hogy mindig van egy szebb mód a különböző problémák megoldására. Az egyetem során még nagyon meghatározó élmény volt a GémDzsem, ami alatt csapatokban fejleszthettünk határidőre egy adott téma alapján különböző játékokat. A GémDszem alatt sikerült a legtöbbet tanulnom a játékfejlesztésről és itt fejeztem be először egy játékot teljesen a csapatomnak a segítségével. Már 4 ilyen GémDszem-en vettem részt és mindegyik során sikerült újat tanulnom és még jobban megszeretni ezt a területet.
+
+A szakdolgozatomban fejlesztek először többjátékos játékot, ami mindig is egy célom volt. A tapasztalataim és az egyetem segítségével már magabiztosan tudtam elkezdeni a fejlesztést és mint minden eddigi fejlesztésem során, most is sokat tudtam tanulni a folyamat alatt. A játékom ötletét és célját \aref{ch-rendszerterv}. fejezetben fejtem ki bővebben.
+
+\begin{center}
+	Forráskód elérhetősége:
+	
+	{\color{teal}\url{https://github.com/szbmrk/H8P190_Thesis}}
+	
+	Játék elérhetősége:
+	
+	{\color{teal}\url{https://github.com/szbmrk/H8P190_Thesis_Builds}}
+	
+	Bemutató videó elérhetősége:
+	
+	{\color{teal}\url{https://example.com}}
+\end{center}
+	
 \chapter{Technológiai áttekintés}
 
 Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is. Az API (alkalmazásprogramozási interfész) segítségével egy program vagy szolgáltatás funkcióit más programok is elérhetik anélkül, hogy a belső működést ismerniük kellene. A játékmotorok használata megkönnyíti a fejlesztés folyamatát, ugyanakkor nem biztosítanak olyan nagy fokú rugalmasságot, mint az API-alapú fejlesztés. Az API-alapú fejlesztés során függvény könyvtárak segítségével tudjuk felépíteni a játékunkat, ezért az egyes modulok nincsenek a játékmotor keretei köré szorítva, hanem az adott függvények segítségével magunk építhetjük fel ezeket. Ilyen API-k lehetnek például a játékfejlesztés során a grafikai-, multimédia kezelő API-k. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, így ki tudtam használni az általa kínált lehetőségeket és eszközöket.
@@ -60,15 +84,15 @@ A játékmotorok olyan fejlesztői környezetek, amelyek célja, hogy egyszerűs
 
 \subsection{Unreal}
 
-Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat pl. karakter mozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki. \cite{WikipedaiUnreal}
+Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat pl. karakter mozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki. \cite{WikipediaUnreal} \cite{UnrealEngine}
 
 \subsection{Godot}
 
-A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv). \cite{GitHubGodot}
+A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv). \cite{Godot} \cite{GitHubGodot}
 
 \subsection{Unity}
 
-A Unity az egyik legismertebb és legelterjedtebb játékmotor a piacon, amely támogatja a mobil, asztali, konzolos, valamint webes játékok fejlesztését 2D és 3D játékokhoz egyaránt. Jelentős előnye a könnyen tanulható felhasználói felület és a jól dokumentáltság. Elsősorban a C\# nyelvet használja scriptelésre, de támogatja a vizuális programozást is. A játékmotorhoz tartozik több különböző előfizetési szint is, de van ingyenesen használható verziója is.  Mivel a C\# közel áll hozzám, tapasztalatom is van már ezzel a játékmotorral és maga a játékmotor adottságai pont megfeleltek a szakdolgozatom követelményeihez, ezért erre a játékmotorra esett a választásom. Erről a játékmotorról \aref{ch-unity}. fejezetben bővebben írok. \cite{WikipediaUnity}
+A Unity az egyik legismertebb és legelterjedtebb játékmotor a piacon, amely támogatja a mobil, asztali, konzolos, valamint webes játékok fejlesztését 2D és 3D játékokhoz egyaránt. Jelentős előnye a könnyen tanulható felhasználói felület és a jól dokumentáltság. Elsősorban a C\# nyelvet használja scriptelésre, de támogatja a vizuális programozást is. A játékmotorhoz tartozik több különböző előfizetési szint is, de van ingyenesen használható verziója is.  Mivel a C\# közel áll hozzám, tapasztalatom is van már ezzel a játékmotorral és maga a játékmotor adottságai pont megfeleltek a szakdolgozatom követelményeihez, ezért erre a játékmotorra esett a választásom. Erről a játékmotorról \aref{ch-unity}. fejezetben bővebben írok. \cite{Unity} \cite{WikipediaUnity}
 
 \section{Többjátékos technológia a játékfejlesztésben}
 
@@ -285,6 +309,7 @@ A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken ker
 \end{figure}
 
 \chapter{Rendszerterv}
+\label{ch-rendszerterv}
 
 \section{Rendszer célja}
 
@@ -293,19 +318,19 @@ A szakdolgozatom célja egy Texas Hold'Em szabályain alapuló póker játék fe
 \section{Architekturális terv}
 \label{sec-architecture}
 
-A szakdolgozat 3 különböző projektből fog felépülni: PC játék (Unity), Mobil játék (Unity), Közös DLL (C\# Class Library). Mivel mind a három projekt a C\# programozási nyelvet használja, így egyszerűen lehet kezelni a közös metódusokat, könyvtárakat, funkciókat.
+A szakdolgozat 3 különböző projektből épül fel: PC játék (Unity), Mobil játék (Unity), Közös DLL (C\# Class Library). Mivel mind a három projekt a C\# programozási nyelvet használja, így egyszerűen lehet kezelni a közös metódusokat, könyvtárakat, funkciókat.
 
 \paragraph{PC játék}
 
-A PC játék fog szolgálni az asztalként, itt lehet létrehozni és kezelni a játszmákat. A játékmenet fontosabb részei itt lesznek nyomon követhetők. 
+A PC játék szolgál az asztalként, itt lehet létrehozni és kezelni a játszmákat. A játékmenet fontosabb részei itt nyomon követhetők a játékosok számára. 
 
 \paragraph{Mobil játék}
 
-A Mobil játék szerepe a PC-s játékkal való kommunikáció megteremtése a játékosok számára. A játékosok itt fognak tudni különféle üzenetek küldésével játszani a játékkal, miközben a játékmenet többi részét majd a PC-n követhetik.
+A Mobil játék szerepe a PC-s játékkal való kommunikáció megteremtése a játékosok számára. A játékosok itt tudnak különféle üzenetek küldésével játszani a játékkal, miközben a játékmenet többi részét a PC-n követhetik.
 
 \paragraph{Közös DLL}
 
-A közös DLL szerep azoknak a függvényeknek és metódusoknak összegyűjtése, amit mind a PC illetve a Mobil játék során is használok a kódban. Ennek egyik legfontosabb része a kézkiértékeléshez szükséges algoritmus, amiről bővebben \aref{subsec-kezkiertekeloalgoritmus}. szekcióban írok. A DLL-nek egy másik fontos része a két játék közötti üzenetek egységbe fogása. Az üzenetek küldéséről \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok, de a lényeg, hogy az itt használt osztályokat is a DLL tartalmazza, hiszen mindkét oldal ezeket az osztályokat használja az üzenetek kezelésére.
+A közös DLL szerepe azoknak a függvényeknek és metódusoknak összegyűjtése, amit mind a PC illetve a Mobil játék során is használok a kódban. Ennek egyik legfontosabb része a kézkiértékeléshez szükséges algoritmus, amiről bővebben \aref{subsec-kezkiertekeloalgoritmus}. szekcióban írok. A DLL-nek egy másik fontos része a két játék közötti üzenetek egységbe fogása. Az üzenetek küldéséről \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok, de a lényeg, hogy az üzenet küldés során használt osztályokat is a DLL tartalmazza, hiszen így mindkét oldal egységesen tudja kezelni őket.
 
 \section{Követelmények}
 
@@ -510,7 +535,7 @@ Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazot
 
 A játék során három fontos szerep forog körbe a játékosok között, amit ,,gombokkal'' jelölünk. Ezek a szerepek az osztó, kis vak és nagy vak. Az osztótól balra ülő játékos lesz a kis vak, a kis vaktól balra ülő pedig a nagy vak. Az osztót pedig több különböző módon választhatjuk meg a játék elején.  
 
-Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig még osztás előtt kötelesek betenni a vak téteket, ahol a kis vak tét általában a nagy vak tét fele. Egy játszma az alábbiak szerint játszódhat le: \cite{WikipediaTexasholdem}
+Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig még osztás előtt kötelesek betenni a vak téteket, ahol a kis vak tét általában a nagy vak tét fele. Egy játszma az alábbiak szerint játszódhat le: \cite{TexasholdemSzabalyok} \cite{WikipediaTexasholdem}
 
 \begin{enumerate}
 	\item \emph{Osztás}
@@ -826,16 +851,39 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
 
+\begin{center}
+	Forráskód elérhetősége:
+	
+	{\color{teal}\url{https://github.com/szbmrk/H8P190_Thesis}}
+	
+	Játék elérhetősége:
+	
+	{\color{teal}\url{https://github.com/szbmrk/H8P190_Thesis_Builds}}
+	
+	Bemutató videó elérhetősége:
+	
+	{\color{teal}\url{https://example.com}}
+\end{center}
+
 \begin{thebibliography}{2}
 	\addcontentsline{toc}{chapter}{\bibname}
 	\bibitem{WikipediaGameEngine}
 	\textsc{Wikipedia}: \emph{Game engine}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Game_engine} [Letöltve: 2025-02-28]
 	
-	\bibitem{WikipedaiUnreal}
+	\bibitem{WikipediaUnreal}
 	\textsc{Wikipedia}: \emph{Unreal Engine}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unreal_Engine} [Letöltve: 2025-02-28]
+
+	\bibitem{UnrealEngine}
+	\textsc{Epic Games}: \emph{Unreal Engine}, elérhető: \url{https://www.unrealengine.com} [Letöltve: 2025-02-28]
+	
+	\bibitem{Godot}
+	\textsc{Juan Linietsky, Ariel Manzur, Godot közösség}: \emph{Godot}: \url{https://godotengine.org} [Letöltve: 2025-02-28]
 	
 	\bibitem{GitHubGodot}
 	\textsc{GitHub}: \emph{Godot}: \url{https://github.com/godotengine/godot} [Letöltve: 2025-02-28]
+	
+	\bibitem{Unity}
+	\textsc{Unity Technologies}: \emph{Unity}, elérhető: \url{https://unity.com} [Letöltve: 2025-02-28]
 	
 	\bibitem{WikipediaUnity}
 	\textsc{Wikipedia}: \emph{Unity (game engine)}, Wikipedia, az online enciklopédia, elérhető: \url{https://en.wikipedia.org/wiki/Unity_(game_engine)} [Letöltve: 2025-02-28]
@@ -965,6 +1013,10 @@ A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy 
 	
 	\bibitem{WikipediaPoker}
 	\textsc{Wikipedia}: \emph{Póker}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/P%C3%B3ker} [Letöltve: 2024-11-12]
+	
+	\bibitem{TexasholdemSzabalyok}
+	\textsc{PokerStrategy}: \emph{A Texas hold'em játékszabályai
+	}, elérhető: \url{	https://hu.pokerstrategy.com/strategy/various-poker/texas-holdem-jatekszabalyok} [Letöltve: 2024-11-13]
 	
 	\bibitem{WikipediaTexasholdem}
 	\textsc{Wikipedia}: \emph{Texas Hold'Em}, Wikipedia, az online enciklopédia, elérhető: \url{https://hu.wikipedia.org/wiki/Texas_Hold%E2%80%99Em} [Letöltve: 2024-11-13]
