@@ -789,19 +789,21 @@ Az animációk nagyban segítik a vizuális játékélményt és egyértelműbb�
 
 A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. 
 
-Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat. A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni.
+Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat és teszt jegyzőkönyveket vezetünk ezeknek a teszteknek a menetéről. Fontos lehet hogy ezeket a játék teszteket ne csak önmagunk csináljuk hiszen mi ismerjük a játékot és akár azok a részek amik nem egyértelműek első felhasználói szempontból nekünk nem biztos hogy feltűnnek. Külsős tesztelők sok olyan dolgot fedezhetnek fel, ami nekünk eszünkbe se jutott volna de mégis sokat javít a játékélmény növelésében.
+
+A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni. A tiszta kód írásának egyik módja lehet az OOP (Objektum orientált programozás) alapelveinek betartása lehet.
 
 \section{Közös DLL tesztelése}
 
-A közös DLL tesztelése során a már fentebb említett egység teszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egység teszteteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint, ahogy korábban \aref{sec-architecture}. szekcióban említettem a közös DLL projektnek az egyik legfontosabb része a kézkiértékelést kezelő algoritmus. A kézkiértékeléshez írt egység teszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként a teszteknél.
+A közös DLL tesztelése során a már fentebb említett egység teszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egység teszteteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint, ahogy korábban \aref{sec-architecture}. szekcióban említettem a közös DLL projektnek az egyik legfontosabb része a kézkiértékelést kezelő algoritmus. A kézkiértékeléshez írt egység teszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként és az esetleges döntetlen eseteket is figyelembe vettem.
 
 \section{Játékok tesztelése}
 
-A játékok tesztelésében legnagyobb szerepet a playtest játszott. A playtest kétféleképpen nézett ki:
+A játékok tesztelésében legnagyobb szerepet a playtest játszott, amit már egészen a korai fejlesztési fázisban is elkezdtem. A playtest-ek kétféleképpen néztek ki:
 
 \begin{itemize}
-	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen. Ezeknél a teszteknél a hibák feltárása mellet sok visszajelzést kaptam, amik segítettek a játékélmény fejlesztését.
-	\item Egyedül: Unity editor által adott lehetőségeket kihasználva teszteltem. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiplayer play mode}-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. \cite{UnityMultiplayerPlayMode}
+	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen. Ezeknél a teszteknél a hibák feltárása mellet sok visszajelzést kaptam, amik segítettek a játékélmény fejlesztését. Ezek a tesztek egy kis motivációs lendületet is tudtak adni, hiszen jó volt látni ahogy a barátaim élvezik a játékot, akár még hibás állapotában is.
+	\item Egyedül: a Unity editor által adott lehetőségeket kihasználva teszteltem a játékot. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiplayer play mode}-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. Ezeknek a teszteknek a során a hibák keresésére fókuszáltam. \cite{UnityMultiplayerPlayMode}
 \end{itemize}
 
 A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésre de játékélménybeli javításába is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, amik a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, ami megkönnyítette a hibák feltárását.
@@ -810,7 +812,7 @@ Mindkét játékhoz készítettem a már korábbiakban említett egység tesztek
 
 \subsubsection{Teszt jegyzőkönyv}
 
-A playtest-ek során teszt jegyzőkönyvet is vezettem. A jegyzőkönyvek segítettek a hibák dokumentálásában, így később is egységes formában át tudtam nézni az észlelt hibákat. Egy ilyen jegyzőkönyv látható a főmenü jelentről \aref{tab-tesztjegyzokonyv}. táblázatban.
+A playtest-ek során teszt jegyzőkönyvet vezettem. A jegyzőkönyvek segítettek a hibák dokumentálásában, így később is egységes formában át tudtam nézni az észlelt hibákat. Egy ilyen jegyzőkönyv látható a főmenü jelentről \aref{tab-tesztjegyzokonyv}. táblázatban. A jelenetekre mindig külön jegyző könyveket vezettem, a könnyebb átláthatóság érdekében.
 
 \begin{table}[ht!]
 	\centering
