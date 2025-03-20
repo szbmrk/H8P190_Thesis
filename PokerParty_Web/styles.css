@@ -93,6 +93,11 @@ body {
     margin: 0.5rem;
 }
 
+.download-btn:first-child {
+    margin-bottom: 1rem;
+}
+
+
 .download-btn:hover {
     transform: scale(1.03);
     box-shadow: 0 5px 15px rgba(106, 90, 205, 0.3);
