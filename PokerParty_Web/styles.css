@@ -90,6 +90,7 @@ body {
     border-radius: 50px;
     font-weight: 600;
     transition: all 0.3s ease;
+    margin: 0.5rem;
 }
 
 .download-btn:hover {
@@ -131,4 +132,15 @@ footer {
     padding: 2px 6px;
     border-radius: 4px;
     color: #ddd;
+}
+
+.os-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.os-icon {
+    font-size: 1.5rem;
 }
