@@ -84,15 +84,15 @@ A játékmotorok olyan fejlesztői környezetek, amelyek célja, hogy egyszerűs
 
 \subsection{Unreal}
 
-Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat pl. karakter mozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki. \cite{UnrealEngine}
+Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat pl. karakter mozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki \cite{UnrealEngine}.
 
 \subsection{Godot}
 
-A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv). \cite{Godot} \cite{GitHubGodot}
+A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv) \cite{Godot} \cite{GitHubGodot}.
 
 \subsection{Unity}
 
-A Unity az egyik legismertebb és legelterjedtebb játékmotor a piacon, amely támogatja a mobil, asztali, konzolos, valamint webes játékok fejlesztését 2D és 3D játékokhoz egyaránt. Jelentős előnye a könnyen tanulható felhasználói felület és a jól dokumentáltság. Elsősorban a C\# nyelvet használja scriptelésre, de támogatja a vizuális programozást is. A játékmotorhoz tartozik több különböző előfizetési szint is, de van ingyenesen használható verziója is.  Mivel a C\# közel áll hozzám, tapasztalatom is van már ezzel a játékmotorral és maga a játékmotor adottságai pont megfeleltek a szakdolgozatom követelményeihez, ezért erre a játékmotorra esett a választásom. Erről a játékmotorról \aref{ch-unity}. fejezetben bővebben írok. \cite{Unity}
+A Unity az egyik legismertebb és legelterjedtebb játékmotor a piacon, amely támogatja a mobil, asztali, konzolos, valamint webes játékok fejlesztését 2D és 3D játékokhoz egyaránt. Jelentős előnye a könnyen tanulható felhasználói felület és a jól dokumentáltság. Elsősorban a C\# nyelvet használja scriptelésre, de támogatja a vizuális programozást is. A játékmotorhoz tartozik több különböző előfizetési szint is, de van ingyenesen használható verziója is.  Mivel a C\# közel áll hozzám, tapasztalatom is van már ezzel a játékmotorral és maga a játékmotor adottságai pont megfeleltek a szakdolgozatom követelményeihez, ezért erre a játékmotorra esett a választásom. Erről a játékmotorról \aref{ch-unity}. fejezetben bővebben írok \cite{Unity}.
 
 \section{Többjátékos technológia a játékfejlesztésben}
 
@@ -100,7 +100,7 @@ A mai megjelenő játékok nagy része már tartalmaz valamiféle többjátékos
 
 \subsection{Korai megoldások}
 
-Többjátékossal játszható játék először stratégia kör alapú játékokban jelent meg, de ez még nem egyidejű játékot jelentett. Ezek után egyidejű többjátékos játék lehetősége először egy 2 játékossal egyszerre egy helyen játszható játékkal jött létre, ez a játék volt a jól ismert Pong. A Pong után kezdtek egyre jobban elterjedni a helyi többjátékos játékok, ahol az egymás elleni játék helyett, egymással együtt működve is tudtunk játszani. Egy népszerű módszer a helyi többjátékos játékok megvalósításánál az osztott képernyő, ahol általában el van választva a kijelző több egyenlő részre, ahol 1-1 részt 1-1 játékos kezelhet. A 2000-es évek elején pedig már megjelent az online többjátékos játékok lehetősége is, ahol már nem volt szükség egy térben tartózkodni a többi játékossal. \cite{MediumMultiplayer}
+Többjátékossal játszható játék először stratégia kör alapú játékokban jelent meg, de ez még nem egyidejű játékot jelentett. Ezek után egyidejű többjátékos játék lehetősége először egy 2 játékossal egyszerre egy helyen játszható játékkal jött létre, ez a játék volt a jól ismert Pong. A Pong után kezdtek egyre jobban elterjedni a helyi többjátékos játékok, ahol az egymás elleni játék helyett, egymással együtt működve is tudtunk játszani. Egy népszerű módszer a helyi többjátékos játékok megvalósításánál az osztott képernyő, ahol általában el van választva a kijelző több egyenlő részre, ahol 1-1 részt 1-1 játékos kezelhet. A 2000-es évek elején pedig már megjelent az online többjátékos játékok lehetősége is, ahol már nem volt szükség egy térben tartózkodni a többi játékossal \cite{MediumMultiplayer}.
 
 \subsection{Kliens-Szerver}
 
@@ -131,7 +131,7 @@ A kliens és a szerver megbízható hálózati protokoll (pl. TCP vagy UDP) seg�
  
 Végső sorban szerver ellenőriz minden interakciót és csak ő tud dönteni a változásokról. Ez azért jó, mert így a csalásokkal szemben is védekezik a játék. 
 
-Mivel mindig várni kell a szerver által küldött információra egy interakció esetén, így késleltetés léphet fel, főleg lassabb internet kapcsolat esetén. Erre egy módszer amit alkalmazni szoktak a klienseknél az úgynevezett predikció, ahol a helyi interakció alapján a kliens megpróbálja kitalálni mi fog ténylegesen történni. \cite{MediumClientServer}
+Mivel mindig várni kell a szerver által küldött információra egy interakció esetén, így késleltetés léphet fel, főleg lassabb internet kapcsolat esetén. Erre egy módszer amit alkalmazni szoktak a klienseknél az úgynevezett predikció, ahol a helyi interakció alapján a kliens megpróbálja kitalálni mi fog ténylegesen történni \cite{MediumClientServer}.
 
 \subsection{Peer-to-Peer (P2P)}
 
@@ -150,12 +150,12 @@ A P2P architektúra előnyei a Kliens-Szerver architektúrával szemben:
 	\item Sokkal költség hatékonyabb megoldás, mivel nem kell egy központi szerver üzemeltetésére költeni.
 \end{itemize}
 
-Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity Technologies által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. szekcióban bővebben írok. \cite{MediumP2P}
+Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity Technologies által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. szekcióban bővebben írok \cite{MediumP2P}.
 
 \chapter{Unity}
 \label{ch-unity}
 
-A Unity egy játékmotor, amit aktívan a Unity Technologies fejleszt. A játékmotor segítségével számos platformra fejleszthetünk 2D és 3D játékokat is. Ezek a platformok közé tartoznak a virtuális valóságot szolgáltató platformok is. A megszokott asztali számítógépek mellett, mobil és web támogatást is nyújt a játékmotor. \cite{UnityPlatforms}
+A Unity egy játékmotor, amit aktívan a Unity Technologies fejleszt. A játékmotor segítségével számos platformra fejleszthetünk 2D és 3D játékokat is. Ezek a platformok közé tartoznak a virtuális valóságot szolgáltató platformok is. A megszokott asztali számítógépek mellett, mobil és web támogatást is nyújt a játékmotor \cite{UnityPlatforms}.
 
 \section{Unity6}
 
@@ -173,32 +173,32 @@ Mai legfrissebb verziója a játékmotornak a Unity6, amit 2024 végén adtak ki
 	\item Gyorsított UI fejlesztés
 \end{itemize}
 
-Ezek mellett még számos fejlesztést és javítást hozott a frissítés. \cite{Unity6Features}
+Ezek mellett még számos fejlesztést és javítást hozott a frissítés \cite{Unity6Features}.
 
 \section{Felépítése}
 
-A játékok Unity-ben különböző jelenetekre (scene) vannak felbontva. A különböző jelenetekkel játékbeli tereket választhatunk el, például 1-1 szintet a játékon belül. A jeleneteken belül a játék fő építő eleme a \emph{GameObject}, amit egy fa hierarchiában tudunk a jelenetekbe pakolni. \cite{UnityScene}
+A játékok Unity-ben különböző jelenetekre (scene) vannak felbontva. A különböző jelenetekkel játékbeli tereket választhatunk el, például 1-1 szintet a játékon belül. A jeleneteken belül a játék fő építő eleme a \emph{GameObject}, amit egy fa hierarchiában tudunk a jelenetekbe pakolni \cite{UnityScene}.
 
 \subsection{GameObject}
 \label{subsec-gameobject}
 
-Unity-ben minden objektum egy GameObject. Ez azt jelenti, hogy mindennek, ami a játékban szerepelhet, GameObject-nek kell lennie. Önmagában egy GameObject nem csinál semmit, ezért tulajdonságokkal kell felruháznunk. A GameObject egy konténer, amihez darabokat adhatunk, amitől hang, effekt, karakter vagy akármi lehet. Ezeket a darabokat komponenseknek nevezzük. \cite{UnityGameObjects}
+Unity-ben minden objektum egy GameObject. Ez azt jelenti, hogy mindennek, ami a játékban szerepelhet, GameObject-nek kell lennie. Önmagában egy GameObject nem csinál semmit, ezért tulajdonságokkal kell felruháznunk. A GameObject egy konténer, amihez darabokat adhatunk, amitől hang, effekt, karakter vagy akármi lehet. Ezeket a darabokat komponenseknek nevezzük \cite{UnityGameObjects}.
 
 \subsubsection{Komponensek}
 
-A komponensek lehetnek beépítettek, amivel a Unity szolgál, vagy akár írhatunk saját komponenseket C\# script-ek segítségével. Komponensek segítségével tudjuk életre kelteni a GameObject-eket. A saját script-ek írása lehetővé teszi a GameObject-en szereplő többi komponens módosítását és kezelését is. Komponenseket tudunk törölni és hozzáadni egy objektumhoz, ezeket a műveletek \aref{subsec-editor}. szekcióban említett inspector ablakon keresztül tudjuk kezelni. Ebben a szekcióban bemutatom részletesebben a leggyakrabban használt komponenseket. \cite{UnityComponents}
+A komponensek lehetnek beépítettek, amivel a Unity szolgál, vagy akár írhatunk saját komponenseket C\# script-ek segítségével. Komponensek segítségével tudjuk életre kelteni a GameObject-eket. A saját script-ek írása lehetővé teszi a GameObject-en szereplő többi komponens módosítását és kezelését is. Komponenseket tudunk törölni és hozzáadni egy objektumhoz, ezeket a műveletek \aref{subsec-editor}. szekcióban említett inspector ablakon keresztül tudjuk kezelni. Ebben a szekcióban bemutatom részletesebben a leggyakrabban használt komponenseket \cite{UnityComponents}.
 
 \paragraph{Transform}
 
-Az egyik legfontosabb komponens, amivel minden objektumnak rendelkeznie kell. Ezt a komponenst nem is lehet törölni az objektumokról. Információt szolgáltat az objektum: pozíciójáról, méretéről, forgásáról és a hierarchiában lévő tulajdonságairól is. \cite{UnityTransform}
+Az egyik legfontosabb komponens, amivel minden objektumnak rendelkeznie kell. Ezt a komponenst nem is lehet törölni az objektumokról. Információt szolgáltat az objektum: pozíciójáról, méretéről, forgásáról és a hierarchiában lévő tulajdonságairól is \cite{UnityTransform}.
 	
 \paragraph{RigidBody}
 
-Azok az objektumok amelyeken van ilyen komponens, azok használják a beépített fizikai motort a gravitáció és többi fizikai hatás szimulálásához. A Transform komponens használata helyett, a fizikai motor segítségével módosítható az objektum pozíciója. Különféle fizikai hatásokat szimulálhatunk a komponens segítségével. Számos tulajdonságot is beállíthatunk az objektumnak, mint például a tömegét, a pontosabb szimulációk érdekében. \cite{UnityRigidbody}
+Azok az objektumok amelyeken van ilyen komponens, azok használják a beépített fizikai motort a gravitáció és többi fizikai hatás szimulálásához. A Transform komponens használata helyett, a fizikai motor segítségével módosítható az objektum pozíciója. Különféle fizikai hatásokat szimulálhatunk a komponens segítségével. Számos tulajdonságot is beállíthatunk az objektumnak, mint például a tömegét, a pontosabb szimulációk érdekében \cite{UnityRigidbody}.
 
 \paragraph{Camera}
 
-A játékos a kamerán keresztül fogja látni a világot. Egy projekt létrehozásakor alapból létrejön egy objektum, amire a Camera komponens már hozzá van adva. A komponensen különféle beállításokat találhatunk a felbontással, effektekkel és hasonlókkal kapcsolatban. \cite{UnityCamera}
+A játékos a kamerán keresztül fogja látni a világot. Egy projekt létrehozásakor alapból létrejön egy objektum, amire a Camera komponens már hozzá van adva. A komponensen különféle beállításokat találhatunk a felbontással, effektekkel és hasonlókkal kapcsolatban \cite{UnityCamera}.
 
 \paragraph{Collider}
 
@@ -215,15 +215,15 @@ Ez a komponens lehetőséget ad két objektum találkozásának vizsgálatára. 
 
 \paragraph{Sprite Renderer}
 
-Ez a komponens lehetővé teszi a képek megjelenítését 2D illetve 3D projektekben is. Egy sprite-ot kell megadnunk neki, amit különböző képformátumokból a Unity-be importálva tudunk létrehozni. \cite{UnitySpriteRenderer}
+Ez a komponens lehetővé teszi a képek megjelenítését 2D illetve 3D projektekben is. Egy sprite-ot kell megadnunk neki, amit különböző képformátumokból a Unity-be importálva tudunk létrehozni \cite{UnitySpriteRenderer}.
 
 \paragraph{Light}
 
-Ennek a komponensnek a segítségével tudjuk kezelni a fényeket a játékban. 2D és 3D esetén is több különböző light komponenst szolgáltat a Unity. A fényeknek lehetőségünk van állítani a fényét, színét, távolságát és még sok hasonló tulajdonságot. \cite{UnityLight}
+Ennek a komponensnek a segítségével tudjuk kezelni a fényeket a játékban. 2D és 3D esetén is több különböző light komponenst szolgáltat a Unity. A fényeknek lehetőségünk van állítani a fényét, színét, távolságát és még sok hasonló tulajdonságot \cite{UnityLight}.
 
 \paragraph{Audio Source}
 
-Ennek a komponensnek egy Audio Clip-et szolgáltatva tudjuk lejátszani az adott hangunkat. Van lehetőségünk a hangerőt és hasonló tulajdonságokat módosítanunk. Használatához szükségünk van egy Audio Listener komponensre is, aminek segítségével akár térben is különbséget tehetünk a hangok között. \cite{UnityAudioSource}
+Ennek a komponensnek egy Audio Clip-et szolgáltatva tudjuk lejátszani az adott hangunkat. Van lehetőségünk a hangerőt és hasonló tulajdonságokat módosítanunk. Használatához szükségünk van egy Audio Listener komponensre is, aminek segítségével akár térben is különbséget tehetünk a hangok között \cite{UnityAudioSource}.
 
 \paragraph{Script}
 
@@ -234,7 +234,7 @@ Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenete
 	\item Update: az update metódus minden frame-ben lefut, amikor az objektum aktív.
 \end{itemize}
 
-A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. szekcióban említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta. \cite{UnityScripting}
+A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. szekcióban említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta \cite{UnityScripting}.
 
 \subsection{Prefab}
 \label{subsec-prefab}
@@ -261,28 +261,28 @@ Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog
 
 \paragraph{Project Window}
 
-Ebben az ablakban tudjuk kezelni a fájlrendszerét a projektünknek. Itt hozhatunk létre rendszerezés céljából különböző mappákat, és helyezhetjük el a felhasználni kívánt fájlokat is. \cite{UnityProjectWindow}
+Ebben az ablakban tudjuk kezelni a fájlrendszerét a projektünknek. Itt hozhatunk létre rendszerezés céljából különböző mappákat, és helyezhetjük el a felhasználni kívánt fájlokat is \cite{UnityProjectWindow}.
 
 \paragraph{Scene View}
 
-Ez az egyik legfontosabb ablak. Itt tudjuk kezelni a jeleneten belüli játék elemeinket. Több különböző módon tudjuk manipulálni az objektumokat, beleértve a pozíciójuk módosítását, és az átméretezésüket is. \cite{UnitySceneView}
+Ez az egyik legfontosabb ablak. Itt tudjuk kezelni a jeleneten belüli játék elemeinket. Több különböző módon tudjuk manipulálni az objektumokat, beleértve a pozíciójuk módosítását, és az átméretezésüket is \cite{UnitySceneView}.
 
 \paragraph{Hierarchy Window}
 
-Ez az ablak tartalmazza a jelenlegi jeleneten belüli összes játék objektumot. Itt tudunk létrehozni új objektumokat, és a faszerű hierarchia nézetben rendezni őket. \cite{UnityHierarchyWindow}
+Ez az ablak tartalmazza a jelenlegi jeleneten belüli összes játék objektumot. Itt tudunk létrehozni új objektumokat, és a faszerű hierarchia nézetben rendezni őket \cite{UnityHierarchyWindow}.
 
 \paragraph{Inspector Window}
 
-Ha kiválasztunk egy objektumot a hierarchiában, vagy a jelenet nézetben, akkor azt az objektumot ezen az ablakon keresztül tudjuk kezelni. Itt tudunk új komponenseket adni hozzá és a meglévőeket pedig módosítani. Itt tudjuk például a saját kódjainkat is az objektumokra helyezni. \cite{UnityInspectorWindow}
+Ha kiválasztunk egy objektumot a hierarchiában, vagy a jelenet nézetben, akkor azt az objektumot ezen az ablakon keresztül tudjuk kezelni. Itt tudunk új komponenseket adni hozzá és a meglévőeket pedig módosítani. Itt tudjuk például a saját kódjainkat is az objektumokra helyezni \cite{UnityInspectorWindow}.
 
 \paragraph{Game View}
 
-Ezen az ablakon látható a játékban használt kamerák által rögzített renderelt kép, amely a végső játékot mutatja be. \cite{UnityGameView}
+Ezen az ablakon látható a játékban használt kamerák által rögzített renderelt kép, amely a végső játékot mutatja be \cite{UnityGameView}.
 
 \section{Relay}
 
 \label{sec-relay}
-A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fejlesszünk drága dedikált szerverek nélkül. A kapcsolódás folyamat hozzáférési kódokon keresztül történik a játékosok között. A Unity Technologies elmondása szerint ezt a szolgáltatást kis méretű casual játékokhoz és kör alapú kártya játékokhoz a legérdemesebb használni. Az alábbiak a fő előnyei ennek a szolgáltatásnak. \cite{UnityRelayService} \cite{UnityRelayDocs}
+A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fejlesszünk drága dedikált szerverek nélkül. A kapcsolódás folyamat hozzáférési kódokon keresztül történik a játékosok között. A Unity Technologies elmondása szerint ezt a szolgáltatást kis méretű casual játékokhoz és kör alapú kártya játékokhoz a legérdemesebb használni. Az alábbiak a fő előnyei ennek a szolgáltatásnak \cite{UnityRelayService} \cite{UnityRelayDocs}.
 
 \begin{itemize}
 	\item Költséghatékony megoldás a játékosok összekapcsolásra: A Peer-to-Peer alapú megoldás lehetővé teszi, hogy a játékosok a saját eszközeiken hosztolják a játékot és így nincs szükség drága szerverekre.
@@ -294,12 +294,12 @@ Két fő komponensből épül fel a Relay.
 
 \begin{itemize}
 	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön a játékosok között. Ennek segítségével a játékomban fix bájton tárolt szöveges adatokat küldök a játékosok között, aminek a pontosabb menetéről a \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok.
-	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk. \cite{UnityAllocationsService}
+	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk \cite{UnityAllocationsService}.
 \end{itemize}
 
 \subsection{Relay Server}
 
-A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken keresztül kommunikálnak egymással. A Relay szerverek továbbítják az üzeneteket a kliensek között kis késleltetésű datagram cserével, ez biztosítja azt, hogy két játékos sose kapcsolódik közvetlen egymáshoz. Ezek a szerverek nyilvános végpontként viselkednek, ami elérhető az összes játékos számára. Ez a megközelítés megoldást ad több különböző felmerülő problémára is mint például a játékosok közötti tűzfalakra. Minden játékos ugyanarra az ip címre tud csatlakozni, amit biztosra vehetnek, hogy a játékmenet során nem fog változni, így a játékosoknak nem kell tudniuk egymás ip címéről, ez is erősíti a biztonságot a rendszerben. \cite{UnityRelayServers}
+A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken keresztül kommunikálnak egymással. A Relay szerverek továbbítják az üzeneteket a kliensek között kis késleltetésű datagram cserével, ez biztosítja azt, hogy két játékos sose kapcsolódik közvetlen egymáshoz. Ezek a szerverek nyilvános végpontként viselkednek, ami elérhető az összes játékos számára. Ez a megközelítés megoldást ad több különböző felmerülő problémára is mint például a játékosok közötti tűzfalakra. Minden játékos ugyanarra az ip címre tud csatlakozni, amit biztosra vehetnek, hogy a játékmenet során nem fog változni, így a játékosoknak nem kell tudniuk egymás ip címéről, ez is erősíti a biztonságot a rendszerben \cite{UnityRelayServers}.
 
 \begin{figure}[ht!]
 	\centering
@@ -508,15 +508,15 @@ A Unity az első és talán legfontosabb eszköz, ami az alapját adta a 2 ját�
 
 \paragraph{Rider}
 
-A Rider egy a JetBrains által fejlesztett integrált fejlesztői környezet, aminek segítségével különböző .NET projekteket és játék projekteket tudunk fejleszteni. Egy cross-platform IDE, az az több különböző platformon is elérhető számunkra. A környezet beépített Unity támogatással rendelkezik, és különböző funkciókat szolgáltat a C\# szkriptek írásának megkönnyítésére. \cite{Rider}
+A Rider egy a JetBrains által fejlesztett integrált fejlesztői környezet, aminek segítségével különböző .NET projekteket és játék projekteket tudunk fejleszteni. Egy cross-platform IDE, az az több különböző platformon is elérhető számunkra. A környezet beépített Unity támogatással rendelkezik, és különböző funkciókat szolgáltat a C\# szkriptek írásának megkönnyítésére \cite{Rider}.
 
 \paragraph{Git, GitHub}
 
-A Git egy nyílt forráskódú, verziókezelő rendszer, amely lehetővé teszi a projektek forráskódjának és fájljainak változásainak nyomon követését. A Git segítségével hatékonyan lehet kezelni a változások történetét, különböző verziókat létrehozni, valamint a kollaboráció során fellépő konfliktusokat egyszerűbben megoldani. A GitHub egy online platform, amely a Git verziókezelő rendszerre épül, és számos hasznos szolgáltatást nyújt, mint például távoli tárolók (repository-k) létrehozása. A GitHub lehetővé teszi a kód egyszerű megosztását, és elérését különböző helyekről. \cite{Git} \cite{GitHub}
+A Git egy nyílt forráskódú, verziókezelő rendszer, amely lehetővé teszi a projektek forráskódjának és fájljainak változásainak nyomon követését. A Git segítségével hatékonyan lehet kezelni a változások történetét, különböző verziókat létrehozni, valamint a kollaboráció során fellépő konfliktusokat egyszerűbben megoldani. A GitHub egy online platform, amely a Git verziókezelő rendszerre épül, és számos hasznos szolgáltatást nyújt, mint például távoli tárolók (repository-k) létrehozása. A GitHub lehetővé teszi a kód egyszerű megosztását, és elérését különböző helyekről \cite{Git} \cite{GitHub}.
 
 \paragraph{Trello}
 
-A Trello egy vizuális, online projektmenedzsment eszköz, amely segítségével egyszerűen és átláthatóan kezelhetőek különböző feladatok és munkafolyamatok. A Trello kártyákon alapuló rendszerében egyes feladatokat vagy tennivalókat kártyákként kezelhetünk, amelyeket különböző listákba rendezhetünk, például ,,Teendő'', ,,Folyamatban'', vagy ,,Kész''. Ezáltal könnyen áttekinthető, hogy hol tartunk, és hogy mi van még hátra a projektünkből. \cite{Trello}
+A Trello egy vizuális, online projektmenedzsment eszköz, amely segítségével egyszerűen és átláthatóan kezelhetőek különböző feladatok és munkafolyamatok. A Trello kártyákon alapuló rendszerében egyes feladatokat vagy tennivalókat kártyákként kezelhetünk, amelyeket különböző listákba rendezhetünk, például ,,Teendő'', ,,Folyamatban'', vagy ,,Kész''. Ezáltal könnyen áttekinthető, hogy hol tartunk, és hogy mi van még hátra a projektünkből \cite{Trello}.
 
 \chapter{Saját szoftver megvalósítása}
 
@@ -588,7 +588,7 @@ Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig mé
 
 \subsubsection{Pókerkezek}
 
-Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erősségük szerint rendeztem el, a legerősebbtől a leggyengébbig. A lista tetején található kéz a pókerben elérhető legmagasabb értékű kombináció, és innen lefelé haladva egyre gyengébb kezek következnek. Az alábbi sorrend megtekinthető \aref{fig-pokerhands}.~ábrán is. \cite[9.~oldal]{Szurdi}
+Az alábbi felsorolás a lehetséges pókerkezeket mutatja be, amelyeket erősségük szerint rendeztem el, a legerősebbtől a leggyengébbig. A lista tetején található kéz a pókerben elérhető legmagasabb értékű kombináció, és innen lefelé haladva egyre gyengébb kezek következnek. Az alábbi sorrend megtekinthető \aref{fig-pokerhands}.~ábrán is \cite[9.~oldal]{Szurdi}.
 
 \begin{enumerate}
 	\item \emph{Royal flös (royal flush)}: A legerősebb lapkombináció. Egyszínű 10-es, bubi, dáma, király, ász lapokból áll. Ha két ilyen találkozik, akkor döntetlen\footnote{Osztozás történik a nyeremény között.} van.
@@ -803,12 +803,12 @@ A játékok tesztelésében legnagyobb szerepet a playtest játszott, amit már 
 
 \begin{itemize}
 	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen. Ezeknél a teszteknél a hibák feltárása mellet sok visszajelzést kaptam, amik segítettek a játékélmény fejlesztését. Ezek a tesztek egy kis motivációs lendületet is tudtak adni, hiszen jó volt látni ahogy a barátaim élvezik a játékot, akár még hibás állapotában is.
-	\item Egyedül: a Unity editor által adott lehetőségeket kihasználva teszteltem a játékot. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiplayer play mode}-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. Ezeknek a teszteknek a során a hibák keresésére fókuszáltam. \cite{UnityMultiplayerPlayMode}
+	\item Egyedül: a Unity editor által adott lehetőségeket kihasználva teszteltem a játékot. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiplayer play mode}-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. Ezeknek a teszteknek a során a hibák keresésére fókuszáltam \cite{UnityMultiplayerPlayMode}.
 \end{itemize}
 
 A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésre de játékélménybeli javításába is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, amik a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, ami megkönnyítette a hibák feltárását.
 
-Mindkét játékhoz készítettem a már korábbiakban említett egység teszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egység tesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. A Mock komponensek segítségével a hiányzó függőségeket betudjuk tölteni a tesztelendő osztályban. \cite{NUnit}
+Mindkét játékhoz készítettem a már korábbiakban említett egység teszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egység tesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. A Mock komponensek segítségével a hiányzó függőségeket betudjuk tölteni a tesztelendő osztályban \cite{NUnit}.
 
 \subsubsection{Teszt jegyzőkönyv}
 
