@@ -1659,6 +1659,7 @@ GameObject:
   - component: {fileID: 1547469803803062378}
   - component: {fileID: 7570702083108468725}
   - component: {fileID: 3738172528374128237}
+  - component: {fileID: 7901852591279320181}
   m_Layer: 5
   m_Name: Minus
   m_TagString: Untagged
@@ -1768,6 +1769,51 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7901852591279320181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5230183310432347805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8215861183471054830}
+          m_TargetAssemblyTypeName: BetAmountGUI, Assembly-CSharp
+          m_MethodName: OnMinusHeldDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8215861183471054830}
+          m_TargetAssemblyTypeName: BetAmountGUI, Assembly-CSharp
+          m_MethodName: OnMinusHeldUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6077343634747864327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,6 +1826,7 @@ GameObject:
   - component: {fileID: 3526026369291843034}
   - component: {fileID: 5000213996697405789}
   - component: {fileID: 364232796594619538}
+  - component: {fileID: 3860444018484591530}
   m_Layer: 5
   m_Name: Plus
   m_TagString: Untagged
@@ -1889,6 +1936,51 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3860444018484591530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077343634747864327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8215861183471054830}
+          m_TargetAssemblyTypeName: BetAmountGUI, Assembly-CSharp
+          m_MethodName: OnPlusHeldDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8215861183471054830}
+          m_TargetAssemblyTypeName: BetAmountGUI, Assembly-CSharp
+          m_MethodName: OnPlusHeldUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6168544757227318000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,6 +2124,8 @@ MonoBehaviour:
   submitText: Bet
   minValue: 0
   maxValue: 0
+  initialDelay: 0.3
+  changeInterval: 0.1
 --- !u!1 &6730521954921373985
 GameObject:
   m_ObjectHideFlags: 0
