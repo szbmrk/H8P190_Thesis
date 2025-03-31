@@ -111,7 +111,7 @@ public class LobbyGUI : MonoBehaviour
             conditionToStartText.SetActive(true);
         }
 
-        playerCount.text = numOfPlayers.ToString() + "/" + LobbySettings.MaximumPlayers;
+        playerCount.text = "Players: " + numOfPlayers.ToString() + "/" + LobbySettings.MaximumPlayers;
     }
 
     private void HandleStartingMoneyDropdownValueChanged(int index)
