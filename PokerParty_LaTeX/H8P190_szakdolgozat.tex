@@ -150,7 +150,7 @@ A P2P architektúra előnyei a Kliens-Szerver architektúrával szemben:
 	\item Sokkal költség hatékonyabb megoldás, mivel nem kell egy központi szerver üzemeltetésére költeni.
 \end{itemize}
 
-Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity Technologies által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. szekcióban bővebben írok \cite{MediumP2P}.
+Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity Technologies által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. fejezetben bővebben írok \cite{MediumP2P}.
 
 \chapter{Unity}
 \label{ch-unity}
@@ -175,18 +175,18 @@ Mai legfrissebb verziója a játékmotornak a Unity6, amit 2024 végén adtak ki
 
 Ezek mellett még számos fejlesztést és javítást hozott a frissítés \cite{Unity6Features}.
 
-\section{Felépítése}
+\section{Scene}
 
 A játékok Unity-ben különböző jelenetekre (scene) vannak felbontva. A különböző jelenetekkel játékbeli tereket választhatunk el, például 1-1 szintet a játékon belül. A jeleneteken belül a játék fő építő eleme a \emph{GameObject}, amit egy fa hierarchiában tudunk a jelenetekbe pakolni \cite{UnityScene}.
 
-\subsection{GameObject}
-\label{subsec-gameobject}
+\section{GameObject}
+\label{sec-gameobject}
 
 Unity-ben minden objektum egy GameObject. Ez azt jelenti, hogy mindennek, ami a játékban szerepelhet, GameObject-nek kell lennie. Önmagában egy GameObject nem csinál semmit, ezért tulajdonságokkal kell felruháznunk. A GameObject egy konténer, amihez darabokat adhatunk, amitől hang, effekt, karakter vagy akármi lehet. Ezeket a darabokat komponenseknek nevezzük \cite{UnityGameObjects}.
 
 \subsubsection{Komponensek}
 
-A komponensek lehetnek beépítettek, amivel a Unity szolgál, vagy akár írhatunk saját komponenseket C\# script-ek segítségével. Komponensek segítségével tudjuk életre kelteni a GameObject-eket. A saját script-ek írása lehetővé teszi a GameObject-en szereplő többi komponens módosítását és kezelését is. Komponenseket tudunk törölni és hozzáadni egy objektumhoz, ezeket a műveletek \aref{subsec-editor}. szekcióban említett inspector ablakon keresztül tudjuk kezelni. Ebben a szekcióban bemutatom részletesebben a leggyakrabban használt komponenseket \cite{UnityComponents}.
+A komponensek lehetnek beépítettek, amivel a Unity szolgál, vagy akár írhatunk saját komponenseket C\# script-ek segítségével. Komponensek segítségével tudjuk életre kelteni a GameObject-eket. A saját script-ek írása lehetővé teszi a GameObject-en szereplő többi komponens módosítását és kezelését is. Komponenseket tudunk törölni és hozzáadni egy objektumhoz, ezeket a műveletek \aref{sec-editor}. fejezetben említett inspector ablakon keresztül tudjuk kezelni. Ebben a szekcióban bemutatom részletesebben a leggyakrabban használt komponenseket \cite{UnityComponents}.
 
 \paragraph{Transform}
 
@@ -234,10 +234,10 @@ Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenete
 	\item Update: az update metódus minden frame-ben lefut, amikor az objektum aktív.
 \end{itemize}
 
-A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. szekcióban említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta \cite{UnityScripting}.
+A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. fejezetben említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta \cite{UnityScripting}.
 
-\subsection{Prefab}
-\label{subsec-prefab}
+\section{Prefab}
+\label{sec-prefab}
 
 A Unity Prefab rendszere lehetővé teszi egy GameObject el tárolását, minden komponensével, tulajdonságértékével és gyermek GameObjectjével együtt, egy újrafelhasználható objektumként. Ha van egy olyan objektumunk, amit sokszor újra fel szeretnénk használni a jelenteinkben, akkor érdemes Prefab-et használni ezeknek az objektumoknak az eltárolására. Egyes Prefab-ek esetén felülírhatjuk az alap beállításokat, így kis szinten különböző de logikailag összefüggő objektumokat használhatunk. Néhány gyakori példa a Prefab használatra: \cite{UnityPrefab}
 
@@ -247,9 +247,9 @@ A Unity Prefab rendszere lehetővé teszi egy GameObject el tárolását, minden
 	\item Ismétlődő UI elemek - például Játékos kártyák egy lobby panelen.
 \end{itemize}
 
-\subsection{Editor}
+\section{Editor}
 
-\label{subsec-editor}
+\label{sec-editor}
 Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog történni. A Unity editor több különböző ablakból tevődik össze, amik segítik a fejlesztési folyamatot. Ebben a szekcióban bemutatom részletesebben a legfontosabb ablakokat.
 
 \begin{figure}[ht!]
@@ -293,7 +293,7 @@ A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fe
 Két fő komponensből épül fel a Relay.
 
 \begin{itemize}
-	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön a játékosok között. Ennek segítségével a játékomban fix bájton tárolt szöveges adatokat küldök a játékosok között, aminek a pontosabb menetéről a \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok.
+	\item Relay Server: az alacsony szintű Unity Transport réteghez kapcsolódik, hogy bájtokat küldjön a játékosok között. Ennek segítségével a játékomban fix bájton tárolt szöveges adatokat küldök a játékosok között, aminek a pontosabb menetéről a \aref{sec-tobbjatekoskapcsolat}. fejezetben bővebben írok.
 	\item Relay Allocation Service: backenden működik, hogy a játékosok a hozzáférési kódok megosztásával játékmeneteket hozhassanak létre és csatlakozhassanak hozzájuk \cite{UnityAllocationsService}.
 \end{itemize}
 
@@ -330,7 +330,7 @@ A Mobil játék szerepe a PC-s játékkal való kommunikáció megteremtése a j
 
 \paragraph{Közös DLL}
 
-A közös DLL szerepe azoknak a függvényeknek és metódusoknak összegyűjtése, amit mind a PC illetve a Mobil játék során is használok a kódban. Ennek egyik legfontosabb része a kézkiértékeléshez szükséges algoritmus, amiről bővebben \aref{subsec-kezkiertekeloalgoritmus}. szekcióban írok. A DLL-nek egy másik fontos része a két játék közötti üzenetek egységbe fogása. Az üzenetek küldéséről \aref{sec-tobbjatekoskapcsolat}. szekcióban bővebben írok, de a lényeg, hogy az üzenet küldés során használt osztályokat is a DLL tartalmazza, hiszen így mindkét oldal egységesen tudja kezelni őket.
+A közös DLL szerepe azoknak a függvényeknek és metódusoknak összegyűjtése, amit mind a PC illetve a Mobil játék során is használok a kódban. Ennek egyik legfontosabb része a kézkiértékeléshez szükséges algoritmus, amiről bővebben \aref{subsec-kezkiertekeloalgoritmus}. fejezetben írok. A DLL-nek egy másik fontos része a két játék közötti üzenetek egységbe fogása. Az üzenetek küldéséről \aref{sec-tobbjatekoskapcsolat}. fejezetben bővebben írok, de a lényeg, hogy az üzenet küldés során használt osztályokat is a DLL tartalmazza, hiszen így mindkét oldal egységesen tudja kezelni őket.
 
 \section{Követelmények}
 
@@ -529,7 +529,7 @@ A \emph{Texas~Hold’Em} a közösségi pókerjátékok legnépszerűbb formája
 \subsection{Szabályok ismertetése}
 \label{subsec-pokerszabalyok}
 
-Ebben a fejezetben a póker legelterjedtebb, hivatalos versenyeken is alkalmazott szabályrendszere kerül bemutatásra. Ami közös az összes variációban, hogy a játékot 52~lapos francia kártyával játsszák dzsókerek nélkül.
+Ebben a szekcióban a póker legelterjedtebb, hivatalos versenyeken is alkalmazott szabályrendszere kerül bemutatásra. Ami közös az összes variációban, hogy a játékot 52~lapos francia kártyával játsszák dzsókerek nélkül.
 
 \subsubsection{Játék menete}
 
@@ -736,7 +736,7 @@ A teljes algoritmus tehát röviden így működik:
 \section{Többjátékos kapcsolat megvalósítása}
 \label{sec-tobbjatekoskapcsolat}
 
-A két játék legfontosabb és legbonyolultabb része a zökkenőmentes kapcsolat és kommunikáció megvalósítása volt a két platform és a játékosok között. Korábban említettem \aref{sec-relay}. szekcióban, hogy a háttérben hogyan működik a Unity Technologies által szolgáltatott megoldás, ebben a szekcióban arról írok, hogy én ezt hogyan használtam ki és alkalmaztam a két játékban. A játék során egyetlen módot használtam a kommunikáció megvalósítására, még pedig fix bájton tárolt szöveges adatok küldését a kapcsolatok között, ez azt jelenti hogy a játékosok között bármilyen szöveget tudtam küldeni egy adott tárolható szöveg hosszig. Az üzenet küldéseknek két módja volt: a hoszt játékos (PC) küld üzenetet bármelyik mobilos játékosnak, vagy bármelyik mobilos játékos küld üzenetet a hoszt játékosnak.
+A két játék legfontosabb és legbonyolultabb része a zökkenőmentes kapcsolat és kommunikáció megvalósítása volt a két platform és a játékosok között. Korábban említettem \aref{sec-relay}. fejezetben, hogy a háttérben hogyan működik a Unity Technologies által szolgáltatott megoldás, ebben a szekcióban arról írok, hogy én ezt hogyan használtam ki és alkalmaztam a két játékban. A játék során egyetlen módot használtam a kommunikáció megvalósítására, még pedig fix bájton tárolt szöveges adatok küldését a kapcsolatok között, ez azt jelenti hogy a játékosok között bármilyen szöveget tudtam küldeni egy adott tárolható szöveg hosszig. Az üzenet küldéseknek két módja volt: a hoszt játékos (PC) küld üzenetet bármelyik mobilos játékosnak, vagy bármelyik mobilos játékos küld üzenetet a hoszt játékosnak.
 
 Az üzenetek küldéséhez osztályokat használtam amiket a küldés során JSON szöveges formátumba konvertáltam, majd a megérkezett üzeneteket pedig vissza alakítottam osztályokká a könnyebb kezelés végett. Ezzel a megoldással könnyen tudtam kezelni és küldeni is a két platform között az üzeneteket. Az üzenetek megkülönböztetésére üzenet megkülönböztető típusokat hoztam létre. Ezek a típusok \aref{kod-uzenettipusok}. kódban láthatóak.
 
@@ -771,7 +771,7 @@ A játékmenet fejlesztése során próbáltam figyelni a tiszta és könnyen m�
 
 \subsection{Prefab-ek használata}
 
-A fejlesztés során a már \aref{subsec-prefab}. szekcióban is említettem hogy a Prefab-ek használata nagyon hasznos tud lenni a többször használatos játék elemek során. A játékban Prefab-et több helyen is használtam, viszont a legfontosabb a játékosokat megjelenítő UI elemek voltak. Ezzel a módszerrel minden játékosnak a megjelenítését egységes módon tudtam kezelni. Ilyen Prefab volt még pl. a hiba üzenetet megjelenítő felugró ablak, a chat üzeneteket megjelenítő chat doboz, a mobilon lévő lehetséges akciókat kezelő gombok és csúszkák és még hasonló UI elemek.
+A fejlesztés során a már \aref{sec-prefab}. fejezetben is említettem hogy a Prefab-ek használata nagyon hasznos tud lenni a többször használatos játék elemek során. A játékban Prefab-et több helyen is használtam, viszont a legfontosabb a játékosokat megjelenítő UI elemek voltak. Ezzel a módszerrel minden játékosnak a megjelenítését egységes módon tudtam kezelni. Ilyen Prefab volt még pl. a hiba üzenetet megjelenítő felugró ablak, a chat üzeneteket megjelenítő chat doboz, a mobilon lévő lehetséges akciókat kezelő gombok és csúszkák és még hasonló UI elemek.
 
 \subsection{Vizuális elemek}
 
@@ -779,7 +779,7 @@ A játék látvány világát leginkább a Unity által szolgáltatott UI elemek
 
 \subsection{Póker játékmenet megvalósítása}
 
-A játékmenet alapját \aref{subsec-pokerszabalyok}. szekcióban leírt szabályok adták. Minden játszma egy frissen kevert 52 lapos paklival kezd, az osztó és a vakok kisorsolásával. A körök logikáját egy szkript kezeli, ahol egy állapotgép alapú megoldás dolgozik háttérben. A körök kezdésekor minden játékos megkapja a tájékoztató üzenetet, arról hogy ki következik, a soron lévő játékos pedig a lehetséges akcióit is megkapja. Miután egy játékos elvégezte az akcióját ezt a PC oldalon a kör kezelő szkript dolgozza fel és a kör állapotától függően a következő játékosnak megint az újra meghatározott lehetséges akciókat ki küldi. Ha egy licit körnek vége van, erről mindenki kap tájékoztatást és a szabályok alapján elindul a következő kör, ez addig megy ameddig csak 1 játékos marad bent a játszmában. Egy játékos kiesik ha a 0\$-t eléri a pénze, ilyenkor egy lecsatlakozási kérelmet és egy üzenetet kap a játékos az elért helyezéséről, amit a mobilon egyből lekezelve látni is fog.
+A játékmenet alapját \aref{subsec-pokerszabalyok}. fejezetben leírt szabályok adták. Minden játszma egy frissen kevert 52 lapos paklival kezd, az osztó és a vakok kisorsolásával. A körök logikáját egy szkript kezeli, ahol egy állapotgép alapú megoldás dolgozik háttérben. A körök kezdésekor minden játékos megkapja a tájékoztató üzenetet, arról hogy ki következik, a soron lévő játékos pedig a lehetséges akcióit is megkapja. Miután egy játékos elvégezte az akcióját ezt a PC oldalon a kör kezelő szkript dolgozza fel és a kör állapotától függően a következő játékosnak megint az újra meghatározott lehetséges akciókat ki küldi. Ha egy licit körnek vége van, erről mindenki kap tájékoztatást és a szabályok alapján elindul a következő kör, ez addig megy ameddig csak 1 játékos marad bent a játszmában. Egy játékos kiesik ha a 0\$-t eléri a pénze, ilyenkor egy lecsatlakozási kérelmet és egy üzenetet kap a játékos az elért helyezéséről, amit a mobilon egyből lekezelve látni is fog.
 
 \subsection{Animációk}
 
@@ -795,7 +795,7 @@ A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megprób�
 
 \section{Közös DLL tesztelése}
 
-A közös DLL tesztelése során a már fentebb említett egység teszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egység teszteteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint, ahogy korábban \aref{sec-architecture}. szekcióban említettem a közös DLL projektnek az egyik legfontosabb része a kézkiértékelést kezelő algoritmus. A kézkiértékeléshez írt egység teszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként és az esetleges döntetlen eseteket is figyelembe vettem.
+A közös DLL tesztelése során a már fentebb említett egység teszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egység teszteteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint, ahogy korábban \aref{sec-architecture}. fejezetben említettem a közös DLL projektnek az egyik legfontosabb része a kézkiértékelést kezelő algoritmus. A kézkiértékeléshez írt egység teszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként és az esetleges döntetlen eseteket is figyelembe vettem.
 
 \section{Játékok tesztelése}
 
