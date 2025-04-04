@@ -84,15 +84,25 @@ A játékmotorok olyan fejlesztői környezetek, amelyek célja, hogy egyszerűs
 
 \subsection{Unreal}
 
-Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat pl. karakter mozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki \cite{UnrealEngine}.
+Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat, például a karaktermozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki.
+
+A játékmotor egyik legnagyobb előnye a már említett csúcskategóriás grafikai teljesítménye, amely lehetővé teszi valósághű látványvilág megteremtését. Azonban ez nagy számítási kapacitást igényel, ezért a kisebb, alacsony erőforrás-igényű projektekhez kevésbé ideális.
+
+A motor alapvetően C++ nyelven történő fejlesztésre épül, ami erős kontrollt biztosít a fejlesztők számára, de egyben meredek tanulási görbét is jelent. A Blueprint vizuális programozási rendszer egyszerűsíti a folyamatot, de komplexebb logikák esetén a kódszintű fejlesztés elengedhetetlen.
+
+Mivel a szakdolgozatomban nem volt szükségem az Unreal Engine által nyújtott csúcsgrafikai megoldásokra, és a C++ nyelv kevésbé áll közel hozzám, úgy döntöttem, hogy nem ezt a játékmotort választom \cite{UnrealEngine}.
 
 \subsection{Godot}
 
-A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv) \cite{Godot} \cite{GitHubGodot}.
+A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás-igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv). Emellett támogatja a C\#, C++ és VisualScript használatát is, ami növeli a rugalmasságát.
+
+A Godot különösen hatékonyan kezeli a 2D projekteket, és a 3D-s projektek terén is folyamatosan fejlődik. Mivel nyílt forráskódú, a fejlesztők közössége aktívan részt vesz a fejlesztésében és hibajavításában. Hátránya azonban, hogy kevésbé elterjedt és kevesebb kész eszköz érhető el hozzá, mint a Unity esetében.
+
+A Godot a rugalmassága és könnyen tanulhatósága miatt kiváló lehet kisebb projektek megvalósítására. A projektemnek a Godot is egy jó választás lehetett volna, de a Unity által nyújtott eszközkészlet, ami lehetővé teszi a többjátékos kapcsolat megvalósítását több különböző módon nagy előnyt jelent a Godot-tal szemben. \cite{Godot} \cite{GitHubGodot}.  
 
 \subsection{Unity}
 
-A Unity az egyik legismertebb és legelterjedtebb játékmotor a piacon, amely támogatja a mobil, asztali, konzolos, valamint webes játékok fejlesztését 2D és 3D játékokhoz egyaránt. Jelentős előnye a könnyen tanulható felhasználói felület és a jól dokumentáltság. Elsősorban a C\# nyelvet használja scriptelésre, de támogatja a vizuális programozást is. A játékmotorhoz tartozik több különböző előfizetési szint is, de van ingyenesen használható verziója is.  Mivel a C\# közel áll hozzám, tapasztalatom is van már ezzel a játékmotorral és maga a játékmotor adottságai pont megfeleltek a szakdolgozatom követelményeihez, ezért erre a játékmotorra esett a választásom. Erről a játékmotorról \aref{ch-unity}. fejezetben bővebben írok \cite{Unity}.
+A Unity az egyik legismertebb és legelterjedtebb játékmotor a piacon, amely támogatja a mobil, asztali, konzolos, valamint webes játékok fejlesztését 2D és 3D játékokhoz egyaránt. Jelentős előnye a könnyen tanulható felhasználói felület és a jól dokumentáltság. Elsősorban a C\# nyelvet használja szkriptelésre, de támogatja a vizuális programozást is. A játékmotorhoz tartozik több különböző előfizetési szint is, de van ingyenesen használható verziója is.  Mivel a C\# közel áll hozzám, tapasztalatom is van már ezzel a játékmotorral és maga a játékmotor adottságai pont megfeleltek a szakdolgozatom követelményeihez, ezért erre a játékmotorra esett a választásom. Erről a játékmotorról \aref{ch-unity}. fejezetben bővebben írok \cite{Unity}.
 
 \section{Többjátékos technológia a játékfejlesztésben}
 
@@ -234,7 +244,7 @@ Az egyik legfontosabb komponens, amivel személyre tudjuk szabni a játékmenete
 	\item Update: az update metódus minden frame-ben lefut, amikor az objektum aktív.
 \end{itemize}
 
-A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{subsec-editor}. fejezetben említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta \cite{UnityScripting}.
+A megírt kódban különböző objektumokra és komponensekre is tudunk hivatkozni, amit \aref{sec-editor}. fejezetben említett inspector ablakban kell be referálnunk. Lehetőségünk van másik script-re is hivatkozni. A játékfejlesztésben sok tervezési minta megtalálható az optimális kód írására, de a leggyakrabban használtnak mondható az egyke (singleton) tervezési minta \cite{UnityScripting}.
 
 \section{Prefab}
 \label{sec-prefab}
@@ -254,7 +264,7 @@ Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=16cm]{UnityEditor}
+	\includegraphics[width=15cm]{UnityEditor}
 	\caption{Unity editor}
 	\label{fig-unityeditor}
 \end{figure}
@@ -342,10 +352,11 @@ A PC játék rendelkezik egy főmenüvel, amelyen keresztül kezelhetőek a beá
 
 \subsubsection{Beállítások}
 
+
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
@@ -368,7 +379,7 @@ A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mo
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
@@ -376,9 +387,9 @@ A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mo
 		\hline
 		Játékos kirúgása & A játékos eltávolítása a lobby-ból (csak a host számára) & ,,Kirúgás'' gomb \\ 
 		\hline
-		Hozzáférési kód megjelenítése & Egyedi azonosítókód mutatása, amelyet a játékosok használnak a csatlakozáshoz & ,,ABC123'' \\ 
+		\raggedright Hozzáférési kód megjelenítése & Egyedi azonosítókód mutatása, amelyet a játékosok használnak a csatlakozáshoz & ,,ABC123'' \\ 
 		\hline
-		Játékosok státuszának jelzése & Jelzés, hogy ki áll készen a játék indítására & Készen áll / Nincs kész \\ 
+		Státuszok jelzése & Jelzés, hogy ki áll készen a játék indítására & Készen áll / Nincs kész \\ 
 		\hline
 		Chat-funkció & Kommunikáció a lobby játékosai között & Chat-ablak,\newline,,Játékos1: üzenet'' \\ 
 		\hline
@@ -397,11 +408,11 @@ Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol 
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
-		Játékos megjelenítése & Játékos megjelenítése UI elemek segítségével & Kártya, ahol látszik a játékos neve és pénze \\
+		\raggedright Játékos megjelenítése & Játékos megjelenítése UI elemek segítségével & Kártya, ahol látszik a játékos neve és pénze \\
 		\hline
 		Aktív játékos kijelzése & Világosan látható, hogy ki következik a körben & Játékos1 kártyájának kiemelése \\ 
 		\hline
@@ -409,15 +420,15 @@ Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol 
 		\hline
 		Kártyák osztása az asztalra & Kártyák automatikus kiosztása a megfelelő pillanatban & Kártyák csúsztatása egyesével az asztalra animációval \\ 
 		\hline
-		Kártyák felfordítása & Kártyák automatikus felfordítása a megfelelő pillanatban & Kártyák felfordítása egyesével az asztalon \\ 
+		\raggedright Kártyák felfordítása & Kártyák automatikus felfordítása a megfelelő pillanatban & Kártyák felfordítása egyesével az asztalon \\ 
 		\hline
 		Kártyák osztása játékosoknak & Kártyák automatikus kiosztása a megfelelő pillanatban & Kártyák csúsztatása egyesével a játékosoknak animációval \\ 
 		\hline
-		Kör végének mutatása & Feljön egy ablak, ahol látszik ki nyerte meg a kört és milyen kézzel & ,,Játékos3 nyert: Royal Flush'' \\
+		\raggedright Kör végének mutatása & Feljön egy ablak, ahol látszik ki nyerte meg a kört és milyen kézzel & ,,Játékos3 nyert:\newline Royal Flush'' \\
 		\hline
-		Kör végén játékosok kártyáinak mutatása & Minden játékosnak megjelenik milyen kártyák voltak a kezében & ,,Játékos2 nyert: [Szív király, Gyémánt 10]'' \\
+		Játékos kezek mutatása & Minden játékosnak megjelenik milyen kártyák voltak a kezében & ,,Játékos2:\newline [Szív király, Gyémánt 10]'' \\
 		\hline
-		Játszma végén nyertes mutatása & A játszma végén megjelenik a nyerő játékos neve egy felületen & ,,Játszma vége, Játékos1 nyert'' \\
+		Nyertes mutatása & A játszma végén megjelenik a nyerő játékos neve egy felületen & ,,Játékos1 nyert'' \\
 		\hline
 		Visszalépés a főmenübe & A játszma végén vissza lehet lépni a főmenübe & ,,Visszalépés a főmenübe'' gomb \\
 		\hline
@@ -432,17 +443,17 @@ A mobil játék kezdőképernyőjén lehetőségünk van egy játékos név és 
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
-		Játékos név megadása & Játékos név megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,Játékos1'' \\ 
+		\raggedright Játékos név megadása & Játékos név megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,Játékos1'' \\ 
 		\hline
-		Hozzáférési kód megadása & Hozzáférési kód megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,ABC123'' \\ 
+		\raggedright Hozzáférési kód megadása & Hozzáférési kód megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,ABC123'' \\ 
 		\hline
-		Csatlakozás játékhoz sikeres & A megadott információkkal megpróbál egy játékhoz csatlakozni & ,,Csatlakozás'' gomb \\ 
+		\raggedright Csatlakozás játékhoz sikeres & A megadott információkkal megpróbál egy játékhoz csatlakozni & ,,Csatlakozás'' gomb \\ 
 		\hline
-		Csatlakozás játékhoz sikertelen & Kijelzi az okát a sikertelen csatlakozásnak & ,,A megadott hozzáférési kóddal játszma nem található'' \\ 
+		\raggedright Csatlakozás játékhoz sikertelen & Kijelzi az okát a sikertelen csatlakozásnak & ,,A megadott hozzáférési kóddal játszma nem található'' \\ 
 		\hline
 	\end{tabular}
 	\caption{Kezdőképernyő követelményei}
@@ -455,13 +466,13 @@ Sikeres csatlakozás után a Lobby felület jelenik meg. A Lobby felületen tudu
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
 		Chat üzenet küldése & Chat üzenet küldés, ami a PC játékon megjelenik, hogy minden játékos lássa & ,,Játékos1: üzenet'' \\ 
 		\hline
-		Készenlét módosítása & Készenlét be és ki kapcsolása & ,,Készen állok'', ,,Nem állok készen'' gombok \\ 
+		\raggedright Készenlét módosítása & Készenlét be és ki kapcsolása & ,,Készen állok'', ,,Nem állok készen'' gombok \\ 
 		\hline
 		Kilépés a játszmából & Kilépés a csatlakozott játszmából & ,,Kilépés'' gomb \\ 
 		\hline
@@ -476,21 +487,21 @@ Ha az összes játékos készen állt, és a PC-n elindította a hoszt a játszm
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{4cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
 		Pénz megjelenítése & A játékos jelenlegi pénze megjelenik a felületen & ,,Pénz: 50\$'' \\ 
 		\hline
-		2 felület közötti váltás & Váltás az akciók és a kártyák felület között & ,,Kártyák megjelenítése'', ,,Akciók megjelnítése'' gombok \\ 
+		2 felület közötti váltás & Váltás az akciók és a kártyák felület között & ,,Kártyák megjelenítése'',\newline ,,Akciók megjelnítése''\newline gombok \\ 
 		\hline
-		Akciók felület (a játékos következik) & Lehetséges akciók megjelenítése & ,,Bedobás'', ,,All In'' gombok, Tét megadására szolgáló csúszka, stb\dots \\ 
+		\raggedright Akciók felület (a játékos következik) & Lehetséges akciók megjelenítése & ,,Bedobás'', ,,All In'' gombok, Tét megadására szolgáló csúszka, stb\dots \\ 
 		\hline
-		Akciók felület (nem a játékos következik) & Figyelmeztető üzenet megjelenítése & ,,Nem a te vagy jelenleg a körben'' \\ 
+		\raggedright Akciók felület (nem a játékos következik) & Figyelmeztető üzenet megjelenítése & ,,Nem a te vagy jelenleg a körben'' \\ 
 		\hline
-		Kártyák felület (van kártya a játékos kezében) & Kártyák megjelenítése és a legjobb használható kéz feltüntetése & A 2 kártyáról 1-1 kép, ,,Legjobb kéz: Kettes pár'' felirat \\ 
+		\raggedright Kártyák felület (van kártya a játékos kezében) & Kártyák megjelenítése és a legjobb használható kéz feltüntetése & A 2 kártyáról 1-1 kép,\newline ,,Legjobb kéz: Kettes pár'' felirat \\ 
 		\hline
-		Kártyák felület (nincs kártya a játékos kezében) & Figyelmeztető üzenet megjelenítése & ,,Nincs kártya a kezedben'' \\ 
+		\raggedright Kártyák felület (nincs kártya a játékos kezében) & Figyelmeztető üzenet megjelenítése & ,,Nincs kártya a kezedben'' \\ 
 		\hline
 		Kilépés a játszmából & Kilépés a csatlakozott játszmából & ,,Kilépés'' gomb \\ 
 		\hline
@@ -730,7 +741,7 @@ A teljes algoritmus tehát röviden így működik:
 	\item A második bitmezőn maradékos osztást használva ellenőrizzük, hogy póker, full, drill, két pár, egy pár vagy magas lap pókerkezünk van-e.
 	\item Az első bitmező LSB-vel történő osztásával ellenőrizzük a sorokat, majd elvégezzük az ász-alacsony sorok extra ellenőrzését.
 	\item Ellenőrizzük, hogy van-e öt azonos színű lap a flush-höz, beleértve a royal flush extra ellenőrzését is.
-	\item A döntetleneket felbontjuk a pókerkezekhez kiszámolt bizonyos pontszámok összehasonlításával.
+	\item A döntetleneket felbontjuk a legjobb pókerkezekhez kiszámolt bizonyos pontszámok összehasonlításával.
 \end{enumerate}
 
 \section{Többjátékos kapcsolat megvalósítása}
@@ -752,7 +763,7 @@ A póker játszma során minden egyes kör elején küldök tájékoztató üzen
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=16cm]{Lobby}
+	\includegraphics[width=15cm]{Lobby}
 	\caption{Lobby jelenet}
 	\label{fig-lobby}
 \end{figure}
@@ -833,11 +844,11 @@ A playtest-ek során teszt jegyzőkönyvet vezettem. A jegyzőkönyvek segített
 		\hline
 		22:18 & Minőség módosítása & Sikeres & A minőségeket helyesen felsorolja \\
 		\hline
-		22:20 & Képernyőmód módosítása & Sikeres & Lehet váltani a teljes és ablakos képernyő között \\
+		22:20 & Képernyőmód módosítása & Sikeres & Ablakos és teljes képernyő közötti váltás \\
 		\hline
-		22:23 & SFX hangerő módosítása & Sikeres & Csúszka segítségével lehet módosítani az értékét. \\
+		22:23 & SFX hangerő módosítása & Sikeres & Csúszkával lehet módosítani az értékét. \\
 		\hline
-		22:25 & Zene hangerő módosítása & Sikeres & Csúszka segítségével lehet módosítani az értékét \\
+		22:25 & Zene hangerő módosítása & Sikeres & Csúszkával lehet módosítani az értékét \\
 		\hline
 		22:30 & Beállítások elfogadása & Sikeres & Módosítja a változtatott beállításokat \\
 		\hline
@@ -908,8 +919,7 @@ A játék fejlesztése során sok újat tanultam a Unity keretrendszerben tört�
 	\textsc{Unity Technologies}: \emph{Unity}, elérhető: \url{https://unity.com} [Letöltve: 2025-02-28]
 	
 	\bibitem{MediumMultiplayer}
-	\textsc{Jamal Aladdin}: \emph{The Evolution of Multiplayer Gaming: A Journey Through Time}, Jamal Aladdin blogja, elérhető:
-	\url{https://medium.com/@Jamal_Aladdin/the-evolution-of-multiplayer-gaming-a-journey-through-time-e34ef59294c2} [Letöltve: 2025-02-28]
+	\textsc{Jamal Aladdin}: \emph{The Evolution of Multiplayer Gaming: A Journey Through Time}, Jamal Aladdin blogja, elérhető: \href{https://medium.com/@Jamal_Aladdin/the-evolution-of-multiplayer-gaming-a-journey-through-time-e34ef59294c2}{Jamal Aladdin blogja} [Letöltve: 2025-02-28]
 	
 	\bibitem{MediumClientServer}
 	\textsc{Lem Apperson}: \emph{Beginning Game Development: Client-Server Architecture}, Lem Apperson blogja, elérhető:
@@ -1040,7 +1050,7 @@ A játék fejlesztése során sok újat tanultam a Unity keretrendszerben tört�
 	}, elérhető: \url{	https://hu.pokerstrategy.com/strategy/various-poker/texas-holdem-jatekszabalyok} [Letöltve: 2024-11-13]
 	
 	\bibitem{HandEvaluation}
-	\textsc{Jonathan Hsiao}: \emph{Evaluating Poker Hands with Bit Math}, Jonathan Hsiao blogja, elérhető: \url{https://jonathanhsiao.com/blog/evaluating-poker-hands-with-bit-math} [Letöltve: 2025-02-25]
+    \textsc{Jonathan Hsiao}: \emph{Evaluating Poker Hands with Bit Math}, Jonathan Hsiao blogja, elérhető: \url{https://jonathanhsiao.com/blog/evaluating-poker-hands-with-bit-math} [Letöltve: 2025-02-25]
 	
 	\bibitem{Szurdi}
 	\textsc{Szurdi András}: \emph{Pókerkönyv. Kezdőknek és haladóknak}, Ciceró, Budapest, 1995.
@@ -1049,7 +1059,7 @@ A játék fejlesztése során sok újat tanultam a Unity keretrendszerben tört�
 	\textsc{Varga Ervin}: \emph{Póker alapkönyv}, Vagabund, Kecskemét, 2008.
 	
 	\bibitem{UnityLeanTween}
-	\textsc{DentedPixel}: \emph{LeanTween}, elérhető:
+	\textsc{DentedPixel}: \emph{LeanTween}, dokumentáció elérhető:
 	\url{https://dentedpixel.com/LeanTweenDocumentation/classes/LeanTween.html} [Letöltve: 2025-03-11]
 	
 	\bibitem{UnityMultiplayerPlayMode}
