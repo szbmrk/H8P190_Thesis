@@ -374,7 +374,7 @@ A PC játék rendelkezik egy főmenüvel, amelyen keresztül kezelhetőek a beá
 
 \subsubsection{Lobby}
 
-A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mobiljukról tudnak csatlakozni a játszmához.
+A Lobby felületen megjelenik a hozzáférési kód, amivel a játékosok a mobiljukról tudnak csatlakozni a játszmához.
 
 \begin{table}[ht!]
 	\centering
@@ -385,7 +385,7 @@ A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mo
 		\hline
 		Játékosok megjelenítése & Csatlakozott játékosok listázása (név, státusz) & ,,Játékos1 - készen áll'' \\ 
 		\hline
-		Játékos kirúgása & A játékos eltávolítása a lobby-ból (csak a host számára) & ,,Kirúgás'' gomb \\ 
+		Játékos kirúgása & A játékos eltávolítása a lobby-ból (csak a hoszt számára) & ,,Kirúgás'' gomb \\ 
 		\hline
 		\raggedright Hozzáférési kód megjelenítése & Egyedi azonosítókód mutatása, amelyet a játékosok használnak a csatlakozáshoz & ,,ABC123'' \\ 
 		\hline
@@ -393,9 +393,9 @@ A Lobby felületen megjelenik a hozzáférési kódot, amivel a játékosok a mo
 		\hline
 		Chat-funkció & Kommunikáció a lobby játékosai között & Chat-ablak,\newline,,Játékos1: üzenet'' \\ 
 		\hline
-		Kezdő pénz beállítása & A host választhat különböző kezdőértékek közül & 100\$, 250\$, 500\$ \\ 
+		Kezdő pénz beállítása & A hoszt választhat különböző kezdőértékek közül & 100\$, 250\$, 500\$ \\ 
 		\hline
-		Játékindítás & A host elindíthatja a játékot, ha mindenki készen áll & ,,Indítás'' gomb \\ 
+		Játékindítás & A hoszt elindíthatja a játékot, ha mindenki készen áll & ,,Indítás'' gomb \\ 
 		\hline
 	\end{tabular}
 	\caption{Lobby felület követelményei}
@@ -451,7 +451,7 @@ A mobil játék kezdőképernyőjén lehetőségünk van egy játékos név és 
 		\hline
 		\raggedright Hozzáférési kód megadása & Hozzáférési kód megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,ABC123'' \\ 
 		\hline
-		\raggedright Csatlakozás játékhoz sikeres & A megadott információkkal megpróbál egy játékhoz csatlakozni & ,,Csatlakozás'' gomb \\ 
+		\raggedright Csatlakozás játékhoz & A megadott információkkal megpróbál egy játékhoz csatlakozni & ,,Csatlakozás'' gomb \\ 
 		\hline
 		\raggedright Csatlakozás játékhoz sikertelen & Kijelzi az okát a sikertelen csatlakozásnak & ,,A megadott hozzáférési kóddal játszma nem található'' \\ 
 		\hline
@@ -497,7 +497,7 @@ Ha az összes játékos készen állt, és a PC-n elindította a hoszt a játszm
 		\hline
 		\raggedright Akciók felület (a játékos következik) & Lehetséges akciók megjelenítése & ,,Bedobás'', ,,All In'' gombok, Tét megadására szolgáló csúszka, stb\dots \\ 
 		\hline
-		\raggedright Akciók felület (nem a játékos következik) & Figyelmeztető üzenet megjelenítése & ,,Nem a te vagy jelenleg a körben'' \\ 
+		\raggedright Akciók felület (nem a játékos következik) & Figyelmeztető üzenet megjelenítése & ,,Nem te vagy jelenleg a körben'' \\ 
 		\hline
 		\raggedright Kártyák felület (van kártya a játékos kezében) & Kártyák megjelenítése és a legjobb használható kéz feltüntetése & A 2 kártyáról 1-1 kép,\newline ,,Legjobb kéz: Kettes pár'' felirat \\ 
 		\hline
@@ -725,7 +725,7 @@ Az alábbi lépéseket kell végrehajtanunk a kézkiértékeléshez:
 		\begin{itemize}
 			\item Az első kártya értékét kettes számrendszerben eltoljuk balra 16-al
 			\item A második kártya értékét kettes számrendszerben eltoljuk balra 12-vel
-			\item A harmadik kártya értékét kettes számrendszerben eltoljuk balra 8-cel
+			\item A harmadik kártya értékét kettes számrendszerben eltoljuk balra 8-cal
 			\item A negyedik kártya értékét kettes számrendszerben eltoljuk balra 4-el
 			\item Az ötödik kártya értékét nem toljuk el
 		\end{itemize}  
@@ -798,11 +798,11 @@ Az animációk nagyban segítik a vizuális játékélményt és egyértelműbb�
 
 \chapter{Tesztelés}
 
-A tesztelés nagyon fontos része a fejlesztésnek, hiszen ennek a folyamatnak a során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. 
+A tesztelés nagyon fontos része a fejlesztésnek, hiszen ezen folyamat során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során le kezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. 
 
 Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat és teszt jegyzőkönyveket vezetünk ezeknek a teszteknek a menetéről. Fontos lehet hogy ezeket a játék teszteket ne csak önmagunk csináljuk hiszen mi ismerjük a játékot és akár azok a részek amik nem egyértelműek első felhasználói szempontból nekünk nem biztos hogy feltűnnek. Külsős tesztelők sok olyan dolgot fedezhetnek fel, ami nekünk eszünkbe se jutott volna de mégis sokat javít a játékélmény növelésében.
 
-A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni. A tiszta kód írásának egyik módja lehet az OOP (Objektum orientált programozás) alapelveinek betartása lehet.
+A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni. A tiszta kód írásának egyik módja lehet az OOP (Objektum orientált programozás) alapelveinek betartása.
 
 \section{Közös DLL tesztelése}
 
@@ -872,7 +872,7 @@ A játékmenet bővítésére 2 jelentősebb tervet említek meg ebben a szekci�
 
 \section{Konklúzió}
 
-A játék fejlesztése során sok újat tanultam a Unity keretrendszerben történő fejlesztésről. Az előző projektjeim alapján már alapból elég jól ismertem a keretrendszert, de egy ilyen nagyobb szabású projekt során sok olyan elem és technológia került elő amivel eddig nem találkoztam. Sikerült teljesítenem a többjátékos játék fejlesztése célomat is, és a továbbiakban sokkal magabiztosabban tudok ilyen fejlesztésbe kezdeni.
+A játék fejlesztése során sok újat tanultam a Unity játékmotorban történő fejlesztésről. Az előző projektjeim alapján már alapból elég jól ismertem a játékmotort, de egy ilyen nagyobb szabású projekt során sok olyan elem és technológia került elő amivel eddig nem találkoztam. Sikerült teljesítenem a többjátékos játék fejlesztése célomat is, és a továbbiakban sokkal magabiztosabban tudok ilyen fejlesztésbe kezdeni.
 
 \begin{center}
 	Forráskód elérhetősége:
