@@ -52,11 +52,11 @@ A videojátékok már egészen kis korom óta foglalkoztattak. Amikor először 
 
 Ahogy telt az idő, egyre több játék jelent meg és apukám mindig valami újat mutatott. Először hihetetlennek tűnt, hogy ugyanazon a számítógépen mennyi különböző játékot lehet játszani, ugyanazokkal az eszközökkel irányítva. Egy LAN partin találkoztam a többjátékos játékok világával először, ahol apukám, rokonok és barátok egyszerre játszottak ugyanazzal a játékkal és láthatták egymást a saját játékaikban. Ekkortól kezdett el igazán érdekelni, hogy hogyan is működik mindez a háttérben. 
 
-Középiskolában találkoztam először a programozással. Az első találkozás után már tudtam, hogy ezzel a területtel szeretnék később is foglalkozni. Nemcsak a játékok iránti szeretetem miatt, hanem mert felfedeztem, hogy a programozás lehetőséget ad arra, hogy belelássak igazán mi folyik a háttérben és a saját ötleteimet is megvalósíthassam. Miután elkezdtem programozni mindig más szemmel játszottam a játékokkal és próbáltam belelátni, hogy a háttérben az adott folyamatokat hogyan valósíthatták meg a fejlesztők.
+Középiskolában találkoztam először a programozással. Az első találkozás után már tudtam, hogy ezzel a területtel szeretnék később is foglalkozni. Nemcsak a játékok iránti szeretetem miatt, hanem mert felfedeztem, hogy a programozás lehetőséget ad arra, hogy belelássak igazán, mi folyik a háttérben és a saját ötleteimet is megvalósíthassam. Miután elkezdtem programozni mindig más szemmel játszottam a játékokkal és próbáltam belelátni, hogy a háttérben az adott folyamatokat hogyan valósíthatták meg a fejlesztők.
 
 Rengeteg többjátékos játékot játszottam a barátaimmal és ez az egyik kedvenc időtöltésemmé vált. Közben pedig mindig is szerettem volna fejleszteni egy saját játékot, amit akár közösen is tudunk játszani. Ennek érdekében szabadidőmben hobbi projektek segítségével próbáltam minél többet tanulni a játékfejlesztésről. Több projektbe is belekezdtem amelyek nagyon sokat tanítottak a fejlesztési folyamatuk során, de egyiket se tudtam igazán befejezni.
 
-Az egyetem során pedig a hobbi projektek mellett sok új dolgot tanultam, melyek tovább segítettek a játékfejlesztésben. Az egyetemen tanultak által sikerült még jobban belelátnom az informatika és programozás világába. Több terület is elkezdett érdekelni a játékfejlesztésen kívül, de mindig a játékfejlesztés maradt az első. Rengeteg előző megoldásomat is át gondoltam és a tanultak alapján rájöttem, hogy mindig van egy szebb mód a különböző problémák megoldására. Az egyetem során még nagyon meghatározó élmény volt a GémDzsem, ami alatt csapatokban fejleszthettünk határidőre egy adott téma alapján különböző játékokat. A GémDszem alatt sikerült a legtöbbet tanulnom a játékfejlesztésről és itt fejeztem be először egy játékot teljesen a csapatomnak a segítségével. Már 4 ilyen GémDszem-en vettem részt és mindegyik során sikerült újat tanulnom, még jobban megszeretni ezt a területet.
+Az egyetem során pedig a hobbi projektek mellett sok új dolgot tanultam, melyek tovább segítettek a játékfejlesztésben. Az egyetemen tanultak által sikerült még jobban belelátnom az informatika és programozás világába. Több terület is elkezdett érdekelni a játékfejlesztésen kívül, de mindig a játékfejlesztés maradt az első. Rengeteg előző megoldásomat is átgondoltam és a tanultak alapján rájöttem, hogy mindig van egy effektívebb megoldás a különböző problémákra. Az egyetem során még nagyon meghatározó élmény volt a GémDzsem, ami alatt csapatokban fejleszthettünk határidőre egy adott téma alapján különböző játékokat. A GémDzsem alatt sikerült a legtöbbet tanulnom a játékfejlesztésről és itt fejeztem be először egy játékot teljesen a csapatom segítségével. Már 4 ilyen GémDzsem-en vettem részt és mindegyik során sikerült újat tanulnom, még jobban megszeretni ezt a területet.
 
 A szakdolgozatomban fejlesztek először többjátékos játékot, ami mindig is egy célom volt. A tapasztalataim és az egyetem segítségével már magabiztosan tudtam elkezdeni a fejlesztést, mint minden eddigi fejlesztésem során, most is sokat sikerült tanulnom a folyamat alatt. A játékom ötletét és célját \aref{ch-rendszerterv}. fejezetben fejtem ki bővebben.
 
@@ -76,15 +76,14 @@ A szakdolgozatomban fejlesztek először többjátékos játékot, ami mindig is
 	
 \chapter{Technológiai áttekintés}
 
-Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is. Az API (alkalmazásprogramozási interfész) segítségével egy program vagy szolgáltatás funkcióit más programok is elérhetik anélkül, hogy a belső működést ismerniük kellene. A játékmotorok használata megkönnyíti a fejlesztés folyamatát, ugyanakkor nem biztosítanak olyan nagy fokú rugalmasságot, mint az API-alapú fejlesztés. Az API-alapú fejlesztés során függvény könyvtárak segítségével tudjuk felépíteni a játékunkat, ezért az egyes modulok nincsenek a játékmotor keretei köré szorítva, hanem az adott függvények segítségével magunk építhetjük fel ezeket. Ilyen API-k lehetnek például a játékfejlesztés során a grafikai-, multimédia kezelő API-k. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, így ki tudtam használni az általa kínált lehetőségeket és eszközöket.
-
+Manapság a játékfejlesztés legelterjedtebb módja a játékmotorok használata. Alternatív megoldásként azonban még előfordul az API-alapú fejlesztés is. Az API (alkalmazásprogramozási interfész) segítségével egy program vagy szolgáltatás funkcióit más programok is elérhetik anélkül, hogy a belső működést ismerniük kellene. A játékmotorok használata megkönnyíti a fejlesztés folyamatát, ugyanakkor nem biztosítanak olyan nagy fokú rugalmasságot, mint az API-alapú fejlesztés. Az API-alapú fejlesztés során függvény könyvtárak segítségével tudjuk felépíteni a játékunkat, ezért az egyes modulok nincsenek a játékmotor keretei köré szorítva, hanem az adott függvények segítségével magunk építhetjük fel ezeket. Ilyen API-k lehetnek például a játékfejlesztés során a grafikai-, multimédia kezelő API-k. A szakdolgozatom elkészítéséhez én a játékmotor-alapú fejlesztést választottam, hiszen így kitudtam használni az előre kínált eszközöket, amiket egy játékmotor nyújt az API-alapú fejlesztéssel szemben.
 \section{Enginek}
 
-A játékmotorok olyan fejlesztői környezetek, amelyek célja, hogy egyszerűsítsék és felgyorsítsák a játékok fejlesztésének folyamatát. Egy tipikus játékmotor különböző komponenseket és funkciókat szolgáltat a fejlesztőnek, mint például: grafikai renderelést, fizikai szimulációt, animációkezelést, hangkezelést. A játékmotorok használata megkönnyíti a fejlesztők dolgát, viszont nem ad annyi rugalmasságot, mint az API alapú fejlesztés \cite{GameEngines}.
+A játékmotorok olyan fejlesztői környezetek, amelyek célja, hogy egyszerűsítsék és felgyorsítsák a játékok fejlesztésének folyamatát. Egy tipikus játékmotor különböző komponenseket és funkciókat szolgáltat a fejlesztőnek, melyeket nem kell az alapoktól felépítenie. Például: grafikai renderelést, fizikai szimulációt, animációkezelést, hangkezelést. A játékmotorok használata megkönnyíti a fejlesztők dolgát, viszont nem ad annyi rugalmasságot, mint az API-alapú fejlesztés \cite{GameEngines}.
 
 \subsection{Unreal}
 
-Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, amelyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat, például a karaktermozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki.
+Az Unreal Engine egy professzionális, nagy teljesítményű játékmotor, melyet az Epic Games fejleszt. Főbb előnyei közé tartozik a kiemelkedő grafikája. Az ingyenes hozzáférése és a vizuális programozást lehetővé tevő Blueprint rendszere miatt kisebb fejlesztők körében is népszerűvé vált. Elsősorban C++-ban történő fejlesztésre optimalizált, de a már említett Blueprint-rendszernek köszönhetően programozói tapasztalat nélkül is lehetséges játékot fejleszteni benne. A játékmotorban sok újrahasználható komponens megtalálható, így a gyakran használt dolgokat, például a karaktermozgást, nem kell felépíteni az alapoktól. A játékmotort 3D játékok fejlesztésére találták ki.
 
 A játékmotor egyik legnagyobb előnye a már említett csúcskategóriás grafikai teljesítménye, amely lehetővé teszi valósághű látványvilág megteremtését. Azonban ez nagy számítási kapacitást igényel, ezért a kisebb, alacsony erőforrás-igényű projektekhez kevésbé ideális.
 
@@ -94,11 +93,11 @@ Mivel a szakdolgozatomban nem volt szükségem az Unreal Engine által nyújtott
 
 \subsection{Godot}
 
-A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás-igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt, natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv). Emellett támogatja a C\#, C++ és VisualScript használatát is, ami növeli a rugalmasságát.
+A Godot egy nyílt forráskódú, ingyenesen elérhető játékmotor. Nagy előnye a könnyű használhatóság, a kis erőforrás-igénye, valamint a nyílt forráskód nyújtotta rugalmasság és közösségi támogatás. Támogatja a 2D és 3D játékfejlesztést egyaránt. Natív szkriptnyelve a GDScript (Pythonhoz hasonló nyelv). Emellett támogatja a C\#, C++ és VisualScript használatát is, ami növeli a rugalmasságát.
 
 A Godot különösen hatékonyan kezeli a 2D projekteket, és a 3D-s projektek terén is folyamatosan fejlődik. Mivel nyílt forráskódú, a fejlesztők közössége aktívan részt vesz a fejlesztésében és hibajavításában. Hátránya azonban, hogy kevésbé elterjedt és kevesebb kész eszköz érhető el hozzá, mint a Unity esetében.
 
-A Godot a rugalmassága és könnyen tanulhatósága miatt kiváló lehet kisebb projektek megvalósítására. A projektemnek a Godot is egy jó választás lehetett volna, de a Unity által nyújtott eszközkészlet, ami lehetővé teszi a többjátékos kapcsolat megvalósítását több különböző módon nagy előnyt jelent a Godot-tal szemben. \cite{Godot} \cite{GitHubGodot}.  
+A Godot a rugalmassága és könnyen tanulhatósága miatt kiváló lehet kisebb projektek megvalósítására. A projektemnek a Godot is egy jó választás lehetett volna, de a Unity által nyújtott eszközkészlet, ami lehetővé teszi a többjátékos kapcsolat megvalósítását több különböző módon, nagy előnyt jelent a Godot-tal szemben. \cite{Godot} \cite{GitHubGodot}.  
 
 \subsection{Unity}
 
@@ -110,7 +109,7 @@ A mai megjelenő játékok nagy része már tartalmaz valamiféle többjátékos
 
 \subsection{Korai megoldások}
 
-Többjátékossal játszható játék először stratégia kör alapú játékokban jelent meg, de ez még nem egyidejű játékot jelentett. Ezek után egyidejű többjátékos játék lehetősége először egy 2 játékossal egyszerre egy helyen játszható játékkal jött létre, ez a játék volt a jól ismert Pong. A Pong után kezdtek egyre jobban elterjedni a helyi többjátékos játékok, ahol az egymás elleni játék helyett, egymással együtt működve is tudtunk játszani. Egy népszerű módszer a helyi többjátékos játékok megvalósításánál az osztott képernyő, ahol általában el van választva a kijelző több egyenlő részre, ahol 1-1 részt 1-1 játékos kezelhet. A 2000-es évek elején pedig már megjelent az online többjátékos játékok lehetősége is, ahol már nem volt szükség egy térben tartózkodni a többi játékossal \cite{MediumMultiplayer}.
+Többjátékossal játszható játék először stratégia kör alapú játékokban jelent meg, de ez még nem egyidejű játékot jelentett. Ezek után egyidejű többjátékos játék lehetősége először egy 2 játékossal egyszerre egy helyen játszható játékkal jött létre, ez a játék volt a jól ismert Pong. A Pong után kezdtek egyre jobban elterjedni a helyi többjátékos játékok, ahol az egymás elleni játék helyett egymással együtt működve is tudtunk játszani. Egy népszerű módszer a helyi többjátékos játékok megvalósításánál az osztott képernyő, ahol általában el van választva a kijelző több egyenlő részre, ahol 1-1 részt 1-1 játékos kezelhet. A 2000-es évek elején pedig már megjelent az online többjátékos játékok lehetősége is, ahol már nem volt szükség egy térben tartózkodni a többi játékossal \cite{MediumMultiplayer}.
 
 \subsection{Kliens-Szerver}
 
@@ -132,9 +131,9 @@ A Kliens-Szerver architektúra az egyik legtöbbet használt módszer az online 
 
 A kliens és a szerver megbízható hálózati protokoll (pl. TCP vagy UDP) segítségével kommunikál és olyan csomagokat küld, amelyek a játékosok interakcióiról, játékeseményekről és állapotfrissítésekről tartalmaznak információkat. 
  
-Végső sorban szerver ellenőriz minden interakciót és csak ő tud dönteni a változásokról. Ez azért jó, mert így a csalásokkal szemben is védekezik a játék. 
+Végső sorban a szerver ellenőriz minden interakciót és csak ő tud dönteni a változásokról. Ez azért jó, mert így a csalásokkal szemben is védekezik a játék. 
 
-Mivel mindig várni kell a szerver által küldött információra egy interakció esetén, így késleltetés léphet fel, főleg lassabb internet kapcsolat esetén. Erre egy módszer amit alkalmazni szoktak a klienseknél az úgynevezett predikció, ahol a helyi interakció alapján a kliens megpróbálja kitalálni mi fog ténylegesen történni \cite{MediumClientServer}.
+Mivel mindig várni kell a szerver által küldött információra egy interakció esetén, így késleltetés léphet fel, főleg lassabb internet kapcsolat esetén. Erre egy módszer amit alkalmazni szoktak a klienseknél, az úgynevezett predikció, ahol a helyi interakció alapján a kliens megpróbálja kitalálni mi fog ténylegesen történni \cite{MediumClientServer}.
 
 \begin{figure}[ht!]
 	\centering
@@ -151,7 +150,7 @@ A P2P architektúra lényege, hogy a játékosok közvetlen kapcsolatot létesí
 A P2P architektúra előnyei a Kliens-Szerver architektúrával szemben:
 \begin{itemize}
 	\item Mivel a játékosok közvetlen kapcsolatot alakítanak ki egymással, így általában gyorsabb a válaszidő.
-	\item Sokkal költség hatékonyabb megoldás, mivel nem kell egy központi szerver üzemeltetésére költeni.
+	\item Sokkal költséghatékonyabb megoldás, mivel nem kell egy központi szerver üzemeltetésére költeni.
 \end{itemize}
 
 Mivel ebben a felépítésben nincs egy központi szerver, ami ellenőrző szerepet is tölt be, így a csalások kiszűrése több gondot okozhat. Mint minden felépítésnek, ennek is vannak előnyei és hátrányai is. Ezt az architektúrát kisebb játékos létszám igényű játékoknál célszerű használni. A szakdolgozatom során egy a Unity Technologies által létrehozott P2P architektúrán alapuló technológiát alkalmazok, amiről \aref{sec-relay}. fejezetben bővebben írok \cite{MediumP2P}.
@@ -170,7 +169,7 @@ A Unity egy játékmotor, amit aktívan a Unity Technologies fejleszt. A játék
 
 \section{Unity6}
 
-Mai legfrissebb verziója a játékmotornak a Unity6, amit 2024 végén adtak ki. A frissítés számos nagy fejlesztéssel állt elő, amik közül nekem az egyik legfontosabb a tesztelés szempontjából, a \emph{Multiplayer play mode} volt. Fontosabb fejlesztések: 
+Mai legfrissebb verziója a játékmotornak a Unity6, amit 2024 végén adtak ki. A frissítés számos nagy fejlesztéssel állt elő, amik közül nekem az egyik legfontosabb a tesztelés szempontjából, a ,,Multiplayer play mode'' volt. Fontosabb fejlesztések: 
 
 \begin{itemize}
 	\item Renderelés teljesítményének növelése
@@ -178,7 +177,7 @@ Mai legfrissebb verziója a játékmotornak a Unity6, amit 2024 végén adtak ki
 	\item Többjátékos játékok fejlesztésének egyszerűsítése
 	\begin{itemize}
 		\item Multiplayer Center: kiválaszthatjuk, hogy milyen igényeink vannak a játékkal kapcsolatban, majd a Unity felsorolja nekünk a megfelelő technológiákat és csomagokat, így nem nekünk kell keresgélnünk és kutatnunk a csomagok után.
-		\item Multiplayer Play Mode: talán ez volt számomra a legfontosabb, hiszen exponenciális mértékben felgyorsította a tesztelés folyamatát. A Multiplay Play Mode lehetővé teszi, hogy egyszerre több példányban is futhasson a játék a gépemen buildelés nélkül.
+		\item Multiplayer Play Mode: talán ez volt számomra a legfontosabb, hiszen exponenciális mértékben felgyorsította a tesztelés folyamatát. A Multiplayer Play Mode lehetővé teszi, hogy egyszerre több példányban is futhasson a játék a gépemen buildelés nélkül.
 	\end{itemize}
 	\item Web alapú fejlesztés teljesítményének növelése
 	\item Gyorsított UI fejlesztés
@@ -188,7 +187,7 @@ A fentebb felsoroltak mellett még számos fejlesztést, valamint javítást hoz
 
 \section{Scene}
 
-A játékok Unity-ben különböző jelenetekre (scene) vannak felbontva. A különböző jelenetekkel játékbeli tereket választhatunk el, például 1-1 szintet a játékon belül. A jeleneteken belül a játék fő építő eleme a \emph{GameObject}, amit egy fa hierarchiában tudunk a jelenetekbe pakolni \cite{UnityScene}.
+A játékok Unity-ben különböző jelenetekre (scene) vannak felbontva. A különböző jelenetekkel játékbeli tereket választhatunk el, például 1-1 szintet a játékon belül. A jeleneteken belül a játék fő építő eleme a ,,GameObject'', amit egy fa hierarchiában tudunk a jelenetekbe pakolni \cite{UnityScene}.
 
 \section{GameObject}
 \label{sec-gameobject}
@@ -201,11 +200,11 @@ A komponensek lehetnek beépítettek, amivel a Unity szolgál, vagy akár írhat
 
 \paragraph{Transform}
 
-Az egyik legfontosabb komponens, amivel minden objektumnak rendelkeznie kell. Ezt a komponenst nem is lehet törölni az objektumokról. Információt szolgáltat az objektum: pozíciójáról, méretéről, forgásáról és a hierarchiában lévő tulajdonságairól is \cite{UnityTransform}.
+Az egyik legfontosabb komponens, amivel minden objektumnak rendelkeznie kell. Ezt a komponenst nem is lehet törölni az objektumokról. Információt szolgáltat az objektum pozíciójáról, méretéről, forgásáról és a hierarchiában lévő tulajdonságairól is \cite{UnityTransform}.
 	
 \paragraph{RigidBody}
 
-Azok az objektumok, amelyeken van ilyen komponens, azok használják a beépített fizikai motort a gravitáció és többi fizikai hatás szimulálásához. A Transform komponens használata helyett, a fizikai motor segítségével módosítható az objektum pozíciója. Különféle fizikai hatásokat szimulálhatunk a komponens segítségével. Számos tulajdonságot is beállíthatunk az objektumnak, mint például a tömegét, a pontosabb szimulációk érdekében \cite{UnityRigidbody}.
+Azok az objektumok, amelyeken van ilyen komponens, azok használják a beépített fizikai motort a gravitáció és többi fizikai hatás szimulálásához. A Transform komponens használata helyett, a fizikai motor segítségével módosítható az objektum pozíciója. Különféle fizikai hatásokat szimulálhatunk a komponens segítségével. Számos tulajdonságot is beállíthatunk az objektumnak, mint például a tömegét a pontosabb szimulációk érdekében \cite{UnityRigidbody}.
 
 \paragraph{Camera}
 
@@ -230,7 +229,7 @@ Ez a komponens lehetővé teszi a képek megjelenítését 2D illetve 3D projekt
 
 \paragraph{Light}
 
-Ennek a komponensnek a segítségével tudjuk kezelni a fényeket a játékban. 2D és 3D esetén is több különböző light komponenst szolgáltat a Unity. A fényeknek lehetőségünk van állítani a fényét, színét, távolságát és még sok hasonló tulajdonságot \cite{UnityLight}.
+Ennek a komponensnek a segítségével tudjuk kezelni a fényeket a játékban. 2D és 3D esetén is több különböző light komponenst szolgáltat a Unity. A fényeknek lehetőségünk van állítani a fényerejét, színét, távolságát és még sok hasonló tulajdonságot \cite{UnityLight}.
 
 \paragraph{Audio Source}
 
@@ -250,7 +249,7 @@ A megírt kódban különböző objektumokra és komponensekre is tudunk hivatko
 \section{Prefab}
 \label{sec-prefab}
 
-A Unity Prefab rendszere lehetővé teszi egy GameObject el tárolását, minden komponensével, tulajdonságértékével és gyermek GameObjectjével együtt, egy újrafelhasználható objektumként. Ha van egy olyan objektumunk, amit sokszor újra fel szeretnénk használni a jelenteinkben, akkor érdemes Prefab-et használni ezeknek az objektumoknak az eltárolására. Egyes Prefab-ek esetén felülírhatjuk az alap beállításokat, így kis szinten különböző de logikailag összefüggő objektumokat használhatunk. Néhány gyakori példa a Prefab használatra: \cite{UnityPrefab}
+A Unity Prefab rendszere lehetővé teszi egy GameObject eltárolását, minden komponensével, tulajdonságértékével és gyermek GameObjectjével együtt, egy újrafelhasználható objektumként. Ha van egy olyan objektumunk, amit sokszor újra fel szeretnénk használni a jelenteinkben, akkor érdemes Prefab-et használni ezeknek az objektumoknak az eltárolására. Egyes Prefab-ek esetén felülírhatjuk az alap beállításokat, így kis szinten különböző de logikailag összefüggő objektumokat használhatunk. Néhány gyakori példa a Prefab használatra: \cite{UnityPrefab}
 
 \begin{itemize}
 	\item Nem játékos karakterek (NPC-k) - akár egy ellenfél típussal többször is találkozhatunk a játékunk során.
@@ -261,7 +260,7 @@ A Unity Prefab rendszere lehetővé teszi egy GameObject el tárolását, minden
 \section{Editor}
 
 \label{sec-editor}
-Minden ami nem kód írás egy játék fejlesztése során, az az editor-ban fog történni. A Unity editor több különböző ablakból tevődik össze, melyek segítik a fejlesztési folyamatot. Ebben a szekcióban bemutatom részletesebben a legfontosabb ablakokat.
+Minden ami nem kódírás egy játék fejlesztése során, az editor-ban fog történni. A Unity editor több különböző ablakból tevődik össze, melyek segítik a fejlesztési folyamatot. Ebben a szekcióban bemutatom részletesebben a legfontosabb ablakokat.
 
 \begin{figure}[ht!]
 	\centering
@@ -276,7 +275,7 @@ Ebben az ablakban tudjuk kezelni a fájlrendszerét a projektünknek. Itt hozhat
 
 \paragraph{Scene View}
 
-Ez az egyik legfontosabb ablak. Itt tudjuk kezelni a jeleneten belüli játék elemeinket. Több különböző módon tudjuk manipulálni az objektumokat, beleértve a pozíciójuk módosítását és az átméretezésüket is \cite{UnitySceneView}.
+Ez az egyik legfontosabb ablak. Itt tudjuk kezelni a jeleneten belüli játékelemeinket. Több különböző módon tudjuk manipulálni az objektumokat, beleértve a pozíciójuk módosítását és az átméretezésüket is \cite{UnitySceneView}.
 
 \paragraph{Hierarchy Window}
 
@@ -284,7 +283,7 @@ Ez az ablak tartalmazza a jelenlegi jeleneten belüli összes játék objektumot
 
 \paragraph{Inspector Window}
 
-Ha kiválasztunk egy objektumot a hierarchiában vagy a jelenet nézetben, akkor azt az objektumot ezen az ablakon keresztül tudjuk kezelni. Itt tudunk új komponenseket adni hozzá és a meglévőeket pedig módosítani. Itt tudjuk például a saját kódjainkat is az objektumokra helyezni \cite{UnityInspectorWindow}.
+Amikor kiválasztunk egy objektumot a hierarchiában vagy a jelenet nézetben, akkor azt az objektumot ezen az ablakon keresztül tudjuk kezelni. Itt tudunk új komponenseket adni hozzá és a meglévőeket pedig módosítani. Itt tudjuk például a saját kódjainkat is az objektumokra helyezni \cite{UnityInspectorWindow}.
 
 \paragraph{Game View}
 
@@ -293,7 +292,7 @@ Ezen az ablakon látható a játékban használt kamerák által rögzített ren
 \section{Relay}
 
 \label{sec-relay}
-A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fejlesszünk drága dedikált szerverek nélkül. A kapcsolódás folyamat hozzáférési kódokon keresztül történik a játékosok között. A Unity Technologies elmondása szerint ezt a szolgáltatást kis méretű casual játékokhoz és kör alapú kártya játékokhoz a legérdemesebb használni. Az alábbiak a fő előnyei ennek a szolgáltatásnak \cite{UnityRelayService} \cite{UnityRelayDocs}.
+A Relay szolgáltatás lehetőséget ad arra, hogy többjátékos játékokat fejlesszünk drága dedikált szerverek nélkül. A kapcsolódás folyamata hozzáférési kódokon keresztül történik a játékosok között. A Unity Technologies elmondása szerint ezt a szolgáltatást kis méretű casual játékokhoz és kör alapú kártyajátékokhoz a legérdemesebb használni. Az alábbiak a fő előnyei ennek a szolgáltatásnak \cite{UnityRelayService} \cite{UnityRelayDocs}.
 
 \begin{itemize}
 	\item Költséghatékony megoldás a játékosok összekapcsolására: A Peer-to-Peer alapú megoldás lehetővé teszi, hogy a játékosok a saját eszközeiken hosztolják a játékot és így nincs szükség drága szerverekre.
@@ -310,7 +309,7 @@ Két fő komponensből épül fel a Relay.
 
 \subsection{Relay Server}
 
-A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken keresztül kommunikálnak egymással. A Relay szerverek továbbítják az üzeneteket a kliensek között kis késleltetésű datagram cserével, ez biztosítja azt, hogy két játékos sose kapcsolódik közvetlen egymáshoz. Ezek a szerverek nyilvános végpontként viselkednek, ami elérhető az összes játékos számára. Ez a megközelítés megoldást ad több különböző felmerülő problémára is, mint például a játékosok közötti tűzfalakra. Minden játékos ugyanarra az ip címre tud csatlakozni, amit biztosra vehetnek, hogy a játékmenet során nem fog változni, így a játékosoknak nem kell tudniuk egymás ip címéről, ez is erősíti a biztonságot a rendszerben \cite{UnityRelayServers}.
+A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken keresztül kommunikálnak egymással. A Relay szerverek továbbítják az üzeneteket a kliensek között kis késleltetésű datagram cserével, ez biztosítja azt, hogy két játékos sose kapcsolódik közvetlen egymáshoz. Ezek a szerverek nyilvános végpontként viselkednek, ami elérhető az összes játékos számára. Ez a megközelítés megoldást ad több különböző felmerülő problémára is, mint például a játékosok közötti tűzfalakra. Minden játékos ugyanarra az IP-címre tud csatlakozni, amit biztosra vehetnek, hogy a játékmenet során nem fog változni, így a játékosoknak nem kell tudniuk egymás IP-címéről, ez is erősíti a biztonságot a rendszerben \cite{UnityRelayServers}.
 
 \begin{figure}[ht!]
 	\centering
@@ -324,7 +323,7 @@ A játékosok nem közvetlen egymáshoz csatlakozva, hanem Relay szervereken ker
 
 \section{Rendszer célja}
 
-A szakdolgozatom célja egy Texas Hold'Em szabályain alapuló póker játék fejlesztése, ahol egy asztali számítógép és több mobiltelefon között jön létre a kapcsolat a többjátékos játékmenet megvalósításához. A játék célja, hogy egy hasonló élményt adjon a játékosok számára, mintha rendes pókert játszanánk élőben. Ezt a célt úgy próbáltam elérni, hogy a mobiltelefonok képzik a játékosok ,,kezeit'' és a számítógép pedig az asztalt, az az a közös teret.
+A szakdolgozatom célja egy Texas Hold'Em szabályain alapuló póker játék fejlesztése, ahol egy asztali számítógép és több mobiltelefon között jön létre a kapcsolat a többjátékos játékmenet megvalósításához. A játék célja, hogy egy hasonló élményt adjon a játékosok számára, mintha rendes pókert játszanánk élőben. Ezt a célt úgy próbáltam elérni, hogy a mobiltelefonok képzik a játékosok ,,kezeit'' és a számítógép pedig az asztalt, vagyis a közös teret.
 
 \section{Architekturális terv}
 \label{sec-architecture}
@@ -333,7 +332,7 @@ A szakdolgozat 3 különböző projektből épül fel: PC játék (Unity), Mobil
 
 \paragraph{PC játék}
 
-A PC játék szolgál az asztalként, itt lehet létrehozni és kezelni a játszmákat. A játékmenet fontosabb részei itt nyomon követhetők a játékosok számára. 
+A PC játék szolgál az asztalként, itt lehet létrehozni és kezelni a játszmákat. A játékmenet fontosabb részei itt nyomon követhetőek a játékosok számára. 
 
 \paragraph{Mobil játék}
 
@@ -357,7 +356,7 @@ A PC játék rendelkezik egy főmenüvel, amelyen keresztül kezelhetőek a beá
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
@@ -380,7 +379,7 @@ A Lobby felületen megjelenik a hozzáférési kód, amivel a játékosok a mobi
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
@@ -388,11 +387,11 @@ A Lobby felületen megjelenik a hozzáférési kód, amivel a játékosok a mobi
 		\hline
 		Játékos kirúgása & A játékos eltávolítása a lobby-ból (csak a hoszt számára) & ,,Kirúgás'' gomb \\ 
 		\hline
-		\raggedright Hozzáférési kód megjelenítése & Egyedi azonosítókód mutatása, amelyet a játékosok használnak a csatlakozáshoz & ,,ABC123'' \\ 
+		Hozzáférési kód megjelenítése & Egyedi azonosítókód mutatása, amelyet a játékosok használnak a csatlakozáshoz & ,,ABC123'' \\ 
 		\hline
 		Státuszok jelzése & Jelzés, hogy ki áll készen a játék indítására & Készen áll / Nincs kész \\ 
 		\hline
-		Chat-funkció & Kommunikáció a lobby játékosai között & Chat-ablak,\newline,,Játékos1: üzenet'' \\ 
+		Chat-funkció & Kommunikáció a lobby játékosai között & Chat-ablak, ,,Játékos1: üzenet'' \\ 
 		\hline
 		Kezdő pénz beállítása & A hoszt választhat különböző kezdőértékek közül & 100\$, 250\$, 500\$ \\ 
 		\hline
@@ -409,11 +408,11 @@ Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol 
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
-		\raggedright Játékos megjelenítése & Játékos megjelenítése UI elemek segítségével & Kártya, ahol látszik a játékos neve és pénze \\
+		Játékos megjelenítése & Játékos megjelenítése UI elemek segítségével & Kártya, ahol látszik a játékos neve és pénze \\
 		\hline
 		Aktív játékos kijelzése & Világosan látható, hogy ki következik a körben & Játékos1 kártyájának kiemelése \\ 
 		\hline
@@ -421,13 +420,13 @@ Miután a Lobby-ból elindítottuk a játékot, betölt egy új jelenetet, ahol 
 		\hline
 		Kártyák osztása az asztalra & Kártyák automatikus kiosztása a megfelelő pillanatban & Kártyák csúsztatása egyesével az asztalra animációval \\ 
 		\hline
-		\raggedright Kártyák felfordítása & Kártyák automatikus felfordítása a megfelelő pillanatban & Kártyák felfordítása egyesével az asztalon \\ 
+		Kártyák felfordítása & Kártyák automatikus felfordítása a megfelelő pillanatban & Kártyák felfordítása egyesével az asztalon \\ 
 		\hline
 		Kártyák osztása játékosoknak & Kártyák automatikus kiosztása a megfelelő pillanatban & Kártyák csúsztatása egyesével a játékosoknak animációval \\ 
 		\hline
-		\raggedright Kör végének mutatása & Feljön egy ablak, ahol látszik ki nyerte meg a kört és milyen kézzel & ,,Játékos3 nyert:\newline Royal Flush'' \\
+		Kör végének mutatása & Feljön egy ablak, ahol látszik ki nyerte meg a kört és milyen kézzel & ,,Játékos3 nyert: Royal Flush'' \\
 		\hline
-		Játékos kezek mutatása & Minden játékosnak megjelenik milyen kártyák voltak a kezében & ,,Játékos2:\newline [Szív király, Gyémánt 10]'' \\
+		Játékos kezek mutatása & Minden játékosnak megjelenik milyen kártyák voltak a kezében & ,,Játékos2: [Szív király, Gyémánt 10]'' \\
 		\hline
 		Nyertes mutatása & A játszma végén megjelenik a nyerő játékos neve egy felületen & ,,Játékos1 nyert'' \\
 		\hline
@@ -444,17 +443,17 @@ A mobil játék kezdőképernyőjén lehetőségünk van egy játékos név és 
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
-		\raggedright Játékos név megadása & Játékos név megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,Játékos1'' \\ 
+		Játékos név megadása & Játékos név megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,Játékos1'' \\ 
 		\hline
-		\raggedright Hozzáférési kód megadása & Hozzáférési kód megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,ABC123'' \\ 
+		Hozzáférési kód megadása & Hozzáférési kód megadására ad lehetőséget egy szerkeszthető szövegdoboz segítségével & ,,ABC123'' \\ 
 		\hline
-		\raggedright Csatlakozás játékhoz & A megadott információkkal megpróbál egy játékhoz csatlakozni & ,,Csatlakozás'' gomb \\ 
+		Csatlakozás játékhoz & A megadott információkkal megpróbál egy játékhoz csatlakozni & ,,Csatlakozás'' gomb \\ 
 		\hline
-		\raggedright Csatlakozás játékhoz sikertelen & Kijelzi az okát a sikertelen csatlakozásnak & ,,A megadott hozzáférési kóddal játszma nem található'' \\ 
+		Csatlakozás játékhoz sikertelen & Kijelzi az okát a sikertelen csatlakozásnak & ,,A megadott hozzáférési kóddal játszma nem található'' \\ 
 		\hline
 	\end{tabular}
 	\caption{Kezdőképernyő követelményei}
@@ -467,13 +466,13 @@ Sikeres csatlakozás után a Lobby felület jelenik meg. A Lobby felületen tudu
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
 		Chat üzenet küldése & Chat üzenet küldés, ami a PC játékon megjelenik, hogy minden játékos lássa & ,,Játékos1: üzenet'' \\ 
 		\hline
-		\raggedright Készenlét módosítása & Készenlét be és ki kapcsolása & ,,Készen állok'', ,,Nem állok készen'' gombok \\ 
+		Készenlét módosítása & Készenlét be és ki kapcsolása & ,,Készen állok'', ,,Nem állok készen'' gombok \\ 
 		\hline
 		Kilépés a játszmából & Kilépés a csatlakozott játszmából & ,,Kilépés'' gomb \\ 
 		\hline
@@ -488,21 +487,21 @@ Ha az összes játékos készen állt és a PC-n elindította a hoszt a játszm�
 \begin{table}[ht!]
 	\centering
 	\footnotesize
-	\begin{tabular}{|p{3cm}|p{7cm}|p{4cm}|}
+	\begin{tabular}{|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{4cm}|}
 		\hline
 		\textbf{Funkció} & \textbf{Leírás} & \textbf{Opciók/Példák} \\ 
 		\hline
 		Pénz megjelenítése & A játékos jelenlegi pénze megjelenik a felületen & ,,Pénz: 50\$'' \\ 
 		\hline
-		2 felület közötti váltás & Váltás az akciók és a kártyák felület között & ,,Kártyák megjelenítése'',\newline ,,Akciók megjelnítése''\newline gombok \\ 
+		2 felület közötti váltás & Váltás az akciók és a kártyák felület között & ,,Kártyák megjelenítése'', ,,Akciók megjelnítése'' gombok \\ 
 		\hline
-		\raggedright Akciók felület (a játékos következik) & Lehetséges akciók megjelenítése & ,,Bedobás'', ,,All In'' gombok, Tét megadására szolgáló csúszka, stb\dots \\ 
+		Akciók felület (a játékos következik) & Lehetséges akciók megjelenítése & ,,Bedobás'', ,,All In'' gombok, tét megadására szolgáló csúszka, stb. \\ 
 		\hline
-		\raggedright Akciók felület (nem a játékos következik) & Figyelmeztető üzenet megjelenítése & ,,Nem te vagy jelenleg a körben'' \\ 
+		Akciók felület (nem a játékos következik) & Figyelmeztető üzenet megjelenítése & ,,Nem te vagy jelenleg a körben'' \\ 
 		\hline
-		\raggedright Kártyák felület (van kártya a játékos kezében) & Kártyák megjelenítése és a legjobb használható kéz feltüntetése & A 2 kártyáról 1-1 kép,\newline ,,Legjobb kéz: Kettes pár'' felirat \\ 
+		Kártyák felület (van kártya a játékos kezében) & Kártyák megjelenítése és a legjobb használható kéz feltüntetése & A 2 kártyáról 1-1 kép, ,,Legjobb kéz: Kettes pár'' felirat \\ 
 		\hline
-		\raggedright Kártyák felület (nincs kártya a játékos kezében) & Figyelmeztető üzenet megjelenítése & ,,Nincs kártya a kezedben'' \\ 
+		Kártyák felület (nincs kártya a játékos kezében) & Figyelmeztető üzenet megjelenítése & ,,Nincs kártya a kezedben'' \\ 
 		\hline
 		Kilépés a játszmából & Kilépés a csatlakozott játszmából & ,,Kilépés'' gomb \\ 
 		\hline
@@ -512,7 +511,7 @@ Ha az összes játékos készen állt és a PC-n elindította a hoszt a játszm�
 
 \section{Használt fejlesztői eszközök}
 
-A fejlesztés folyamatát számos eszköz segítette és gyorsította fel. Ebben a szekcióban ezeket az eszközöket sorolom fel és ismertetem röviden. A fejlesztésnek nem csak a kódolás a része, így látható lesz, hogy több különböző eszköz, melyeknek nincs közük a kódoláshoz is segítették a fejlesztést.
+A fejlesztés folyamatát számos eszköz segítette és gyorsította fel. Ebben a szekcióban ezeket az eszközöket sorolom fel és ismertetem röviden. A fejlesztésnek nem csak a kódolás a része, így látható lesz, hogy több különböző eszköz -- melyeknek nincs közük a kódoláshoz -- is segítették a fejlesztést.
 
 \paragraph{Unity}
 
@@ -520,11 +519,11 @@ A Unity az első és talán legfontosabb eszköz, mely az alapját adta a 2 ját
 
 \paragraph{Rider}
 
-A Rider egy a JetBrains által fejlesztett integrált fejlesztői környezet, melynek segítségével különböző .NET projekteket és játék projekteket tudunk fejleszteni. Egy cross-platform IDE, az az több különböző platformon is elérhető számunkra. A környezet beépített Unity támogatással rendelkezik és különböző funkciókat szolgáltat a C\# szkriptek írásának megkönnyítésére \cite{Rider}.
+A Rider egy a JetBrains által fejlesztett integrált fejlesztői környezet, melynek segítségével különböző .NET projekteket és játék projekteket tudunk fejleszteni. Egy cross-platform IDE, vagyis több különböző platformon is elérhető számunkra. A környezet beépített Unity támogatással rendelkezik és különböző funkciókat szolgáltat a C\# szkriptek írásának megkönnyítésére \cite{Rider}.
 
 \paragraph{Git, GitHub}
 
-A Git egy nyílt forráskódú, verziókezelő rendszer, amely lehetővé teszi a projektek forráskódjának és fájljainak változásainak nyomon követését. A Git segítségével hatékonyan lehet kezelni a változások történetét, különböző verziókat létrehozni, valamint a kollaboráció során fellépő konfliktusokat egyszerűbben megoldani. A GitHub egy online platform, amely a Git verziókezelő rendszerre épül és számos hasznos szolgáltatást nyújt, mint például távoli tárolók (repository-k) létrehozása. A GitHub lehetővé teszi a kód egyszerű megosztását és elérését különböző helyekről \cite{Git} \cite{GitHub}.
+A Git egy nyílt forráskódú, verziókezelő rendszer, amely lehetővé teszi a projektek forráskódjának és fájljai változásainak nyomon követését. A Git segítségével hatékonyan lehet kezelni a változások történetét, különböző verziókat létrehozni, valamint a kollaboráció során fellépő konfliktusokat egyszerűbben megoldani. A GitHub egy online platform, amely a Git verziókezelő rendszerre épül és számos hasznos szolgáltatást nyújt, mint például távoli tárolók (repository-k) létrehozása. A GitHub lehetővé teszi a kód egyszerű megosztását és elérését különböző helyekről \cite{Git} \cite{GitHub}.
 
 \paragraph{Trello}
 
@@ -545,7 +544,7 @@ Ebben a szekcióban a póker legelterjedtebb, hivatalos versenyeken is alkalmazo
 
 \subsubsection{Játék menete}
 
-A játék során három fontos szerep forog körbe a játékosok között, amit ,,gombokkal'' jelölünk. Ezek a szerepek az osztó, kis vak és nagy vak. Az osztótól balra ülő játékos lesz a kis vak, a kis vaktól balra ülő pedig a nagy vak. Az osztót pedig több különböző módon választhatjuk meg a játék elején.  
+A játék során három fontos szerep forog körbe a játékosok között, amit ,,gombokkal'' jelölünk. Ezek a szerepek az osztó, ,,kis vak'' és ,,nagy vak''. Az osztótól balra ülő játékos lesz a kis vak, a kis vaktól balra ülő pedig a nagy vak. Az osztót pedig több különböző módon választhatjuk meg a játék elején.  
 
 Az osztó keveri és osztja ki a lapokat a szabályok szerint. A vakok pedig még osztás előtt kötelesek betenni a vak téteket, ahol a kis vak tét általában a nagy vak tét fele. Egy játszma az alábbiak szerint játszódhat le: \cite{TexasholdemSzabalyok}
 
@@ -697,7 +696,7 @@ Az alábbi lépéseket kell végrehajtanunk a kézkiértékeléshez:
 		\end{table}
 		
 	\end{itemize}
-	\item Kéz értékelés a második bitmező segítségével.
+	\item Kézértékelés a második bitmező segítségével.
 	\begin{itemize}
 		\item A második bitmező 15-el való maradékos osztásának segítségével kitudunk értékelni 6 különböző pókerkezet. Először átszámoljuk a második bitmezőt 10-es számrendszerbe, majd utána végezzük el a 15-el való maradékos osztást. Pár példa erre:
 		\begin{itemize}
@@ -710,19 +709,19 @@ Az alábbi lépéseket kell végrehajtanunk a kézkiértékeléshez:
 			\item Magas lap (high card): Mindig 5-öt fog visszaadni az osztás eredményeképpen.
 		\end{itemize}
 		
-		A varázslat az, hogy mind a hat pókerkéz a fenti módszerrel történő számolás mindig ugyanazt az eredményt adja, függetlenül attól, hogy mi a tényleges öt lap. Amit a maradékos osztás 15-el csinál, az egyenértékű az egyes 4 bites kártyák értékének összegzésével. Tehát a [2, 2, 2, 3, 3] kártyák esetében ez pl. 0111 + 0011 amit binárisan összeadva, majd átszámolva 10-et kapunk. Ez mind a 6 pókerkéznél így fog működni.
+		A varázslat az, hogy mind a hat pókerkéz esetén, a fenti módszerrel történő számolás mindig ugyanazt az eredményt adja, függetlenül attól, hogy mi a tényleges öt lap. Amit a maradékos osztás 15-el csinál, az egyenértékű az egyes 4 bites kártyák értékének összegzésével. Tehát a [2, 2, 2, 3, 3] kártyák esetében ez pl. 0111 + 0011 amit binárisan összeadva, majd átszámolva 10-et kapunk. Ez mind a 6 pókerkéznél így fog működni.
 	\end{itemize}
 	\item Sorok ellenőrzése.
 	\begin{itemize}
-		\item A \emph{sorok} ellenőrzéséhez az első bitmezőt fogjuk felhasználni. Az első bitmezőn bitenkénti ÉS műveletet alkalmazunk önmagának negatívjával. Ennek eredményeképpen megkapjuk az LSB-t, ami a bináris szám ábrázolásának legjobb oldali bitjére utal. Majd ezután, ha elosztjuk az eredeti bitmezőt az LSB-vel, akkor megtudjuk állapítani, hogy a pókerkéz \emph{sor}-t tartalmaz-e. Ha az osztás eredménye pontosan egyenlő 11111-el, azaz decimálisan 31-el, akkor \emph{sorunk} van, ellenkező esetben pedig nincs \emph{sorunk}. Ez a módszer minden \emph{sorra} működni fog, kivéve az \emph{ász-alacsony sorra}, amit egy külön ellenőrzéssel megtudunk állapítani. Ha az első bitmezőnk pontosan egyenlő az alábbi bitmezővel: 100000000111100, akkor \emph{ász-alacsony sorunk} van.
+		\item A sorok ellenőrzéséhez az első bitmezőt fogjuk felhasználni. Az első bitmezőn bitenkénti ÉS műveletet alkalmazunk önmagának negatívjával. Ennek eredményeképpen megkapjuk az LSB-t, ami a bináris szám ábrázolásának legjobb oldali bitjére utal. Majd ezután, ha elosztjuk az eredeti bitmezőt az LSB-vel, akkor megtudjuk állapítani, hogy a pókerkéz sort tartalmaz-e. Ha az osztás eredménye pontosan egyenlő 11111-el, azaz decimálisan 31-el, akkor sorunk van, ellenkező esetben pedig nincs sorunk. Ez a módszer minden sorra működni fog, kivéve az ász-alacsony sorra, amit egy külön ellenőrzéssel megtudunk állapítani. Ha az első bitmezőnk pontosan egyenlő az alábbi bitmezővel: 100000000111100, akkor ász-alacsony sorunk van.
 	\end{itemize}
 	\item Flush ellenőrzése.
 	\begin{itemize}
-		\item A \emph{flush} ellenőrzésénél nincs szükségünk bit matematikára, szimplán csak azt kell megnéznünk, hogy a kapott 5 input kártya közül, mindnek megegyezik a színe. Ha mindegyik ugyanolyan színű, akkor a pókerkéz \emph{flush}, ellenkező esetben pedig nem. Ha \emph{flush} kezünk van és az előző ellenőrzés szerint \emph{sorunk} is van, akkor \emph{straight flush} kezünk van. Az első bitmező segítségével pedig tudjuk ellenőrzini a \emph{royal flush}-t is. Hasonló módon mint az \emph{ász-alacsony sornál} itt is az első bitmezőt kell ellenőriznünk. Ha az első bitmezőnk pontosan egyenlő az alábbi bitmezővel: 111110000000000, akkor \emph{royal flush} pókerkezünk van.
+		\item A flush ellenőrzésénél nincs szükségünk bit matematikára, szimplán csak azt kell megnéznünk, hogy a kapott 5 input kártya közül, mindnek megegyezik a színe. Ha mindegyik ugyanolyan színű, akkor a pókerkéz flush, ellenkező esetben pedig nem. Ha flush kezünk van és az előző ellenőrzés szerint sorunk is van, akkor straight flush kezünk van. Az első bitmező segítségével pedig tudjuk ellenőrzini a royal flush-t is. Hasonló módon mint az ász-alacsony sornál itt is az első bitmezőt kell ellenőriznünk. Ha az első bitmezőnk pontosan egyenlő az alábbi bitmezővel: 111110000000000, akkor royal flush pókerkezünk van.
 	\end{itemize}
 	\item Döntetlenek eldöntése.
 	\begin{itemize}
-		\item Abban az esetben, ha két pókerkéz azonos típusú, a döntetleneket úgy döntjük el, hogy az 5 kártyát először az előfordulás sorrendje, majd a rangja szerint rendezzük és bitek eltolásával összehasonlítható pontszámot hozunk létre az alábbiak szerint:
+		\item Abban az esetben, ha két pókerkéz azonos típusú, a döntetleneket úgy döntjük el, hogy az 5 kártyát először az előfordulás sorrendje, majd a rangja szerint rendezzük és bitek eltolásával összehasonlítható pontszámokat hozunk létre az alábbiak szerint:
 		\begin{itemize}
 			\item Az első kártya értékét kettes számrendszerben eltoljuk balra 16-al.
 			\item A második kártya értékét kettes számrendszerben eltoljuk balra 12-vel.
@@ -748,15 +747,15 @@ A teljes algoritmus tehát röviden így működik:
 \section{Többjátékos kapcsolat megvalósítása}
 \label{sec-tobbjatekoskapcsolat}
 
-A két játék legfontosabb és legbonyolultabb része a zökkenőmentes kapcsolat és kommunikáció megvalósítása volt a két platform és a játékosok között. Korábban említettem \aref{sec-relay}. fejezetben, hogy a háttérben hogyan működik a Unity Technologies által szolgáltatott megoldás, ebben a szekcióban arról írok, hogy én ezt hogyan használtam ki és alkalmaztam a két játékban. A játék során egyetlen módot használtam a kommunikáció megvalósítására, még pedig fix bájton tárolt szöveges adatok küldését a kapcsolatok között, ez azt jelenti, hogy a játékosok között bármilyen szöveget tudtam küldeni egy adott tárolható szöveg hosszig. Az üzenet küldéseknek két módja volt: a hoszt játékos (PC) küld üzenetet bármelyik mobilos játékosnak, vagy bármelyik mobilos játékos küld üzenetet a hoszt játékosnak.
+A két játék legfontosabb és legbonyolultabb része a zökkenőmentes kapcsolat és kommunikáció megvalósítása volt a két platform és a játékosok között. Korábban említettem \aref{sec-relay}. fejezetben, hogy a háttérben hogyan működik a Unity Technologies által szolgáltatott megoldás, ebben a szekcióban arról írok, hogy én ezt hogyan használtam ki és alkalmaztam a két játékban. A játék során egyetlen módot használtam a kommunikáció megvalósítására, mégpedig fix bájton tárolt szöveges adatok küldését a kapcsolatok között. Ez azt jelenti, hogy a játékosok között bármilyen szöveget tudtam küldeni egy adott tárolható szöveg hosszig. Az üzenet küldéseknek két módja volt. Vagy a hoszt játékos (PC) küld üzenetet bármelyik mobilos játékosnak, vagy bármelyik mobilos játékos küld üzenetet a hoszt játékosnak.
 
-Az üzenetek küldéséhez osztályokat használtam amiket a küldés során JSON szöveges formátumba konvertáltam, majd a megérkezett üzeneteket pedig vissza alakítottam osztályokká a könnyebb kezelés végett. Ezzel a megoldással könnyen tudtam kezelni és küldeni is a két platform között az üzeneteket. Az üzenetek megkülönböztetésére üzenet megkülönböztető típusokat hoztam létre. Ezek a típusok \aref{kod-uzenettipusok}. kódban láthatóak.
+Az üzenetek küldéséhez osztályokat használtam amiket a küldés során JSON szöveges formátumba konvertáltam, majd a megérkezett üzeneteket pedig visszaalakítottam osztályokká a könnyebb kezelés végett. Ezzel a megoldással könnyen tudtam kezelni és küldeni is a két platform között az üzeneteket. Az üzenetek megkülönböztetésére üzenet megkülönböztető típusokat hoztam létre. Ezek a típusok \aref{kod-uzenettipusok}. kódban láthatóak.
 
 \lstinputlisting[style=csharp,caption=Üzenet típusok,label=kod-uzenettipusok]{NetworkMessageType.cs}
 
 \subsection{Kapcsolat kezelése a PC oldalon}
 
-A PC oldalon az első lépés a Relay-t kihasználva a megkapott hozzáférési kód megosztása volt a Mobilos játékosokkal, erre a megoldásom \aref{fig-lobby}. ábrán látható. A játszmák elején egy Lobby jelenetet hoztam létre, ahol csatlakozhatnak a játékosok és itt tudjuk majd őket kezelni a játszma előtt. Ezen a felületen osztom meg a hozzáférési kódot a játékosokkal és miután sikerül csatlakozniuk, akkor jelenítem meg őket. Miután egy játékos felcsatlakozott a kód segítségével egy tömböt használva nyomon követem a csatlakozásokat a későbbi kezelés érdekében. A PC oldalon így egyszerre az összes csatlakozott játékosnak, vagy akár egy kiválasztott indexű játékosnak külön is tudok üzenetet küldeni. A játék során az egyes játékosokat a nevük alapján különböztetem meg. Miután felcsatlakoznak a kóddal automatikusan küldenek egy üzenetet, amiben a játékos nevüket küldik el, így el tudom tárolni melyik csatlakozáshoz melyik név tartozik. Az összes üzenet, amit a mobil oldalról kapok tartalmazza a játékos nevüket, így tudom melyik játékossal kell foglalkozni az üzenet kezelésekor. 
+A PC oldalon az első lépés a Relay-t kihasználva a megkapott hozzáférési kód megosztása volt a mobilos játékosokkal, erre a megoldásom \aref{fig-lobby}. ábrán látható. A játszmák elején egy Lobby jelenetet hoztam létre, ahol csatlakozhatnak a játékosok és itt tudjuk majd őket kezelni a játszma előtt. Ezen a felületen osztom meg a hozzáférési kódot a játékosokkal és miután sikerül csatlakozniuk, akkor jelenítem meg őket. Miután egy játékos felcsatlakozott a kód segítségével egy tömböt használva nyomon követem a csatlakozásokat a későbbi kezelés érdekében. A PC oldalon így egyszerre az összes csatlakozott játékosnak, vagy akár egy kiválasztott indexű játékosnak külön is tudok üzenetet küldeni. A játék során az egyes játékosokat a nevük alapján különböztetem meg. Miután felcsatlakoznak a kóddal automatikusan küldenek egy üzenetet, amiben a játékos nevüket küldik el, így el tudom tárolni melyik csatlakozáshoz melyik név tartozik. Az összes üzenet, amit a mobil oldalról kapok, tartalmazza a küldő játékos nevét, így tudom melyik játékossal kell foglalkozni az üzenet kezelésekor. 
 
 A PC oldalon továbbá lehetőségem van lecsatlakoztatni a mobilos játékosokat is, ezt ,,kirúgás'' gombok használatával hívtam meg. Az üzeneteken kívül még egy dolgot tudok kezelni a PC oldalon, az pedig a mobil oldalról küldött lecsatlakozások. Ezek során kisebb kihívásokat jelentett pl. a játszma közbeni lecsatlakozások, de minden egyes esetet sikerült lekezelnem a zökkenőmentes játékmenet eléréshez.
 
@@ -771,56 +770,56 @@ A póker játszma során minden egyes kör elején küldök tájékoztató üzen
 
 \subsection{Kapcsolat kezelése a Mobil oldalon}
 
-A mobil oldalon a megosztott hozzáférési kód segítségével tudunk csatlakozni a játszmákhoz. A hozzáférési kód megadása mellett egy játékos nevet is kell választatnunk, aminek segítségével később majd a hoszt tud azonosítani minket. Ez a játékos név a sikeres csatlakozás esetén automatikusan egy üzenet formájában el is küldődik a hosztnak. Amennyiben már van ilyen játékos név vagy esetleg már megtelt az adott Lobby, akkor a hoszt küld erről egy tájékoztató üzenetet és ezt lekezelve egy hibaüzenettel visszatérünk a kezdőképernyőre.
+A mobil oldalon a megosztott hozzáférési kód segítségével tudunk csatlakozni a játszmákhoz. A hozzáférési kód megadása mellett egy játékos nevet is kell választatnunk, aminek segítségével később majd a hoszt tud azonosítani minket. Ez a játékos név a sikeres csatlakozás esetén automatikusan egy üzenet formájában el is küldődik a hosztnak. Amennyiben már van ilyen játékosnév vagy esetleg már megtelt az adott Lobby, akkor a hoszt küld erről egy tájékoztató üzenetet és ezt lekezelve egy hibaüzenettel visszatérünk a kezdőképernyőre.
 
-Mobil oldalon 2 opciónk van kommunikálni a PC-vel, az egyik az üzenetek küldése, a másik pedig a lecsatlakozási kérelem küldése. Az üzenetek küldésére különböző gombok és szöveges dobozok adnak lehetőséget, pl. egy ,,Készen állok'' gomb, ami a Lobby jelenet során jelzi a PC számára, hogy készen állunk a játszma indítására. A játszma során minden egyes lehetséges akciónak az elvégzésekor küldünk egy üzenetet a hosztnak, ami ezt megfelelően kezeli és elküldi a következő játékosnak az ő lehetséges akcióit.
+Mobil oldalon 2 opciónk van kommunikálni a PC-vel, az egyik az üzenetek küldése, a másik pedig a lecsatlakozási kérelem küldése. Az üzenetek küldésére különböző gombok és szöveges dobozok adnak lehetőséget. Például egy ,,Készen állok'' gomb, ami a Lobby jelenet során jelzi a PC számára, hogy készen állunk a játszma indítására. A játszma során minden egyes lehetséges akciónak az elvégzésekor küldünk egy üzenetet a hosztnak, ami ezt megfelelően kezeli és elküldi a következő játékosnak az ő lehetséges akcióit.
 
-Amennyiben a PC oldalról kapunk egy lecsatlakozási kérelmet, azaz kirúgnak minket egy játszmából, akkor ezt a játék kezeli és egy hibaüzenettel visszatérünk a kezdő képernyőre.
+Amennyiben a PC oldalról kapunk egy lecsatlakozási kérelmet, azaz kirúgnak minket egy játszmából, akkor ezt a játék kezeli és egy hibaüzenettel visszatérünk a kezdőképernyőre.
 
 \section{Játékmenet megvalósítása}
 
-A játékmenet fejlesztése során próbáltam figyelni a tiszta és könnyen módosítható kódok és projekt létrehozására. A kód megírása során próbáltam kiszedni absztrakciókba az újból megjelenő funkcionalitásokat, így a jövőben könnyen bővíthető és elkülöníthető kódot tudok írni. A játékfejlesztés során egy bevált módszer az úgymond kezelő szkriptek készítése, ahol egy-egy ilyen kezelő felel egy adott funkcionalitásért, pl. az AudioManager szkript felel a hangokért. Ezeknél a kezelőknél az egyke tervezési mintát használtam, mivel ha szükség van kívülről elérni ezeket a kezelőket, azt így könnyen megtudtam tenni és biztosította, hogy mindig csak egy kezelő példány legyen létrehozva az adott funkciók kezelésére.
+A játékmenet fejlesztése során próbáltam figyelni a tiszta és könnyen módosítható kódok és projekt létrehozására. A kód megírása során próbáltam kiszedni absztrakciókba az újból megjelenő funkcionalitásokat, így a jövőben könnyen bővíthető és elkülöníthető kódot tudok írni. A játékfejlesztés során egy bevált módszer az úgymond kezelő szkriptek készítése, ahol egy-egy ilyen kezelő felel egy adott funkcionalitásért, pl. az AudioManager szkript felel a hangokért. Ezeknél a kezelőknél az egyke tervezési mintát használtam, mivel ha szükség van kívülről elérni ezeket a kezelőket, azt így könnyen meg tudtam tenni és biztosította, hogy mindig csak egy kezelő példány legyen létrehozva az adott funkciók kezelésére.
 
 \subsection{Prefab-ek használata}
 
-A fejlesztés során a már \aref{sec-prefab}. fejezetben is említettem, hogy a Prefab-ek használata nagyon hasznos tud lenni a többször használatos játék elemek során. A játékban Prefab-et több helyen is használtam, viszont a legfontosabb a játékosokat megjelenítő UI elemek voltak. Ezzel a módszerrel minden játékosnak a megjelenítését egységes módon tudtam kezelni. Ilyen Prefab volt még pl. a hiba üzenetet megjelenítő felugró ablak, a chat üzeneteket megjelenítő chat doboz, a mobilon lévő lehetséges akciókat kezelő gombok és csúszkák és még hasonló UI elemek.
+A fejlesztés során a már \aref{sec-prefab}. fejezetben is említettem, hogy a Prefab-ek használata nagyon hasznos tud lenni a többször használatos játékelemek során. A játékban Prefab-et több helyen is használtam, viszont a legfontosabb a játékosokat megjelenítő UI elemek voltak. Ezzel a módszerrel minden játékosnak a megjelenítését egységes módon tudtam kezelni. Ilyen Prefab volt még például a hiba üzenetet megjelenítő felugró ablak, a chat üzeneteket megjelenítő chat doboz, a mobilon lévő lehetséges akciókat kezelő gombok, csúszkák és még hasonló UI elemek.
 
 \subsection{Vizuális elemek}
 
-A játék látvány világát leginkább a Unity által szolgáltatott UI elemekből építettem fel. Próbáltam egy pixeles stílust elérni, ezt egy pixeles betűtípus használatával sikerült is egész jól megvalósítanom. A látvány világ kialakításában nagy segítségemre volt a menyasszonyom, Erdész Réka. A játék legfontosabb látványbeli elemei a kártyák és az összes elem aminek a pókerhez van köze Réka által lettek megrajzolva. Ezen elemek közé tartozik az 52 kártya lap egyedi kinézete, a póker asztal és a póker asztal díszítésére szolgáló póker zsetonok is.
+A játék látványvilágát leginkább a Unity által szolgáltatott UI elemekből építettem fel. Próbáltam egy pixeles stílust elérni, ezt egy pixeles betűtípus használatával sikerült is egész jól megvalósítanom. A látványvilág kialakításában nagy segítségemre volt a menyasszonyom, Erdész Réka. A játék legfontosabb látványbeli elemei a kártyák és az összes elem aminek a pókerhez van köze Réka által lettek megrajzolva. Ezen elemek közé tartozik az 52 kártyalap egyedi kinézete, a pókerasztal és a pókerasztal díszítésére szolgáló póker zsetonok is.
 
 \subsection{Póker játékmenet megvalósítása}
 
-A játékmenet alapját \aref{subsec-pokerszabalyok}. fejezetben leírt szabályok adták. Minden játszma egy frissen kevert 52 lapos paklival kezd, az osztó és a vakok kisorsolásával. A körök logikáját egy szkript kezeli, ahol egy állapotgép alapú megoldás dolgozik a háttérben. A körök kezdésekor minden játékos megkapja a tájékoztató üzenetet arról, hogy ki következik, a soron lévő játékos pedig a lehetséges akcióit is megkapja. Miután egy játékos elvégezte az akcióját ezt a PC oldalon a kör kezelő szkript dolgozza fel és a kör állapotától függően a következő játékosnak megint az újra meghatározott lehetséges akciókat ki küldi. Amikor egy licit körnek vége van, erről mindenki kap tájékoztatást és a szabályok alapján elindul a következő kör, ez addig megy ameddig csak 1 játékos marad bent a játszmában. Egy játékos kiesik ha a 0\$-t eléri a pénze, ilyenkor egy lecsatlakozási kérelmet és egy üzenetet kap a játékos az elért helyezéséről, amit a mobilon egyből lekezelve látni is fog.
+A játékmenet alapját \aref{subsec-pokerszabalyok}. fejezetben leírt szabályok adták. Minden játszma egy frissen kevert 52 lapos paklival kezd, az osztó és a vakok kisorsolásával. A körök logikáját egy szkript kezeli, ahol egy állapotgép alapú megoldás dolgozik a háttérben. A körök kezdésekor minden játékos megkapja a tájékoztató üzenetet arról, hogy ki következik, a soron lévő játékos pedig a lehetséges akcióit is megkapja. Miután egy játékos elvégezte az akcióját ezt a PC oldalon a kör kezelő szkript dolgozza fel és a kör állapotától függően a következő játékosnak megint az újra meghatározott lehetséges akciókat küldi ki. Amikor egy licit körnek vége van, erről mindenki kap tájékoztatást és a szabályok alapján elindul a következő kör, ez addig megy ameddig csak 1 játékos marad bent a játszmában. Egy játékos kiesik ha a 0\$-t eléri a pénze, ilyenkor egy lecsatlakozási kérelmet és egy üzenetet kap a játékos az elért helyezéséről, amit a mobilon egyből lekezelve látni is fog.
 
 \subsection{Animációk}
 
-Az animációk nagyban segítik a vizuális játékélményt és egyértelműbbé teszik a játékmenet követését. A játékomban ilyen animációk pl. a kártyák osztása, felfordítása és egyéb a játékmenettel kapcsolatos animációk. Az animációk létrehozásához csak kódolást használtam a LeanTween \cite{UnityLeanTween} ingyenesen elérhető csomag segítségével. A LeanTween lehetőséget ad különböző mozgásokat, méretezéseket és forgásokat implementálni a játékelemek részére. Betudjuk állítani a cél tulajdonságon kívül az átmenetet is, ami lehet pl. lineáris, négyzetes és hasonló átmenetek. Az animációk végén (amikor az elemek elérték a cél tulajdonságot), lehetőségünk van callback metódusok segítségével lekezelni ezt az eseményt. Ezeknek a callback metódusoknak köszönhetően könnyen tudtam kezelni az osztás folyamatát, hiszen ha az egyik kártya elérte a célját, akkor el is indíthattam a következő kártyát.
+Az animációk nagyban segítik a vizuális játékélményt és egyértelműbbé teszik a játékmenet követését. A játékomban ilyen animációk például a kártyák osztása, felfordítása és egyéb a játékmenettel kapcsolatos animációk. Az animációk létrehozásához csak kódolást használtam a LeanTween \cite{UnityLeanTween} ingyenesen elérhető csomag segítségével. A LeanTween lehetőséget ad különböző mozgásokat, méretezéseket és forgásokat implementálni a játékelemek részére. Be tudjuk állítani a céltulajdonságon kívül az átmenetet is, ami lehet pl. lineáris, négyzetes és hasonló átmenetek. Az animációk végén (amikor az elemek elérték a céltulajdonságot), lehetőségünk van ,,callback'' metódusok segítségével lekezelni ezt az eseményt. Ezeknek a callback metódusoknak köszönhetően könnyen tudtam kezelni az osztás folyamatát, hiszen ha az egyik kártya elérte a célját, akkor el is indíthattam a következő kártyát.
 
 \chapter{Tesztelés}
 
-A tesztelés nagyon fontos része a fejlesztésnek, hiszen ezen folyamat során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után letudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az \emph{egység tesztek} írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során lekezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. 
+A tesztelés nagyon fontos része a fejlesztésnek, hiszen ezen folyamat során tárjuk fel a lehetséges hibákat a programunkban. A tesztek nagy szerepet játszanak az egyszerűen bővíthető és fejleszthető kódbázisokban, hiszen így minden módosítás és bővítés után le tudjuk ellenőrizni, hogy van-e hiba a kódban. A legelterjedtebb tesztelési forma az ,,egységtesztek'' írása, ahol 1-1 metódusnak vagy függvénynek több különböző bemenet alapján vizsgáljuk a várt kimenetét. Az egység tesztek során lekezeljük a helyes bemenetre való működést és az akár hibát kiváltó bemenetre való működést is. 
 
-Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játék teszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat és teszt jegyzőkönyveket vezetünk ezeknek a teszteknek a menetéről. Fontos lehet, hogy ezeket a játék teszteket ne csak önmagunk csináljuk, hiszen mi ismerjük a játékot és akár azok a részek melyek nem egyértelműek első felhasználói szempontból nekünk nem biztos, hogy feltűnnek. Külsős tesztelők sok olyan dolgot fedezhetnek fel, melyek nekünk eszünkbe se jutottak volna, de mégis sokat javít a játékélmény növelésében.
+Az egyik legfontosabb tesztelési módszer játékfejlesztés szempontjából a játékteszt (playtest), ahol a játékot minél körültekintőbben játszva tárjuk fel az esetleges hibákat és teszt jegyzőkönyveket vezetünk ezeknek a teszteknek a menetéről. Fontos lehet, hogy ezeket a játékteszteket ne csak önmagunk csináljuk, hiszen mi ismerjük a játékot és akár azok a részek melyek nem egyértelműek első felhasználói szempontból, nekünk nem biztos, hogy feltűnnek. Külsős tesztelők sok olyan dolgot fedezhetnek fel, melyek nekünk eszünkbe se jutottak volna, de mégis sokat javít a játékélmény növelésében.
 
-A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egység teszteket is egyszerűbb dolgunk lesz megírni. A tiszta kód írásának egyik módja lehet az OOP (Objektum orientált programozás) alapelveinek betartása.
+A tesztelés folyamatát az is segítheti egy ekkora projektnél, hogy megpróbálunk minél tisztább és rendezettebb kódot írni, így az egységteszteket is egyszerűbb dolgunk lesz megírni. A tiszta kód írásának egyik módja lehet az OOP (Objektum orientált programozás) alapelveinek betartása.
 
 \section{Közös DLL tesztelése}
 
-A közös DLL tesztelése során a már fentebb említett egység teszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egység teszteteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint ahogy korábban \aref{sec-architecture}. fejezetben említettem a közös DLL projektnek az egyik legfontosabb része a kézkiértékelést kezelő algoritmus. A kézkiértékeléshez írt egység teszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként és az esetleges döntetlen eseteket is figyelembe vettem.
+A közös DLL tesztelése során a már fentebb említett egységteszteket alkalmaztam. A kódban lévő összes metódusra és függvényre írtam egységteszteket, minden lehetséges eset tesztelésére. Ezeknek a teszteknek a segítségével könnyen tudtam bővíteni és ellenőrizni a kódbázist. Mint ahogy korábban \aref{sec-architecture}. fejezetben említettem a közös DLL projektnek az egyik legfontosabb része a kéz kiértékelést kezelő algoritmus. A kéz kiértékeléshez írt egységteszteknél különösen figyeltem arra, hogy minden lehetséges pókerkéz kombinációt használjak bemenetként és az esetleges döntetlen eseteket is figyelembe vettem.
 
 \section{Játékok tesztelése}
 
-A játékok tesztelésében legnagyobb szerepet a playtest játszott, amit már egészen a korai fejlesztési fázisban is végeztem. A playtest-ek kétféleképpen néztek ki:
+A játékok tesztelésében legnagyobb szerepet a ,,playtest'' játszott, amit már egészen a korai fejlesztési fázisban is végeztem. A playtest-ek kétféleképpen néztek ki:
 
 \begin{itemize}
-	\item Barátokkal: a ki buildelt Unity játékokat élesben teszteltük közösen. Ezeknél a teszteknél a hibák feltárása mellet sok visszajelzést kaptam, melyek segítettek a játékélmény fejlesztését. Ezek a tesztek egy kis motivációs lendületet is tudtak adni, hiszen jó volt látni, ahogy a barátaim élvezik a játékot, akár még hibás állapotában is.
-	\item Egyedül: a Unity editor által adott lehetőségeket kihasználva teszteltem a játékot. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott \emph{Multiplayer play mode}-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. Ezeknek a teszteknek a során a hibák keresésére fókuszáltam \cite{UnityMultiplayerPlayMode}.
+	\item Barátokkal: a ki ,,build''-elt Unity játékokat élesben teszteltük közösen. Ezeknél a teszteknél a hibák feltárása mellet sok visszajelzést kaptam, melyek segítettek a játékélmény fejlesztését. Ezek a tesztek egy kis motivációs lendületet is tudtak adni, hiszen jó volt látni, ahogy a barátaim élvezik a játékot, akár még hibás állapotában is.
+	\item Egyedül: a Unity editor által adott lehetőségeket kihasználva teszteltem a játékot. Ez azt jelentette, hogy a PC játék 1 példányban futott a gépemen, a mobil játék pedig a Unity által szolgáltatott ,,Multiplayer play mode''-nak köszönhetően egyszerre 2-4 példányban futott a gépemen. Ezeknek a teszteknek a során a hibák keresésére fókuszáltam \cite{UnityMultiplayerPlayMode}.
 \end{itemize}
 
-A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésre, de játékélménybeli javításába is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, melyek a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, a hibák feltárásának megkönnyítése érdekében.
+A playtest-ek során mindig odafigyeltem, hogy minden lehetőséget kipróbáljak a játékban. Ezek a playtest-ek nem csak hibakeresésben, hanem a játékélmény javításában is sokat segítettek, hiszen a barátaim sok dolgot észrevettek és jeleztek felém, melyek a játékélményt segíthetik. Későbbiekben készítettem egy naplózó rendszert is a játékokhoz, a hibák feltárásának megkönnyítése érdekében.
 
-Mindkét játékhoz készítettem a már korábbiakban említett egység teszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egység tesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. A Mock komponensek segítségével a hiányzó függőségeket betudjuk tölteni a tesztelendő osztályban \cite{NUnit}.
+Mindkét játékhoz készítettem a már korábbiakban említett egységteszteket is, amikhez az NUnit könyvtárat használtam. Játékfejlesztés során körülményes lehet az egységtesztek használata, hiszen nagyon sokszor egy adott kódrészlet akár több másik komponenstől is függhet, ennek megoldására úgynevezett mock komponenseket hozunk létre. A Mock komponensek segítségével a hiányzó függőségeket be tudjuk tölteni a tesztelendő osztályban \cite{NUnit}.
 
 \subsubsection{Teszt jegyzőkönyv}
 
@@ -841,7 +840,7 @@ A playtest-ek során teszt jegyzőkönyvet vezettem. A jegyzőkönyvek segített
 		\hline
 		22:12 & Beállítások bezárása gomb & Sikeres & Bezárja a beállítások felületet \\
 		\hline
-		22:15 & Felbontás módosítása & Sikeres & A felbontásokat helyesen felsorolj \\
+		22:15 & Felbontás módosítása & Sikeres & A felbontásokat helyesen felsorolja \\
 		\hline
 		22:18 & Minőség módosítása & Sikeres & A minőségeket helyesen felsorolja \\
 		\hline
@@ -854,13 +853,13 @@ A playtest-ek során teszt jegyzőkönyvet vezettem. A jegyzőkönyvek segített
 		22:30 & Beállítások elfogadása & Sikeres & Módosítja a változtatott beállításokat \\
 		\hline
 	\end{tabular}
-	\caption{Példa tesztjegyzőkönyv a főmenüről (2024.12.28)}
+	\caption{Példa teszt jegyzőkönyv a főmenüről (2024.12.28)}
 	\label{tab-tesztjegyzokonyv}
 \end{table}
 
 \pagebreak
 
-A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy, hogy csak idő pazarlás, de mindenképpen megéri időt tölteni vele. A játékfejlesztésben pedig a hibakeresésen kívül másban is fontos szerepet játszik, hiszen akár a játékélmény fejlesztésében is segíthet. Vannak olyan játékok is, ahol a játékmenet kiegyensúlyozásának érdekében is rákényszerülünk a tesztelésre, mely elhagyhatatlan eleme a fejlesztési folyamatnak. Az én játékom esetében hiba keresésben és játékélménybeli javításban is sokat segítettek a fentebb említett tesztelési módszerek.
+A tesztelés folyamata lehet körülményes és néhány helyen érződhet úgy, hogy csak időpazarlás, de mindenképpen megéri időt tölteni vele. A játékfejlesztésben pedig a hibakeresésen kívül másban is fontos szerepet játszik, hiszen akár a játékélmény fejlesztésében is segíthet. Vannak olyan játékok is, ahol a játékmenet kiegyensúlyozásának érdekében is rákényszerülünk a tesztelésre, mely elhagyhatatlan eleme a fejlesztési folyamatnak. Az én játékom esetében hibakeresésben és játékélménybeli javításban is sokat segítettek a fentebb említett tesztelési módszerek.
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
@@ -873,7 +872,7 @@ A játékmenet bővítésére 2 jelentősebb tervet említek meg ebben a szekci�
 
 \section{Konklúzió}
 
-A játék fejlesztése során sok újat tanultam a Unity játékmotorban történő fejlesztésről. Az előző projektjeim alapján már elég jól ismertem a játékmotort, de egy ilyen nagyobb szabású projekt során sok olyan elem és technológia került elő, amivel eddig nem találkoztam. Sikerült teljesítenem a többjátékos játékfejlesztése célomat is, így a továbbiakban sokkal magabiztosabban tudok ilyen fejlesztésbe kezdeni.
+A játék fejlesztése során sok újat tanultam a Unity játékmotorban történő fejlesztésről. Az előző projektjeim alapján már elég jól ismertem a játékmotort, de egy ilyen nagyobb szabású projekt során sok olyan elem és technológia került elő, amivel eddig nem találkoztam. Sikerült teljesítenem a többjátékos játékfejlesztési célomat is, így a továbbiakban sokkal magabiztosabban tudok ilyen fejlesztésbe kezdeni.
 
 \begin{center}
 	Forráskód elérhetősége:
@@ -892,17 +891,17 @@ A játék fejlesztése során sok újat tanultam a Unity játékmotorban törté
 \chapter*{Ábrák jegyzéke}
 \addcontentsline{toc}{chapter}{Ábrák jegyzéke}
 
-\ref{fig-clientserver}. ábra -- saját készítésű ábra, \cite{ResearchGateClientServer} alapján
+\ref{fig-clientserver}. ábra -- saját készítésű ábra, \cite{ResearchGateClientServer} alapján \dotfill
 \newline
-\ref{fig-p2p}. ábra -- saját készítésű ábra, \cite{TechTermsP2P} alapján
+\ref{fig-p2p}. ábra -- saját készítésű ábra, \cite{TechTermsP2P} alapján \dotfill
 \newline
-\ref{fig-unityeditor}. ábra -- saját készítésű ábra
+\ref{fig-unityeditor}. ábra -- saját készítésű ábra \dotfill
 \newline
-\ref{fig-unityrelayservers}. ábra -- saját készítésű ábra, \cite{UnityRelayServers} alapján
+\ref{fig-unityrelayservers}. ábra -- saját készítésű ábra, \cite{UnityRelayServers} alapján \dotfill
 \newline
-\ref{fig-pokerhands}. ábra -- forrás: \url{https://cardmates.co.uk/all_poker_hands} [Letöltve: 2025-03-02]  
+\ref{fig-pokerhands}. ábra -- \url{https://cardmates.co.uk/all_poker_hands} [Letöltve: 2025-03-02] \dotfill   
 \newline
-\ref{fig-lobby}. ábra -- saját készítésű ábra
+\ref{fig-lobby}. ábra -- saját készítésű ábra \dotfill
 
 \begin{thebibliography}{2}
 	\addcontentsline{toc}{chapter}{\bibname}
@@ -1057,7 +1056,7 @@ A játék fejlesztése során sok újat tanultam a Unity játékmotorban törté
     \textsc{Jonathan Hsiao}: \emph{Evaluating Poker Hands with Bit Math}, Jonathan Hsiao blogja, elérhető: \url{https://jonathanhsiao.com/blog/evaluating-poker-hands-with-bit-math} [Letöltve: 2025-02-25]
 	
 	\bibitem{Szurdi}
-	\textsc{Szurdi András}: \emph{Pókerkönyv. Kezdőknek és haladóknak}, Ciceró, Budapest, 1995.
+	\textsc{Szurdi András}: \emph{Pókerkönyv kezdőknek és haladóknak}, Ciceró, Budapest, 1995.
 	
 	\bibitem{Varga}
 	\textsc{Varga Ervin}: \emph{Póker alapkönyv}, Vagabund, Kecskemét, 2008.
