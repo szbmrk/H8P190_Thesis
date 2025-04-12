@@ -1,6 +1,6 @@
 # H8P190 Thesis for Computer Science BSc at Eszterhazy Karoly Catholic University
 
-The objective of my thesis is to develop a poker game based on Texas Hold'Em rules, where a desktop computer is connected to several mobile phones to implement a multiplayer game. The game is designed to give players a similar experience as playing a real poker game in real life. This was achieved by using the mobile phones as the "hands" of the players and the computer as the table, the common space.
+The objective of my thesis is to develop a poker game based on Texas Hold'Em rules, where several mobile phones are connected to a desktop computer to implement a multiplayer game. The game is designed to give players a similar experience as playing a real poker game in real life. This was achieved by using the mobile phones as the "hands" of the players and the computer as the table, the common space.
 
 ## Architectural design
 
